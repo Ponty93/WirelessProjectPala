@@ -1,5 +1,5 @@
 <?php
-//dati accesso serben per Ludus DS
+//Credentials for Ludus DS database
 $servername = "psionoff.mysql.db.internal";
 $username = "psionoff_LDS";
 $password = "nOJ0i)O4tzICV@cFe@";
