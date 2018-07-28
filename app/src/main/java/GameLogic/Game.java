@@ -8,15 +8,13 @@ import Actors.Player;
 public class Game {
     private final Player player1;
     private final Player player2;
-    private int counterPlayerOne;
-    private int counterPlayerTwo;
-    private int counter = 0;
+    private int roundsCounter = 0;
 
-    public Game(Player one, Player two) {
-        player1 = one;
-        player2 = two;
-        counterPlayerOne = 6;
-        counterPlayerTwo = 6;
+    public Game() {
+        boolean aux = settleFirst();
+        player1 = new Player(aux);
+        player2 = new Player(!aux);
+
     }
 
     /**
@@ -29,33 +27,17 @@ public class Game {
     public Player getPlayer2() {
         return player2;
     }
-    public int getCounterPlayerOne() {
-        return counterPlayerOne;
-    }
-    public int getCounterPlayerTwo() {
-        return counterPlayerTwo;
-    }
-    public int getCounter() {
-        return counter;
+    public int getRoundsCounter() {
+        return roundsCounter;
     }
 
-    /**
-     * Set methods for the pawns counter of each player
-     * @param val
-     */
-    public void setCounterPlayerOne(int val) {
-        counterPlayerOne = val;
-    }
-    public void setCounterPlayerTwo(int val) {
-        counterPlayerTwo = val;
-    }
 
     /**
      * set the rounds counter
      * @param val
      */
     public void setCounter(int val) {
-        counter = val;
+        roundsCounter = val;
     }
 
     /**
@@ -67,11 +49,24 @@ public class Game {
      */
 
     public boolean settleFirst() {
-        int intResult = (int)Math.random()*3600+1;
-        if((intResult % 2) == 0)
-            return true;
-        else
-            return false;
+        int intResult = (int)Math.random()*2+1;
+
+        return intResult%2 ==0;
+
     }
 
+    public String whoPlay() {
+        boolean aux = (roundsCounter%2 == 0);
+        if(player1.getOrder() == aux)
+            return player1.getUserName();
+        else
+            return player2.getUserName();
+    }
+
+    public Player findPlayerByUserName(String user) {
+        if(user == player1.getUserName())
+            return player1;
+        else
+            return player2;
+    }
 }

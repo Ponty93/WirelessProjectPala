@@ -28,7 +28,7 @@ public class MainMenu extends AppCompatActivity {
      * @param view
      */
     public void goToNewGame(View view) {
-        Intent intent = new Intent(this, Game.class);
+        Intent intent = new Intent(this, GameView.class);
         startActivity(intent);
     }
 }
