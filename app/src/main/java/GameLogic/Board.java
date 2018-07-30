@@ -16,17 +16,7 @@ public class Board extends Game {
      * 30 : position assigned to the winnerpawns
      */
     private int numberOfCell = 30;
-    private HashMap<Integer,Integer> mapPawnsOnBoard = new HashMap<>();
     private int[] diceBuffer = new int[2];
-    /**
-     * builds the map putting the id of the pawns for each player
-     * id[0..5] belongs to player 1
-     * id[6..11] belongs to player 2
-     */
-    private void buildMap() {
-        for(int i=0; i<12;i++)
-            mapPawnsOnBoard.put(i,-1);
-    }
 
     /**
      * create a Board instance to begin the game
@@ -35,7 +25,6 @@ public class Board extends Game {
     public Board(int cells) {
         super();
         numberOfCell = cells;
-        buildMap();
     }
 
     /**
@@ -58,11 +47,13 @@ public class Board extends Game {
      * v1 && id1 MUSTN'T be -1
      * v2 && id2 could be -1
      */
-    public void planToMove(int v1, int id1, int v2, int id2) {
+    /*public void planToMove(int v1, int id1, int v2, int id2) {
             movePawn(v1,findPlayerByUserName(whoPlay()).findPawnById(id1));
-            if(id2 != -1)
-                movePawn(v1,findPlayerByUserName(whoPlay()).findPawnById(id1));
-    }
+            if(id2 != id1)
+                movePawn(v2,findPlayerByUserName(whoPlay()).findPawnById(id2));
+            else
+                movePawn(v2,findPlayerByUserName(whoPlay()).findPawnById(id1));
+    }*/
 
     /**
      * Move a pawn according to the values passed as param
@@ -70,7 +61,7 @@ public class Board extends Game {
      * @param val
      * @param pawn
      */
-    public void movePawn(int val, Pawn pawn) {
+    /*public void movePawn(int val, Pawn pawn) {
         if(whoPlay() == getPlayer1().getUserName()) {
             if(mapPawnsOnBoard.get(0 + pawn.getId()) + val == numberOfCell-1)
                 mapPawnsOnBoard.put(0 + pawn.getId(),numberOfCell);
@@ -96,7 +87,7 @@ public class Board extends Game {
             }
         }
 
-    }
+    }*/
 
 
 
