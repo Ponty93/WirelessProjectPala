@@ -99,6 +99,15 @@ public class Board extends Game {
     //public void movePawn(int val, Pawn pawn)
 
 
+    /**
+     * Asks the capacity of a specified position to the db
+     * @param pos
+     * @return {int}
+     */
+    //public int howManyPawns(int pos)
+
+
+
 
 
 

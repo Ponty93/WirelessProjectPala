@@ -10,8 +10,6 @@ public class Player {
     private final boolean order;
 
 
-
-
     /**
      * Builds a Player instance
      * @constructor
@@ -29,6 +27,10 @@ public class Player {
 
     }
 
+    public int getUserId() {
+        return id;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -36,6 +38,12 @@ public class Player {
     public boolean getOrder() {
         return order;
     }
+
+    /**
+     * Finds a pawn by passing his id
+     * @param id
+     * @return {Pawn}
+     */
     //public Pawn findPawnById(int id)
 
 }

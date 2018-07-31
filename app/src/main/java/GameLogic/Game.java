@@ -55,6 +55,10 @@ public class Game {
 
     }
 
+    /**
+     * Checks who plays in this round
+     * @return {String}
+     */
     public String whoPlay() {
         boolean aux = (roundsCounter%2 == 0);
         if(player1.getOrder() == aux)
@@ -63,10 +67,26 @@ public class Game {
             return player2.getUserName();
     }
 
-    public Player findPlayerByUserName(String user) {
-        if(user == player1.getUserName())
+    /**
+     * Searches for a player by passing an id
+     * @param id
+     * @return {Player}
+     */
+    public Player findPlayerById(int id) {
+        if(id == player1.getUserId())
             return player1;
         else
             return player2;
     }
+
+    /**
+     * Checks how many points a player has
+     * @param player
+     * @return {int}
+     */
+    //public int howManyPoint(Player player)
+
+
+
+
 }
