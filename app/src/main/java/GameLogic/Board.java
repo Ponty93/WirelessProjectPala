@@ -56,38 +56,47 @@ public class Board extends Game {
     }*/
 
     /**
+     * Check if a pawn is able to win
+     * @param id
+     * @param val
+     * @param player
+     * @return {boolean}
+     */
+    //public boolean checkIfPawnWin(int id, int val, Player player)
+
+    /**
+     * Check if a pawn is going to be over the board size
+     * @param val
+     * @param id
+     * @param player
+     * @return {boolean}
+     */
+    //public boolean checkIfOutOfBoard(int id, int val, Player player)
+
+    /**
+     * Check if a pawn can eat a enemy pawn by checking the # of pawns in the board's cell
+     * @param idPlayer1
+     * @param idPlayer2
+     * @return {boolean}
+     */
+
+    //public boolean canEat(int idPlayer1,int idPlayer2)
+
+    /**
+     * Sets the position value of a enemy pawn that can be eaten to -1
+     * @param id
+     * @param player
+     * @return {void}
+     */
+    //public void eatPawn(int id,Player player)
+
+    /**
      * Move a pawn according to the values passed as param
      * The method also check if the pawn is at the end line or is over that
      * @param val
      * @param pawn
      */
-    /*public void movePawn(int val, Pawn pawn) {
-        if(whoPlay() == getPlayer1().getUserName()) {
-            if(mapPawnsOnBoard.get(0 + pawn.getId()) + val == numberOfCell-1)
-                mapPawnsOnBoard.put(0 + pawn.getId(),numberOfCell);
-            else if(mapPawnsOnBoard.get(0 + pawn.getId()) + val >=numberOfCell)
-                return;
-            else {
-                if (mapPawnsOnBoard.get(0 + pawn.getId()) != -1)
-                    mapPawnsOnBoard.put(0 + pawn.getId(), mapPawnsOnBoard.get(0 + pawn.getId()) + val);
-                else
-                    mapPawnsOnBoard.put(0 + pawn.getId(), 0 + val);
-            }
-        }
-        else {
-            if(mapPawnsOnBoard.get(5 + pawn.getId()) + val == numberOfCell-1)
-                mapPawnsOnBoard.put(5 + pawn.getId(),numberOfCell);
-            else if(mapPawnsOnBoard.get(5 + pawn.getId()) + val >=numberOfCell)
-                return;
-            else {
-                if (mapPawnsOnBoard.get(5 + pawn.getId()) != -1)
-                    mapPawnsOnBoard.put(5 + pawn.getId(), mapPawnsOnBoard.get(5 + pawn.getId()) + val);
-                else
-                    mapPawnsOnBoard.put(5 + pawn.getId(), 0 + val);
-            }
-        }
-
-    }*/
+    //public void movePawn(int val, Pawn pawn)
 
 
 

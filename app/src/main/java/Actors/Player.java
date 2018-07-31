@@ -16,6 +16,12 @@ public class Player {
      * Builds a Player instance
      * @constructor
      */
+    public Player(boolean round) {
+        id=123;
+        userName="dummyPlayer";
+        order = round;
+
+    }
     public Player(boolean r,int idfromServer, String user) {
         id = idfromServer;
         userName = user;

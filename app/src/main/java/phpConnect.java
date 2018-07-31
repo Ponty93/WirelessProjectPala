@@ -1,7 +1,7 @@
 import android.os.AsyncTask;
 
 import org.json.JSONObject;
-import apiLibrary.src.com.goebl.david.*;
+import apiLibrary.src.main.java.com.goebl.david.*;
 public final class phpConnect extends AsyncTask<String,Void,JSONObject> {
 
     private String url;
