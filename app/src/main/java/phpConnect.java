@@ -1,6 +1,7 @@
 import android.os.AsyncTask;
 
 import org.json.JSONObject;
+import apiLibrary.src.com.goebl.david.*;
 public final class phpConnect extends AsyncTask<String,Void,JSONObject> {
 
     private String url;
@@ -8,7 +9,7 @@ public final class phpConnect extends AsyncTask<String,Void,JSONObject> {
     private int pawnId;
     private int playerId;
     private char charOperation;
-    private Webb webb = com.goebl.david.Webb.create();
+    private Webb webb = Webb.create();
 
 
     public phpConnect(String passedURL,int gameIdPassed, int pawnIdPassed,int playerIdPassed, char charOperationPassed) {
