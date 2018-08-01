@@ -8,22 +8,25 @@ public class Player {
     private final  int id;
     private final String userName;
     private final boolean order;
+    private int score;
 
 
     /**
      * Builds a Player instance
      * @constructor
      */
-    public Player(boolean round) {
+    public Player() {
         id=123;
         userName="dummyPlayer";
-        order = round;
+        order = false;
+        score = 0;
 
     }
     public Player(boolean r,int idfromServer, String user) {
         id = idfromServer;
         userName = user;
         order = r;
+        score = 0;
 
     }
 
@@ -46,4 +49,12 @@ public class Player {
      */
     //public Pawn findPawnById(int id)
 
+
+    /**
+     * Counts the pawns which have already won
+     * @param idGame
+     * @return {int}
+     */
+    //viene richiamata dalla function di movimento se checkIfPawnWin ritorna true
+    //public int countHowManyWon(int idGame)
 }

@@ -19,7 +19,7 @@ public class Board extends Game {
     private int[] diceBuffer = new int[2];
 
     /**
-     * create a Board instance to begin the game
+     * create a BoardActivity instance to begin the game
      * @param cells define the number of cells the board has
      */
     public Board(int cells) {
@@ -27,6 +27,10 @@ public class Board extends Game {
         numberOfCell = cells;
     }
 
+    public Board(int cells,Player player1, Player player2) {
+        super(player1,player2);
+        numberOfCell = cells;
+    }
     /**
      * Assign two random values in sequence to the diceBuffer array
      * The method models two dice roll

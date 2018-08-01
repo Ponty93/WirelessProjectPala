@@ -23,8 +23,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainMenu" />
         </activity>
-        <activity android:name=".Game" android:parentActivityName=".MainMenu">
-            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".MainMenu"/>
+        <activity
+            android:name=".GameView"
+            android:parentActivityName=".MainMenu">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainMenu" />
+        </activity>
+        <activity android:name=".BoardActivity" android:parentActivityName=".GameView">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GameView"/>
+
         </activity>
     </application>
 

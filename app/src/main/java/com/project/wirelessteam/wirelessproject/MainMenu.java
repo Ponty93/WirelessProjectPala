@@ -29,6 +29,7 @@ public class MainMenu extends AppCompatActivity {
      */
     public void goToNewGame(View view) {
         Intent intent = new Intent(this, GameView.class);
+        //passo id del player
         startActivity(intent);
     }
 }

@@ -12,9 +12,14 @@ public class Game {
 
     public Game() {
         boolean aux = settleFirst();
-        player1 = new Player(aux);
-        player2 = new Player(!aux);
+        player1 = new Player();
+        player2 = new Player();
 
+    }
+    public Game(Player p1, Player p2) {
+
+        player1 = p1;
+        player2 = p2;
     }
 
     /**
@@ -48,7 +53,7 @@ public class Game {
      * @return {boolean}
      */
 
-    public boolean settleFirst() {
+    public static boolean settleFirst() {
         int intResult = (int)Math.random()*2+1;
 
         return intResult%2 ==0;
