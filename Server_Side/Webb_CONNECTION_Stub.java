@@ -60,15 +60,8 @@ public class MainMenu extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            URL url = null;
-            try {
-                url = new URL("https://psionofficial.com/Wireless/a.php");
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+          
+             
 
             Webb w = Webb.create();
             o = w.get("https://psionofficial.com/Wireless/a.php").header("Authorization", "eskere")
