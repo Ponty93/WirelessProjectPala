@@ -1,4 +1,4 @@
-package apiLibrary.src.main.java.com.goebl.david;
+package API.apiLibrary.src.main.java.com.goebl.david;
 /**
  * Runtime exception wrapping the real exception thrown by HttpUrlConnection et al.
  *

@@ -1,23 +1,26 @@
 package GameLogic;
 import Actors.Player;
+import java.util.UUID;
 /**
  * Models a game in which two players play
  */
 
 
 public class Game {
+    private final UUID idGame;
     private final Player player1;
     private final Player player2;
     private int roundsCounter = 0;
 
     public Game() {
+        idGame = new UUID(16,48);
         boolean aux = settleFirst();
         player1 = new Player();
         player2 = new Player();
 
     }
     public Game(Player p1, Player p2) {
-
+        idGame = new UUID(16,48);
         player1 = p1;
         player2 = p2;
     }
@@ -36,6 +39,9 @@ public class Game {
         return roundsCounter;
     }
 
+    public UUID getIdGame() {
+        return idGame;
+    }
 
     /**
      * set the rounds counter
@@ -82,6 +88,13 @@ public class Game {
             return player1;
         else
             return player2;
+    }
+
+    public Player findPlayerByRemoving(int id) {
+        if(id == player1.getUserId())
+            return player2;
+        else
+            return player1;
     }
 
     /**

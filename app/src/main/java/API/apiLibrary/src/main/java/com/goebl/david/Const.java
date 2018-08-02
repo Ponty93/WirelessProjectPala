@@ -1,4 +1,4 @@
-package apiLibrary.src.main.java.com.goebl.david;
+package API.apiLibrary.src.main.java.com.goebl.david;
 
 /**
  * Constant values and strings.
