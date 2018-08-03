@@ -7,10 +7,12 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
     private boolean checkIfAlreadyLogged = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        checkLogin();
     }
 
     //check if the user already authenticated or else head to the login page
