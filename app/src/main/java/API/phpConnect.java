@@ -22,7 +22,7 @@ public final class phpConnect extends AsyncTask<String, Void, Boolean>{
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-    }
+    } //todo
 
     @Override
     protected Boolean doInBackground(String... params) {
@@ -91,7 +91,10 @@ public final class phpConnect extends AsyncTask<String, Void, Boolean>{
     private Boolean create(String idOperation,int playerId,int pawnId) {
         try {
             Response<Void> response= webb.post(url)
-                    .param("gameId", gameId).param("pawnId",pawnId).param("playerId",playerId).param("op", idOperation)
+                    .param("gameId", gameId)
+                    .param("pawnId",pawnId)
+                    .param("playerId",playerId)
+                    .param("op", idOperation)
                     .ensureSuccess()
                     .asVoid();
             if(response.getStatusCode() == 200) {
@@ -117,10 +120,14 @@ public final class phpConnect extends AsyncTask<String, Void, Boolean>{
     private Boolean update(String idOperation,int playerId,String attrToQuery,int valToQuery,String paramToUpdate, String val) {
         try {
             Response<Void> response = webb.post(url)
-                        .param("gameId", gameId).param(attrToQuery, valToQuery).param("playerId", playerId).param("op", idOperation).param("paramUpdate", paramToUpdate)
-                        .param("valToUpdate", val)
-                        .ensureSuccess()
-                        .asVoid();
+                        .param("gameId", gameId)
+                    .param(attrToQuery, valToQuery)
+                    .param("playerId", playerId)
+                    .param("op", idOperation)
+                    .param("paramUpdate", paramToUpdate)
+                    .param("valToUpdate", val)
+                    .ensureSuccess()
+                    .asVoid();
 
 
             if(response.getStatusCode() == 200)
@@ -143,7 +150,9 @@ public final class phpConnect extends AsyncTask<String, Void, Boolean>{
     private Boolean delete(String idOperation,int playerId,int pawnId) {
         try {
             Response<Void> response= webb.post(url)
-                    .param("gameId", gameId).param("pawnId",pawnId).param("playerId",playerId).param("op", idOperation)
+                    .param("gameId", gameId).param("pawnId",pawnId)
+                    .param("playerId",playerId)
+                    .param("op", idOperation)
                     .ensureSuccess()
                     .asVoid();
             if(response.getStatusCode() == 200) {

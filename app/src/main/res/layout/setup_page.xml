@@ -4,35 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainMenu">
+    tools:context=".setupPage">
 
     <Button
-        android:id="@+id/newGameButton"
-        android:layout_width="224dp"
-        android:layout_height="75dp"
+        android:id="@+id/button"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
         android:onClick="goToNewGame"
         android:text="New Game"
-        android:textAllCaps="false"
-        android:textColor="@android:color/black"
-        android:textSize="36sp"
+        android:textSize="26sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/hightlightsButton"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/hightlightsButton"
-        android:layout_width="253dp"
-        android:layout_height="72dp"
+        android:id="@+id/button2"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
         android:onClick="goToHighlights"
         android:text="Highlights"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
+        android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newGameButton" />
+        app:layout_constraintTop_toBottomOf="@+id/button" />
 </android.support.constraint.ConstraintLayout>

@@ -18,7 +18,7 @@
 	$valToUpdate = isset($update['valToUpdate']) ? $update['valToUpdate'] : "";
 	
 	
-	
+
 	if($op == "") // if checking what kind of operation i'm requesting
 	{
 		$sql="" ; 
