@@ -1,5 +1,7 @@
 public bool outOfBounds(int v, int id){
-	int val = echo select Posizione FROM Pawn WHERE idpawn=id && idplayer=idCurrentPlayer() && idgame=currentGame() ;//ritorno da pagina php in cui dato l'id della pedina mi ritorna la sua posizione
+    jsonobject risultato;
+	risultato = echo select Posizione FROM Pawn WHERE idpawn=id && idplayer=idCurrentPlayer() && idgame=currentGame() ;//ritorno da pagina php in cui dato l'id della pedina mi ritorna la sua posizione
+	int val;
 	if(val+v >= 30){
 		return false;
 	}

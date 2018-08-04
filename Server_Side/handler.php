@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	include('config.php');
 	$content = file_get_contents("php://input"); //get all data sent
 	$update = json_decode($content, true);  //decode dat juicy jsonObject
@@ -39,7 +39,11 @@ if($op == "SendPawnPosition") // example returning the position of a pawn.
 
 		
 	}
-	
+
+//if($op == "SendNumberOfPawns") elect count( Posizione) FROM Pawn WHERE posizione Like pos idplayer=idCurrentPlayer() && idgame=currentGame()
+//mi ritorna il numero di pedine impilate su una pedina del giocatore corrente	
+
+
 	if($op == "") 
 	{
 		$sql="" ; 
