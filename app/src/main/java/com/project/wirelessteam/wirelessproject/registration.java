@@ -35,14 +35,13 @@ public class registration extends AppCompatActivity {
         if(checkInput(editName,editPass)){
             String name = editName.getText().toString();
             String pass = editPass.getText().toString();
-            UUID id = new UUID(16,48);
+           // UUID id = new UUID(16,48); unuseful since the db decides the id.
             try{
             webb.post(new String())
-                    .param("userId",id)
                     .param("userName", name)
                     .param("password", pass)
                     .ensureSuccess()
-                    .asVoid();
+                    .asString();
             }catch(Exception e ){e.printStackTrace();}
             startActivity(intent);
         }
