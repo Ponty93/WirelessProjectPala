@@ -19,7 +19,5 @@ public bool eatingBiggerPawn(int v, int id){
 	else{
 		return true;
 	}
-
-	//culo
 }
 	
