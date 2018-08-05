@@ -41,7 +41,7 @@ public class login extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            String  risultato=s.replaceAll("\\s+","");
+            String risultato=s.replaceAll("\\s+","");
             if(risultato.equals("1")){
                 ((TextView) findViewById(R.id.textView2)).setText("LOGIN CORRETTO!");
                 loginVar=1;

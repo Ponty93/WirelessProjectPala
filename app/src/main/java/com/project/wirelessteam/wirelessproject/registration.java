@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.UUID;
+
 
 import API.apiLibrary.src.main.java.com.goebl.david.*;
 
@@ -55,12 +55,17 @@ public class registration extends AppCompatActivity {
             Integer risultInt= Integer.parseInt(risultato);
             if(risultInt!=0){
                 ((TextView) findViewById(R.id.textView6)).setText("REGISTRAZIONE EFFETTUATA!");
-                //here we should save the ID the php page sent us and setup the local login memory.
+                goToLogin();
+
             }else{
                 ((TextView) findViewById(R.id.textView6)).setText("NOME NON DISPONIBILE!");
             }
             System.out.println(s);
         }
+    }
+
+    private void goToLogin() {
+        startActivity(new Intent(this,login.class));
     }
     public void sendRegistrationData(View view) {
        EditText editName = (EditText) findViewById(R.id.editText2);
@@ -71,8 +76,6 @@ public class registration extends AppCompatActivity {
             String pass = editPass.getText().toString();
 
             new RegistrationSender().execute();
-            Intent intent = new Intent(this,login.class);
-            startActivity(intent);
         }
     }
 }

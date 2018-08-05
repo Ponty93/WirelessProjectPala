@@ -150,7 +150,8 @@ public final class phpConnect extends AsyncTask<String, Void, Boolean>{
     private Boolean delete(String idOperation,int playerId,int pawnId) {
         try {
             Response<Void> response= webb.post(url)
-                    .param("gameId", gameId).param("pawnId",pawnId)
+                    .param("gameId", gameId)
+                    .param("pawnId",pawnId)
                     .param("playerId",playerId)
                     .param("op", idOperation)
                     .ensureSuccess()

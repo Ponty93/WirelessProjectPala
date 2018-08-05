@@ -78,6 +78,9 @@ public class Board extends Game {
                         movePawn(posToArrive,id,player);
                 }
             }
+            /*else {
+            //shows a popup to inform the user the move is not valid
+        }*/
     }
 
     /**
@@ -85,7 +88,6 @@ public class Board extends Game {
      * @param posToArrive
      * @return {boolean}
      */
-    //todo replace string URL
     public boolean checkIfPawnWin(int posToArrive, Player player, int id) {
         if(posToArrive == numberOfCell-1) {
             getConnection().execute("u",Integer.toString(player.getUserId()),"pawnId",Integer.toString(id),"position",Integer.toString(posToArrive));

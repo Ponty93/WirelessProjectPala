@@ -110,8 +110,8 @@ public class Game {
      */
 
     public int howManyPoint(Player player) {
-        getConnection().execute("point",Integer.toString(player.getUserId()),"0");
-        return Integer.parseInt(getConnection().getParamFromJson("point"));
+        getConnection().execute("point",Integer.toString(player.getUserId()),"pos",Integer.toString(30));
+        return Integer.parseInt(getConnection().getParamFromJson("count"));
     }
 
 
