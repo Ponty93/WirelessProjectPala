@@ -11,7 +11,7 @@ import android.widget.TextView;
 import API.apiLibrary.src.main.java.com.goebl.david.*;
 public class login extends AppCompatActivity {
 
- private String loginString = "";
+ private int loginVar = 0;
     //private String Pass= ((TextView)findViewById(R.id.editText)).getText().toString();
     //private String Name= ((TextView)findViewById(R.id.editText2)).getText().toString();
     @Override
@@ -32,10 +32,10 @@ public class login extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             Webb w = Webb.create();
-             loginString = w.get("https://psionofficial.com/Wireless/login.php?Name=" + Name + "&Pass=" + Pass)
+             String aux= w.get("https://psionofficial.com/Wireless/login.php?Name=" + Name + "&Pass=" + Pass)
                     .ensureSuccess().asString().getBody();
 
-            return loginString;
+            return aux;
         }
 
         @Override
@@ -44,10 +44,12 @@ public class login extends AppCompatActivity {
             String  risultato=s.replaceAll("\\s+","");
             if(risultato.equals("1")){
                 ((TextView) findViewById(R.id.textView2)).setText("LOGIN CORRETTO!");
-                loginString="";
+                loginVar=1;
+                goToSetup();
 
-            }else{
+            }else {
                 ((TextView) findViewById(R.id.textView2)).setText("LOGIN ERRATO!");
+                loginVar = 0;
             }
             System.out.println(s);
         }
@@ -56,11 +58,14 @@ public class login extends AppCompatActivity {
 
             new Controllo().execute();
 
-            if(!loginString.equals("")){
-                //((TextView) findViewById(R.id.textView2)).setText(loginString);
-                loginString="";
-                startActivity(new Intent(this,setupPage.class));
-            }
+    }
+
+    public void goToSetup() {
+        if(loginVar ==1) {
+            loginVar = 0;
+            startActivity(new Intent(this,setupPage.class));
+        }
+
     }
 
     public void goToRecord(View view) {
