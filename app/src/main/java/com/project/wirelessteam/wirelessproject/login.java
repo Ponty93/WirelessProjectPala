@@ -11,7 +11,7 @@ import android.widget.TextView;
 import API.apiLibrary.src.main.java.com.goebl.david.*;
 public class login extends AppCompatActivity {
 
-String o;
+ private String loginString = "";
     //private String Pass= ((TextView)findViewById(R.id.editText)).getText().toString();
     //private String Name= ((TextView)findViewById(R.id.editText2)).getText().toString();
     @Override
@@ -32,9 +32,10 @@ String o;
         @Override
         protected String doInBackground(String... params) {
             Webb w = Webb.create();
-             o = w.get("https://psionofficial.com/Wireless/login.php?Name=" + Name + "&Pass=" + Pass)
+             loginString = w.get("https://psionofficial.com/Wireless/login.php?Name=" + Name + "&Pass=" + Pass)
                     .ensureSuccess().asString().getBody();
-            return o;
+
+            return loginString;
         }
 
         @Override
@@ -43,6 +44,8 @@ String o;
             String  risultato=s.replaceAll("\\s+","");
             if(risultato.equals("1")){
                 ((TextView) findViewById(R.id.textView2)).setText("LOGIN CORRETTO!");
+                loginString="";
+
             }else{
                 ((TextView) findViewById(R.id.textView2)).setText("LOGIN ERRATO!");
             }
@@ -52,11 +55,16 @@ String o;
     public void sendLogin(View v) {
 
             new Controllo().execute();
+
+            if(!loginString.equals("")){
+                //((TextView) findViewById(R.id.textView2)).setText(loginString);
+                loginString="";
+                startActivity(new Intent(this,setupPage.class));
+            }
     }
 
     public void goToRecord(View view) {
-        Intent intent = new Intent(this,registration.class);
-        startActivity(intent);
+        startActivity(new Intent(this,registration.class));
     }
 
 

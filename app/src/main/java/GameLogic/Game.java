@@ -7,20 +7,20 @@ import java.util.UUID;
 
 
 public class Game {
-    private final UUID idGame;
+    private final int idGame;
     private final Player player1;
     private final Player player2;
     private int roundsCounter = 0;
 
-    public Game() {
-        idGame = new UUID(16,48);
+    public Game(int gameId) {
+        idGame = gameId;
         boolean aux = settleFirst();
         player1 = new Player();
         player2 = new Player();
 
     }
-    public Game(Player p1, Player p2) {
-        idGame = new UUID(16,48);
+    public Game(Player p1, Player p2,int gameId) {
+        idGame = gameId;
         player1 = p1;
         player2 = p2;
     }
@@ -39,7 +39,7 @@ public class Game {
         return roundsCounter;
     }
 
-    public UUID getIdGame() {
+    public int getIdGame() {
         return idGame;
     }
 

@@ -9,13 +9,13 @@ import java.util.UUID;
 import API.apiLibrary.src.main.java.com.goebl.david.*;
 public final class phpConnect extends AsyncTask<String, Void, Boolean>{
 
-    private String url; //todo remove
-    private UUID gameId;
+    private String url;
+    private int gameId;
     private Webb webb = Webb.create();
     private JSONObject resJson = null;
 
-    public phpConnect(String passedURL,UUID gameIdPassed) {
-        url = passedURL; //todo replace with the URL of the php page
+    public phpConnect(String passedURL,int gameIdPassed) {
+        url = passedURL;
         gameId = gameIdPassed;
     }
 

@@ -15,18 +15,18 @@ public class Board extends Game {
      */
     private int numberOfCell = 30;
     private int[] diceBuffer = new int[2];
-    private phpConnect connectionHandler = new phpConnect(new String(),getIdGame());
+    private phpConnect connectionHandler = new phpConnect("https://www.psionofficial.com/Wireless/handler.php",getIdGame());
     /**
      * create a BoardActivity instance to begin the game
      * @param cells define the number of cells the board has
      */
-    public Board(int cells) {
-        super();
+    public Board(int cells,int gameId) {
+        super(gameId);
         numberOfCell = cells;
     }
 
-    public Board(int cells,Player player1, Player player2) {
-        super(player1,player2);
+    public Board(int cells,Player player1, Player player2,int gameId) {
+        super(player1,player2,gameId);
         numberOfCell = cells;
     }
     /**

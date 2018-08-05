@@ -13,7 +13,7 @@ import java.util.UUID;
 import API.apiLibrary.src.main.java.com.goebl.david.*;
 
 public class registration extends AppCompatActivity {
-String o;
+    private String o;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,20 +63,16 @@ String o;
         }
     }
     public void sendRegistrationData(View view) {
-       // Intent intent = new Intent(this, login.class);
        EditText editName = (EditText) findViewById(R.id.editText2);
        EditText editPass = (EditText) findViewById(R.id.editText3);
 
-        //if(checkInput(editName,editPass)){
+        if(checkInput(editName,editPass)){
             String name = editName.getText().toString();
             String pass = editPass.getText().toString();
-           // UUID id = new UUID(16,48); unuseful since the db decides the id.
+
             new RegistrationSender().execute();
-
-            // startActivity(intent);
-        //}
-
-
-
+            Intent intent = new Intent(this,login.class);
+            startActivity(intent);
+        }
     }
 }
