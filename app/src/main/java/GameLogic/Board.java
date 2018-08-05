@@ -15,7 +15,7 @@ public class Board extends Game {
      */
     private int numberOfCell = 30;
     private int[] diceBuffer = new int[2];
-    private phpConnect connectionHandler = new phpConnect("https://www.psionofficial.com/Wireless/handler.php",getIdGame());
+
     /**
      * create a BoardActivity instance to begin the game
      * @param cells define the number of cells the board has
@@ -147,9 +147,7 @@ public class Board extends Game {
     }
 
 
-    public phpConnect getConnection() {
-        return connectionHandler;
-    }
+
 
 
 

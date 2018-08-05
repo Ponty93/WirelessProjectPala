@@ -24,18 +24,11 @@
                 android:value=".setupPage" />
         </activity>
         <activity
-            android:name=".GameView"
+            android:name=".BoardActivity"
             android:parentActivityName=".setupPage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".setupPage" />
-        </activity>
-        <activity
-            android:name=".BoardActivity"
-            android:parentActivityName=".GameView">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".GameView" />
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>

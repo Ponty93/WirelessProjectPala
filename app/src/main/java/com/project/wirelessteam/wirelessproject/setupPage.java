@@ -31,7 +31,6 @@ public class setupPage extends AppCompatActivity {
      * @param view
      */
     public void goToNewGame(View view) {
-        Intent intent = new Intent(this, GameView.class);
         //faccio una post con id del player a scheduler php che mi ritorna una nuova board
         //con player1 e player2 scelti dallo scheduler con politica FIFO
         int id1=0, id2=0,gameId=0;

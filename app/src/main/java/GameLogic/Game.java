@@ -1,4 +1,5 @@
 package GameLogic;
+import API.phpConnect;
 import Actors.Player;
 import java.util.UUID;
 /**
@@ -11,6 +12,7 @@ public class Game {
     private final Player player1;
     private final Player player2;
     private int roundsCounter = 0;
+    private phpConnect connectionHandler = new phpConnect("https://www.psionofficial.com/Wireless/handler.php",getIdGame());
 
     public Game(int gameId) {
         idGame = gameId;
@@ -97,12 +99,20 @@ public class Game {
             return player1;
     }
 
+    public phpConnect getConnection() {
+        return connectionHandler;
+    }
     /**
      * Checks how many points a player has
      * @param player
      * @return {int}
+     *
      */
-    //public int howManyPoint(Player player)
+
+    public int howManyPoint(Player player) {
+        getConnection().execute("point",Integer.toString(player.getUserId()),"0");
+        return Integer.parseInt(getConnection().getParamFromJson("point"));
+    }
 
 
 
