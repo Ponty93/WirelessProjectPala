@@ -50,11 +50,7 @@ public class Player {
     //public Pawn findPawnById(int id)
 
 
-    /**
-     * Counts the pawns which have already won
-     * @param idGame
-     * @return {int}
-     */
-    //viene richiamata dalla function di movimento se checkIfPawnWin ritorna true
-    //public int countHowManyWon(int idGame)
+
 }
+
+

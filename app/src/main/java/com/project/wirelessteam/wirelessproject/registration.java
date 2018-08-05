@@ -53,10 +53,9 @@ public class registration extends AppCompatActivity {
             super.onPostExecute(s);
             String  risultato=o.replaceAll("\\s+","");
             Integer risultInt= Integer.parseInt(risultato);
-            if(risultInt!=0){
+            if(risultInt != 0){
                 ((TextView) findViewById(R.id.textView6)).setText("REGISTRAZIONE EFFETTUATA!");
                 goToLogin();
-
             }else{
                 ((TextView) findViewById(R.id.textView6)).setText("NOME NON DISPONIBILE!");
             }

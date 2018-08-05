@@ -65,17 +65,19 @@ public class Board extends Game {
      * @param player
      */
     public void planToMove(int val, int id, Player player) {
-        getConnection().execute("r",Integer.toString(player.getUserId()),Integer.toString(id));
+        getConnection().execute("r","PAWN",Integer.toString(player.getUserId()),Integer.toString(id));
         int posToStart = Integer.parseInt(getConnection().getParamFromJson("position"));
         int posToArrive = posToStart+ val;
         if(posToArrive < numberOfCell) {
-                if(checkIfPawnWin(posToArrive,player,id))
+                if(checkIfPawnWin(player.getUserId(),posToArrive,posToStart))
                     return;
                 else {
-                    if(canEat(player.getUserId(),findPlayerByRemoving(player.getUserId()).getUserId(),posToStart,posToArrive))
-                        eatPawn(posToArrive,findPlayerByRemoving(player.getUserId()));
+                    if(canEat(player.getUserId(),findPlayerByRemoving(player.getUserId()).getUserId(),posToStart,posToArrive)) {
+                        eatPawn(player.getUserId(),posToArrive);
+                        movePawn(player.getUserId(),id,posToStart,posToArrive);
+                    }
                     else
-                        movePawn(posToArrive,id,player);
+                        movePawn(player.getUserId(),id,posToStart,posToArrive);
                 }
             }
             /*else {
@@ -85,12 +87,14 @@ public class Board extends Game {
 
     /**
      * Check if a pawn is able to win
+     * @param playerId
+     * @param posToStart
      * @param posToArrive
      * @return {boolean}
      */
-    public boolean checkIfPawnWin(int posToArrive, Player player, int id) {
+    public boolean checkIfPawnWin(int playerId,int posToStart, int posToArrive) {
         if(posToArrive == numberOfCell-1) {
-            getConnection().execute("u",Integer.toString(player.getUserId()),"pawnId",Integer.toString(id),"position",Integer.toString(posToArrive));
+            getConnection().execute("u",Integer.toString(playerId),"position",Integer.toString(posToStart),Integer.toString(posToArrive));
             return true;
         }
         else
@@ -118,22 +122,28 @@ public class Board extends Game {
 
     /**
      * Sets the position value of a enemy pawn that can be eaten to -1
-     * @param pos
-     * @param player
+     * @param posToStart
+     * @param playerId
      * @return {void}
      */
-    public void eatPawn(int pos,Player player) {
-        getConnection().execute("u",Integer.toString(player.getUserId()),"positionToUpdate",Integer.toString(pos),"positionUpdated",Integer.toString(-1));
+    public void eatPawn(int playerId,int posToStart) {
+        getConnection().execute("u",Integer.toString(playerId),"position",Integer.toString(posToStart),Integer.toString(-1));
     }
 
     /**
      * Move a pawn according to the values passed as param
      * The method also check if the pawn is at the end line or is over that
-     * @param val
+     * @param playerId
      * @param pawnId
+     * @param posToStart
+     * @param posToArrive
+     * @return {void}
      */
-    public void movePawn(int val, int pawnId, Player player) {
-        getConnection().execute("u", Integer.toString(player.getUserId()),"pawnId", Integer.toString(pawnId),"position",Integer.toString(val));
+    public void movePawn(int playerId,int pawnId,int posToStart, int posToArrive) {
+        if(posToStart == -1)
+            getConnection().execute("u",Integer.toString(playerId),"pawnId",Integer.toString(pawnId),Integer.toString(posToArrive));
+        else
+            getConnection().execute("u",Integer.toString(playerId),"position",Integer.toString(posToStart),Integer.toString(posToArrive));
     }
 
 
@@ -144,7 +154,7 @@ public class Board extends Game {
      */
     public int howManyPawns(int pos, int playerId)
     {
-        getConnection().execute("r",Integer.toString(playerId),"pos",Integer.toString(pos));
+        getConnection().execute("r","PAWN",Integer.toString(playerId),"pos",Integer.toString(pos));
         return Integer.parseInt(getConnection().getParamFromJson("count"));
     }
 

@@ -27,13 +27,13 @@ public final class phpConnect extends AsyncTask<String, Void, Boolean>{
     @Override
     protected Boolean doInBackground(String... params) {
         if(params[0] == "c")
-            return create(params[0],Integer.parseInt(params[1]),Integer.parseInt(params[2]));
+            return create(params[0],params[1],params[2],params[3]);
         else if(params[0] == "r")
-            return read(params[0],Integer.parseInt(params[1]),params[2],Integer.parseInt(params[3]));
+            return read(params[0],params[1],Integer.parseInt(params[2]),params[3],Integer.parseInt(params[4]));
         else if(params[0] == "u")
-            return update(params[0],Integer.parseInt(params[1]),params[2],Integer.parseInt(params[3]),params[4],params[5]);
+            return update(params[0],Integer.parseInt(params[1]),params[2],Integer.parseInt(params[3]),Integer.parseInt(params[4]));
         else if(params[0] == "d")
-            return delete(params[0],Integer.parseInt(params[1]),Integer.parseInt(params[2]));
+            return delete(params[0],params[1],Integer.parseInt(params[2]));
 
         return false;
     }
@@ -49,24 +49,54 @@ public final class phpConnect extends AsyncTask<String, Void, Boolean>{
     /**
      * The method reads a record from the table PAWN and returns his attribute and value as a JSON
      * @param idOperation : String to identify the operation to execute
+     * @param tableName : defines the table to query
      * @param playerId : userId of the player committing the operation
      * @param paramToRead : Choice to read by "pos" or by "pawnId"
      * @param valToRead : Val to use to read the query,it could be a pawn's position or a pawnId
      * @return {boolean}
      */
-    private Boolean read(String idOperation,int playerId,String paramToRead, int valToRead) {
+    private Boolean read(String idOperation,String tableName,int playerId,String paramToRead, int valToRead) {
         try {
             Response<JSONObject> response = null;
 
             if(paramToRead.equals("pawnId")) {
                 response = webb.post(url)
-                        .param("gameId", gameId).param("pawnId", valToRead).param("playerId", playerId).param("op", idOperation)
+                        .param("gameId", gameId)
+                        .param("tableName",tableName)
+                        .param("pawnId", valToRead)
+                        .param("playerId", playerId)
+                        .param("op", idOperation)
+                        .param("caseToQuery",1)
                         .ensureSuccess()
                         .asJsonObject();
             }
-            else if(paramToRead.equals("pos")) {
+            else if(paramToRead.equals("position")) {
                 response = webb.post(url)
-                        .param("gameId", gameId).param("pos",valToRead ).param("playerId", playerId).param("op", idOperation)
+                        .param("gameId", gameId)
+                        .param("tableName",tableName)
+                        .param("pos",valToRead )
+                        .param("playerId", playerId)
+                        .param("op", idOperation)
+                        .param("caseToQuery",2)
+                        .ensureSuccess()
+                        .asJsonObject();
+            }
+            else if(paramToRead.equals("boardUpdate")){
+                response = webb.post(url)
+                        .param("gameId", gameId)
+                        .param("tableName",tableName)
+                        .param("op", idOperation)
+                        .param("caseToQuery",3)
+                        .ensureSuccess()
+                        .asJsonObject();
+            }
+            else { //case that assume the read is not for the PAWN table but anyone else
+                response = webb.post(url)
+                        .param("tableName",tableName)
+                        .param("op", idOperation)
+                        .param("caseToQuery",4)
+                        .param("attrToQuery",paramToRead)
+                        .param("valToQuery",valToRead)
                         .ensureSuccess()
                         .asJsonObject();
             }
@@ -84,16 +114,20 @@ public final class phpConnect extends AsyncTask<String, Void, Boolean>{
     /**
      * The method builds a new record in the PAWN table
      * @param idOperation
-     * @param playerId
-     * @param pawnId
+     * @param tableName
+     * @param val1
+     * @param val2
      * @return {boolean}
+     * tableName="GAME" : val1 = Player1Id val2 = Player2Id
+     * tableName="Player" : val1: Username val2 = Password
+     * tableName="Pawn" : val1 = GameId val2= PlayerId
      */
-    private Boolean create(String idOperation,int playerId,int pawnId) {
+    private Boolean create(String idOperation,String tableName,String val1,String val2) {
         try {
             Response<Void> response= webb.post(url)
-                    .param("gameId", gameId)
-                    .param("pawnId",pawnId)
-                    .param("playerId",playerId)
+                    .param("table",tableName)
+                    .param("firstValToQuery",val1)
+                    .param("secondValToQuery",val2)
                     .param("op", idOperation)
                     .ensureSuccess()
                     .asVoid();
@@ -108,27 +142,41 @@ public final class phpConnect extends AsyncTask<String, Void, Boolean>{
     }
 
     /**
-     * The method updates the paramToUpdate attribute with the new val value
+     * The method updates the posToBeUpdated position attribute with the new val posToUpdate
      * @param idOperation
      * @param playerId
-     * @param attrToQuery : Choice to query by position or by pawnId
-     * @param valToQuery : pawnId or position value
-     * @param paramToUpdate : attribute of the PAWN table to be updated
-     * @param val : new value to be updated to the paramToUpdate's attribute
+     * @param attrToQuery: attribute to use in the making of the query
+     * @param valToQuery : val to use in the making to the query, associated to attrToQuery
+     * @param posToUpdate : new position's value
+     * exclusive method for the PAWN table
      * @return {boolean}
      */
-    private Boolean update(String idOperation,int playerId,String attrToQuery,int valToQuery,String paramToUpdate, String val) {
+    private Boolean update(String idOperation,int playerId,String attrToQuery,int valToQuery,int posToUpdate) {
         try {
-            Response<Void> response = webb.post(url)
-                        .param("gameId", gameId)
-                    .param(attrToQuery, valToQuery)
-                    .param("playerId", playerId)
-                    .param("op", idOperation)
-                    .param("paramUpdate", paramToUpdate)
-                    .param("valToUpdate", val)
-                    .ensureSuccess()
-                    .asVoid();
 
+                Response<Void> response= null;
+                if(attrToQuery.equals("pawnId")) {
+                response =
+                        webb.post(url)
+                                .param("gameId", gameId)
+                                .param("op", idOperation)
+                                .param("playerId", playerId)
+                                .param("pawnId", valToQuery)
+                                .param("posToUpdate", posToUpdate)
+                                .ensureSuccess()
+                                .asVoid();
+            }
+            else if(attrToQuery.equals("position")) {
+                    response =
+                            webb.post(url)
+                                    .param("gameId", gameId)
+                                    .param("op", idOperation)
+                                    .param("playerId", playerId)
+                                    .param("posToBeUpdated", valToQuery)
+                                    .param("posToUpdate", posToUpdate)
+                                    .ensureSuccess()
+                                    .asVoid();
+                }
 
             if(response.getStatusCode() == 200)
                 return true;
@@ -143,16 +191,15 @@ public final class phpConnect extends AsyncTask<String, Void, Boolean>{
     /**
      * The method deletes a record in the PAWN table
      * @param idOperation
-     * @param playerId
-     * @param pawnId
+     * @param tableName
+     * @param tableId
      * @return {boolean}
      */
-    private Boolean delete(String idOperation,int playerId,int pawnId) {
+    private Boolean delete(String idOperation,String tableName, int tableId) {
         try {
             Response<Void> response= webb.post(url)
-                    .param("gameId", gameId)
-                    .param("pawnId",pawnId)
-                    .param("playerId",playerId)
+                    .param("tableName",tableName)
+                    .param("tableId",tableId)
                     .param("op", idOperation)
                     .ensureSuccess()
                     .asVoid();

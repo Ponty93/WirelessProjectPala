@@ -102,17 +102,7 @@ public class Game {
     public phpConnect getConnection() {
         return connectionHandler;
     }
-    /**
-     * Checks how many points a player has
-     * @param player
-     * @return {int}
-     *
-     */
 
-    public int howManyPoint(Player player) {
-        getConnection().execute("point",Integer.toString(player.getUserId()),"pos",Integer.toString(30));
-        return Integer.parseInt(getConnection().getParamFromJson("count"));
-    }
 
 
 
