@@ -60,7 +60,7 @@ public class login extends AppCompatActivity {
 
     }
 
-    public void goToSetup() {
+    private void goToSetup() {
         if(loginVar ==1) {
             loginVar = 0;
             startActivity(new Intent(this,setupPage.class));
