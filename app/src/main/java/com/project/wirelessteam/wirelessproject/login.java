@@ -8,10 +8,14 @@ import android.view.View;
 import android.widget.TextView;
 
 
-import API.apiLibrary.src.main.java.com.goebl.david.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import API.phpConnect;
+
 public class login extends AppCompatActivity {
 
- private int loginVar = 0;
+ private boolean loginVar = false;
     //private String Pass= ((TextView)findViewById(R.id.editText)).getText().toString();
     //private String Name= ((TextView)findViewById(R.id.editText2)).getText().toString();
     @Override
@@ -21,37 +25,46 @@ public class login extends AppCompatActivity {
     }
 
 
-    class Controllo extends AsyncTask<String,Void,String> {
-        String Pass= ((TextView)findViewById(R.id.editText4)).getText().toString();
-        String Name= ((TextView)findViewById(R.id.editText)).getText().toString();
+    class Controllo extends AsyncTask<String,Void,Boolean> {
+        private String Pass= ((TextView)findViewById(R.id.editText4)).getText().toString();
+        private String Name= ((TextView)findViewById(R.id.editText)).getText().toString();
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
 
         @Override
-        protected String doInBackground(String... params) {
-            Webb w = Webb.create();
-             String aux= w.get("https://psionofficial.com/Wireless/login.php?Name=" + Name + "&Pass=" + Pass)
-                    .ensureSuccess().asString().getBody();
+        protected Boolean doInBackground(String... params) {
+            phpConnect conn = new phpConnect("https://psionofficial.com/Wireless/login.php",-1);
+            StringBuffer sb;
+            try{
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update((Name+Pass).getBytes());
+            byte[] digest = md.digest();
+            sb = new StringBuffer();
+            for(byte b : digest)
+                sb.append(String.format("%02x", b & 0xff));
 
-            return aux;
+            conn.execute("r","USERS","-1",sb.toString(),"-2");
+            }catch(NoSuchAlgorithmException e){
+                e.printStackTrace();
+            }
+
+            return conn.getResult();
+
         }
 
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            String risultato=s.replaceAll("\\s+","");
-            if(risultato.equals("1")){
+        protected void onPostExecute(Boolean r) {
+            if (r == true) {
                 ((TextView) findViewById(R.id.textView2)).setText("LOGIN CORRETTO!");
-                loginVar=1;
+                loginVar = true;
                 goToSetup();
 
-            }else {
+            } else {
                 ((TextView) findViewById(R.id.textView2)).setText("LOGIN ERRATO!");
-                loginVar = 0;
+                loginVar = false;
             }
-            System.out.println(s);
         }
     }
     public void sendLogin(View v) {
@@ -61,8 +74,8 @@ public class login extends AppCompatActivity {
     }
 
     private void goToSetup() {
-        if(loginVar ==1) {
-            loginVar = 0;
+        if(loginVar == true) {
+            loginVar = false;
             startActivity(new Intent(this,setupPage.class));
         }
 

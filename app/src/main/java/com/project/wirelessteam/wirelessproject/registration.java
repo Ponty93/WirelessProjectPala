@@ -39,7 +39,7 @@ public class registration extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(String... params) {
-            phpConnect conn = new phpConnect("https://www.psionofficial.com/Wireless/register.php",0);
+            phpConnect conn = new phpConnect("https://www.psionofficial.com/Wireless/register.php",-1);
             conn.execute("c","USERS",name,pass);
             return conn.getResult();
         }
