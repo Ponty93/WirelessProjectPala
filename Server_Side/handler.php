@@ -53,12 +53,13 @@
 	
 	
 	if($op == "READ") {
-		if($tableName=="game"){//sending all pawn' positions
+		if($tableName=="game"){//sending all pawn' positions // meglio fare solo 1 query. Select * from GAME where gameId = idGame
+		                                                    // poi si fa semplicemente il parse e si smistano i record
 			$parameters = array("gameId" => $gameId);
 			$sql="SELECT * FROM Pawn WHERE id_Player like " . $playerId . " AND id_Game like " . $gameId ;
 			$result=$conn->query($sql);
 				while($row = $result->fetch_assoc()){//Player1's Pawn
-				$parameters['playerId'][$playerId]['pawnId'][$row['ID']]['playerId'][]=$row['id_Player'];
+				$parameters['playerId'][$playerId]['pawnId'][$row['ID']]['playerId'][]=$row['id_Player'];//2 volte player Id?
 				$parameters['playerId'][$playerId]['pawnId'][$row['ID']]['position'][]=$row['Position'];
 													}	
 														

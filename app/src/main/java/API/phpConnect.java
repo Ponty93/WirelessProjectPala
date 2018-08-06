@@ -7,12 +7,14 @@ import org.json.JSONObject;
 import java.util.UUID;
 
 import API.apiLibrary.src.main.java.com.goebl.david.*;
-public final class phpConnect extends AsyncTask<String, Void, Boolean>{
+public final class phpConnect extends AsyncTask<String, Void, Void>{
 
     private String url;
     private int gameId;
     private Webb webb = Webb.create();
     private JSONObject resJson = null;
+    private boolean resOperation = false;
+
 
     public phpConnect(String passedURL,int gameIdPassed) {
         url = passedURL;
@@ -25,19 +27,23 @@ public final class phpConnect extends AsyncTask<String, Void, Boolean>{
     } //todo
 
     @Override
-    protected Boolean doInBackground(String... params) {
+    protected Void doInBackground(String... params) {
         if(params[0] == "c")
-            return create(params[0],params[1],params[2],params[3]);
+            resOperation=create(params[0],params[1],params[2],params[3]);
         else if(params[0] == "r")
-            return read(params[0],params[1],Integer.parseInt(params[2]),params[3],Integer.parseInt(params[4]));
+            resOperation=read(params[0],params[1],Integer.parseInt(params[2]),params[3],Integer.parseInt(params[4]));
         else if(params[0] == "u")
-            return update(params[0],Integer.parseInt(params[1]),params[2],Integer.parseInt(params[3]),Integer.parseInt(params[4]));
+            resOperation=update(params[0],Integer.parseInt(params[1]),params[2],Integer.parseInt(params[3]),Integer.parseInt(params[4]));
         else if(params[0] == "d")
-            return delete(params[0],params[1],Integer.parseInt(params[2]));
+            resOperation=delete(params[0],params[1],Integer.parseInt(params[2]));
 
-        return false;
+        return null;
     }
 
+
+    public boolean getResult() {
+        return resOperation;
+    }
     /**
      * Operation allowed:
      * Create: 'c' builds a record in the table specified with the passed params
@@ -84,7 +90,9 @@ public final class phpConnect extends AsyncTask<String, Void, Boolean>{
             else if(paramToRead.equals("boardUpdate")){
                 response = webb.post(url)
                         .param("gameId", gameId)
+                        .param("player1Id",playerId)
                         .param("tableName",tableName)
+                        .param("player2Id",valToRead)
                         .param("op", idOperation)
                         .param("caseToQuery",3)
                         .ensureSuccess()

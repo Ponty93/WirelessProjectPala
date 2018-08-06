@@ -10,10 +10,10 @@ import android.widget.TextView;
 
 
 
-import API.apiLibrary.src.main.java.com.goebl.david.*;
+import API.phpConnect;
 
 public class registration extends AppCompatActivity {
-    private String o;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +29,7 @@ public class registration extends AppCompatActivity {
         }
     }
 
-    class RegistrationSender extends AsyncTask<String,Void,String> {
+    class RegistrationSender extends AsyncTask<String,Void,Boolean> {
         String pass= ((TextView)findViewById(R.id.editText3)).getText().toString();
         String name= ((TextView)findViewById(R.id.editText2)).getText().toString();
         @Override
@@ -38,22 +38,18 @@ public class registration extends AppCompatActivity {
         }
 
         @Override
-        protected String doInBackground(String... params) {
-            Webb webb = Webb.create();
-            o = webb.post("https://www.psionofficial.com/Wireless/register.php")
-                    .param("userName", name)
-                    .param("password", pass)
-                    .ensureSuccess()
-                    .asString().getBody();
-            return o;
+        protected Boolean doInBackground(String... params) {
+            phpConnect conn = new phpConnect("https://www.psionofficial.com/Wireless/register.php",0);
+            conn.execute("c","USERS",name,pass);
+            return conn.getResult();
         }
 
         @Override
-        protected void onPostExecute(String s) {
+        protected void onPostExecute(Boolean s) {
             super.onPostExecute(s);
-            String  risultato=o.replaceAll("\\s+","");
-            Integer risultInt= Integer.parseInt(risultato);
-            if(risultInt != 0){
+            //String  risultato=o.replaceAll("\\s+","");
+            //Integer risultInt= Integer.parseInt(risultato);
+            if(s == true){
                 ((TextView) findViewById(R.id.textView6)).setText("REGISTRAZIONE EFFETTUATA!");
                 goToLogin();
             }else{
