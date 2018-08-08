@@ -10,23 +10,32 @@ import android.widget.TextView;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.ExecutionException;
 
 import API.phpConnect;
 
 public class login extends AppCompatActivity {
 
  private boolean loginVar = false;
-    private String Pass= ((TextView)findViewById(R.id.editText4)).getText().toString();
-    private String Name= ((TextView)findViewById(R.id.editText)).getText().toString();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
     }
 
-    public void sendLogin() {
+    public void sendLogin(View view) {
+        String Pass= ((TextView)findViewById(R.id.editText4)).getText().toString();
+        String Name= ((TextView)findViewById(R.id.editText)).getText().toString();
         phpConnect conn = new phpConnect("https://psionofficial.com/Wireless/login.php",-1);
-        conn.execute("r",Name,"-1",makeMD5(Name+Pass),"-2");
+        try {
+            conn.execute("r",Name,"-1",makeMD5(Name+Pass),"-2").get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         if(conn.getResult() == true){
             ((TextView) findViewById(R.id.textView2)).setText("LOGIN CORRETTO!");
             loginVar = true;

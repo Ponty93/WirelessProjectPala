@@ -1,5 +1,6 @@
 package API;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,6 +21,10 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
         url = passedURL;
         gameId = gameIdPassed;
     }
+    public boolean getResult() {
+        Log.d("VALORE RESOP2" , String.valueOf(resOperation));
+        return resOperation;
+    }
 
     @Override
     protected void onPreExecute() {
@@ -36,14 +41,12 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
             resOperation=update(params[0],Integer.parseInt(params[1]),params[2],Integer.parseInt(params[3]),Integer.parseInt(params[4]));
         else if(params[0] == "d")
             resOperation=delete(params[0],params[1],Integer.parseInt(params[2]));
-
+        Log.d("VALORE RESOP" , String.valueOf(resOperation));
         return null;
     }
 
 
-    public boolean getResult() {
-        return resOperation;
-    }
+
     /**
      * Operation allowed:
      * Create: 'c' builds a record in the table specified with the passed params
@@ -113,7 +116,8 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
                         .getBody();
             }
             if(Integer.parseInt(getParamFromJson("Result")) == 1)
-                return true;
+                    Log.d("READ" , "Sto a METTERE TRUE!");
+                    return true;
         }
         catch(Exception e ){
             e.printStackTrace();
