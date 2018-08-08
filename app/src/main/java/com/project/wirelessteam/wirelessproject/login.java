@@ -45,7 +45,7 @@ public class login extends AppCompatActivity {
             for(byte b : digest)
                 sb.append(String.format("%02x", b & 0xff));
 
-            conn.execute("r","USERS","-1",sb.toString(),"-2");
+            conn.execute("r",Name,"-1",sb.toString(),"-2");
             }catch(NoSuchAlgorithmException e){
                 e.printStackTrace();
             }

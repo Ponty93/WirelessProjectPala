@@ -7,7 +7,6 @@ import org.json.JSONObject;
 import java.util.UUID;
 
 import API.apiLibrary.src.main.java.com.goebl.david.*;
-
 public final class phpConnect extends AsyncTask<String, Void, Void>{
 
     private String url;
@@ -62,12 +61,12 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
      * @param valToRead : Val to use to read the query,it could be a pawn's position or a pawnId
      * @return {boolean}
      */
-    private Boolean read(String idOperation,String tableName,int playerId,String paramToRead, int valToRead) {
+    private boolean read(String idOperation,String tableName,int playerId,String paramToRead, int valToRead) {
         try {
-            Response<JSONObject> response = null;
+
 
             if(paramToRead.equals("pawnId")) {
-                response = webb.post(url)
+                resJson = webb.post(url)
                         .param("gameId", gameId)
                         .param("tableName",tableName)
                         .param("pawnId", valToRead)
@@ -75,10 +74,11 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
                         .param("op", idOperation)
                         .param("caseToQuery",1)
                         .ensureSuccess()
-                        .asJsonObject();
+                        .asJsonObject()
+                        .getBody();
             }
             else if(paramToRead.equals("position")) {
-                response = webb.post(url)
+                resJson = webb.post(url)
                         .param("gameId", gameId)
                         .param("tableName",tableName)
                         .param("pos",valToRead )
@@ -86,10 +86,11 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
                         .param("op", idOperation)
                         .param("caseToQuery",2)
                         .ensureSuccess()
-                        .asJsonObject();
+                        .asJsonObject()
+                        .getBody();
             }
             else if(paramToRead.equals("boardUpdate")){
-                response = webb.post(url)
+                resJson = webb.post(url)
                         .param("gameId", gameId)
                         .param("player1Id",playerId)
                         .param("tableName",tableName)
@@ -97,22 +98,22 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
                         .param("op", idOperation)
                         .param("caseToQuery",3)
                         .ensureSuccess()
-                        .asJsonObject();
+                        .asJsonObject()
+                        .getBody();
             }
             else { //case that assume the read is not for the PAWN table but anyone else
-                response = webb.post(url)
+                resJson = webb.post(url)
                         .param("tableName",tableName)
                         .param("op", idOperation)
                         .param("caseToQuery",4)
                         .param("attrToQuery",paramToRead)
                         .param("valToQuery",valToRead)
                         .ensureSuccess()
-                        .asJsonObject();
+                        .asJsonObject()
+                        .getBody();
             }
-            if(response.getStatusCode() == 200) {
-                resJson = response.getBody();
+            if(Integer.parseInt(getParamFromJson("Result")) == 1)
                 return true;
-            }
         }
         catch(Exception e ){
             e.printStackTrace();
@@ -131,16 +132,18 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
      * tableName="Player" : val1: Username val2 = Password
      * tableName="Pawn" : val1 = GameId val2= PlayerId
      */
-    private Boolean create(String idOperation,String tableName,String val1,String val2) {
+    private boolean create(String idOperation,String tableName,String val1,String val2) {
         try {
-            Response<Void> response= webb.post(url)
+                resJson = webb.post(url)
                     .param("table",tableName)
                     .param("firstValToQuery",val1)
                     .param("secondValToQuery",val2)
                     .param("op", idOperation)
                     .ensureSuccess()
-                    .asVoid();
-            if(response.getStatusCode() == 200) {
+                    .asJsonObject()
+                    .getBody();
+
+            if(Integer.parseInt(getParamFromJson("Result")) == 1) {
                 return true;
             }
         }
@@ -160,12 +163,12 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
      * exclusive method for the PAWN table
      * @return {boolean}
      */
-    private Boolean update(String idOperation,int playerId,String attrToQuery,int valToQuery,int posToUpdate) {
+    private boolean update(String idOperation,int playerId,String attrToQuery,int valToQuery,int posToUpdate) {
         try {
 
-                Response<Void> response= null;
+
                 if(attrToQuery.equals("pawnId")) {
-                response =
+                resJson=
                         webb.post(url)
                                 .param("gameId", gameId)
                                 .param("op", idOperation)
@@ -173,10 +176,11 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
                                 .param("pawnId", valToQuery)
                                 .param("posToUpdate", posToUpdate)
                                 .ensureSuccess()
-                                .asVoid();
+                                .asJsonObject()
+                                .getBody();
             }
             else if(attrToQuery.equals("position")) {
-                    response =
+                    resJson =
                             webb.post(url)
                                     .param("gameId", gameId)
                                     .param("op", idOperation)
@@ -184,10 +188,11 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
                                     .param("posToBeUpdated", valToQuery)
                                     .param("posToUpdate", posToUpdate)
                                     .ensureSuccess()
-                                    .asVoid();
+                                    .asJsonObject()
+                                    .getBody();
                 }
 
-            if(response.getStatusCode() == 200)
+            if(Integer.parseInt(getParamFromJson("Result")) == 1)
                 return true;
 
         }
@@ -204,15 +209,17 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
      * @param tableId
      * @return {boolean}
      */
-    private Boolean delete(String idOperation,String tableName, int tableId) {
+    private boolean delete(String idOperation,String tableName, int tableId) {
         try {
-            Response<Void> response= webb.post(url)
+                resJson= webb.post(url)
                     .param("tableName",tableName)
                     .param("tableId",tableId)
                     .param("op", idOperation)
                     .ensureSuccess()
-                    .asVoid();
-            if(response.getStatusCode() == 200) {
+                    .asJsonObject()
+                    .getBody();
+
+            if(Integer.parseInt(getParamFromJson("Result")) == 1) {
                 return true;
             }
         }
