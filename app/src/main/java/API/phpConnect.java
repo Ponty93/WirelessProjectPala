@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import java.util.UUID;
 
 import API.apiLibrary.src.main.java.com.goebl.david.*;
-//to change
+
 public final class phpConnect extends AsyncTask<String, Void, Void>{
 
     private String url;
