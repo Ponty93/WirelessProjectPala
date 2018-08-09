@@ -25,7 +25,7 @@ public class registration extends AppCompatActivity {
         if(!name.getText().toString().equals("") && !pass.getText().toString().equals(""))
             return true;
         else {
-            name.setText("Questo campo non deve essere lasciato vuoto!");
+            name.setText("Questo campo non deve essere lasciato vuoto!"); //todo
             return false;
         }
     }
