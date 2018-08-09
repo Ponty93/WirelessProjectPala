@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+import java.util.concurrent.ExecutionException;
 
 import API.phpConnect;
 
@@ -29,36 +30,6 @@ public class registration extends AppCompatActivity {
         }
     }
 
-    class RegistrationSender extends AsyncTask<String,Void,Boolean> {
-        String pass= ((TextView)findViewById(R.id.editText3)).getText().toString();
-        String name= ((TextView)findViewById(R.id.editText2)).getText().toString();
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Boolean doInBackground(String... params) {
-            phpConnect conn = new phpConnect("https://www.psionofficial.com/Wireless/register.php",-1);
-            conn.execute("c","USERS",name,pass);
-            return conn.getResult();
-        }
-
-        @Override
-        protected void onPostExecute(Boolean s) {
-            super.onPostExecute(s);
-            //String  risultato=o.replaceAll("\\s+","");
-            //Integer risultInt= Integer.parseInt(risultato);
-            if(s == true){
-                ((TextView) findViewById(R.id.textView6)).setText("REGISTRAZIONE EFFETTUATA!");
-                goToLogin();
-            }else{
-                ((TextView) findViewById(R.id.textView6)).setText("NOME NON DISPONIBILE!");
-            }
-            System.out.println(s);
-        }
-    }
-
     private void goToLogin() {
         startActivity(new Intent(this,login.class));
     }
@@ -67,10 +38,24 @@ public class registration extends AppCompatActivity {
        EditText editPass = (EditText) findViewById(R.id.editText3);
 
         if(checkInput(editName,editPass)){
-            String name = editName.getText().toString();
-            String pass = editPass.getText().toString();
+            String pass= ((TextView)findViewById(R.id.editText3)).getText().toString();
+            String name= ((TextView)findViewById(R.id.editText2)).getText().toString();
+            phpConnect conn = new phpConnect("https://www.psionofficial.com/Wireless/register.php",-1);
+            try {
+                conn.execute("c","USERS",name,pass,"1").get();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if(conn.getResult() == true){
+                ((TextView) findViewById(R.id.textView6)).setText("REGISTRAZIONE EFFETTUATA!");
+                goToLogin();
+            }else{
+                ((TextView) findViewById(R.id.textView6)).setText("NOME NON DISPONIBILE!");
+            }
 
-            new RegistrationSender().execute();
+
         }
     }
 }
