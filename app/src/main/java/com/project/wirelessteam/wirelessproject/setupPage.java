@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
+import API.phpConnect;
 public class setupPage extends AppCompatActivity {
 
     @Override
@@ -31,16 +31,33 @@ public class setupPage extends AppCompatActivity {
      * @param view
      */
     public void goToNewGame(View view) {
-        //faccio una post con id del player a scheduler php che mi ritorna una nuova board
-        //con player1 e player2 scelti dallo scheduler con politica FIFO
-        int id1=0, id2=0,gameId=0;
-        String user1 = "Def1",user2="Def2";
+
+        //retrieve local player data from login
+        Intent intentFromLogin = getIntent();
+        phpConnect conn = new phpConnect(new String(),-1); //todo
+        String idPlayer1 =intentFromLogin.getStringExtra("idPlayer");
+        String userNamePlayer1 = intentFromLogin.getStringExtra("userName");
+
+        //query to retrieve new game instance data by passing local playerId
+        conn.execute("r","GAME","-1","playerId",idPlayer1);
+
+        //saving data from query to GAME table
+        int gameId = Integer.parseInt(conn.getParamFromJson("gameId"));
+        String idPlayer2 = conn.getParamFromJson("idPlayer2");
+
+        //todo retrieve data about player2
+        conn.setUrl(new String());
+        conn.execute("r","PLAYER","-1","playerId",idPlayer2); //todo
+
+        String userNamePlayer2 = conn.getParamFromJson("userName");
+
+        //builds the intent to create the new local Board instance
         Intent intentToBoard = new Intent(this, BoardActivity.class);
-        //passo un intent con id, userName player 1 e player 2 prelevati dalla query
-        intentToBoard.putExtra("player1Id", id1);
-        intentToBoard.putExtra("player1Name", user1);
-        intentToBoard.putExtra("player2Id", id2);
-        intentToBoard.putExtra("player2Name", user2);
+
+        intentToBoard.putExtra("player1Id", idPlayer1);
+        intentToBoard.putExtra("player1Name", userNamePlayer1);
+        intentToBoard.putExtra("player2Id", idPlayer2);
+        intentToBoard.putExtra("player2Name", userNamePlayer2);
         intentToBoard.putExtra("gameId",gameId);
         startActivity(intentToBoard);
     }

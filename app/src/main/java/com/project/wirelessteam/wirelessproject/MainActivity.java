@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //todo manage login credentials
     public void checkLogin() {
         if(checkIfAlreadyLogged == false)
             headToLogin();

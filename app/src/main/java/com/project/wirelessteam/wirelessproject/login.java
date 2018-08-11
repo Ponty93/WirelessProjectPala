@@ -17,17 +17,17 @@ import API.phpConnect;
 public class login extends AppCompatActivity {
 
  private boolean loginVar = false;
-
+ private  phpConnect conn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        conn =  new phpConnect("https://psionofficial.com/Wireless/login.php",-1);
     }
 
     public void sendLogin(View view) {
         String Pass= ((TextView)findViewById(R.id.editText4)).getText().toString();
         String Name= ((TextView)findViewById(R.id.editText)).getText().toString();
-        phpConnect conn = new phpConnect("https://psionofficial.com/Wireless/login.php",-1);
         try {
             conn.execute("r",Name,"-1",makeMD5(Name+Pass),"-2").get();
         } catch (ExecutionException e) {
@@ -66,7 +66,10 @@ public class login extends AppCompatActivity {
     private void goToSetup() {
         if(loginVar == true) {
             loginVar = false;
-            startActivity(new Intent(this,setupPage.class));
+            Intent intent = new Intent(this,setupPage.class);
+            intent.putExtra("idPlayer",conn.getParamFromJson("playerId"));
+            intent.putExtra("userName",conn.getParamFromJson("userName"));
+            startActivity(intent);
         }
 
     }

@@ -19,12 +19,10 @@ public class Board extends Game {
     /**
      * create a BoardActivity instance to begin the game
      * @param cells define the number of cells the board has
+     * @param player1
+     * @param player2
+     * @param gameId
      */
-    public Board(int cells,int gameId) {
-        super(gameId);
-        numberOfCell = cells;
-    }
-
     public Board(int cells,Player player1, Player player2,int gameId) {
         super(player1,player2,gameId);
         numberOfCell = cells;

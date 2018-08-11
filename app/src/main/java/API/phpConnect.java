@@ -21,10 +21,7 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
         url = passedURL;
         gameId = gameIdPassed;
     }
-    public boolean getResult() {
-        Log.d("VALORE RESOP2" , String.valueOf(resOperation));
-        return resOperation;
-    }
+
 
     @Override
     protected void onPreExecute() {
@@ -255,6 +252,18 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
             e.printStackTrace();
         }
         return null;
+    }
+
+    public boolean getResult() {
+        //Log.d("VALORE RESOP2" , String.valueOf(resOperation));
+        return resOperation;
+    }
+
+    public String getUrl(){
+        return url;
+    }
+    public void setUrl(String newUrl) {
+        url = newUrl;
     }
 
 

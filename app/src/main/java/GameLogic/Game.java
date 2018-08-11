@@ -14,13 +14,7 @@ public class Game {
     private int roundsCounter = 0;
     private phpConnect connectionHandler = new phpConnect("https://www.psionofficial.com/Wireless/handler.php",getIdGame());
 
-    public Game(int gameId) {
-        idGame = gameId;
-        boolean aux = settleFirst();
-        player1 = new Player();
-        player2 = new Player();
 
-    }
     public Game(Player p1, Player p2,int gameId) {
         idGame = gameId;
         player1 = p1;
@@ -53,20 +47,6 @@ public class Game {
         roundsCounter = val;
     }
 
-    /**
-     * method to settle who starts first
-     * Returns a boolean that rappresents the result
-     * evens: true;
-     * odds = false;
-     * @return {boolean}
-     */
-
-    public static boolean settleFirst() {
-        int intResult = (int)Math.random()*2+1;
-
-        return intResult%2 ==0;
-
-    }
 
     /**
      * Checks who plays in this round
