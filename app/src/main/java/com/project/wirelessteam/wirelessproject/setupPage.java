@@ -35,22 +35,20 @@ public class setupPage extends AppCompatActivity {
      */
     public void goToNewGame(View view) {
 
-        //retrieve local player data from login
-
-        /*phpConnect conn = new phpConnect(new String(),-1); //todo
-        String idPlayer1 =myIntent.getStringExtra("idPlayer");
-        String userNamePlayer1 = myIntent.getStringExtra("userName");
-
+        Intent intentToLobby = new Intent(this,lobby.class);
+        intentToLobby.putExtra("idPlayer",myIntent.getStringExtra("idPlayer"));
+        intentToLobby.putExtra("userName",myIntent.getStringExtra("userName"));
+        startActivity(intentToLobby);
         //query to retrieve new game instance data by passing local playerId
-        conn.execute("r","GAME","-1","playerId",idPlayer1);
+        /*conn.execute("r","GAME","-1","playerId",idPlayer1);
 
         //saving data from query to GAME table
         int gameId = Integer.parseInt(conn.getParamFromJson("gameId"));
         String idPlayer2 = conn.getParamFromJson("idPlayer2");
 
         //todo retrieve data about player2
-        conn.setUrl(new String());
-        conn.execute("r","PLAYER","-1","playerId",idPlayer2); //todo
+        conn.setUrl("https://psionofficial.com/Wireless/handler.php");
+        conn.execute("r","PLAYER","-1","playerId",idPlayer2);
 
         String userNamePlayer2 = conn.getParamFromJson("userName");
 

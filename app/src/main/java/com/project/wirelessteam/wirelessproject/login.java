@@ -22,7 +22,7 @@ public class login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        conn =  new phpConnect("https://psionofficial.com/Wireless/login.php",-1);
+        conn = new phpConnect("https://psionofficial.com/Wireless/login.php",-1);
     }
 
     public void sendLogin(View view) {

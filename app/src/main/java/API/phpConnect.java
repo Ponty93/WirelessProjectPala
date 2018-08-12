@@ -113,8 +113,8 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
                         .getBody();
             }
             if(Integer.parseInt(getParamFromJson("Result")) == 1){
-                    Log.d("READ" , "Sto a METTERE TRUE!");
-                    Log.d("valRead",getParamFromJson("Result"));
+                    //Log.d("READ" , "Sto a METTERE TRUE!");
+                    //Log.d("valRead",getParamFromJson("Result"));
                     return true;
             }
         }
