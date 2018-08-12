@@ -64,7 +64,7 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
     private boolean read(String idOperation,String tableName,int playerId,String paramToRead, int valToRead) {
         try {
 
-
+            Log.d("entroInRead","Sto a inizio metodo");
             if(paramToRead.equals("pawnId")) {
                 resJson = webb.post(url)
                         .param("gameId", gameId)
@@ -112,9 +112,11 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
                         .asJsonObject()
                         .getBody();
             }
-            if(Integer.parseInt(getParamFromJson("Result")) == 1)
+            if(Integer.parseInt(getParamFromJson("Result")) == 1){
                     Log.d("READ" , "Sto a METTERE TRUE!");
+                    Log.d("valRead",getParamFromJson("Result"));
                     return true;
+            }
         }
         catch(Exception e ){
             e.printStackTrace();

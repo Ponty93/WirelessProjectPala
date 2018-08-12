@@ -10,11 +10,14 @@ import android.widget.TextView;
 import API.phpConnect;
 public class setupPage extends AppCompatActivity {
 
+    Intent myIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setup_page);
-        Intent intent = getIntent();
+        myIntent = getIntent();
+        TextView userName = (TextView) findViewById(R.id.displayUserName);
+        userName.setText(myIntent.getStringExtra("userName"));
     }
 
     /**
@@ -33,10 +36,10 @@ public class setupPage extends AppCompatActivity {
     public void goToNewGame(View view) {
 
         //retrieve local player data from login
-        Intent intentFromLogin = getIntent();
-        phpConnect conn = new phpConnect(new String(),-1); //todo
-        String idPlayer1 =intentFromLogin.getStringExtra("idPlayer");
-        String userNamePlayer1 = intentFromLogin.getStringExtra("userName");
+
+        /*phpConnect conn = new phpConnect(new String(),-1); //todo
+        String idPlayer1 =myIntent.getStringExtra("idPlayer");
+        String userNamePlayer1 = myIntent.getStringExtra("userName");
 
         //query to retrieve new game instance data by passing local playerId
         conn.execute("r","GAME","-1","playerId",idPlayer1);
@@ -59,6 +62,6 @@ public class setupPage extends AppCompatActivity {
         intentToBoard.putExtra("player2Id", idPlayer2);
         intentToBoard.putExtra("player2Name", userNamePlayer2);
         intentToBoard.putExtra("gameId",gameId);
-        startActivity(intentToBoard);
+        startActivity(intentToBoard);*/
     }
 }
