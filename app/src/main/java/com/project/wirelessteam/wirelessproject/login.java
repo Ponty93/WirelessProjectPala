@@ -22,14 +22,14 @@ public class login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        conn = new phpConnect("https://psionofficial.com/Wireless/login.php",-1);
     }
 
     public void sendLogin(View view) {
+        conn = new phpConnect("https://psionofficial.com/Wireless/login.php",-1);
         String Pass= ((TextView)findViewById(R.id.editText4)).getText().toString();
         String Name= ((TextView)findViewById(R.id.editText)).getText().toString();
         try {
-            conn.execute("r",Name,"-1",makeMD5(Name+Pass),"-2").get();
+            conn.execute("r",Name,"-1", makeMD5(Name+Pass),"-2").get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
