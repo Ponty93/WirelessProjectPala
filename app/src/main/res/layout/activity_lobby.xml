@@ -4,18 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".lobby">
+    tools:context=".lobby"
+    android:background="@color/colorPrimary">
 
 
     <Chronometer
         android:id="@+id/timer"
-        android:layout_width="160dp"
-        android:layout_height="100dp"
+        android:layout_width="209dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="164dp"
-        android:textSize="80sp"
-        android:textAlignment="center"/>
+        android:background="@drawable/rectangle_border"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark"
+        android:textSize="60sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView8"
@@ -25,15 +29,29 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="118dp"
         android:text="Timer to start a game:"
-        android:textSize="24sp" />
+        android:textColor="@android:color/background_light"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="176dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="172dp"
+        android:layout_marginEnd="91dp"
         android:onClick="stopButton"
-        android:text="Button" />
+        android:text="Stop"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView8"
+        android:layout_alignTop="@+id/stop"
+        android:onClick="startButton"
+        android:text="Start"
+        android:textStyle="bold" />
 </RelativeLayout>

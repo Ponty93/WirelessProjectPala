@@ -8,13 +8,13 @@ import org.json.JSONObject;
 import java.util.UUID;
 
 import API.apiLibrary.src.main.java.com.goebl.david.*;
-public final class phpConnect extends AsyncTask<String, Void, Void>{
+public final class phpConnect extends AsyncTask<String, Void,Boolean>{
 
     private String url;
     private int gameId;
     private Webb webb = Webb.create();
     private JSONObject resJson = null;
-    private boolean resOperation = false;
+
 
 
     public phpConnect(String passedURL,int gameIdPassed) {
@@ -29,7 +29,8 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
     } //todo
 
     @Override
-    protected Void doInBackground(String... params) {
+    protected Boolean doInBackground(String... params) {
+        boolean resOperation = false;
         if(params[0] == "c")
             resOperation=create(params[0],params[1],params[2],params[3]);
         else if(params[0] == "r")
@@ -39,7 +40,7 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
         else if(params[0] == "d")
             resOperation=delete(params[0],params[1],Integer.parseInt(params[2]));
         Log.d("VALORE RESOP" , String.valueOf(resOperation));
-        return null;
+        return resOperation;
     }
 
 
@@ -256,10 +257,7 @@ public final class phpConnect extends AsyncTask<String, Void, Void>{
         return null;
     }
 
-    public boolean getResult() {
-        //Log.d("VALORE RESOP2" , String.valueOf(resOperation));
-        return resOperation;
-    }
+
 
     public String getUrl(){
         return url;

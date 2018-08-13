@@ -41,14 +41,15 @@ public class registration extends AppCompatActivity {
             String pass= ((TextView)findViewById(R.id.editText3)).getText().toString();
             String name= ((TextView)findViewById(R.id.editText2)).getText().toString();
             phpConnect conn = new phpConnect("https://www.psionofficial.com/Wireless/register.php",-1);
+            boolean aux = false;
             try {
-                conn.execute("c","USERS",name,pass,"1").get();
+                aux = conn.execute("c","USERS",name,pass,"1").get();
             } catch (ExecutionException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(conn.getResult() == true){
+            if(aux == true){
                 ((TextView) findViewById(R.id.textView6)).setText("REGISTRAZIONE EFFETTUATA!");
                 goToLogin();
             }else{

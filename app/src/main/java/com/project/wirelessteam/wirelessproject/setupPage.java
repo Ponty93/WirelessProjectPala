@@ -39,27 +39,6 @@ public class setupPage extends AppCompatActivity {
         intentToLobby.putExtra("idPlayer",myIntent.getStringExtra("idPlayer"));
         intentToLobby.putExtra("userName",myIntent.getStringExtra("userName"));
         startActivity(intentToLobby);
-        //query to retrieve new game instance data by passing local playerId
-        /*conn.execute("r","GAME","-1","playerId",idPlayer1);
 
-        //saving data from query to GAME table
-        int gameId = Integer.parseInt(conn.getParamFromJson("gameId"));
-        String idPlayer2 = conn.getParamFromJson("idPlayer2");
-
-        //todo retrieve data about player2
-        conn.setUrl("https://psionofficial.com/Wireless/handler.php");
-        conn.execute("r","PLAYER","-1","playerId",idPlayer2);
-
-        String userNamePlayer2 = conn.getParamFromJson("userName");
-
-        //builds the intent to create the new local Board instance
-        Intent intentToBoard = new Intent(this, BoardActivity.class);
-
-        intentToBoard.putExtra("player1Id", idPlayer1);
-        intentToBoard.putExtra("player1Name", userNamePlayer1);
-        intentToBoard.putExtra("player2Id", idPlayer2);
-        intentToBoard.putExtra("player2Name", userNamePlayer2);
-        intentToBoard.putExtra("gameId",gameId);
-        startActivity(intentToBoard);*/
     }
 }

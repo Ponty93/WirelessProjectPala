@@ -46,7 +46,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".login" />
         </activity>
-        <activity android:name=".lobby"></activity>
+        <activity android:name=".lobby" android:parentActivityName=".setupPage">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".setupPage" />
+        </activity>
     </application>
 
 </manifest>

@@ -28,15 +28,16 @@ public class login extends AppCompatActivity {
         conn = new phpConnect("https://psionofficial.com/Wireless/login.php",-1);
         String Pass= ((TextView)findViewById(R.id.editText4)).getText().toString();
         String Name= ((TextView)findViewById(R.id.editText)).getText().toString();
+        boolean aux= false;
         try {
-            conn.execute("r",Name,"-1", makeMD5(Name+Pass),"-2").get();
+            aux = conn.execute("r",Name,"-1", makeMD5(Name+Pass),"-2").get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        if(conn.getResult() == true){
+        if(aux == true){
             ((TextView) findViewById(R.id.textView2)).setText("LOGIN CORRETTO!");
             loginVar = true;
             goToSetup();
