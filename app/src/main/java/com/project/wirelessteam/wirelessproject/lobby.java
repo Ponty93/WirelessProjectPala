@@ -48,9 +48,9 @@ public class lobby extends AppCompatActivity {
                     currActivity.finish();
                 }
                 boolean aux = false;
-                /*if(seconds % 10 == 0){
+                if(seconds % 10 == 0){
                     try{
-                        lobbyConn = new phpConnect(new String(), -1);
+                        lobbyConn = new phpConnect("https://psionofficial.com/Wireless/lobby.php", -1);
                         aux = lobbyConn.execute("r","-1",lobbyIntent.getStringExtra("userName"),lobbyIntent.getStringExtra("idPlayer")).get();
                     }
                     catch(InterruptedException e ){
@@ -64,13 +64,13 @@ public class lobby extends AppCompatActivity {
                     else { //case in which the player doesn't have to wait in the lobby but found right away a opponent
                        toBoard();
                     }
-                }*/
+                }
 
             }
         });
         boolean aux = false;
-       /* try{
-            lobbyConn = new phpConnect(new String(), -1);
+       try{
+            lobbyConn = new phpConnect("https://psionofficial.com/Wireless/lobby.php", -1);
             aux =lobbyConn.execute("r","-1",lobbyIntent.getStringExtra("userName"),lobbyIntent.getStringExtra("idPlayer")).get();
         }
         catch(InterruptedException e ){
@@ -84,8 +84,8 @@ public class lobby extends AppCompatActivity {
         else { //case in which the player doesn't have to wait in the lobby but found right away a opponent
             toBoard();
         }
-        */
-        lobbyChecker();
+
+        //lobbyChecker();
     }
 
     private void toBoard(){

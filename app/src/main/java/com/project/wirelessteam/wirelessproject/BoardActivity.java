@@ -27,6 +27,7 @@ public class BoardActivity extends AppCompatActivity {
         TextView userPl = (TextView) findViewById(R.id.userAvv);
         idPl.setText(buildBoard.getStringExtra("player2Id"));
         userPl.setText(buildBoard.getStringExtra("player2Name"));
+
         /*int id1 = BuildBoard.getIntExtra("player1Id", 0);
         int id2 = BuildBoard.getIntExtra("player2Id", 0);
         int gameId = BuildBoard.getIntExtra("gameId", 0);
