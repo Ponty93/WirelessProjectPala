@@ -70,24 +70,25 @@ public class lobby extends AppCompatActivity {
             }
         });
         boolean aux = false;
+        boolean flag= false;
+        /*if(flag == false) {
+            try {
+                flag = true;
+                lobbyConn = new phpConnect("https://psionofficial.com/Wireless/lobby.php", -1);
+                aux = lobbyConn.execute("r", "-1", "-1", lobbyIntent.getStringExtra("userName"), lobbyIntent.getStringExtra("idPlayer")).get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (aux == false)
+                lobbyChecker();
+            else { //case in which the player doesn't have to wait in the lobby but found right away a opponent
+                toBoard();
+            }
+        }*/
 
-        try{
-            lobbyConn = new phpConnect("https://psionofficial.com/Wireless/lobby.php", -1);
-            aux =lobbyConn.execute("r","-1","-1",lobbyIntent.getStringExtra("userName"),lobbyIntent.getStringExtra("idPlayer")).get();
-        }
-        catch(InterruptedException e ){
-            e.printStackTrace();
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-        if( aux == false)
-            lobbyChecker();
-        else { //case in which the player doesn't have to wait in the lobby but found right away a opponent
-            toBoard();
-        }
-
-        //lobbyChecker();
+        lobbyChecker();
     }
 
     private void toBoard(){
@@ -95,7 +96,7 @@ public class lobby extends AppCompatActivity {
         int player2Id = Integer.parseInt(lobbyConn.getParamFromJson("player2Id"));
         Intent toBoard = new Intent(currActivity,BoardActivity.class);
         toBoard.putExtra("player1Name",lobbyIntent.getStringExtra("userName"));
-        toBoard.putExtra("player1Id",Integer.parseInt(lobbyIntent.getStringExtra("playerId")));
+        toBoard.putExtra("player1Id",Integer.parseInt(lobbyIntent.getStringExtra("idPlayer")));
         toBoard.putExtra("player2Id",player2Id);
         toBoard.putExtra("player2Name",player2UserName);
         //put extraInt the id of the game object created
