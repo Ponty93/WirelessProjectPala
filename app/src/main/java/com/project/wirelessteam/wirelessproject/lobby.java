@@ -51,7 +51,7 @@ public class lobby extends AppCompatActivity {
                 if(seconds % 10 == 0){
                     try{
                         lobbyConn = new phpConnect("https://psionofficial.com/Wireless/lobby.php", -1);
-                        aux = lobbyConn.execute("r","-1",lobbyIntent.getStringExtra("userName"),lobbyIntent.getStringExtra("idPlayer")).get();
+                        aux = lobbyConn.execute("r","-1",lobbyIntent.getStringExtra("idPlayer"),lobbyIntent.getStringExtra("userName"),"-1").get();
                     }
                     catch(InterruptedException e ){
                         e.printStackTrace();
@@ -71,7 +71,7 @@ public class lobby extends AppCompatActivity {
         boolean aux = false;
        try{
             lobbyConn = new phpConnect("https://psionofficial.com/Wireless/lobby.php", -1);
-            aux =lobbyConn.execute("r","-1",lobbyIntent.getStringExtra("userName"),lobbyIntent.getStringExtra("idPlayer")).get();
+            aux =lobbyConn.execute("r","-1",lobbyIntent.getStringExtra("userName"),lobbyIntent.getStringExtra("idPlayer"),"-1").get();
         }
         catch(InterruptedException e ){
             e.printStackTrace();
