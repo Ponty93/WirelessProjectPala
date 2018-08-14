@@ -44,10 +44,12 @@ public class lobby extends AppCompatActivity {
                 timer.setFormat(Long.toString(minutes)+":"+Long.toString(seconds));
                 Log.d("MyTimer", "onChronometerTick: " + minutes + " : " + seconds);
                 Log.d("MyCounter",""+seconds%10);
+
                 if(minutes == 5L){
                     currActivity.finish();
                 }
                 boolean aux = false;
+
                 if(seconds % 10 == 0){
                     try{
                         lobbyConn = new phpConnect("https://psionofficial.com/Wireless/lobby.php", -1);
@@ -59,17 +61,17 @@ public class lobby extends AppCompatActivity {
                     catch(Exception e){
                         e.printStackTrace();
                     }
-                    if(aux  == false)
-                        lobbyChecker();
-                    else { //case in which the player doesn't have to wait in the lobby but found right away a opponent
-                       toBoard();
-                    }
+
+                    if(aux  == true)
+                        toBoard();
+
                 }
 
             }
         });
         boolean aux = false;
-       try{
+
+        try{
             lobbyConn = new phpConnect("https://psionofficial.com/Wireless/lobby.php", -1);
             aux =lobbyConn.execute("r","-1",lobbyIntent.getStringExtra("idPlayer"),lobbyIntent.getStringExtra("userName"),"-1").get();
         }
