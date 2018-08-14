@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 
@@ -19,8 +22,12 @@ public class BoardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
-        Intent BuildBoard = getIntent();
-        int id1 = BuildBoard.getIntExtra("player1Id", 0);
+        Intent buildBoard = getIntent();
+        TextView idPl = (TextView) findViewById(R.id.idAvv);
+        TextView userPl = (TextView) findViewById(R.id.userAvv);
+        idPl.setText(buildBoard.getStringExtra("player2Id"));
+        userPl.setText(buildBoard.getStringExtra("player2Name"));
+        /*int id1 = BuildBoard.getIntExtra("player1Id", 0);
         int id2 = BuildBoard.getIntExtra("player2Id", 0);
         int gameId = BuildBoard.getIntExtra("gameId", 0);
         String user1 = BuildBoard.getStringExtra("player1Name");
@@ -28,7 +35,7 @@ public class BoardActivity extends AppCompatActivity {
         boolean roundOrder = settleFirst();
         currentBoard = new Board(30, new Player(roundOrder, id1, user1), new Player(!roundOrder, id2, user2), gameId);
         setPawnView(this,currentBoard.getPlayer1().getPawns());
-        setPawnView(this,currentBoard.getPlayer2().getPawns());
+        setPawnView(this,currentBoard.getPlayer2().getPawns());*/
     }
 
     private void setPawnView(Context context, HashMap<Integer, Pawn> map){

@@ -29,6 +29,7 @@ public class login extends AppCompatActivity {
         String Pass= ((TextView)findViewById(R.id.editText4)).getText().toString();
         String Name= ((TextView)findViewById(R.id.editText)).getText().toString();
         boolean aux= false;
+
         try {
             aux = conn.execute("r",Name,"-1", makeMD5(Name+Pass),"-2").get();
         } catch (ExecutionException e) {
