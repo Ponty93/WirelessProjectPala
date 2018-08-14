@@ -71,7 +71,7 @@ public class lobby extends AppCompatActivity {
         boolean aux = false;
        try{
             lobbyConn = new phpConnect("https://psionofficial.com/Wireless/lobby.php", -1);
-            aux =lobbyConn.execute("r","-1",lobbyIntent.getStringExtra("userName"),lobbyIntent.getStringExtra("idPlayer"),"-1").get();
+            aux =lobbyConn.execute("r","-1",lobbyIntent.getStringExtra("idPlayer"),lobbyIntent.getStringExtra("userName"),"-1").get();
         }
         catch(InterruptedException e ){
             e.printStackTrace();
@@ -99,6 +99,7 @@ public class lobby extends AppCompatActivity {
         //put extraInt the id of the game object created
         startActivity(toBoard);
     }
+
     public void lobbyChecker() {
         timer.setBase(SystemClock.elapsedRealtime());
         timer.start();
