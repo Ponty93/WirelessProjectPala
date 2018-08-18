@@ -125,5 +125,11 @@ public class lobby extends AppCompatActivity {
         startButton.setEnabled(true);
     }
 
+    public void back(View v){
+
+        super.finish();
+
+    }
+
 
 }

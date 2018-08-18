@@ -1,6 +1,7 @@
 package com.project.wirelessteam.wirelessproject;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import API.phpConnect;
 public class setupPage extends AppCompatActivity {
+    MediaPlayer mp;
 
     Intent myIntent;
     @Override
@@ -18,6 +20,14 @@ public class setupPage extends AppCompatActivity {
         myIntent = getIntent();
         TextView userName = (TextView) findViewById(R.id.displayUserName);
         userName.setText(myIntent.getStringExtra("userName"));
+        mp = MediaPlayer.create(this, R.raw.menu2);
+        if(mp.isPlaying()){
+
+
+        }else {
+            mp.start();
+            mp.setLooping(true);
+        }
     }
 
     /**
