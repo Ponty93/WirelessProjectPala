@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="myClass">
+
+        <attr name="cellText" format="string" />
+        <attr name="cellColor" format="color" />
+
+    </declare-styleable>
+</resources>
