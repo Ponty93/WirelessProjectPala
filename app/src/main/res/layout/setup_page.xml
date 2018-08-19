@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="729dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/back"
+        app:srcCompat="@drawable/menu2"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
@@ -20,7 +20,7 @@
         android:id="@+id/button"
         android:layout_width="156dp"
         android:layout_height="68dp"
-        android:background="@drawable/mar1"
+        android:background="@drawable/mar3"
         android:onClick="goToNewGame"
         android:text="New Game"
         android:textColor="@android:color/black"
@@ -37,7 +37,7 @@
         android:layout_width="155dp"
         android:layout_height="62dp"
         android:layout_marginBottom="48dp"
-        android:background="@drawable/mar2"
+        android:background="@drawable/mar3"
         android:onClick="goToHighlights"
         android:text="Highlights"
         android:textSize="26sp"
@@ -77,7 +77,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="220dp"
+        android:layout_height="531dp"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/statue"
+        tools:layout_editor_absoluteX="188dp"
+        tools:layout_editor_absoluteY="151dp" />
 
 
 </android.support.constraint.ConstraintLayout>

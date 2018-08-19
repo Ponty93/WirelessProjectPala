@@ -20,7 +20,7 @@ public class setupPage extends AppCompatActivity {
         myIntent = getIntent();
         TextView userName = (TextView) findViewById(R.id.displayUserName);
         userName.setText(myIntent.getStringExtra("userName"));
-        mp = MediaPlayer.create(this, R.raw.menu2);
+        mp = MediaPlayer.create(this, R.raw.menu);
         if(mp.isPlaying()){
 
 
