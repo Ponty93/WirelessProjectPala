@@ -2,6 +2,7 @@ package com.project.wirelessteam.wirelessproject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ public class BoardActivity extends AppCompatActivity {
         TextView userPl = (TextView) findViewById(R.id.userAvv);
         idPl.setText(Integer.toString(buildBoard.getIntExtra("player2Id",0)));
         userPl.setText(buildBoard.getStringExtra("player2Name"));
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         /*int id1 = BuildBoard.getIntExtra("player1Id", 0);
         int id2 = BuildBoard.getIntExtra("player2Id", 0);
