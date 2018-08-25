@@ -16,8 +16,8 @@ public class Pawn {
         pawnId = id;
     }
 
-    public void setImage(Context context){
-        pawn = new ImageView(context);
+    public void setPawnView(ImageView pawnView){
+        pawn = pawnView ;
     }
     public int getId() {
         return pawnId;
