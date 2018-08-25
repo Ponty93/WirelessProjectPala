@@ -12,22 +12,22 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_alignEnd="@+id/cell4"
-        android:layout_alignRight="@+id/cell4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignEnd="@+id/cell5"
+        android:layout_alignRight="@+id/cell5"
         android:layout_alignTop="@+id/imageView"
         android:contentDescription="dado2"
         app:srcCompat="@color/colorAccent" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="70dp"
-        android:layout_toEndOf="@+id/cell2"
-        android:layout_toRightOf="@+id/cell2"
+        android:layout_marginTop="67dp"
+        android:layout_toEndOf="@+id/cell1"
+        android:layout_toRightOf="@+id/cell1"
         android:contentDescription="dado1"
         app:srcCompat="@color/colorAccent" />
 
@@ -69,19 +69,19 @@
 
     <TextView
         android:id="@+id/scoreAvv"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/cell3"
-        android:layout_toRightOf="@+id/cell3"
+        android:layout_toEndOf="@+id/scorePL"
+        android:layout_toRightOf="@+id/scorePL"
         android:text="0"
         android:textAlignment="center"
         tools:text="0" />
 
     <TextView
         android:id="@+id/scorePL"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignEnd="@+id/cell3"
         android:layout_alignRight="@+id/cell3"
         android:layout_alignParentTop="true"
@@ -91,8 +91,8 @@
 
     <com.project.wirelessteam.wirelessproject.myClass
         android:id="@+id/cell1"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellText="START"
         app:cellColor="#000"
         android:layout_above="@+id/cell16"
@@ -107,8 +107,8 @@
         android:layout_toRightOf="@+id/cell1"
         android:layout_toEndOf="@+id/cell1"
         android:layout_alignTop="@+id/cell1"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellText="  1"
         app:cellColor="#000"
         android:background="#00ff00"
@@ -121,8 +121,8 @@
         android:layout_alignTop="@+id/cell2"
         android:layout_toRightOf="@+id/cell2"
         android:layout_toEndOf="@+id/cell2"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellColor="#000"
         app:cellText="  2"
         android:background="#00ff00"
@@ -136,8 +136,8 @@
         android:layout_toEndOf="@+id/cell3"
         android:layout_toRightOf="@+id/cell3"
         android:layout_alignTop="@id/cell3"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellText="  3"
         app:cellColor="#000"
         android:background="#00ff00"
@@ -151,8 +151,8 @@
         android:layout_toEndOf="@+id/cell4"
         android:layout_toRightOf="@+id/cell4"
         android:layout_alignTop="@id/cell4"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellText="  4"
         app:cellColor="#000"
         android:background="#00ff00"
@@ -166,8 +166,8 @@
         android:layout_toEndOf="@+id/cell5"
         android:layout_toRightOf="@+id/cell5"
         android:layout_alignTop="@id/cell5"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellText="  5"
         app:cellColor="#000"
         android:background="#00ff00"
@@ -179,8 +179,8 @@
     <com.project.wirelessteam.wirelessproject.myClass
         android:id="@+id/cell7"
         android:layout_above="@+id/cell6"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         android:layout_alignLeft="@+id/cell6"
         android:layout_alignStart="@+id/cell6"
         app:cellText="  6"
@@ -196,8 +196,8 @@
         android:layout_toLeftOf="@+id/cell7"
         android:layout_toStartOf="@+id/cell7"
         android:layout_alignTop="@id/cell7"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellText="  7"
         app:cellColor="#000"
         >
@@ -209,8 +209,8 @@
         android:layout_toStartOf="@+id/cell8"
         android:layout_toLeftOf="@+id/cell8"
         android:layout_alignTop="@id/cell7"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellText="  8"
         app:cellColor="#000"
         >
@@ -222,8 +222,8 @@
         android:layout_toStartOf="@+id/cell9"
         android:layout_toLeftOf="@+id/cell9"
         android:layout_alignTop="@id/cell7"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellText="  9"
         app:cellColor="#000"
         >
@@ -235,8 +235,8 @@
         android:layout_toStartOf="@+id/cell10"
         android:layout_toLeftOf="@+id/cell10"
         android:layout_alignTop="@id/cell7"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellText="10"
         app:cellColor="#000"
         >
@@ -248,8 +248,8 @@
         android:layout_toStartOf="@+id/cell11"
         android:layout_toLeftOf="@+id/cell11"
         android:layout_alignTop="@id/cell7"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellText="11"
         app:cellColor="#000"
         >
@@ -258,8 +258,8 @@
 
     <com.project.wirelessteam.wirelessproject.myClass
         android:id="@+id/cell13"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         android:layout_above="@+id/cell1"
         android:layout_toStartOf="@+id/cell1"
         android:layout_toLeftOf="@+id/cell1"
@@ -270,8 +270,8 @@
 
     <com.project.wirelessteam.wirelessproject.myClass
         android:id="@+id/cell14"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         android:layout_alignLeft="@+id/cell15"
         android:layout_alignStart="@+id/cell15"
         android:layout_alignTop="@+id/cell2"
@@ -282,13 +282,13 @@
 
     <com.project.wirelessteam.wirelessproject.myClass
         android:id="@+id/cell15"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginLeft="13dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginLeft="75dp"
         app:cellColor="#000"
         app:cellText="14">
 
@@ -299,8 +299,8 @@
         android:layout_toEndOf="@+id/cell15"
         android:layout_toRightOf="@+id/cell15"
         android:layout_alignTop="@id/cell15"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellText="15"
         app:cellColor="#000"
         >
@@ -312,8 +312,8 @@
         android:layout_toEndOf="@+id/cell16"
         android:layout_toRightOf="@+id/cell16"
         android:layout_alignTop="@id/cell15"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellText="16"
         app:cellColor="#000"
         >
@@ -325,8 +325,8 @@
         android:layout_toEndOf="@+id/cell17"
         android:layout_toRightOf="@+id/cell17"
         android:layout_alignTop="@id/cell15"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellText="17"
         app:cellColor="#000"
         >
@@ -338,8 +338,8 @@
         android:layout_toEndOf="@+id/cell18"
         android:layout_toRightOf="@+id/cell18"
         android:layout_alignTop="@id/cell15"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellText="18"
         app:cellColor="#000"
 
@@ -353,8 +353,8 @@
         android:layout_toEndOf="@+id/cell19"
         android:layout_toRightOf="@+id/cell19"
         android:layout_alignTop="@id/cell15"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellText="19"
         app:cellColor="#000"
         >
@@ -366,8 +366,8 @@
         android:layout_toRightOf="@+id/cell20"
         android:layout_toEndOf="@+id/cell20"
         android:layout_alignTop="@id/cell15"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellText="20"
         app:cellColor="#000"
         >
@@ -379,8 +379,8 @@
         android:layout_toRightOf="@+id/cell21"
         android:layout_toEndOf="@+id/cell21"
         android:layout_alignTop="@id/cell15"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellText="21"
         app:cellColor="#000"
         >
@@ -389,8 +389,8 @@
 
     <com.project.wirelessteam.wirelessproject.myClass
         android:id="@+id/cell23"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         android:layout_alignTop="@+id/cell1"
         android:layout_toEndOf="@+id/cell6"
         android:layout_toRightOf="@+id/cell6"
@@ -401,8 +401,8 @@
 
     <com.project.wirelessteam.wirelessproject.myClass
         android:id="@+id/cell24"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         android:layout_above="@+id/cell1"
         android:layout_toEndOf="@+id/cell6"
         android:layout_toRightOf="@+id/cell6"
@@ -413,8 +413,8 @@
 
     <com.project.wirelessteam.wirelessproject.myClass
         android:id="@+id/cell25"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         android:layout_above="@+id/cell7"
         android:layout_toEndOf="@+id/cell6"
         android:layout_toRightOf="@+id/cell6"
@@ -425,8 +425,8 @@
 
     <com.project.wirelessteam.wirelessproject.myClass
         android:id="@+id/cell26"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         android:layout_above="@+id/cell7"
         android:layout_toEndOf="@+id/cell5"
         android:layout_toRightOf="@+id/cell5"
@@ -437,8 +437,8 @@
 
     <com.project.wirelessteam.wirelessproject.myClass
         android:id="@+id/cell27"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         android:layout_above="@+id/cell7"
         android:layout_toEndOf="@+id/cell4"
         android:layout_toRightOf="@+id/cell4"
@@ -452,8 +452,8 @@
         android:layout_toLeftOf="@+id/cell27"
         android:layout_toStartOf="@+id/cell27"
         android:layout_alignTop="@+id/cell25"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellText="27"
         app:cellColor="#000"
         >
@@ -465,8 +465,8 @@
         android:layout_toLeftOf="@+id/cell28"
         android:layout_toStartOf="@+id/cell28"
         android:layout_alignTop="@+id/cell25"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         app:cellText="28"
         app:cellColor="#000"
         >
@@ -475,8 +475,8 @@
 
     <com.project.wirelessteam.wirelessproject.myClass
         android:id="@+id/cell30"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         android:layout_above="@+id/cell7"
         android:layout_toStartOf="@+id/cell29"
         android:layout_toLeftOf="@+id/cell29"
@@ -490,8 +490,8 @@
         android:layout_toLeftOf="@+id/cell30"
         android:layout_toStartOf="@+id/cell30"
         android:layout_alignTop="@+id/cell25"
-        android:layout_width="140dp"
-        android:layout_height="50dp"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
         app:cellText="END"
         android:background="#0000ff"
         app:cellColor="#000"
@@ -606,6 +606,5 @@
         android:layout_alignRight="@+id/cell1"
         android:layout_alignTop="@+id/cell1"
         app:srcCompat="@drawable/nero" />
-
 
 </RelativeLayout>

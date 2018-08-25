@@ -66,7 +66,7 @@
 
     <TextView
         android:id="@+id/displayUserName"
-        android:layout_width="104dp"
+        android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:layout_marginEnd="84dp"
         android:layout_marginRight="84dp"
