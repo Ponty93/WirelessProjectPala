@@ -499,4 +499,101 @@
 
     </com.project.wirelessteam.wirelessproject.myClass>
 
+    <ImageView
+        android:id="@+id/red1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/cell1"
+        android:layout_toEndOf="@+id/idPL"
+        app:srcCompat="@drawable/rosso" />
+
+    <ImageView
+        android:id="@+id/red2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/cell1"
+        android:layout_toEndOf="@+id/idPL"
+        app:srcCompat="@drawable/rosso" />
+
+    <ImageView
+        android:id="@+id/red3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/cell1"
+        android:layout_toEndOf="@+id/idPL"
+        app:srcCompat="@drawable/rosso" />
+
+    <ImageView
+        android:id="@+id/red4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/cell1"
+        android:layout_toEndOf="@+id/idPL"
+        app:srcCompat="@drawable/rosso" />
+
+    <ImageView
+        android:id="@+id/red5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/cell1"
+        android:layout_toEndOf="@+id/idPL"
+        app:srcCompat="@drawable/rosso" />
+
+    <ImageView
+        android:id="@+id/red6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/cell1"
+        android:layout_toEndOf="@+id/idPL"
+        app:srcCompat="@drawable/rosso" />
+
+    <ImageView
+        android:id="@+id/black1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/cell1"
+        android:layout_alignTop="@+id/cell1"
+        app:srcCompat="@drawable/nero" />
+
+    <ImageView
+        android:id="@+id/black2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/cell1"
+        android:layout_alignTop="@+id/cell1"
+        app:srcCompat="@drawable/nero" />
+
+    <ImageView
+        android:id="@+id/black3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/cell1"
+        android:layout_alignTop="@+id/cell1"
+        app:srcCompat="@drawable/nero" />
+
+    <ImageView
+        android:id="@+id/black4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/cell1"
+        android:layout_alignTop="@+id/cell1"
+        app:srcCompat="@drawable/nero" />
+
+    <ImageView
+        android:id="@+id/black5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/cell1"
+        android:layout_alignTop="@+id/cell1"
+        app:srcCompat="@drawable/nero" />
+
+    <ImageView
+        android:id="@+id/black6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/cell1"
+        android:layout_alignTop="@+id/cell1"
+        app:srcCompat="@drawable/nero" />
+
+
 </RelativeLayout>
