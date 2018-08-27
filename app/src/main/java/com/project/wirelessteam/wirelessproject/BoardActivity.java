@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
 
 import Actors.Pawn;
 import Actors.Player;
@@ -52,19 +54,28 @@ public class BoardActivity extends AppCompatActivity {
             context = getApplicationContext();
 
         //init the board and the retrieve the data for player 2
-        TextView idPl = (TextView) findViewById(R.id.idAvv);
-        TextView userPl = (TextView) findViewById(R.id.userAvv);
-        idPl.setText(Integer.toString(buildBoard.getIntExtra("player2Id",0)));
-        userPl.setText(buildBoard.getStringExtra("player2Name"));
+        TextView idPl = (TextView) findViewById(R.id.idPL) ;
+        idPl.setText(Integer.toString(buildBoard.getIntExtra("player1Id",0)));
+        TextView userPl =(TextView)findViewById(R.id.userPL);
+        userPl.setText(buildBoard.getStringExtra("player1Name"));
+        TextView idAvv = (TextView) findViewById(R.id.idAvv);
+        TextView userAvv = (TextView) findViewById(R.id.userAvv);
+        idAvv.setText(Integer.toString(buildBoard.getIntExtra("player2Id",0)));
+        userAvv.setText(buildBoard.getStringExtra("player2Name"));
         int id1 = buildBoard.getIntExtra("player1Id", 0);
         int id2 = buildBoard.getIntExtra("player2Id", 0);
-        //int gameId = buildBoard.getIntExtra("gameId", 0);
+        int gameId = buildBoard.getIntExtra("gameId", 0);
+        Log.d("gameID","gameId is" +gameId);
         String user1 = buildBoard.getStringExtra("player1Name");
         String user2 = buildBoard.getStringExtra("player2Name");
+
+
+
+
         boolean roundOrder = true;// settleFirst();
 
         if(currentBoard == null) {
-            currentBoard = new Board(30, new Player(roundOrder, id1, user1), new Player(!roundOrder, id2, user2), 1);
+            currentBoard = new Board(30, new Player(roundOrder, id1, user1), new Player(!roundOrder, id2, user2), gameId);
             setPawnView(context, currentBoard.getPlayer1().getPawns(), "player1");
             setPawnView(context, currentBoard.getPlayer2().getPawns(), "player2");
         }
@@ -130,6 +141,7 @@ public class BoardActivity extends AppCompatActivity {
         findViewById(R.id.cell29).setOnDragListener(new onDragCustomMethod(context));
         findViewById(R.id.cell30).setOnDragListener(new onDragCustomMethod(context));
         findViewById(R.id.cell31).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell31).setTag("cell31");
     }
 
     private void setPawnView(Context context,HashMap<Integer, Pawn> map, String player){
@@ -180,5 +192,13 @@ public class BoardActivity extends AppCompatActivity {
         return Boolean.parseBoolean(tmpConn.getParamFromJson("roundOrder"));
     }*/
 
+
+    public void surrenderButton(View view){
+        //invoco haiPerso
+        //todo
+
+    }
+
+    //todo haiVinto e haiPerso method
 
 }

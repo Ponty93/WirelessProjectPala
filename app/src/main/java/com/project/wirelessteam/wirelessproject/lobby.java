@@ -14,6 +14,7 @@ import android.widget.Chronometer;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ExecutionException;
 
 import API.phpConnect;
 public class lobby extends AppCompatActivity {
@@ -92,6 +93,18 @@ public class lobby extends AppCompatActivity {
     }
 
     private void toBoard(){
+        boolean aux = false;
+        int gameId = 0;
+        phpConnect myConn = null;
+        try {
+             myConn = new phpConnect("https://psionofficial.com/Wireless/a.php", -1);
+             aux = myConn.execute("r", "GAME","-1","gameId", lobbyIntent.getStringExtra("idPlayer")).get();
+        }catch(InterruptedException e){e.printStackTrace();}
+        catch(ExecutionException e){e.printStackTrace();}
+        if(aux == true)
+            gameId=Integer.parseInt(myConn.getParamFromJson("gameId"));
+
+        Log.d("gameID","game id is "+gameId);
         String player2UserName = lobbyConn.getParamFromJson("player2Name");
         int player2Id = Integer.parseInt(lobbyConn.getParamFromJson("player2Id"));
         Intent toBoard = new Intent(currActivity,BoardActivity.class);
@@ -99,6 +112,7 @@ public class lobby extends AppCompatActivity {
         toBoard.putExtra("player1Id",Integer.parseInt(lobbyIntent.getStringExtra("idPlayer")));
         toBoard.putExtra("player2Id",player2Id);
         toBoard.putExtra("player2Name",player2UserName);
+        toBoard.putExtra("gameId",gameId);
         //put extraInt the id of the game object created
         startActivity(toBoard);
     }
@@ -126,8 +140,18 @@ public class lobby extends AppCompatActivity {
     }
 
     public void back(View v){
+        timer.stop();
+       boolean reaux = false;
+        try {
+            lobbyConn = new phpConnect("https://psionofficial.com/Wireless/lobby2.php", -1);
+            reaux = lobbyConn.execute("r", "delete","-1",lobbyIntent.getStringExtra("userName"), lobbyIntent.getStringExtra("idPlayer")).get();
+        }catch(InterruptedException e){e.printStackTrace();}
+        catch(ExecutionException e){e.printStackTrace();}
 
-        super.finish();
+        if(reaux == true)
+            toBoard();
+        else
+            super.finish();
 
     }
 

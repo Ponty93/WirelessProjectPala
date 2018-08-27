@@ -24,11 +24,12 @@ public class onDragCustomMethod implements View.OnDragListener {
         switch(action){
             case DragEvent.ACTION_DRAG_STARTED:
 
-                if(dragEvent.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)){
-                    view.setBackgroundColor(Color.BLUE);
-                    view.invalidate();
-                    return true;
-                }
+                    if(dragEvent.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)){
+                        view.setBackgroundColor(Color.BLUE);
+                        view.invalidate();
+                        return true;
+                    }
+
                 return false;
 
             case DragEvent.ACTION_DRAG_ENTERED:
