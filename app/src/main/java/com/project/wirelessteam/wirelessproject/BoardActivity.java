@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Rect;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.DragEvent;
@@ -23,40 +24,112 @@ import Actors.Player;
 import GameLogic.Board;
 import GameLogic.Game;
 import API.phpConnect;
-public class BoardActivity extends AppCompatActivity implements View.OnTouchListener {
-    private Board currentBoard;
-    private int _xDelta;
-    private int _yDelta;
+import Utils.onTouchCustomMethod;
+import Utils.onTouchCustomMethod;
+import Utils.onDragCustomMethod;
+
+
+public class BoardActivity extends AppCompatActivity {
+    private Board currentBoard = null;
+    private Context context = null;
+    private RelativeLayout refLayout=null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
         Intent buildBoard = getIntent();
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        init(buildBoard);
+        //todo send a req to reload the data if any
+    }
+
+    private void init(Intent buildBoard) {
+
+        if(context == null)
+            context = getApplicationContext();
+
+        //init the board and the retrieve the data for player 2
         TextView idPl = (TextView) findViewById(R.id.idAvv);
         TextView userPl = (TextView) findViewById(R.id.userAvv);
         idPl.setText(Integer.toString(buildBoard.getIntExtra("player2Id",0)));
         userPl.setText(buildBoard.getStringExtra("player2Name"));
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
         int id1 = buildBoard.getIntExtra("player1Id", 0);
         int id2 = buildBoard.getIntExtra("player2Id", 0);
         //int gameId = buildBoard.getIntExtra("gameId", 0);
         String user1 = buildBoard.getStringExtra("player1Name");
         String user2 = buildBoard.getStringExtra("player2Name");
         boolean roundOrder = true;// settleFirst();
-        currentBoard = new Board(30, new Player(roundOrder, id1, user1), new Player(!roundOrder, id2, user2), 1);
-        setPawnView(this,currentBoard.getPlayer1().getPawns(),"player1");
-        setPawnView(this,currentBoard.getPlayer2().getPawns(),"player2");
 
-        //Sets the player1 pawns able to move
-        findViewById(R.id.red1).setOnTouchListener(this);
-        findViewById(R.id.red2).setOnTouchListener(this);
-        findViewById(R.id.red3).setOnTouchListener(this);
-        findViewById(R.id.red4).setOnTouchListener(this);
-        findViewById(R.id.red5).setOnTouchListener(this);
-        findViewById(R.id.red6).setOnTouchListener(this);
+        if(currentBoard == null) {
+            currentBoard = new Board(30, new Player(roundOrder, id1, user1), new Player(!roundOrder, id2, user2), 1);
+            setPawnView(context, currentBoard.getPlayer1().getPawns(), "player1");
+            setPawnView(context, currentBoard.getPlayer2().getPawns(), "player2");
+        }
 
+        if(refLayout == null){
+            refLayout = (RelativeLayout) findViewById(R.id.rel1);
+        }
+
+        //Sets the player1 pawns able to move and their tag
+        ImageView red1 = findViewById(R.id.red1);
+        red1.setOnTouchListener(new onTouchCustomMethod(context,refLayout));
+        red1.setTag("red1");
+
+        ImageView red2 = findViewById(R.id.red2);
+        red2.setOnTouchListener(new onTouchCustomMethod(context,refLayout));
+        red2.setTag("red2");
+
+        ImageView red3 = findViewById(R.id.red3);
+        red3.setOnTouchListener(new onTouchCustomMethod(context,refLayout));
+        red3.setTag("red3");
+
+        ImageView red4 = findViewById(R.id.red4);
+        red4.setOnTouchListener(new onTouchCustomMethod(context,refLayout));
+        red4.setTag("red4");
+
+        ImageView red5 = findViewById(R.id.red5);
+        red5.setOnTouchListener(new onTouchCustomMethod(context,refLayout));
+        red5.setTag("red5");
+
+        ImageView red6 = findViewById(R.id.red6);
+        red6.setOnTouchListener(new onTouchCustomMethod(context,refLayout));
+        red6.setTag("red6");
+
+        //sets the cell able to receive the pawns
+        findViewById(R.id.cell1).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell2).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell3).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell4).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell5).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell6).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell7).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell8).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell9).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell10).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell11).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell12).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell13).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell14).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell15).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell16).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell17).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell18).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell19).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell20).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell21).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell22).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell23).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell24).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell25).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell26).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell27).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell28).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell29).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell30).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell31).setOnDragListener(new onDragCustomMethod(context));
     }
 
     private void setPawnView(Context context,HashMap<Integer, Pawn> map, String player){
@@ -81,43 +154,7 @@ public class BoardActivity extends AppCompatActivity implements View.OnTouchList
     }
 
 
-   @Override
-    public boolean onTouch(View view, MotionEvent event) {
-        final int x = (int) event.getRawX();
-        final int y = (int) event.getRawY();
 
-        switch (event.getAction() & MotionEvent.ACTION_MASK) {
-
-            case MotionEvent.ACTION_DOWN:
-                RelativeLayout.LayoutParams lParams = (RelativeLayout.LayoutParams)
-                        view.getLayoutParams();
-
-                _xDelta = x - lParams.leftMargin;
-                _yDelta = y - lParams.topMargin;
-                break;
-            //case when i lift my finger off the pawn
-            case MotionEvent.ACTION_UP:
-                Toast.makeText(BoardActivity.this,
-                        "RILASCIATO DITINO!", Toast.LENGTH_SHORT)
-                        .show();
-                //Boolean collision= CheckCollision(view,bImageView);
-                break;
-            //case when pawn moves
-            case MotionEvent.ACTION_MOVE:
-                RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view
-                        .getLayoutParams();
-                layoutParams.leftMargin = x - _xDelta;
-                layoutParams.topMargin = y - _yDelta;
-                layoutParams.rightMargin = 0;
-                layoutParams.bottomMargin = 0;
-                view.setLayoutParams(layoutParams);
-                break;
-
-        }
-        findViewById(R.id.rel1).invalidate();
-
-        return true;
-    }
 
     public boolean CheckCollision(View v1,View v2) {
         Rect R1=new Rect(v1.getLeft(), v1.getTop(), v1.getRight(), v1.getBottom());
@@ -125,9 +162,6 @@ public class BoardActivity extends AppCompatActivity implements View.OnTouchList
         return R1.intersect(R2);
     }
 
-    public boolean onDrag(View view, DragEvent dragEvent) {
-        return false;
-    }
 
 
     /**

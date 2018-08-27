@@ -42,7 +42,7 @@ public class myClass extends View {
 
     private void init(AttributeSet attrs) {
         // Obtain a typed array of attributes
-        TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs,   R.styleable.myClass, 0, 0);
+        TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs,R.styleable.myClass, 0, 0);
         // Extract custom attributes into member variables
         try {
             cellColor = a.getColor(R.styleable.myClass_cellColor, Color.BLACK);
