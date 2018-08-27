@@ -1,21 +1,41 @@
 <?php
+
+  
+  
 include('config.php');
 $nameApp="0";
 $PassApp="0";
-$NameApp=$_GET["Name"];
-$PassApp=$_GET["Pass"];
-$sql="SELECT Password FROM Users WHERE Name like '" . mysqli_real_escape_string($conn, $NameApp ) . "'";
+$NameApp=$_POST["tableName"];
+$PassApp=$_POST["attrToQuery"];
+
+
+
+
+
+
+$sql="SELECT ID,Password,Name FROM Users WHERE Name like '" . mysqli_real_escape_string($conn, $NameApp ) . "'";
 
 $result=$conn->query($sql);
 
 while($row = $result->fetch_assoc()){
 $MD5DB=$row['Password'];
+$id_user=$row['ID'];
+$user_name=$row['Name'];
 }
-$unione=$NameApp . $PassApp;
-$MD5APP=md5($unione);
-if($MD5APP==$MD5DB){   //MD5APP it's the MD5 string calculated from the infos the App gave , $MD5DB uses infos from the official database
-echo '1';
+//$unione=$NameApp . $PassApp;
+//$MD5APP=md5($unione);
+if($PassApp==$MD5DB){   // $MD5DB uses infos from the official database
+$login=1;
 
-}else{ echo '0';}
 
+
+
+
+
+}else{ $login=0;}
+
+
+$parameters = array('Result' => $login,'playerId' => $id_user, 'userName' => $user_name);
+header('Content-Type: application/json');
+echo json_encode($parameters, TRUE);
 ?>

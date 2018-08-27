@@ -20,6 +20,8 @@ import API.phpConnect;
 public class lobby extends AppCompatActivity {
     private Intent lobbyIntent;
     private phpConnect lobbyConn;
+    private phpConnect lobbyCanc;
+
     private Chronometer timer;
 
     private AppCompatActivity currActivity =this;
@@ -64,6 +66,7 @@ public class lobby extends AppCompatActivity {
                     }
 
                     if(aux  == true)
+                       // timer.stop();
                         toBoard();
 
                 }
@@ -105,6 +108,7 @@ public class lobby extends AppCompatActivity {
             gameId=Integer.parseInt(myConn.getParamFromJson("gameId"));
 
         Log.d("gameID","game id is "+gameId);
+
         String player2UserName = lobbyConn.getParamFromJson("player2Name");
         int player2Id = Integer.parseInt(lobbyConn.getParamFromJson("player2Id"));
         Intent toBoard = new Intent(currActivity,BoardActivity.class);
@@ -140,10 +144,11 @@ public class lobby extends AppCompatActivity {
     }
 
     public void back(View v){
+
         timer.stop();
-       boolean reaux = false;
+        boolean reaux = false;
         try {
-            lobbyConn = new phpConnect("https://psionofficial.com/Wireless/lobby2.php", -1);
+            lobbyConn = new phpConnect("https://psionofficial.com/Wireless/lobby.php", -1);
             reaux = lobbyConn.execute("r", "delete","-1",lobbyIntent.getStringExtra("userName"), lobbyIntent.getStringExtra("idPlayer")).get();
         }catch(InterruptedException e){e.printStackTrace();}
         catch(ExecutionException e){e.printStackTrace();}
@@ -154,6 +159,5 @@ public class lobby extends AppCompatActivity {
             super.finish();
 
     }
-
 
 }
