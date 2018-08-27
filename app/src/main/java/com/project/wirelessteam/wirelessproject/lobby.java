@@ -14,11 +14,14 @@ import android.widget.Chronometer;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ExecutionException;
 
 import API.phpConnect;
 public class lobby extends AppCompatActivity {
     private Intent lobbyIntent;
     private phpConnect lobbyConn;
+    private phpConnect lobbyCanc;
+
     private Chronometer timer;
 
     private AppCompatActivity currActivity =this;
@@ -63,6 +66,7 @@ public class lobby extends AppCompatActivity {
                     }
 
                     if(aux  == true)
+                       // timer.stop();
                         toBoard();
 
                 }
@@ -92,6 +96,7 @@ public class lobby extends AppCompatActivity {
     }
 
     private void toBoard(){
+        timer.stop();
         String player2UserName = lobbyConn.getParamFromJson("player2Name");
         int player2Id = Integer.parseInt(lobbyConn.getParamFromJson("player2Id"));
         Intent toBoard = new Intent(currActivity,BoardActivity.class);
@@ -127,9 +132,22 @@ public class lobby extends AppCompatActivity {
 
     public void back(View v){
 
-        super.finish();
+
+
+
+        timer.stop();
+        boolean reaux = false;
+        try {
+            lobbyConn = new phpConnect("https://psionofficial.com/Wireless/lobby.php", -1);
+            reaux = lobbyConn.execute("r", "delete","-1",lobbyIntent.getStringExtra("userName"), lobbyIntent.getStringExtra("idPlayer")).get();
+        }catch(InterruptedException e){e.printStackTrace();}
+        catch(ExecutionException e){e.printStackTrace();}
+
+        if(reaux == true)
+            toBoard();
+        else
+            super.finish();
 
     }
-
 
 }
