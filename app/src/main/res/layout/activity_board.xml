@@ -24,8 +24,8 @@
         android:layout_toLeftOf="@+id/invisibleCenter"
         android:layout_toStartOf="@+id/invisibleCenter"
         android:layout_alignTop="@+id/imageView"
-        android:layout_marginRight="25dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
         android:contentDescription="dado2"
         app:srcCompat="@color/colorAccent" />
 
@@ -37,45 +37,52 @@
         android:layout_marginTop="70dp"
         android:layout_toEndOf="@+id/invisibleCenter"
         android:layout_toRightOf="@+id/invisibleCenter"
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
         android:contentDescription="dado1"
         app:srcCompat="@color/colorAccent" />
 
     <TextView
         android:id="@+id/idAvv"
-        android:layout_width="86dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/userAvv"
-        android:layout_toLeftOf="@+id/userAvv"
+        android:layout_toRightOf="@+id/scoreAvv"
+        android:layout_toEndOf="@+id/scoreAvv"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/userAvv"
-        android:layout_width="84dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/idAvv"
+        android:layout_toEndOf="@+id/idAvv"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         />
 
     <TextView
         android:id="@+id/idPL"
-        android:layout_width="86dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/scorePL"
+        android:layout_toStartOf="@+id/scorePL"
+        android:layout_marginRight="50dp"
+        android:layout_marginEnd="50dp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/userPL"
-        android:layout_width="84dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:layout_toRightOf="@+id/idPL"
-        android:layout_toEndOf="@+id/idPL"
+        android:layout_toLeftOf="@+id/idPL"
+        android:layout_toStartOf="@+id/idPL"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
         />
 
     <TextView
