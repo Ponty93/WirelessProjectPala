@@ -85,7 +85,7 @@ public class BoardActivity extends AppCompatActivity {
             boolean connRes = false;
             phpConnect connTimeout = null;
             try {
-                connTimeout = new phpConnect("", ref.getCurrentBoard().getIdGame());
+                connTimeout = new phpConnect("https://psionofficial.com/Wireless/handler.php", ref.getCurrentBoard().getIdGame());
                 connRes = connTimeout.execute("r", "GAME", Integer.toString(ref.getCurrentBoard().getPlayer1().getUserId()), "round", "-1").get();
             }catch(InterruptedException e ){e.printStackTrace();}
             catch(ExecutionException e ){e.printStackTrace();}
@@ -97,6 +97,7 @@ public class BoardActivity extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(context,"ITS TIME TO RAISE",Toast.LENGTH_LONG).show();
+                    roundOrganize(true);
                 }
             }
         }
@@ -131,9 +132,9 @@ public class BoardActivity extends AppCompatActivity {
         if(round == true){
             findViewById(R.id.endTurn).setEnabled(true);
         }
-        else
+        else {
             findViewById(R.id.endTurn).setEnabled(false);
-
+        }
     }
 
     private void init(Intent buildBoard) {
