@@ -65,6 +65,8 @@ public class BoardActivity extends AppCompatActivity {
 
         public void run() {
             //chiamo fine turno
+
+            internalTimer.cancel();
         }
     }
 
@@ -84,6 +86,7 @@ public class BoardActivity extends AppCompatActivity {
             Log.d("ConnectionTimeout","Connection timeout occurred");
             boolean connRes = false;
             phpConnect connTimeout = null;
+
             try {
                 connTimeout = new phpConnect("https://psionofficial.com/Wireless/handler.php", ref.getCurrentBoard().getIdGame());
                 connRes = connTimeout.execute("r", "GAME", Integer.toString(ref.getCurrentBoard().getPlayer1().getUserId()), "round", "-1").get();
@@ -96,9 +99,10 @@ public class BoardActivity extends AppCompatActivity {
                   //winner
                 }
                 else {
-                    Toast.makeText(context,"ITS TIME TO RAISE",Toast.LENGTH_LONG).show();
+                    Log.d("ROUND","ITS FINALLY MY ROUND");
                     roundOrganize(true);
                 }
+                internalTimer.cancel();
             }
         }
     }
