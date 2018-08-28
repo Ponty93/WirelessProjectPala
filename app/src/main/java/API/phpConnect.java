@@ -211,7 +211,7 @@ public final class phpConnect extends AsyncTask<String, Void,Boolean>{
                             webb.post(url)
                                     .param("gameId", gameId)
                                     .param("op", idOperation)
-                                    .param("playerId2", playerId)
+                                    .param("playerId", playerId)
                                     .param("endTurn", attrToQuery)
                                     .ensureSuccess()
                                     .asJsonObject()

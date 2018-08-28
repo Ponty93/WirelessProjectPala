@@ -96,7 +96,7 @@ public class BoardActivity extends AppCompatActivity {
                   //winner
                 }
                 else {
-                    //Log.d("serverResponse","");
+                    Toast.makeText(context,"ITS TIME TO RAISE",Toast.LENGTH_LONG).show();
                 }
             }
         }
@@ -127,6 +127,12 @@ public class BoardActivity extends AppCompatActivity {
             internalTimer.schedule(new connectionTimeout(boardView),10000);
             Log.d("internalTimer","starts NOT my round timer");
         }
+
+        if(round == true){
+            findViewById(R.id.endTurn).setEnabled(true);
+        }
+        else
+            findViewById(R.id.endTurn).setEnabled(false);
 
     }
 
