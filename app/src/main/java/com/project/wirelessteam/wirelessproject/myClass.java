@@ -10,12 +10,13 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class myClass extends View {
-    private int cellColor;
     private String cellText;
     private int textWidth = 10;
     private int textHeight = 30;
     private Paint paintShapeText;
     private Paint paintShapeBorder;
+
+
     public myClass(Context context) {
         super(context);
 
@@ -45,7 +46,6 @@ public class myClass extends View {
         TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs,R.styleable.myClass, 0, 0);
         // Extract custom attributes into member variables
         try {
-            cellColor = a.getColor(R.styleable.myClass_cellColor, Color.BLACK);
             cellText = a.getString(R.styleable.myClass_cellText);
         } finally {
             // TypedArray objects are shared and must be recycled.
@@ -53,11 +53,7 @@ public class myClass extends View {
         }
     }
 
-    public void setCellColor(int color){
-        cellColor = color;
-        invalidate();
-        requestLayout();
-    }
+
     public void setCellText(String text){
         cellText = text;
         invalidate();
@@ -66,9 +62,7 @@ public class myClass extends View {
     public String getCellText() {
         return cellText;
     }
-    public int getCellColor(){
-        return cellColor;
-    }
+
 
 
     @Override
@@ -86,7 +80,7 @@ public class myClass extends View {
 
         paintShapeText = new Paint();
         paintShapeText.setStyle(Paint.Style.FILL);
-        paintShapeText.setColor(cellColor);
+        paintShapeText.setColor(Color.BLACK);
         paintShapeText.setTextSize(60);
         paintShapeText.setFakeBoldText(true);
 
@@ -101,11 +95,7 @@ public class myClass extends View {
     protected void onMeasure(int widthMeasureSpec,int heightMeasureSpec){
 
         int contentWidth = textWidth;
-
-
         int width = resolveSizeAndState(50,widthMeasureSpec,0);
-
-
         int height = resolveSizeAndState(80,heightMeasureSpec,0);
         setMeasuredDimension(width,height);
     }

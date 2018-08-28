@@ -19,6 +19,8 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
 
 import Actors.Pawn;
@@ -35,6 +37,7 @@ public class BoardActivity extends AppCompatActivity {
     private Board currentBoard = null;
     private Context context = null;
     private RelativeLayout refLayout=null;
+    private Timer internalTimer;
 
 
     @Override
@@ -46,8 +49,32 @@ public class BoardActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         init(buildBoard);
         //todo send a req to reload the data if any
+
+        internalTimer = new Timer();
+        internalTimer.schedule(new connectionTimeout(this),500000);
     }
 
+
+    protected class connectionTimeout extends TimerTask {
+
+        private BoardActivity ref;
+
+        public connectionTimeout(BoardActivity board){
+            ref = board;
+        }
+
+        public void run() {
+            Log.d("ConnectionTimeout","Connection timeout occurred");
+            boolean connRes = false;
+            phpConnect connTimeout = new phpConnect("",-1);
+            //todo connRes = connTimeout.execute("r","GAME","-1",).get();
+            if(connRes == true){
+                if(Integer.parseInt(connTimeout.getParamFromJson("winner")) == ref.getCurrentBoard().getPlayer1().getUserId()){
+                    //todo invoco hai vinto per abbandono
+                }
+            }
+        }
+    }
     private void init(Intent buildBoard) {
 
         if(context == null)
@@ -70,12 +97,23 @@ public class BoardActivity extends AppCompatActivity {
         String user2 = buildBoard.getStringExtra("player2Name");
 
 
+        //sets the order of player rounds
+        int round = buildBoard.getIntExtra("roundPlayerId",0);
+        boolean roundPlayerId1;
+        boolean roundPlayerId2;
+        if(round == id1){
+            roundPlayerId1 = true;
+            roundPlayerId2 = false;
+        }
+        else{
+            roundPlayerId1 = false;
+            roundPlayerId2 = true;
+        }
 
 
-        boolean roundOrder = true;// settleFirst();
 
         if(currentBoard == null) {
-            currentBoard = new Board(30, new Player(roundOrder, id1, user1), new Player(!roundOrder, id2, user2), gameId);
+            currentBoard = new Board(30, new Player(roundPlayerId1, id1, user1), new Player(roundPlayerId2, id2, user2), gameId);
             setPawnView(context, currentBoard.getPlayer1().getPawns(), "player1");
             setPawnView(context, currentBoard.getPlayer2().getPawns(), "player2");
         }
@@ -110,38 +148,38 @@ public class BoardActivity extends AppCompatActivity {
         red6.setTag("red6");
 
         //sets the cell able to receive the pawns
-        findViewById(R.id.cell1).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell2).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell3).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell4).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell5).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell6).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell7).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell8).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell9).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell10).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell11).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell12).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell13).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell14).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell15).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell16).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell17).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell18).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell19).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell20).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell21).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell22).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell23).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell24).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell25).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell26).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell27).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell28).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell29).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell30).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell31).setOnDragListener(new onDragCustomMethod(context));
-        findViewById(R.id.cell31).setTag("cell31");
+        findViewById(R.id.cell1L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell2L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell3L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell4L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell5L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell6L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell7L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell8L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell9L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell10L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell11L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell12L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell13L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell14L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell15L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell16L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell17L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell18L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell19L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell20L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell21L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell22L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell23L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell24L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell25L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell26L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell27L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell28L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell29L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell30L).setOnDragListener(new onDragCustomMethod(context));
+        findViewById(R.id.cell31L).setOnDragListener(new onDragCustomMethod(context));
+        //findViewById(R.id.cell31).setTag("cell31");
     }
 
     private void setPawnView(Context context,HashMap<Integer, Pawn> map, String player){
@@ -176,23 +214,6 @@ public class BoardActivity extends AppCompatActivity {
 
 
 
-    /**
-     * method to settle who starts first
-     * Returns a boolean that rappresents the result
-     * evens: true;
-     * odds = false;
-     * @return {boolean}
-     */
-
-    /*public boolean settleFirst() {
-        int intResult = (int)Math.random()*6+1;
-        //todo game.php roundOrder
-        phpConnect tmpConn = new phpConnect("https://www.psionofficial.com/Wireless/handler.php",-1);
-        tmpConn.execute("r","GAME","-1","diceValue",Integer.toString(intResult));
-        return Boolean.parseBoolean(tmpConn.getParamFromJson("roundOrder"));
-    }*/
-
-
     public void surrenderButton(View view){
         //invoco haiPerso
         //todo
@@ -200,5 +221,10 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     //todo haiVinto e haiPerso method
+    //todo call boardActivity update every starting turn from the 2nd turn
 
+
+    public Board getCurrentBoard() {
+        return currentBoard;
+    }
 }

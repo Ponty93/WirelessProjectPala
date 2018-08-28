@@ -20,12 +20,10 @@ import API.phpConnect;
 public class lobby extends AppCompatActivity {
     private Intent lobbyIntent;
     private phpConnect lobbyConn;
-    private phpConnect lobbyCanc;
-
     private Chronometer timer;
-
     private AppCompatActivity currActivity =this;
     private Button startButton,stopButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +51,7 @@ public class lobby extends AppCompatActivity {
                 }
                 boolean aux = false;
 
-                if(seconds % 10 == 0){
+                if(seconds % 5 == 0){
                     try{
                         lobbyConn = new phpConnect("https://psionofficial.com/Wireless/lobby.php", -1);
                         aux = lobbyConn.execute("r","-1","-1",lobbyIntent.getStringExtra("userName"),lobbyIntent.getStringExtra("idPlayer")).get();
@@ -73,24 +71,6 @@ public class lobby extends AppCompatActivity {
 
             }
         });
-        boolean aux = false;
-        boolean flag= false;
-        /*if(flag == false) {
-            try {
-                flag = true;
-                lobbyConn = new phpConnect("https://psionofficial.com/Wireless/lobby.php", -1);
-                aux = lobbyConn.execute("r", "-1", "-1", lobbyIntent.getStringExtra("userName"), lobbyIntent.getStringExtra("idPlayer")).get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (aux == false)
-                lobbyChecker();
-            else { //case in which the player doesn't have to wait in the lobby but found right away a opponent
-                toBoard();
-            }
-        }*/
 
         lobbyChecker();
     }
@@ -98,14 +78,17 @@ public class lobby extends AppCompatActivity {
     private void toBoard(){
         boolean aux = false;
         int gameId = 0;
+        int roundPlayerId = -1;
         phpConnect myConn = null;
         try {
-             myConn = new phpConnect("https://psionofficial.com/Wireless/a.php", -1);
+             myConn = new phpConnect("https://psionofficial.com/Wireless/handler.php", -1);
              aux = myConn.execute("r", "GAME","-1","gameId", lobbyIntent.getStringExtra("idPlayer")).get();
         }catch(InterruptedException e){e.printStackTrace();}
         catch(ExecutionException e){e.printStackTrace();}
-        if(aux == true)
-            gameId=Integer.parseInt(myConn.getParamFromJson("gameId"));
+        if(aux == true) {
+            gameId = Integer.parseInt(myConn.getParamFromJson("gameId"));
+            roundPlayerId = Integer.parseInt(myConn.getParamFromJson("filetto"));
+        }
 
         Log.d("gameID","game id is "+gameId);
 
@@ -117,6 +100,7 @@ public class lobby extends AppCompatActivity {
         toBoard.putExtra("player2Id",player2Id);
         toBoard.putExtra("player2Name",player2UserName);
         toBoard.putExtra("gameId",gameId);
+        toBoard.putExtra("roundPlayerId",roundPlayerId);
         //put extraInt the id of the game object created
         startActivity(toBoard);
     }
@@ -144,7 +128,6 @@ public class lobby extends AppCompatActivity {
     }
 
     public void back(View v){
-
         timer.stop();
         boolean reaux = false;
         try {

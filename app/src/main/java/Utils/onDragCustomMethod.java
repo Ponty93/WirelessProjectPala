@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class onDragCustomMethod implements View.OnDragListener {
@@ -33,6 +35,8 @@ public class onDragCustomMethod implements View.OnDragListener {
                 return false;
 
             case DragEvent.ACTION_DRAG_ENTERED:
+                view.setBackgroundColor(Color.RED);
+                view.invalidate();
                 return true;
 
             case DragEvent.ACTION_DRAG_LOCATION:
@@ -50,15 +54,16 @@ public class onDragCustomMethod implements View.OnDragListener {
                 resetTargetViewBackground(view);
                 view.invalidate();
 
-                /*// Get dragged view object from drag event object.
+                //todo
+                // Get dragged view object from drag event object.
                 View srcView = (View)dragEvent.getLocalState();
                 // Get dragged view's parent view group.
                 ViewGroup owner = (ViewGroup) srcView.getParent();
                 // Remove source view from original parent view group.
                 owner.removeView(srcView);
 
-                View newParent = (View) view;
-                //newParent.addView(srcView);*/
+                RelativeLayout newParent = (RelativeLayout) view;
+                newParent.addView(srcView);
                 return true;
 
 
@@ -84,8 +89,14 @@ public class onDragCustomMethod implements View.OnDragListener {
     private void resetTargetViewBackground(View view)
     {
         // Clear color filter.
-        view.getBackground().clearColorFilter();
-
+        /*if(view.getTag().equals("cell1L") || view.getTag().equals("cell31L"))
+            view.setBackgroundColor(Color.BLUE);
+        else if(view.getTag().equals("cell2L") || view.getTag().equals("cell3L") || view.getTag().equals("cell4L") || view.getTag().equals("cell5L")
+            || view.getTag().equals("cell6L") || view.getTag().equals("cell7L")) {
+            view.setBackgroundColor(Color.GREEN);
+        }
+        else*/
+            view.getBackground().clearColorFilter();
         // Redraw the target view use original color.
         view.invalidate();
     }
