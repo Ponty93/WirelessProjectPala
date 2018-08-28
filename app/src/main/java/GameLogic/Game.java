@@ -12,6 +12,7 @@ public class Game {
     private final Player player1;
     private final Player player2;
     private int roundsCounter = 0;
+    //todo remove
     private phpConnect connectionHandler = new phpConnect("https://www.psionofficial.com/Wireless/handler.php",getIdGame());
 
 
@@ -47,18 +48,6 @@ public class Game {
         roundsCounter = val;
     }
 
-
-    /**
-     * Checks who plays in this round
-     * @return {String}
-     */
-    public String whoPlay() {
-        boolean aux = (roundsCounter%2 == 0);
-        if(player1.getOrder() == aux)
-            return player1.getUserName();
-        else
-            return player2.getUserName();
-    }
 
     /**
      * Searches for a player by passing an id

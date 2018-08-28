@@ -37,6 +37,7 @@ public class BoardActivity extends AppCompatActivity {
     private Board currentBoard = null;
     private Context context = null;
     private RelativeLayout refLayout=null;
+    private final BoardActivity boardView = this;
     private Timer internalTimer;
 
 
@@ -49,16 +50,32 @@ public class BoardActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         init(buildBoard);
         //todo send a req to reload the data if any
+    }
 
-        internalTimer = new Timer();
-        internalTimer.schedule(new connectionTimeout(this),500000);
+    //if the timer goes up to 1.45m then the method "endRound" is called
+
+    /**
+     * class to model the timer for the player round
+     */
+    protected class roundTimer extends TimerTask {
+        private BoardActivity ref;
+        public roundTimer(BoardActivity board){
+            ref= board;
+        }
+
+        public void run() {
+            //chiamo fine turno
+        }
     }
 
 
+    /**
+     * class to model a connectionTimeout task
+     */
+    //class created only when its not my round
     protected class connectionTimeout extends TimerTask {
 
         private BoardActivity ref;
-
         public connectionTimeout(BoardActivity board){
             ref = board;
         }
@@ -66,15 +83,53 @@ public class BoardActivity extends AppCompatActivity {
         public void run() {
             Log.d("ConnectionTimeout","Connection timeout occurred");
             boolean connRes = false;
-            phpConnect connTimeout = new phpConnect("",-1);
-            //todo connRes = connTimeout.execute("r","GAME","-1",).get();
+            phpConnect connTimeout = null;
+            try {
+                connTimeout = new phpConnect("", ref.getCurrentBoard().getIdGame());
+                connRes = connTimeout.execute("r", "GAME", Integer.toString(ref.getCurrentBoard().getPlayer1().getUserId()), "round", "-1").get();
+            }catch(InterruptedException e ){e.printStackTrace();}
+            catch(ExecutionException e ){e.printStackTrace();}
+
+
             if(connRes == true){
                 if(Integer.parseInt(connTimeout.getParamFromJson("winner")) == ref.getCurrentBoard().getPlayer1().getUserId()){
-                    //todo invoco hai vinto per abbandono
+                  //winner
+                }
+                else {
+                    //Log.d("serverResponse","");
                 }
             }
         }
     }
+
+    /**
+     * regolate the players round
+     * @param round
+     */
+    private void roundOrganize(boolean round) {
+        findViewById(R.id.red1).setEnabled(round);
+        findViewById(R.id.red2).setEnabled(round);
+        findViewById(R.id.red3).setEnabled(round);
+        findViewById(R.id.red4).setEnabled(round);
+        findViewById(R.id.red5).setEnabled(round);
+        findViewById(R.id.red6).setEnabled(round);
+
+        //display a message "waiting for foe to finish his turn.."
+
+        //timer to schedule action
+        if(round == true) {//if its my turn, at 2m calls endTurn
+            internalTimer = new Timer();
+            internalTimer.schedule(new roundTimer(boardView), 120000);
+            Log.d("internalTimer","starts my round timer");
+        }
+        else {//its not my turn, every 10s i ask the server if its my turn now
+            internalTimer = new Timer();
+            internalTimer.schedule(new connectionTimeout(boardView),10000);
+            Log.d("internalTimer","starts NOT my round timer");
+        }
+
+    }
+
     private void init(Intent buildBoard) {
 
         if(context == null)
@@ -122,7 +177,7 @@ public class BoardActivity extends AppCompatActivity {
             refLayout = (RelativeLayout) findViewById(R.id.rel1);
         }
 
-        //Sets the player1 pawns able to move and their tag
+        //Define the player1 pawns drag and drop
         ImageView red1 = findViewById(R.id.red1);
         red1.setOnTouchListener(new onTouchCustomMethod(context,refLayout));
         red1.setTag("red1");
@@ -146,6 +201,9 @@ public class BoardActivity extends AppCompatActivity {
         ImageView red6 = findViewById(R.id.red6);
         red6.setOnTouchListener(new onTouchCustomMethod(context,refLayout));
         red6.setTag("red6");
+
+        //abilitate to move the pawns
+        roundOrganize(roundPlayerId1);
 
         //sets the cell able to receive the pawns
         findViewById(R.id.cell1L).setOnDragListener(new onDragCustomMethod(context));
@@ -205,15 +263,34 @@ public class BoardActivity extends AppCompatActivity {
 
 
 
-
+    //todo move in a controller class
     public boolean CheckCollision(View v1,View v2) {
         Rect R1=new Rect(v1.getLeft(), v1.getTop(), v1.getRight(), v1.getBottom());
         Rect R2=new Rect(v2.getLeft(), v2.getTop(), v2.getRight(), v2.getBottom());
         return R1.intersect(R2);
     }
 
+    //todo move to board
+    private void endTurn(){
+
+        boolean serverResponse = false;
+        try {
+            phpConnect myConn = new phpConnect("https://psionofficial.com/Wireless/handler.php", getCurrentBoard().getIdGame());
+            myConn.execute("u", Integer.toString(getCurrentBoard().getPlayer2().getUserId()), "change", "-1", "-1").get();
+        }catch(ExecutionException e){e.printStackTrace();}
+        catch(InterruptedException e){e.printStackTrace();}
+
+        if(serverResponse == true){
+           //calls pawns update to server
+        }
 
 
+        roundOrganize(false);
+    }
+    //todo method to update pawns position
+    public void buttonEndTurn(View view){
+        endTurn();
+    }
     public void surrenderButton(View view){
         //invoco haiPerso
         //todo
@@ -226,5 +303,9 @@ public class BoardActivity extends AppCompatActivity {
 
     public Board getCurrentBoard() {
         return currentBoard;
+    }
+
+    public RelativeLayout getRefLayout() {
+        return refLayout;
     }
 }

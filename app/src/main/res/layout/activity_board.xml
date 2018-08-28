@@ -839,6 +839,16 @@
 
         </RelativeLayout>
 
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/cell1L"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="41dp"
+            android:onClick="buttonEndTurn"
+            android:text="End Turn" />
+
     </RelativeLayout>
 
 </RelativeLayout>

@@ -102,11 +102,22 @@ public final class phpConnect extends AsyncTask<String, Void,Boolean>{
                         .asJsonObject()
                         .getBody();
             }
+            else if(paramToRead.equals("round")){
+                resJson = webb.post(url)
+                        .param("gameId",gameId)
+                        .param("playerId",playerId)
+                        .param("round",paramToRead)
+                        .param("op",idOperation)
+                        .param("caseToQuery",4)
+                        .ensureSuccess()
+                        .asJsonObject()
+                        .getBody();
+            }
             else { //case that assume the read is not for the PAWN table but anyone else
                 resJson = webb.post(url)
                         .param("tableName",tableName)
                         .param("op", idOperation)
-                        .param("caseToQuery",4)
+                        .param("caseToQuery",5)
                         .param("attrToQuery",paramToRead)
                         .param("valToQuery",valToRead)
                         .ensureSuccess()
@@ -191,6 +202,17 @@ public final class phpConnect extends AsyncTask<String, Void,Boolean>{
                                     .param("playerId", playerId)
                                     .param("posToBeUpdated", valToQuery)
                                     .param("posToUpdate", posToUpdate)
+                                    .ensureSuccess()
+                                    .asJsonObject()
+                                    .getBody();
+                }
+                else{
+                    resJson =
+                            webb.post(url)
+                                    .param("gameId", gameId)
+                                    .param("op", idOperation)
+                                    .param("playerId2", playerId)
+                                    .param("endTurn", attrToQuery)
                                     .ensureSuccess()
                                     .asJsonObject()
                                     .getBody();
