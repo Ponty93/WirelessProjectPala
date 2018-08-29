@@ -43,24 +43,6 @@ public class Board extends Game {
     }
 
     /**
-     * Method who organize how a user wants to move his pawns
-     * @param v1
-     * @param id1
-     * @param v2
-     * @param id2
-     * @param player
-     */
-
-    public void howToMove(int v1,int id1,int v2,int id2, Player player) {
-        if(id1 != id2) {
-            planToMove(v1,id1,player);
-            planToMove(v2,id2,player);
-        }
-        else
-            planToMove(v1+v2,id1,player);
-    }
-
-    /**
      * The method search for the pawns the user wants to move
      * @param val
      * @param id
@@ -215,6 +197,16 @@ public class Board extends Game {
         }catch(JSONException e){e.printStackTrace();}
 
         return null;
+    }
+
+    public boolean updateRound(phpConnect connTimeout){
+        try {
+            connTimeout = new phpConnect("https://psionofficial.com/Wireless/handler.php", getIdGame());
+            return connTimeout.execute("r", "GAME", Integer.toString(getPlayer1().getUserId()), "round", "-1").get();
+        }catch(InterruptedException e ){e.printStackTrace();}
+        catch(ExecutionException e ){e.printStackTrace();}
+
+        return false;
     }
 
 

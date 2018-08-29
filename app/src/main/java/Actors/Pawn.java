@@ -8,7 +8,7 @@ public class Pawn {
     //default:1
     ImageView pawn = null;
     private final int pawnId;
-    private int position = 1; //position legengds:
+    private int position = 1; //position leggends:
                                 // 1 : Start
                                 // 31 : Finish
                                 // -1 : currently in a stack
