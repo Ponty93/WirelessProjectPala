@@ -66,7 +66,7 @@ public class BoardActivity extends AppCompatActivity {
         public void run() {
             //chiamo fine turno
 
-            internalTimer.cancel();
+            //internalTimer.cancel();
         }
     }
 
@@ -251,6 +251,9 @@ public class BoardActivity extends AppCompatActivity {
         //findViewById(R.id.cell31).setTag("cell31");
     }
 
+
+
+    //links the pawns object to the pawns views
     private void setPawnView(Context context,HashMap<Integer, Pawn> map, String player){
         if(player.equals("player1")) {
             map.get(0).setPawnView((ImageView)findViewById(R.id.red1));
@@ -302,6 +305,7 @@ public class BoardActivity extends AppCompatActivity {
     public void buttonEndTurn(View view){
         endTurn();
     }
+
     public void surrenderButton(View view){
         //invoco haiPerso
         //todo
