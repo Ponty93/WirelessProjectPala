@@ -19,8 +19,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_toLeftOf="@+id/invisibleCenter"
         android:layout_toStartOf="@+id/invisibleCenter"
         android:layout_alignTop="@+id/imageView"
@@ -31,10 +31,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="50dp"
         android:layout_toEndOf="@+id/invisibleCenter"
         android:layout_toRightOf="@+id/invisibleCenter"
         android:layout_marginStart="5dp"
@@ -47,68 +47,133 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/scoreAvv"
-        android:layout_toEndOf="@+id/scoreAvv"
-        android:layout_marginLeft="50dp"
-        android:layout_marginStart="50dp"
-        android:textStyle="bold" />
+        android:layout_toLeftOf="@+id/userAvv"
+        android:layout_toStartOf="@+id/userAvv"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
+        android:textStyle="bold"
+        android:text="ID"/>
 
     <TextView
         android:id="@+id/userAvv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:layout_toRightOf="@+id/idAvv"
-        android:layout_toEndOf="@+id/idAvv"
-        android:layout_marginLeft="5dp"
-        android:layout_marginStart="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="OPPONENT USERNAME"
         />
 
     <TextView
         android:id="@+id/idPL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/scorePL"
-        android:layout_toStartOf="@+id/scorePL"
+        android:layout_toRightOf="@+id/userPL"
+        android:layout_toEndOf="@+id/userPL"
         android:layout_marginRight="50dp"
         android:layout_marginEnd="50dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:text="ID"/>
 
     <TextView
         android:id="@+id/userPL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:layout_toLeftOf="@+id/idPL"
-        android:layout_toStartOf="@+id/idPL"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_marginRight="5dp"
         android:layout_marginEnd="5dp"
+        android:text="USERNAME"
         />
+
+    <TextView
+        android:id="@+id/scoreAvvText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score:"
+        android:layout_below="@+id/idAvv"
+        android:layout_alignLeft="@+id/idAvv"
+        android:layout_alignStart="@+id/idAvv"
+        />
+
+    <TextView
+        android:id="@+id/scorePLText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score:"
+        android:layout_below="@+id/userPL"/>
 
     <TextView
         android:id="@+id/scoreAvv"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/invisibleCenter"
-        android:layout_toRightOf="@+id/invisibleCenter"
+        android:layout_toEndOf="@+id/scoreAvvText"
+        android:layout_toRightOf="@+id/scoreAvvText"
+        android:layout_alignTop="@+id/scoreAvvText"
         android:text="0"
         android:textAlignment="center"
-        tools:text="0" />
+        tools:text="0"
+        />
 
     <TextView
         android:id="@+id/scorePL"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_alignEnd="@+id/invisibleCenter"
-        android:layout_alignRight="@+id/invisibleCenter"
-        android:layout_alignParentTop="true"
         android:text="0"
         android:textAlignment="center"
-        tools:text="0" />
+        tools:text="0"
+        android:layout_toRightOf="@+id/scorePLText"
+        android:layout_toEndOf="@+id/scorePLText"
+        android:layout_alignTop="@id/scorePLText"
+        />
 
+    <TextView
+        android:id="@+id/roundtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Round:"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/roundnumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/roundtext"
+        android:text="0"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/endTurn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scoreAvv"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:onClick="buttonEndTurn"
+        android:text="End Turn" />
+
+    <Button
+        android:id="@+id/surr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Surrender"
+        android:layout_below="@+id/scorePL"/>
+
+    <Button
+        android:id="@+id/roll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Roll Dice"
+        android:layout_toLeftOf="@+id/endTurn"
+        android:layout_alignTop="@+id/endTurn"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"/>
 
     <RelativeLayout
+        android:id="@+id/boardWrap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -116,8 +181,8 @@
 
         <RelativeLayout
             android:id="@+id/cell1L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_above="@+id/cell16L"
             android:layout_toRightOf="@+id/cell14L"
             android:layout_toEndOf="@+id/cell14L"
@@ -244,8 +309,8 @@
 
         <RelativeLayout
             android:id="@+id/cell2L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_toRightOf="@+id/cell1L"
             android:layout_toEndOf="@+id/cell1L"
             android:layout_alignTop="@+id/cell1L"
@@ -264,8 +329,8 @@
 
         <RelativeLayout
             android:id="@+id/cell3L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_alignTop="@+id/cell2L"
             android:layout_toRightOf="@+id/cell2L"
             android:layout_toEndOf="@+id/cell2L"
@@ -285,8 +350,8 @@
 
         <RelativeLayout
             android:id="@+id/cell4L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_toEndOf="@+id/cell3L"
             android:layout_toRightOf="@+id/cell3L"
             android:layout_alignTop="@id/cell3L"
@@ -306,8 +371,8 @@
 
         <RelativeLayout
             android:id="@+id/cell5L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_toEndOf="@+id/cell4L"
             android:layout_toRightOf="@+id/cell4L"
             android:layout_alignTop="@id/cell4L"
@@ -327,8 +392,8 @@
 
         <RelativeLayout
             android:id="@+id/cell6L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_toEndOf="@+id/cell5L"
             android:layout_toRightOf="@+id/cell5L"
             android:layout_alignTop="@id/cell5L"
@@ -348,8 +413,8 @@
 
         <RelativeLayout
             android:id="@+id/cell7L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_above="@+id/cell6L"
             android:layout_alignLeft="@+id/cell6L"
             android:layout_alignStart="@+id/cell6L"
@@ -369,8 +434,8 @@
 
         <RelativeLayout
             android:id="@+id/cell8L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_toLeftOf="@+id/cell7L"
             android:layout_toStartOf="@+id/cell7L"
             android:layout_alignTop="@id/cell7L"
@@ -388,8 +453,8 @@
 
         <RelativeLayout
             android:id="@+id/cell9L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_toStartOf="@+id/cell8L"
             android:layout_toLeftOf="@+id/cell8L"
             android:layout_alignTop="@id/cell7L"
@@ -397,8 +462,8 @@
 
             <Utils.myClass
                 android:id="@+id/cell9"
-                android:layout_width="70dp"
-                android:layout_height="50dp"
+                android:layout_width="75dp"
+                android:layout_height="60dp"
                 app:cellText="  8"
                 >
 
@@ -408,8 +473,8 @@
 
         <RelativeLayout
             android:id="@+id/cell10L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_toStartOf="@+id/cell9L"
             android:layout_toLeftOf="@+id/cell9L"
             android:layout_alignTop="@id/cell7L"
@@ -428,8 +493,8 @@
 
         <RelativeLayout
             android:id="@+id/cell11L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_toStartOf="@+id/cell10L"
             android:layout_toLeftOf="@+id/cell10L"
             android:layout_alignTop="@id/cell7L"
@@ -448,8 +513,8 @@
 
         <RelativeLayout
             android:id="@+id/cell12L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_toStartOf="@+id/cell11L"
             android:layout_toLeftOf="@+id/cell11L"
             android:layout_alignTop="@id/cell7L"
@@ -468,8 +533,8 @@
 
         <RelativeLayout
             android:id="@+id/cell13L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_above="@+id/cell1L"
             android:layout_toStartOf="@+id/cell1L"
             android:layout_toLeftOf="@+id/cell1L"
@@ -487,8 +552,8 @@
 
         <RelativeLayout
             android:id="@+id/cell14L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_alignLeft="@+id/cell15L"
             android:layout_alignStart="@+id/cell15L"
             android:layout_alignTop="@+id/cell2L"
@@ -506,8 +571,8 @@
 
         <RelativeLayout
             android:id="@+id/cell15L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
@@ -525,8 +590,8 @@
 
         <RelativeLayout
             android:id="@+id/cell16L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_toEndOf="@+id/cell15L"
             android:layout_toRightOf="@+id/cell15L"
             android:layout_alignTop="@id/cell15L"
@@ -545,8 +610,8 @@
 
         <RelativeLayout
             android:id="@+id/cell17L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_toEndOf="@+id/cell16L"
             android:layout_toRightOf="@+id/cell16L"
             android:layout_alignTop="@id/cell15L"
@@ -565,8 +630,8 @@
 
         <RelativeLayout
             android:id="@+id/cell18L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_toEndOf="@+id/cell17L"
             android:layout_toRightOf="@+id/cell17L"
             android:layout_alignTop="@id/cell15L"
@@ -585,8 +650,8 @@
 
         <RelativeLayout
             android:id="@+id/cell19L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_toEndOf="@+id/cell18L"
             android:layout_toRightOf="@+id/cell18L"
             android:layout_alignTop="@id/cell15L"
@@ -606,8 +671,8 @@
 
         <RelativeLayout
             android:id="@+id/cell20L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_toEndOf="@+id/cell19L"
             android:layout_toRightOf="@+id/cell19L"
             android:layout_alignTop="@id/cell15L"
@@ -627,8 +692,8 @@
 
         <RelativeLayout
             android:id="@+id/cell21L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_toRightOf="@+id/cell20L"
             android:layout_toEndOf="@+id/cell20L"
             android:layout_alignTop="@id/cell15L"
@@ -647,8 +712,8 @@
 
         <RelativeLayout
             android:id="@+id/cell22L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_toRightOf="@+id/cell21L"
             android:layout_toEndOf="@+id/cell21L"
             android:layout_alignTop="@id/cell15L"
@@ -667,8 +732,8 @@
 
         <RelativeLayout
             android:id="@+id/cell23L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_alignTop="@+id/cell1L"
             android:layout_toEndOf="@+id/cell6L"
             android:layout_toRightOf="@+id/cell6L"
@@ -686,8 +751,8 @@
 
         <RelativeLayout
             android:id="@+id/cell24L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_above="@+id/cell1L"
             android:layout_toEndOf="@+id/cell6L"
             android:layout_toRightOf="@+id/cell6L"
@@ -705,8 +770,8 @@
 
         <RelativeLayout
             android:id="@+id/cell25L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_above="@+id/cell7L"
             android:layout_toEndOf="@+id/cell6L"
             android:layout_toRightOf="@+id/cell6L"
@@ -724,8 +789,8 @@
 
         <RelativeLayout
             android:id="@+id/cell26L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_above="@+id/cell7L"
             android:layout_toEndOf="@+id/cell5L"
             android:layout_toRightOf="@+id/cell5L"
@@ -743,8 +808,8 @@
 
         <RelativeLayout
             android:id="@+id/cell27L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_above="@+id/cell7L"
             android:layout_toEndOf="@+id/cell4L"
             android:layout_toRightOf="@+id/cell4L"
@@ -762,8 +827,8 @@
 
         <RelativeLayout
             android:id="@+id/cell28L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_toLeftOf="@+id/cell27L"
             android:layout_toStartOf="@+id/cell27L"
             android:layout_alignTop="@+id/cell25L">
@@ -781,8 +846,8 @@
 
         <RelativeLayout
             android:id="@+id/cell29L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_toLeftOf="@+id/cell28L"
             android:layout_toStartOf="@+id/cell28L"
             android:layout_alignTop="@+id/cell25L"
@@ -801,8 +866,8 @@
 
         <RelativeLayout
             android:id="@+id/cell30L"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
             android:layout_above="@+id/cell7L"
             android:layout_toStartOf="@+id/cell29L"
             android:layout_toLeftOf="@+id/cell29L"
@@ -820,8 +885,8 @@
 
         <RelativeLayout
             android:id="@+id/cell31L"
-            android:layout_width="140dp"
-            android:layout_height="50dp"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
             android:layout_toLeftOf="@+id/cell30L"
             android:layout_toStartOf="@+id/cell30L"
             android:layout_alignTop="@+id/cell25L"
@@ -838,16 +903,6 @@
             </Utils.myClass>
 
         </RelativeLayout>
-
-        <Button
-            android:id="@+id/endTurn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/cell1L"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="41dp"
-            android:onClick="buttonEndTurn"
-            android:text="End Turn" />
 
     </RelativeLayout>
 
