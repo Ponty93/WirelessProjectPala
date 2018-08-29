@@ -95,13 +95,25 @@ public class BoardActivity extends AppCompatActivity {
 
 
             if(connRes == true){
-                if(Integer.parseInt(connTimeout.getParamFromJson("winner")) == ref.getCurrentBoard().getPlayer1().getUserId()){
-                  //winner
+                Log.d("JSON","Json res"+connTimeout.getResJson());
+                if(!connTimeout.getParamFromJson("winner").equals("none")) {
+                   /* if (Integer.parseInt(connTimeout.getParamFromJson("winner")) == ref.getCurrentBoard().getPlayer1().getUserId()) {
+                        //winner
+                    }*/
                 }
                 else {
                     Log.d("ROUND","ITS FINALLY MY ROUND");
                     Log.d("JSON","Json res"+connTimeout.getResJson());
-                    roundOrganize(true);
+
+                    //it permits to call the UI thread to exec the Views operation
+                    //timer runs on a different thread, so it does not have access to modify views
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            roundOrganize(true);
+                        }
+                    });
+
                 }
                 internalTimer.cancel();
             }
@@ -130,7 +142,7 @@ public class BoardActivity extends AppCompatActivity {
         }
         else {//its not my turn, every 10s i ask the server if its my turn now
             internalTimer = new Timer();
-            internalTimer.schedule(new connectionTimeout(boardView),0,10000);
+            internalTimer.schedule(new connectionTimeout(boardView),0,5000);
             Log.d("internalTimer","starts NOT my round timer");
         }
 
