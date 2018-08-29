@@ -90,7 +90,7 @@ public final class phpConnect extends AsyncTask<String, Void,Boolean>{
                         .asJsonObject()
                         .getBody();
             }
-            else if(paramToRead.equals("boardUpdate")){
+            else if(paramToRead.equals("boardUpdate")){//todo remove useless
                 resJson = webb.post(url)
                         .param("gameId", gameId)
                         .param("player1Id",playerId)

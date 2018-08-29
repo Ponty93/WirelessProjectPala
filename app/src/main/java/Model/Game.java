@@ -72,7 +72,12 @@ public class Game {
         return connectionHandler;
     }
 
-
+    public boolean playerOrder(int id){
+        if(id == getPlayer1().getUserId())
+            return true;
+        else
+            return false;
+    }
 
 
 

@@ -12,11 +12,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.project.wirelessteam.Views.BoardActivity;
+
+import Model.Board;
+
 public class onDragCustomMethod implements View.OnDragListener {
     private Context cont = null;
-
-    public onDragCustomMethod(Context con) {
+    private Board currentBoard;
+    public onDragCustomMethod(Context con, Board boardRef)
+    {
         cont = con;
+        currentBoard = boardRef;
     }
 
     @Override
@@ -54,7 +60,7 @@ public class onDragCustomMethod implements View.OnDragListener {
                 resetTargetViewBackground(view);
                 view.invalidate();
 
-                //todo
+
                 // Get dragged view object from drag event object.
                 View srcView = (View)dragEvent.getLocalState();
                 // Get dragged view's parent view group.
@@ -64,6 +70,10 @@ public class onDragCustomMethod implements View.OnDragListener {
 
                 RelativeLayout newParent = (RelativeLayout) view;
                 newParent.addView(srcView);
+
+                currentBoard.getPlayer1().setPawnPosition(findViewById(srcView),Integer.parseInt((String)newParent.getTag()));
+                currentBoard.setNumberOfMove(currentBoard.getNumberOfMove()+1);
+
                 return true;
 
 
@@ -85,7 +95,28 @@ public class onDragCustomMethod implements View.OnDragListener {
         return false;
 
     }
+    private int findViewById(View v){
+        String pawn = (String)v.getTag();
 
+        switch(pawn) {
+            case "red1":
+                return 1;
+            case "red2":
+                return 2;
+            case "red3":
+                return 3;
+            case "red4":
+                return 4;
+            case "red5":
+                return 5;
+            case "red6":
+                return 6;
+            default:
+                return 0;
+
+        }
+
+    }
     private void resetTargetViewBackground(View view)
     {
         // Clear color filter.

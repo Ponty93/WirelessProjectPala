@@ -8,7 +8,10 @@ public class Pawn {
     //default:1
     ImageView pawn = null;
     private final int pawnId;
-    private int position = -1;
+    private int position = 1; //position legengds:
+                                // 1 : Start
+                                // 31 : Finish
+                                // -1 : currently in a stack
     private int cap = 1 ;
 
     public Pawn(int id) {
@@ -25,5 +28,6 @@ public class Pawn {
     public int getPosition() {
         return position;
     }
+    public void setPosition(int pos){position = pos;}
 
 }

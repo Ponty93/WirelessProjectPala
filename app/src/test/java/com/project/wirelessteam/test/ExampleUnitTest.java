@@ -1,4 +1,4 @@
-package com.project.wirelessteam.Views;
+package com.project.wirelessteam.test;
 
 import org.junit.Test;
 

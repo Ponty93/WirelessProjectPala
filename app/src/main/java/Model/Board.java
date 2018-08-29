@@ -1,4 +1,11 @@
 package Model;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.concurrent.ExecutionException;
+
+import API.phpConnect;
 import Actors.Player;
 
 public class Board extends Game {
@@ -11,6 +18,7 @@ public class Board extends Game {
      */
     private int numberOfCell = 30;
     private int[] diceBuffer = new int[2];
+    private int numberOfMove = 0;
 
     /**
      * create a BoardActivity instance to begin the game
@@ -152,8 +160,62 @@ public class Board extends Game {
         return Integer.parseInt(getConnection().getParamFromJson("count"));
     }
 
+    public int getNumberOfMove(){
+        return numberOfMove;
+    }
 
+    public void setNumberOfMove(int val){
+        numberOfMove = val;
+    }
 
+    public void endTurn(){
+
+        boolean serverResponse = false;
+        try {
+            phpConnect myConn = new phpConnect("https://psionofficial.com/Wireless/handler.php", getIdGame());
+            myConn.execute("u", Integer.toString(getPlayer2().getUserId()), "change", "-1", "-1").get();
+        }catch(ExecutionException e){e.printStackTrace();}
+        catch(InterruptedException e){e.printStackTrace();}
+
+        if(serverResponse == true){
+            //todo calls pawns upload board
+        }
+
+    }
+
+    public JSONObject uploadBoard(){
+        JSONObject board = new JSONObject();
+        JSONArray player1 = new JSONArray();
+        JSONArray player2 = new JSONArray();
+
+        try {
+            board.put("gameId", getIdGame());
+            board.put("userNamePlayer1",getPlayer1().getUserName());
+            board.put("idPlayer1",getPlayer1().getUserId());
+            board.put("scorePlayer1",getPlayer1().getScore());
+            board.put("userNamePlayer2",getPlayer2().getUserName());
+            board.put("idPlayer2",getPlayer2().getUserId());
+            board.put("scorePlayer2",getPlayer2().getScore());
+
+            for (int i = 1; i < 7; i++) {
+                JSONObject player2Pawns = new JSONObject();
+                JSONObject player1Pawns = new JSONObject();
+                player1Pawns.put("idPawn"+i,i);
+                player1Pawns.put("pawnPosition",getPlayer1().getPawnbyId(i).getPosition());
+                player2Pawns.put("idPawn"+i,i);
+                player1.put(new JSONObject().put("pawn"+i,player1Pawns));
+                player2Pawns.put("pawnPosition",getPlayer2().getPawnbyId(i).getPosition());
+                player2.put(new JSONObject().put("pawn"+i,player2Pawns));
+            }
+
+            board.put("pawnsPlayer1",player1);
+            board.put("pawnsPlayer2",player2);
+
+            return board;
+        }catch(JSONException e){e.printStackTrace();}
+
+        return null;
+    }
 
 
 
