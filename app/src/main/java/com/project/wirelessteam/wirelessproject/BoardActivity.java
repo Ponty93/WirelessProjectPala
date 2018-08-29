@@ -100,6 +100,7 @@ public class BoardActivity extends AppCompatActivity {
                 }
                 else {
                     Log.d("ROUND","ITS FINALLY MY ROUND");
+                    Log.d("JSON","Json res"+connTimeout.getResJson());
                     roundOrganize(true);
                 }
                 internalTimer.cancel();
@@ -124,12 +125,12 @@ public class BoardActivity extends AppCompatActivity {
         //timer to schedule action
         if(round == true) {//if its my turn, at 2m calls endTurn
             internalTimer = new Timer();
-            internalTimer.schedule(new roundTimer(boardView), 120000);
+            internalTimer.schedule(new roundTimer(boardView),0, 120000);
             Log.d("internalTimer","starts my round timer");
         }
         else {//its not my turn, every 10s i ask the server if its my turn now
             internalTimer = new Timer();
-            internalTimer.schedule(new connectionTimeout(boardView),10000);
+            internalTimer.schedule(new connectionTimeout(boardView),0,10000);
             Log.d("internalTimer","starts NOT my round timer");
         }
 
