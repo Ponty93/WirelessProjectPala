@@ -1,8 +1,4 @@
-package GameLogic;
-import API.phpConnect;
-import java.util.HashMap;
-import Actors.Pawn;
-import GameLogic.Game;
+package Model;
 import Actors.Player;
 
 public class Board extends Game {

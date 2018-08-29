@@ -1,9 +1,6 @@
-package com.project.wirelessteam.wirelessproject;
+package com.project.wirelessteam.Views;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,8 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
 
 import API.phpConnect;

@@ -1,22 +1,16 @@
-package com.project.wirelessteam.wirelessproject;
+package com.project.wirelessteam.Views;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Rect;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.DragEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Timer;
@@ -25,10 +19,8 @@ import java.util.concurrent.ExecutionException;
 
 import Actors.Pawn;
 import Actors.Player;
-import GameLogic.Board;
-import GameLogic.Game;
+import Model.Board;
 import API.phpConnect;
-import Utils.onTouchCustomMethod;
 import Utils.onTouchCustomMethod;
 import Utils.onDragCustomMethod;
 

@@ -123,7 +123,7 @@
             android:layout_toEndOf="@+id/cell14L"
             android:background="#0000ff"
             >
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -131,7 +131,7 @@
                 >
 
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
             <ImageView
                 android:id="@+id/red1"
@@ -251,14 +251,14 @@
             android:layout_alignTop="@+id/cell1L"
             android:background="#00ff00"
             >
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="  1"
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -271,7 +271,7 @@
             android:layout_toEndOf="@+id/cell2L"
             android:background="#00ff00"
             >
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -279,7 +279,7 @@
 
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -292,7 +292,7 @@
             android:layout_alignTop="@id/cell3L"
             android:background="#00ff00"
             >
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -300,7 +300,7 @@
 
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -313,14 +313,14 @@
             android:layout_alignTop="@id/cell4L"
             android:background="#00ff00"
             >
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="  4"
 
                 >
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -334,7 +334,7 @@
             android:layout_alignTop="@id/cell5L"
             android:background="#00ff00"
             >
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -342,7 +342,7 @@
 
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -355,7 +355,7 @@
             android:layout_alignStart="@+id/cell6L"
             android:background="#00ff00"
             >
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell7"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -363,7 +363,7 @@
 
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -375,14 +375,14 @@
             android:layout_toStartOf="@+id/cell7L"
             android:layout_alignTop="@id/cell7L"
             >
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="  7"
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -395,14 +395,14 @@
             android:layout_alignTop="@id/cell7L"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell9"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 app:cellText="  8"
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -415,14 +415,14 @@
             android:layout_alignTop="@id/cell7L"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell10"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="  9"
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -435,14 +435,14 @@
             android:layout_alignTop="@id/cell7L"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell11"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="10"
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -455,14 +455,14 @@
             android:layout_alignTop="@id/cell7L"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell12"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="11"
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -475,13 +475,13 @@
             android:layout_toLeftOf="@+id/cell1L"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell13"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="12">
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -494,13 +494,13 @@
             android:layout_alignTop="@+id/cell2L"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell14"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="13">
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -513,13 +513,13 @@
             android:layout_alignParentLeft="true"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell15"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="14">
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -532,14 +532,14 @@
             android:layout_alignTop="@id/cell15L"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell16"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="15"
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -552,14 +552,14 @@
             android:layout_alignTop="@id/cell15L"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell17"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="16"
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -572,14 +572,14 @@
             android:layout_alignTop="@id/cell15L"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell18"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="17"
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -592,7 +592,7 @@
             android:layout_alignTop="@id/cell15L"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell19"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -600,7 +600,7 @@
 
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -614,14 +614,14 @@
             >
 
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell20"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="19"
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -634,14 +634,14 @@
             android:layout_alignTop="@id/cell15L"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell21"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="20"
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -654,14 +654,14 @@
             android:layout_alignTop="@id/cell15L"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell22"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="21"
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -674,13 +674,13 @@
             android:layout_toRightOf="@+id/cell6L"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell23"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="22">
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -693,13 +693,13 @@
             android:layout_toRightOf="@+id/cell6L"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell24"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="23">
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -712,13 +712,13 @@
             android:layout_toRightOf="@+id/cell6L"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell25"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="24">
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -731,13 +731,13 @@
             android:layout_toRightOf="@+id/cell5L"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell26"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="25">
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -750,13 +750,13 @@
             android:layout_toRightOf="@+id/cell4L"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell27"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="26">
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -768,14 +768,14 @@
             android:layout_toStartOf="@+id/cell27L"
             android:layout_alignTop="@+id/cell25L">
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell28"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="27"
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -788,14 +788,14 @@
             android:layout_alignTop="@+id/cell25L"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell29"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="28"
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -808,13 +808,13 @@
             android:layout_toLeftOf="@+id/cell29L"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell30"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="29">
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 
@@ -828,14 +828,14 @@
             android:background="#0000ff"
             >
 
-            <com.project.wirelessteam.wirelessproject.myClass
+            <Utils.myClass
                 android:id="@+id/cell31"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="END"
                 >
 
-            </com.project.wirelessteam.wirelessproject.myClass>
+            </Utils.myClass>
 
         </RelativeLayout>
 

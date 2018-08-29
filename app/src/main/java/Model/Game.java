@@ -1,7 +1,7 @@
-package GameLogic;
+package Model;
 import API.phpConnect;
 import Actors.Player;
-import java.util.UUID;
+
 /**
  * Models a game in which two players play
  */

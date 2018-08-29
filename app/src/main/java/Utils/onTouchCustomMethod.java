@@ -5,9 +5,6 @@ import android.content.Context;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
-import com.project.wirelessteam.wirelessproject.BoardActivity;
 
 public class onTouchCustomMethod implements View.OnTouchListener {
 

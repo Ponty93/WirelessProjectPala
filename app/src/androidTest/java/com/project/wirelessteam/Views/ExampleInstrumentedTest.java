@@ -1,4 +1,4 @@
-package com.project.wirelessteam.wirelessproject;
+package com.project.wirelessteam.Views;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

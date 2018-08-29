@@ -1,4 +1,4 @@
-package com.project.wirelessteam.wirelessproject;
+package com.project.wirelessteam.Views;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -7,10 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.project.wirelessteam.wirelessproject.david.Webb;
-import com.project.wirelessteam.wirelessproject.david.Request;
-import com.project.wirelessteam.wirelessproject.david.Response;
-import com.project.wirelessteam.wirelessproject.david.*;
+import com.project.wirelessteam.Views.david.Webb;
+import com.project.wirelessteam.Views.david.Request;
+import com.project.wirelessteam.Views.david.Response;
+import com.project.wirelessteam.Views.david.*;
 
 import org.json.JSONArray;
 import org.json.JSONException;
