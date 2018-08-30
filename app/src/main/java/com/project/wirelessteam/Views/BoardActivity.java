@@ -100,11 +100,16 @@ public class BoardActivity extends AppCompatActivity {
             connRes = getCurrentBoard().updateRound(connTimeout);
             Log.d("JSON","Json res"+connTimeout.getResJson());
             if(connRes == true){
-                if(!connTimeout.getParamFromJson("winner").equals("none")) {
+                Log.d("RECEIVER","CONNRES IS TRUE");
+                if(connTimeout.getParamFromJson("winner").equals("none") == false) {
+                    Log.d("RECEIVER","WINNER IS ID");
                    if (Integer.parseInt(connTimeout.getParamFromJson("winner")) == refBoard.getCurrentBoard().getPlayer1().getUserId()){
                        endGame(refBoard);
                         //todo display hai vinto
                     }
+                   else {
+                       //todo hai perso : avversario è arrivato con i 6 pawn al finish
+                   }
                 }
                 else {
                     Log.d("ROUND","ITS FINALLY MY ROUND");
