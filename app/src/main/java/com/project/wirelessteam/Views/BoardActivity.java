@@ -66,7 +66,14 @@ public class BoardActivity extends AppCompatActivity {
             if(connRes == true){
                 if(!connTimeout.getParamFromJson("winner").equals("none")) {
                    if (Integer.parseInt(connTimeout.getParamFromJson("winner")) == ref.getCurrentBoard().getPlayer1().getUserId()){
-                        ref.finish();
+                       internalTimer.cancel();
+                       Intent intent = new Intent(ref,
+                               setupPage.class);
+                       intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                               | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+                       startActivity(intent);
+                       ref.finish();
                         //todo display hai vinto
                     }
                 }
@@ -319,10 +326,18 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     public void surrenderButton(View view){
-        if(currentBoard.surrender()) {
+            currentBoard.surrender();
             //invoco haiPerso
-            onBackPressed();
-        }
+            internalTimer.cancel();
+            Intent intent = new Intent(this,
+                    setupPage.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+            startActivity(intent);
+            finish();
+
+
 
     }
 
@@ -341,12 +356,6 @@ public class BoardActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this,
-                setupPage.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
-        finish();
 
     }
 }
