@@ -47,6 +47,50 @@ public class BoardActivity extends AppCompatActivity {
     }
 
 
+    protected class roundTimeout extends TimerTask {
+        private int counter = 0;
+        private BoardActivity refBoard;
+
+        roundTimeout(BoardActivity board) {
+            refBoard = board;
+        }
+
+        public void run() {
+            if(counter == 240){
+                internalTimer.cancel();
+                Intent intent = new Intent(refBoard,
+                        setupPage.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+                startActivity(intent);
+                refBoard.finish();
+            }
+
+
+            counter++;
+            Log.d("roundTimeout", "round timeout occurred");
+            boolean connRes = false;
+            phpConnect connTimeout = new phpConnect("https://psionofficial.com/Wireless/handler.php", currentBoard.getIdGame());
+            connRes = getCurrentBoard().updateRound(connTimeout);
+            Log.d("JSON", "Json res" + connTimeout.getResJson());
+            if (connRes == true) {
+                if (!connTimeout.getParamFromJson("winner").equals("none")) {
+                    if (Integer.parseInt(connTimeout.getParamFromJson("winner")) == refBoard.getCurrentBoard().getPlayer1().getUserId()) {
+                        internalTimer.cancel();
+                        Intent intent = new Intent(refBoard,
+                                setupPage.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+                        startActivity(intent);
+                        refBoard.finish();
+                        //todo display hai vinto
+                    }
+                }
+            }
+        }
+    }
     /**
      * class to model a connectionTimeout task
      */
@@ -63,6 +107,7 @@ public class BoardActivity extends AppCompatActivity {
             boolean connRes = false;
             phpConnect connTimeout = new phpConnect("https://psionofficial.com/Wireless/handler.php", currentBoard.getIdGame());
             connRes = getCurrentBoard().updateRound(connTimeout);
+            Log.d("JSON","Json res"+connTimeout.getResJson());
             if(connRes == true){
                 if(!connTimeout.getParamFromJson("winner").equals("none")) {
                    if (Integer.parseInt(connTimeout.getParamFromJson("winner")) == ref.getCurrentBoard().getPlayer1().getUserId()){
@@ -89,9 +134,9 @@ public class BoardActivity extends AppCompatActivity {
                             roundOrganize(true);
                         }
                     });
-
+                    internalTimer.cancel();
                 }
-                internalTimer.cancel();
+
             }
         }
     }
@@ -122,19 +167,7 @@ public class BoardActivity extends AppCompatActivity {
         //timer to schedule action
         if(round == true) {//if its my turn, at 2m calls endTurn
             internalTimer = new Timer();
-            internalTimer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            currentBoard.endTurn();
-                        }
-                    });
-                    internalTimer.cancel();
-                }
-            }, 120000);
-
+            internalTimer.schedule(new roundTimeout(boardView), 0,5000);
             Log.d("internalTimer","starts my round timer");
         }
         else {//its not my turn, every 10s i ask the server if its my turn now
