@@ -75,11 +75,13 @@ public class lobby extends AppCompatActivity {
         int gameId = 0;
         int roundPlayerId = -1;
         phpConnect myConn = null;
+
         try {
              myConn = new phpConnect("https://psionofficial.com/Wireless/handler.php", -1);
              aux = myConn.execute("r", "GAME","-1","gameId", lobbyIntent.getStringExtra("idPlayer")).get();
         }catch(InterruptedException e){e.printStackTrace();}
         catch(ExecutionException e){e.printStackTrace();}
+
         if(aux == true) {
             gameId = Integer.parseInt(myConn.getParamFromJson("gameId"));
             roundPlayerId = Integer.parseInt(myConn.getParamFromJson("filetto"));
@@ -98,6 +100,7 @@ public class lobby extends AppCompatActivity {
         toBoard.putExtra("roundPlayerId",roundPlayerId);
         //put extraInt the id of the game object created
         startActivity(toBoard);
+        finish();
     }
 
     public void lobbyChecker() {

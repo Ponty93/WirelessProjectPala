@@ -321,7 +321,7 @@ public class BoardActivity extends AppCompatActivity {
     public void surrenderButton(View view){
         if(currentBoard.surrender()) {
             //invoco haiPerso
-            super.finish();
+            onBackPressed();
         }
 
     }
@@ -337,5 +337,16 @@ public class BoardActivity extends AppCompatActivity {
 
     public RelativeLayout getRefLayout() {
         return refLayout;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,
+                setupPage.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        finish();
+
     }
 }
