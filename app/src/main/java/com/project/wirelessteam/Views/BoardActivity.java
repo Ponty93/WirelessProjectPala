@@ -109,7 +109,7 @@ public class BoardActivity extends AppCompatActivity {
                 else {
                     Log.d("ROUND","ITS FINALLY MY ROUND");
                     //Log.d("JSON","Json res"+connTimeout.getResJson());
-
+                    refBoard.getInternalTimer().cancel();
                     //it permits to call the UI thread to exec the Views operation
                     //timer runs on a different thread, so it does not have access to modify views
                     runOnUiThread(new Runnable() {
@@ -118,7 +118,7 @@ public class BoardActivity extends AppCompatActivity {
                             roundOrganize(true);
                         }
                     });
-                    refBoard.getInternalTimer().cancel();
+
                 }
 
             }
@@ -151,10 +151,12 @@ public class BoardActivity extends AppCompatActivity {
         //timer to schedule action
         if(round == true) {//if its my turn, at 2m calls endTurn
             Log.d("internalTimer","starts my round timer");
+            internalTimer = new Timer();
             internalTimer.scheduleAtFixedRate(new roundTimeout(boardView), 0,5000);
         }
         else {//its not my turn, every 10s i ask the server if its my turn now
             Log.d("internalTimer","starts NOT my round timer");
+            internalTimer = new Timer();
             internalTimer.scheduleAtFixedRate(new connectionTimeout(boardView),0,5000);
         }
 
@@ -203,8 +205,7 @@ public class BoardActivity extends AppCompatActivity {
             refLayout = (RelativeLayout) findViewById(R.id.rel1);
         }
 
-        if(internalTimer == null)
-            internalTimer = new Timer();
+
         //sets the order of player rounds
         int roundId = buildBoard.getIntExtra("roundPlayerId",0);
         //abilitate to move the pawns
