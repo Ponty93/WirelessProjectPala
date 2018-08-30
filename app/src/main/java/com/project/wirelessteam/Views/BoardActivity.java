@@ -61,7 +61,7 @@ public class BoardActivity extends AppCompatActivity {
         public void run() {
             Log.d("ConnectionTimeout","Connection timeout occurred");
             boolean connRes = false;
-            phpConnect connTimeout = null;
+            phpConnect connTimeout = new phpConnect("https://psionofficial.com/Wireless/handler.php", currentBoard.getIdGame());
             connRes = getCurrentBoard().updateRound(connTimeout);
             if(connRes == true){
                 if(!connTimeout.getParamFromJson("winner").equals("none")) {

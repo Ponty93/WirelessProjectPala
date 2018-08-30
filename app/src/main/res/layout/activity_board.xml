@@ -159,8 +159,9 @@
         android:id="@+id/surr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Surrender"
-        android:layout_below="@+id/scorePL"/>
+        android:layout_below="@+id/scorePL"
+        android:onClick="surrenderButton"
+        android:text="Surrender" />
 
     <Button
         android:id="@+id/roll"

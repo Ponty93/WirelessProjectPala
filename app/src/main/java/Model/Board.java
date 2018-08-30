@@ -201,7 +201,6 @@ public class Board extends Game {
 
     public boolean updateRound(phpConnect connTimeout){
         try {
-            connTimeout = new phpConnect("https://psionofficial.com/Wireless/handler.php", getIdGame());
             return connTimeout.execute("r", "GAME", Integer.toString(getPlayer1().getUserId()), "round", "-1").get();
         }catch(InterruptedException e ){e.printStackTrace();}
         catch(ExecutionException e ){e.printStackTrace();}
