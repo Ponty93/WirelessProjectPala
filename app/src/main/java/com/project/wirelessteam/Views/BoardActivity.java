@@ -65,9 +65,10 @@ public class BoardActivity extends AppCompatActivity {
             connRes = getCurrentBoard().updateRound(connTimeout);
             if(connRes == true){
                 if(!connTimeout.getParamFromJson("winner").equals("none")) {
-                   /* if (Integer.parseInt(connTimeout.getParamFromJson("winner")) == ref.getCurrentBoard().getPlayer1().getUserId()) {
-                        //winner
-                    }*/
+                   if (Integer.parseInt(connTimeout.getParamFromJson("winner")) == ref.getCurrentBoard().getPlayer1().getUserId()){
+                        ref.finish();
+                        //todo display hai vinto
+                    }
                 }
                 else {
                     Log.d("ROUND","ITS FINALLY MY ROUND");
@@ -318,13 +319,17 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     public void surrenderButton(View view){
-        //invoco haiPerso
-        //todo
+        if(currentBoard.surrender()) {
+            //invoco haiPerso
+            super.finish();
+        }
 
     }
 
-    //todo haiVinto e haiPerso method
+    //todo haiVinto e haiPerso method Views
     //todo update board
+
+
 
     public Board getCurrentBoard() {
         return currentBoard;

@@ -212,7 +212,7 @@ public final class phpConnect extends AsyncTask<String, Void,Boolean>{
                                     .param("gameId", gameId)
                                     .param("op", idOperation)
                                     .param("playerId", playerId)
-                                    .param("endTurn", attrToQuery)
+                                    .param(attrToQuery, attrToQuery)
                                     .ensureSuccess()
                                     .asJsonObject()
                                     .getBody();
