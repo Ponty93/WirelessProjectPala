@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Timer;
@@ -30,7 +31,8 @@ public class BoardActivity extends AppCompatActivity {
     private Context context = null;
     private RelativeLayout refLayout=null;
     private final BoardActivity boardView = this;
-    private Timer internalTimer;
+    private Timer internalTimer = null;
+
 
 
     @Override
@@ -55,11 +57,12 @@ public class BoardActivity extends AppCompatActivity {
             refBoard = board;
         }
 
+        @Override
         public void run() {
 
             counter++;
 
-            if(counter == 240){
+            if(counter == 24){
                 endGame(refBoard);
             }
             Log.d("COUNTER END ROUND","COUNTER IS:"+counter);
@@ -89,6 +92,7 @@ public class BoardActivity extends AppCompatActivity {
             refBoard = board;
         }
 
+        @Override
         public void run() {
             Log.d("ConnectionTimeout","Connection timeout occurred");
             boolean connRes = false;
@@ -114,7 +118,7 @@ public class BoardActivity extends AppCompatActivity {
                             roundOrganize(true);
                         }
                     });
-                    internalTimer.cancel();
+                    refBoard.getInternalTimer().cancel();
                 }
 
             }
@@ -146,14 +150,12 @@ public class BoardActivity extends AppCompatActivity {
 
         //timer to schedule action
         if(round == true) {//if its my turn, at 2m calls endTurn
-            internalTimer = new Timer();
-            internalTimer.schedule(new roundTimeout(boardView), 0,5000);
             Log.d("internalTimer","starts my round timer");
+            internalTimer.scheduleAtFixedRate(new roundTimeout(boardView), 0,5000);
         }
         else {//its not my turn, every 10s i ask the server if its my turn now
-            internalTimer = new Timer();
-            internalTimer.schedule(new connectionTimeout(boardView),0,5000);
             Log.d("internalTimer","starts NOT my round timer");
+            internalTimer.scheduleAtFixedRate(new connectionTimeout(boardView),0,5000);
         }
 
 
@@ -201,7 +203,8 @@ public class BoardActivity extends AppCompatActivity {
             refLayout = (RelativeLayout) findViewById(R.id.rel1);
         }
 
-
+        if(internalTimer == null)
+            internalTimer = new Timer();
         //sets the order of player rounds
         int roundId = buildBoard.getIntExtra("roundPlayerId",0);
         //abilitate to move the pawns
@@ -334,6 +337,7 @@ public class BoardActivity extends AppCompatActivity {
 
     public void buttonEndTurn(View view){
         currentBoard.endTurn();
+        internalTimer.cancel();
         roundOrganize(false);
         //Log.d("JSON IS0","JSON:"+currentBoard.uploadBoard());
     }
@@ -342,7 +346,6 @@ public class BoardActivity extends AppCompatActivity {
             currentBoard.surrender();
             //invoco haiPerso
             endGame(boardView);
-
 
 
     }
@@ -360,12 +363,16 @@ public class BoardActivity extends AppCompatActivity {
         return refLayout;
     }
 
+    public Timer getInternalTimer() {
+        return internalTimer;
+    }
+
     @Override
     public void onBackPressed() {//the button do nothing
     }
 
     private void endGame(BoardActivity ref){
-        internalTimer.cancel();
+        ref.getInternalTimer().cancel();
         Intent intent = new Intent(ref,
                 setupPage.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
