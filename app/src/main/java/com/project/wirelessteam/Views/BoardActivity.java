@@ -312,9 +312,9 @@ public class BoardActivity extends AppCompatActivity {
 
 
     public void buttonEndTurn(View view){
-        //currentBoard.endTurn();
-        //roundOrganize(false);
-        Log.d("JSON IS0","JSON:"+currentBoard.uploadBoard());
+        currentBoard.endTurn();
+        roundOrganize(false);
+        //Log.d("JSON IS0","JSON:"+currentBoard.uploadBoard());
     }
 
     public void surrenderButton(View view){
