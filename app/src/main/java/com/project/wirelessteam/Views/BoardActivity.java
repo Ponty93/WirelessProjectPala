@@ -56,19 +56,13 @@ public class BoardActivity extends AppCompatActivity {
         }
 
         public void run() {
-            if(counter == 240){
-                internalTimer.cancel();
-                Intent intent = new Intent(refBoard,
-                        setupPage.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-                startActivity(intent);
-                refBoard.finish();
-            }
-
 
             counter++;
+
+            if(counter == 240){
+                endGame(refBoard);
+            }
+            Log.d("COUNTER END ROUND","COUNTER IS:"+counter);
             Log.d("roundTimeout", "round timeout occurred");
             boolean connRes = false;
             phpConnect connTimeout = new phpConnect("https://psionofficial.com/Wireless/handler.php", currentBoard.getIdGame());
@@ -77,14 +71,7 @@ public class BoardActivity extends AppCompatActivity {
             if (connRes == true) {
                 if (!connTimeout.getParamFromJson("winner").equals("none")) {
                     if (Integer.parseInt(connTimeout.getParamFromJson("winner")) == refBoard.getCurrentBoard().getPlayer1().getUserId()) {
-                        internalTimer.cancel();
-                        Intent intent = new Intent(refBoard,
-                                setupPage.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-                        startActivity(intent);
-                        refBoard.finish();
+                        endGame(refBoard);
                         //todo display hai vinto
                     }
                 }
@@ -97,9 +84,9 @@ public class BoardActivity extends AppCompatActivity {
     //class created only when its not my round
     protected class connectionTimeout extends TimerTask {
 
-        private BoardActivity ref;
+        private BoardActivity refBoard;
         public connectionTimeout(BoardActivity board){
-            ref = board;
+            refBoard = board;
         }
 
         public void run() {
@@ -110,15 +97,8 @@ public class BoardActivity extends AppCompatActivity {
             Log.d("JSON","Json res"+connTimeout.getResJson());
             if(connRes == true){
                 if(!connTimeout.getParamFromJson("winner").equals("none")) {
-                   if (Integer.parseInt(connTimeout.getParamFromJson("winner")) == ref.getCurrentBoard().getPlayer1().getUserId()){
-                       internalTimer.cancel();
-                       Intent intent = new Intent(ref,
-                               setupPage.class);
-                       intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                               | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-                       startActivity(intent);
-                       ref.finish();
+                   if (Integer.parseInt(connTimeout.getParamFromJson("winner")) == refBoard.getCurrentBoard().getPlayer1().getUserId()){
+                       endGame(refBoard);
                         //todo display hai vinto
                     }
                 }
@@ -361,14 +341,7 @@ public class BoardActivity extends AppCompatActivity {
     public void surrenderButton(View view){
             currentBoard.surrender();
             //invoco haiPerso
-            internalTimer.cancel();
-            Intent intent = new Intent(this,
-                    setupPage.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-            startActivity(intent);
-            finish();
+            endGame(boardView);
 
 
 
@@ -388,7 +361,17 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed() {//the button do nothing
+    }
 
+    private void endGame(BoardActivity ref){
+        internalTimer.cancel();
+        Intent intent = new Intent(ref,
+                setupPage.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+        startActivity(intent);
+        ref.finish();
     }
 }
