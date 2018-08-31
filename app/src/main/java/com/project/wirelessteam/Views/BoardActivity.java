@@ -48,8 +48,15 @@ public class BoardActivity extends AppCompatActivity {
         //initialize the boards view feature
         init(buildBoard);
         //todo send a req to reload the data if any
+
     }
 
+    public Timer getTimerInstance(){
+        if(internalTimer == null)
+            internalTimer = new Timer();
+
+        return internalTimer;
+    }
 
     protected class roundTimeout extends TimerTask {
         private int counter = 0;
@@ -65,20 +72,21 @@ public class BoardActivity extends AppCompatActivity {
             counter++;
 
             if(counter == 24){
-                endGame(refBoard);
+                //endGame(refBoard);
             }
+
             Log.d("COUNTER END ROUND","COUNTER IS:"+counter);
-            Log.d("roundTimeout", "round timeout occurred");
+            //Log.d("roundTimeout", "round timeout occurred");
             boolean connRes = false;
             phpConnect connTimeout = new phpConnect("https://psionofficial.com/Wireless/handler.php", currentBoard.getIdGame());
             connRes = getCurrentBoard().updateRound(connTimeout);
             Log.d("JSON", "Json res" + connTimeout.getResJson());
             if (connRes == true) {
                 if (connTimeout.getParamFromJson("winner").equals("none") == false) {
-                    if (Integer.parseInt(connTimeout.getParamFromJson("winner")) == refBoard.getCurrentBoard().getPlayer1().getUserId()) {
-                        endGame(refBoard);
+                    /*if (Integer.parseInt(connTimeout.getParamFromJson("winner")) == currentBoard.getPlayer1().getUserId()) {
+                        //endGame(refBoard);
                         //todo display hai vinto
-                    }
+                    }*/
                 }
             }
         }
@@ -88,7 +96,7 @@ public class BoardActivity extends AppCompatActivity {
      */
     //class created only when its not my round
     protected class connectionTimeout extends TimerTask {
-
+        private int counter = 0;
         private BoardActivity refBoard;
         public connectionTimeout(BoardActivity board){
             refBoard = board;
@@ -96,7 +104,8 @@ public class BoardActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-            Log.d("ConnectionTimeout","Connection timeout occurred");
+            counter ++;
+            Log.d("ConnectionTimeout","Connection timeout occurred"+counter);
             boolean connRes = false;
             phpConnect connTimeout = new phpConnect("https://psionofficial.com/Wireless/handler.php", currentBoard.getIdGame());
             connRes = getCurrentBoard().updateRound(connTimeout);
@@ -116,7 +125,8 @@ public class BoardActivity extends AppCompatActivity {
                 else {
                     Log.d("ROUND","ITS FINALLY MY ROUND");
                     //Log.d("JSON","Json res"+connTimeout.getResJson());
-                    refBoard.getInternalTimer().cancel();
+                    refBoard.getTimerInstance().cancel();
+                    refBoard.internalTimer = null;
                     //it permits to call the UI thread to exec the Views operation
                     //timer runs on a different thread, so it does not have access to modify views
                     runOnUiThread(new Runnable() {
@@ -160,16 +170,15 @@ public class BoardActivity extends AppCompatActivity {
             ((TextView)findViewById(R.id.scoreAvv)).setText(Integer.toString(getCurrentBoard().getPlayer2().getScore()));
         }
 
-                //timer to schedule action
+
+        //timer to schedule action
         if(round == true) {//if its my turn, at 2m calls endTurn
             Log.d("internalTimer","starts my round timer");
-            internalTimer = new Timer();
-            internalTimer.scheduleAtFixedRate(new roundTimeout(boardView), 0,5000);
+            getTimerInstance().schedule(new roundTimeout(boardView),0,5000);
         }
-        else {//its not my turn, every 10s i ask the server if its my turn now
+        else if(round == false){//its not my turn, every 10s i ask the server if its my turn now
             Log.d("internalTimer","starts NOT my round timer");
-            internalTimer = new Timer();
-            internalTimer.scheduleAtFixedRate(new connectionTimeout(boardView),0,5000);
+            getTimerInstance().schedule(new connectionTimeout(boardView),0,5000);
         }
 
 
@@ -216,6 +225,8 @@ public class BoardActivity extends AppCompatActivity {
         if(refLayout == null){
             refLayout = (RelativeLayout) findViewById(R.id.rel1);
         }
+
+
 
 
         //sets the order of player rounds
@@ -350,7 +361,8 @@ public class BoardActivity extends AppCompatActivity {
 
     public void buttonEndTurn(View view){
         currentBoard.endTurn();
-        internalTimer.cancel();
+        getTimerInstance().cancel();
+        internalTimer = null;
         roundOrganize(false);
         //Log.d("JSON IS0","JSON:"+currentBoard.uploadBoard());
     }
@@ -366,6 +378,7 @@ public class BoardActivity extends AppCompatActivity {
         getCurrentBoard().roll();
         ImageView roll1 = (ImageView) findViewById(R.id.diceRes1);
         ImageView roll2 = (ImageView) findViewById(R.id.diceRes2);
+        Log.d("DICE RESULT","RES 1"+getCurrentBoard().getDiceRes(0)+"RES 2"+getCurrentBoard().getDiceRes(1));
 
 
     }
@@ -389,16 +402,13 @@ public class BoardActivity extends AppCompatActivity {
         return refLayout;
     }
 
-    public Timer getInternalTimer() {
-        return internalTimer;
-    }
 
     @Override
     public void onBackPressed() {//the button do nothing
     }
 
     private void endGame(BoardActivity ref){
-        ref.getInternalTimer().cancel();
+        ref.getTimerInstance().cancel();
         Intent intent = new Intent(ref,
                 setupPage.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
