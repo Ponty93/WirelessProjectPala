@@ -40,7 +40,8 @@
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
         android:contentDescription="dado1"
-        app:srcCompat="@color/colorAccent" />
+        app:srcCompat="@drawable/dadonum1"
+         />
 
     <TextView
         android:id="@+id/idAvv"
