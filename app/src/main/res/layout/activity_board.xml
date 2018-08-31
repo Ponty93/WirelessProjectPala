@@ -19,20 +19,22 @@
 
     <ImageView
         android:id="@+id/diceRes1"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignTop="@+id/diceRes2"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
         android:layout_toLeftOf="@+id/invisibleCenter"
         android:layout_toStartOf="@+id/invisibleCenter"
         android:contentDescription="dado2"
-        app:srcCompat="@color/colorAccent" />
+        app:srcCompat="@drawable/dadonum2"
+        android:background="@drawable/customborder"
+        />
 
     <ImageView
         android:id="@+id/diceRes2"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="50dp"
         android:layout_toEndOf="@+id/invisibleCenter"
@@ -40,6 +42,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
         android:contentDescription="dado1"
+        android:background="@drawable/customborder"
         app:srcCompat="@drawable/dadonum1"
          />
 
@@ -154,7 +157,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:onClick="buttonEndTurn"
-        android:text="End Turn" />
+        android:text="End Turn"
+        />
 
     <Button
         android:id="@+id/surr"
@@ -162,7 +166,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/scorePL"
         android:onClick="surrenderButton"
-        android:text="Surrender" />
+        android:text="Concede" />
 
     <Button
         android:id="@+id/roll"
