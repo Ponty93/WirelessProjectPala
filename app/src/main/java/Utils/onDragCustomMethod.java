@@ -80,7 +80,7 @@ public class onDragCustomMethod implements View.OnDragListener {
 
                 RelativeLayout newParent = (RelativeLayout) view;
                 newParent.addView(srcView);
-
+                ((myClass)((RelativeLayout) view).getChildAt(0)).setCellColor(Color.BLACK);
                 int cellNumber = Integer.parseInt((String)newParent.getTag());
                 if(cellNumber >6 && cellNumber !=30)
                     setPawnPositionInCell(srcView,newParent);
@@ -91,8 +91,7 @@ public class onDragCustomMethod implements View.OnDragListener {
 
 
             case DragEvent.ACTION_DRAG_ENDED:
-                view.setBackgroundColor(Color.WHITE);
-                view.invalidate();
+                ((myClass)((RelativeLayout) view).getChildAt(0)).setCellColor(Color.BLACK);
                 if(dragEvent.getResult())
                     Toast.makeText(cont,"The drop was handled",Toast.LENGTH_LONG);
                 else

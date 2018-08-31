@@ -153,6 +153,7 @@ public class BoardActivity extends AppCompatActivity {
         // sets to 0 the number of move in this round
         // sets the foe score
         if(round == true) {
+            currentBoard.setDiceResToNull();
             currentBoard.setNumberOfMove(0);
             getCurrentBoard().setCounter(getCurrentBoard().getRoundsCounter() + 1);
             ((TextView)findViewById(R.id.roundNumber)).setText(getCurrentBoard().getRoundsCounter());

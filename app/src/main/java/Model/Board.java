@@ -227,7 +227,10 @@ public class Board extends Game {
         return diceBuffer[index];
     }
 
-
+    public void setDiceResToNull(){
+        diceBuffer[0]=0;
+        diceBuffer[1]=0;
+    }
 
 
 
