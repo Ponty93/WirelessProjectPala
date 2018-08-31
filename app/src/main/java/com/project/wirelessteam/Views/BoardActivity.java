@@ -157,7 +157,7 @@ public class BoardActivity extends AppCompatActivity {
             currentBoard.setNumberOfMove(0);
             getCurrentBoard().setCounter(getCurrentBoard().getRoundsCounter() + 1);
             ((TextView)findViewById(R.id.roundNumber)).setText(Integer.toString(getCurrentBoard().getRoundsCounter()));
-            ((TextView)findViewById(R.id.scoreAvv)).setText(getCurrentBoard().getPlayer2().getScore());
+            ((TextView)findViewById(R.id.scoreAvv)).setText(Integer.toString(getCurrentBoard().getPlayer2().getScore()));
         }
 
                 //timer to schedule action
