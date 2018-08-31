@@ -26,7 +26,9 @@ public class login extends AppCompatActivity {
     public void sendLogin(View view) {
         conn = new phpConnect("https://psionofficial.com/Wireless/login.php",-1);
         String Pass= ((TextView)findViewById(R.id.editText4)).getText().toString();
+        Pass = Pass.replaceAll("\\s","");
         String Name= ((TextView)findViewById(R.id.editText)).getText().toString();
+        Name = Name.replaceAll("\\s","");
         boolean aux= false;
 
         try {

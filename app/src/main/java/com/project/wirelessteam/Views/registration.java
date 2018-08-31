@@ -38,7 +38,9 @@ public class registration extends AppCompatActivity {
 
         if(checkInput(editName,editPass)){
             String pass= ((TextView)findViewById(R.id.editText3)).getText().toString();
+            pass = pass.replaceAll("\\s","");
             String name= ((TextView)findViewById(R.id.editText2)).getText().toString();
+            name = name.replaceAll("\\s","");
             phpConnect conn = new phpConnect("https://www.psionofficial.com/Wireless/register.php",-1);
             boolean aux = false;
 

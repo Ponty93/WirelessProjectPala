@@ -142,12 +142,12 @@
         android:layout_centerHorizontal="true"/>
 
     <TextView
-        android:id="@+id/roundnumber"
+        android:id="@+id/roundNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/roundtext"
-        android:text="0"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:text="0" />
 
     <Button
         android:id="@+id/endTurn"
