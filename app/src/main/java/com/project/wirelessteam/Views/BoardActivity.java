@@ -74,7 +74,7 @@ public class BoardActivity extends AppCompatActivity {
             connRes = getCurrentBoard().updateRound(connTimeout);
             Log.d("JSON", "Json res" + connTimeout.getResJson());
             if (connRes == true) {
-                if (!connTimeout.getParamFromJson("winner").equals("none")) {
+                if (connTimeout.getParamFromJson("winner").equals("none") == false) {
                     if (Integer.parseInt(connTimeout.getParamFromJson("winner")) == refBoard.getCurrentBoard().getPlayer1().getUserId()) {
                         endGame(refBoard);
                         //todo display hai vinto
