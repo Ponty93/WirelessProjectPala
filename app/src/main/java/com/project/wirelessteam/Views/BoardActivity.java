@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -149,12 +150,16 @@ public class BoardActivity extends AppCompatActivity {
         //display a message "waiting for foe to finish his turn.."
 
         //increments the players rounds
+        // sets to 0 the number of move in this round
+        // sets the foe score
         if(round == true) {
             currentBoard.setNumberOfMove(0);
             getCurrentBoard().setCounter(getCurrentBoard().getRoundsCounter() + 1);
+            ((TextView)findViewById(R.id.roundNumber)).setText(getCurrentBoard().getRoundsCounter());
+            ((TextView)findViewById(R.id.scoreAvv)).setText(getCurrentBoard().getPlayer2().getScore());
         }
 
-        //timer to schedule action
+                //timer to schedule action
         if(round == true) {//if its my turn, at 2m calls endTurn
             Log.d("internalTimer","starts my round timer");
             internalTimer = new Timer();
@@ -361,8 +366,15 @@ public class BoardActivity extends AppCompatActivity {
         ImageView roll1 = (ImageView) findViewById(R.id.diceRes1);
         ImageView roll2 = (ImageView) findViewById(R.id.diceRes2);
 
+
     }
 
+   /* private Drawable getImageViewByResult(int res){
+        switch(res){
+            case 1:
+                return getResources().getDrawable(R.)
+        }
+    }*/
     //todo haiVinto e haiPerso method Views
     //todo update board
 
