@@ -156,7 +156,7 @@ public class BoardActivity extends AppCompatActivity {
             currentBoard.setDiceResToNull();
             currentBoard.setNumberOfMove(0);
             getCurrentBoard().setCounter(getCurrentBoard().getRoundsCounter() + 1);
-            ((TextView)findViewById(R.id.roundNumber)).setText(getCurrentBoard().getRoundsCounter());
+            ((TextView)findViewById(R.id.roundNumber)).setText(Integer.toString(getCurrentBoard().getRoundsCounter()));
             ((TextView)findViewById(R.id.scoreAvv)).setText(getCurrentBoard().getPlayer2().getScore());
         }
 
