@@ -15,15 +15,16 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.project.wirelessteam.Views.BoardActivity;
+import com.project.wirelessteam.Views.R;
 
 import Model.Board;
 
 public class onDragCustomMethod implements View.OnDragListener {
-    private Context cont = null;
+    private BoardActivity refActivity;
     private Board currentBoard;
-    public onDragCustomMethod(Context con, Board boardRef)
+    public onDragCustomMethod(BoardActivity boardAct, Board boardRef)
     {
-        cont = con;
+        refActivity = boardAct;
         currentBoard = boardRef;
     }
 
@@ -66,7 +67,7 @@ public class onDragCustomMethod implements View.OnDragListener {
                 ClipData data = dragEvent.getClipData();
                 ClipData.Item item = data.getItemAt(0);
                 String itemText = item.getText().toString();
-                Toast.makeText(cont,"Dragged data is"+ itemText,Toast.LENGTH_LONG).show();
+                Toast.makeText(refActivity,"Dragged data is"+ itemText,Toast.LENGTH_LONG).show();
                 resetTargetViewBackground(view);
                 view.invalidate();
 
@@ -85,7 +86,7 @@ public class onDragCustomMethod implements View.OnDragListener {
                 if(cellNumber >6 && cellNumber !=30)
                     setPawnPositionInCell(srcView,newParent);
 
-                currentBoard.getPlayer1().setPawnPosition(findViewById(srcView),Integer.parseInt((String)newParent.getTag()));
+                currentBoard.getPlayer1().setPawnPosition(findViewByTag(srcView),Integer.parseInt((String)newParent.getTag()));
                 currentBoard.setNumberOfMove(currentBoard.getNumberOfMove()+1);
                 return true;
 
@@ -93,9 +94,9 @@ public class onDragCustomMethod implements View.OnDragListener {
             case DragEvent.ACTION_DRAG_ENDED:
                 ((myClass)((RelativeLayout) view).getChildAt(0)).setCellColor(Color.BLACK);
                 if(dragEvent.getResult())
-                    Toast.makeText(cont,"The drop was handled",Toast.LENGTH_LONG);
+                    Toast.makeText(refActivity,"The drop was handled",Toast.LENGTH_LONG);
                 else
-                    Toast.makeText(cont,"The drop was not handled",Toast.LENGTH_LONG);
+                    Toast.makeText(refActivity,"The drop was not handled",Toast.LENGTH_LONG);
 
                 return true;
 
@@ -107,7 +108,7 @@ public class onDragCustomMethod implements View.OnDragListener {
         return false;
 
     }
-    private int findViewById(View v){
+    private int findViewByTag(View v){
         String pawn = (String)v.getTag();
 
         switch(pawn) {
@@ -135,67 +136,67 @@ public class onDragCustomMethod implements View.OnDragListener {
 
         switch(v) {
             case 0:
-                return (RelativeLayout)findViewById(R.id.cell1L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell1L);
             case 1:
-                return (RelativeLayout)findViewById(R.id.cell2L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell2L);
             case 2:
-                return (RelativeLayout)findViewById(R.id.cell3L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell3L);
             case 3:
-                return (RelativeLayout)findViewById(R.id.cell4L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell4L);
             case 4:
-                return (RelativeLayout)findViewById(R.id.cell5L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell5L);
             case 5:
-                return (RelativeLayout)findViewById(R.id.cell6L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell6L);
             case 6:
-                return (RelativeLayout)findViewById(R.id.cell7L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell7L);
             case 7:
-                return (RelativeLayout)findViewById(R.id.cell8L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell8L);
             case 8:
-                return (RelativeLayout)findViewById(R.id.cell9L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell9L);
             case 9:
-                return (RelativeLayout)findViewById(R.id.cell10L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell10L);
             case 10:
-                return (RelativeLayout)findViewById(R.id.cell11L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell11L);
             case 11:
-                return (RelativeLayout)findViewById(R.id.cell12L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell12L);
             case 12:
-                return (RelativeLayout)findViewById(R.id.cell13L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell13L);
             case 13:
-                return (RelativeLayout)findViewById(R.id.cell14L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell14L);
             case 14:
-                return (RelativeLayout)findViewById(R.id.cell15L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell15L);
             case 15:
-                return (RelativeLayout)findViewById(R.id.cell16L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell16L);
             case 16:
-                return (RelativeLayout)findViewById(R.id.cell17L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell17L);
             case 17:
-                return (RelativeLayout)findViewById(R.id.cell18L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell18L);
             case 18:
-                return (RelativeLayout)findViewById(R.id.cell19L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell19L);
             case 19:
-                return (RelativeLayout)findViewById(R.id.cell20L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell20L);
             case 20:
-                return (RelativeLayout)findViewById(R.id.cell21L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell21L);
             case 21:
-                return (RelativeLayout)findViewById(R.id.cell22L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell22L);
             case 22:
-                return (RelativeLayout)findViewById(R.id.cell23L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell23L);
             case 23:
-                return (RelativeLayout)findViewById(R.id.cell24L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell24L);
             case 24:
-                return (RelativeLayout)findViewById(R.id.cell25L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell25L);
             case 25:
-                return (RelativeLayout)findViewById(R.id.cell26L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell26L);
             case 26:
-                return (RelativeLayout)findViewById(R.id.cell27L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell27L);
             case 27:
-                return (RelativeLayout)findViewById(R.id.cell28L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell28L);
             case 28:
-                return (RelativeLayout)findViewById(R.id.cell29L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell29L);
             case 29:
-                return (RelativeLayout)findViewById(R.id.cell30L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell30L);
             case 30:
-                return (RelativeLayout)findViewById(R.id.cell31L);
+                return (RelativeLayout)refActivity.findViewById(R.id.cell31L);
             default:
                 return null;
 
