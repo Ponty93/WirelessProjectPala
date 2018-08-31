@@ -4,10 +4,12 @@ import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Context;
 import android.graphics.Color;
+import android.media.Image;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -31,11 +33,19 @@ public class onDragCustomMethod implements View.OnDragListener {
 
         switch(action){
             case DragEvent.ACTION_DRAG_STARTED:
+                int local = findPositionByView((View)dragEvent.getLocalState());
+                int action1 = currentBoard.getDiceRes(0);
+                int action2 = currentBoard.getDiceRes(1);
+                int action3 = action1+action1;
 
                     if(dragEvent.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)){
-                        view.setBackgroundColor(Color.BLUE);
-                        view.invalidate();
-                        return true;
+                        if(Integer.parseInt((String)view.getTag()) == action1 || Integer.parseInt((String)view.getTag()) == action2 ||
+                                Integer.parseInt((String)view.getTag()) == action3) {
+                            ((myClass) findCellByIndex(local + action1).getChildAt(0)).setCellColor(Color.RED);
+                            ((myClass) findCellByIndex(local + action2).getChildAt(0)).setCellColor(Color.RED);
+                            ((myClass) findCellByIndex(local + action3).getChildAt(0)).setCellColor(Color.RED);
+                            return true;
+                        }
                     }
 
                 return false;
@@ -121,74 +131,74 @@ public class onDragCustomMethod implements View.OnDragListener {
 
     }
 
-    private int findCellByTag(View v){
-        String cell = (String)v.getTag();
+    private RelativeLayout findCellByIndex(int v){
 
-        switch(cell) {
-            case "0":
-                return 0;
-            case "1":
-                return 1;
-            case "2":
-                return 2;
-            case "3":
-                return 3;
-            case "4":
-                return 4;
-            case "5":
-                return 5;
-            case "6":
-                return 6;
-            case "7":
-                return 7;
-            case "8":
-                return 8;
-            case "9":
-                return 9;
-            case "10":
-                return 10;
-            case "11":
-                return 11;
-            case "12":
-                return 12;
-            case "13":
-                return 13;
-            case "14":
-                return 14;
-            case "15":
-                return 15;
-            case "16":
-                return 16;
-            case "17":
-                return 17;
-            case "18":
-                return 18;
-            case "19":
-                return 19;
-            case "20":
-                return 20;
-            case "21":
-                return 21;
-            case "22":
-                return 22;
-            case "23":
-                return 23;
-            case "24":
-                return 24;
-            case "25":
-                return 25;
-            case "26":
-                return 26;
-            case "27":
-                return 27;
-            case "28":
-                return 28;
-            case "29":
-                return 29;
-            case "30":
-                return 30;
+
+        switch(v) {
+            case 0:
+                return (RelativeLayout)findViewById(R.id.cell1L);
+            case 1:
+                return (RelativeLayout)findViewById(R.id.cell2L);
+            case 2:
+                return (RelativeLayout)findViewById(R.id.cell3L);
+            case 3:
+                return (RelativeLayout)findViewById(R.id.cell4L);
+            case 4:
+                return (RelativeLayout)findViewById(R.id.cell5L);
+            case 5:
+                return (RelativeLayout)findViewById(R.id.cell6L);
+            case 6:
+                return (RelativeLayout)findViewById(R.id.cell7L);
+            case 7:
+                return (RelativeLayout)findViewById(R.id.cell8L);
+            case 8:
+                return (RelativeLayout)findViewById(R.id.cell9L);
+            case 9:
+                return (RelativeLayout)findViewById(R.id.cell10L);
+            case 10:
+                return (RelativeLayout)findViewById(R.id.cell11L);
+            case 11:
+                return (RelativeLayout)findViewById(R.id.cell12L);
+            case 12:
+                return (RelativeLayout)findViewById(R.id.cell13L);
+            case 13:
+                return (RelativeLayout)findViewById(R.id.cell14L);
+            case 14:
+                return (RelativeLayout)findViewById(R.id.cell15L);
+            case 15:
+                return (RelativeLayout)findViewById(R.id.cell16L);
+            case 16:
+                return (RelativeLayout)findViewById(R.id.cell17L);
+            case 17:
+                return (RelativeLayout)findViewById(R.id.cell18L);
+            case 18:
+                return (RelativeLayout)findViewById(R.id.cell19L);
+            case 19:
+                return (RelativeLayout)findViewById(R.id.cell20L);
+            case 20:
+                return (RelativeLayout)findViewById(R.id.cell21L);
+            case 21:
+                return (RelativeLayout)findViewById(R.id.cell22L);
+            case 22:
+                return (RelativeLayout)findViewById(R.id.cell23L);
+            case 23:
+                return (RelativeLayout)findViewById(R.id.cell24L);
+            case 24:
+                return (RelativeLayout)findViewById(R.id.cell25L);
+            case 25:
+                return (RelativeLayout)findViewById(R.id.cell26L);
+            case 26:
+                return (RelativeLayout)findViewById(R.id.cell27L);
+            case 27:
+                return (RelativeLayout)findViewById(R.id.cell28L);
+            case 28:
+                return (RelativeLayout)findViewById(R.id.cell29L);
+            case 29:
+                return (RelativeLayout)findViewById(R.id.cell30L);
+            case 30:
+                return (RelativeLayout)findViewById(R.id.cell31L);
             default:
-                return -1;
+                return null;
 
         }
 
@@ -221,5 +231,26 @@ public class onDragCustomMethod implements View.OnDragListener {
             view.getBackground().clearColorFilter();
         // Redraw the target view use original color.
         view.invalidate();
+    }
+
+    private int findPositionByView(View view){
+        String tag = (String) view.getTag();
+
+        switch(tag){
+            case "red1":
+                return currentBoard.getPlayer1().getPawnbyId(1).getPosition();
+            case "red2":
+                return currentBoard.getPlayer1().getPawnbyId(2).getPosition();
+            case "red3":
+                return currentBoard.getPlayer1().getPawnbyId(3).getPosition();
+            case "red4":
+                return currentBoard.getPlayer1().getPawnbyId(4).getPosition();
+            case "red5":
+                return currentBoard.getPlayer1().getPawnbyId(5).getPosition();
+            case "red6":
+                return currentBoard.getPlayer1().getPawnbyId(6).getPosition();
+            default:
+                return 0;
+        }
     }
 }

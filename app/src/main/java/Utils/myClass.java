@@ -13,6 +13,7 @@ import com.project.wirelessteam.Views.R;
 
 public class myClass extends View {
     private String cellText;
+    private int cellColor;
     private int textWidth = 10;
     private int textHeight = 30;
     private Paint paintShapeText;
@@ -49,6 +50,7 @@ public class myClass extends View {
         // Extract custom attributes into member variables
         try {
             cellText = a.getString(R.styleable.myClass_cellText);
+            cellColor = a.getColor(R.styleable.myClass_cellColor,Color.BLACK);
         } finally {
             // TypedArray objects are shared and must be recycled.
             a.recycle();
@@ -61,6 +63,14 @@ public class myClass extends View {
         invalidate();
         requestLayout();
     }
+
+    public void setCellColor(int color){
+        cellColor = color;
+        invalidate();
+        requestLayout();
+    }
+
+    public int getCellColor(){return cellColor;}
     public String getCellText() {
         return cellText;
     }
@@ -82,14 +92,14 @@ public class myClass extends View {
 
         paintShapeText = new Paint();
         paintShapeText.setStyle(Paint.Style.FILL);
-        paintShapeText.setColor(Color.BLACK);
+        paintShapeText.setColor(cellColor);
         paintShapeText.setTextSize(60);
         paintShapeText.setFakeBoldText(true);
 
         paintShapeBorder = new Paint();
         paintShapeBorder.setStyle(Paint.Style.STROKE);
         paintShapeBorder.setStrokeWidth(12);
-        paintShapeBorder.setColor(Color.BLACK);
+        paintShapeBorder.setColor(cellColor);
 
     }
 

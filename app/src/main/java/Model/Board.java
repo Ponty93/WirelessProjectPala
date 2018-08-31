@@ -223,6 +223,11 @@ public class Board extends Game {
 
     }
 
+    public int getDiceRes(int index){
+        return diceBuffer[index];
+    }
+
+
 
 
 

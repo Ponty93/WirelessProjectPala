@@ -3,6 +3,6 @@
     <declare-styleable name="myClass">
 
         <attr name="cellText" format="string" />
-
+        <attr name="cellColor" format="color" />
     </declare-styleable>
 </resources>

@@ -1,6 +1,7 @@
 package Actors;
 
 import android.content.Context;
+import android.media.Image;
 import android.widget.ImageView;
 
 public class Pawn {
@@ -22,6 +23,11 @@ public class Pawn {
     public void setPawnView(ImageView pawnView){
         pawn = pawnView ;
     }
+
+    public ImageView getPawn() {
+        return pawn;
+    }
+
     public int getId() {
         return pawnId;
     }
