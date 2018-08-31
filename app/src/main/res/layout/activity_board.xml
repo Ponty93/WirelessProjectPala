@@ -27,7 +27,7 @@
         android:layout_toLeftOf="@+id/invisibleCenter"
         android:layout_toStartOf="@+id/invisibleCenter"
         android:contentDescription="dado2"
-        app:srcCompat="@drawable/dadonum2"
+        app:srcCompat="@drawable/dadonum6"
         android:background="@drawable/customborder"
         />
 
