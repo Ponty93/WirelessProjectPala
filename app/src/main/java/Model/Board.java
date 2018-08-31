@@ -35,7 +35,7 @@ public class Board extends Game {
      * Assign two random values in sequence to the diceBuffer array
      * The method models two dice roll
      */
-    public void diceRoll() {
+    public void roll() {
 
         diceBuffer[0] = (int) Math.random()*6+1;
         diceBuffer[1] = (int) Math.random()*6+1;
@@ -222,6 +222,7 @@ public class Board extends Game {
         return result;
 
     }
+
 
 
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Rect;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -353,6 +354,12 @@ public class BoardActivity extends AppCompatActivity {
             //invoco haiPerso
             endGame(boardView);
 
+
+    }
+    public void rollDiceButton(View view){
+        getCurrentBoard().roll();
+        ImageView roll1 = (ImageView) findViewById(R.id.diceRes1);
+        ImageView roll2 = (ImageView) findViewById(R.id.diceRes2);
 
     }
 

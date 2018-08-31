@@ -18,19 +18,19 @@
         />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/diceRes1"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_alignTop="@+id/diceRes2"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
         android:layout_toLeftOf="@+id/invisibleCenter"
         android:layout_toStartOf="@+id/invisibleCenter"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_marginRight="5dp"
-        android:layout_marginEnd="5dp"
         android:contentDescription="dado2"
         app:srcCompat="@color/colorAccent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/diceRes2"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentTop="true"

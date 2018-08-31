@@ -71,9 +71,12 @@ public class onDragCustomMethod implements View.OnDragListener {
                 RelativeLayout newParent = (RelativeLayout) view;
                 newParent.addView(srcView);
 
+                int cellNumber = Integer.parseInt((String)newParent.getTag());
+                if(cellNumber >6 && cellNumber !=30)
+                    setPawnPositionInCell(srcView,newParent);
+
                 currentBoard.getPlayer1().setPawnPosition(findViewById(srcView),Integer.parseInt((String)newParent.getTag()));
                 currentBoard.setNumberOfMove(currentBoard.getNumberOfMove()+1);
-
                 return true;
 
 
@@ -115,6 +118,94 @@ public class onDragCustomMethod implements View.OnDragListener {
                 return 0;
 
         }
+
+    }
+
+    private int findCellByTag(View v){
+        String cell = (String)v.getTag();
+
+        switch(cell) {
+            case "0":
+                return 0;
+            case "1":
+                return 1;
+            case "2":
+                return 2;
+            case "3":
+                return 3;
+            case "4":
+                return 4;
+            case "5":
+                return 5;
+            case "6":
+                return 6;
+            case "7":
+                return 7;
+            case "8":
+                return 8;
+            case "9":
+                return 9;
+            case "10":
+                return 10;
+            case "11":
+                return 11;
+            case "12":
+                return 12;
+            case "13":
+                return 13;
+            case "14":
+                return 14;
+            case "15":
+                return 15;
+            case "16":
+                return 16;
+            case "17":
+                return 17;
+            case "18":
+                return 18;
+            case "19":
+                return 19;
+            case "20":
+                return 20;
+            case "21":
+                return 21;
+            case "22":
+                return 22;
+            case "23":
+                return 23;
+            case "24":
+                return 24;
+            case "25":
+                return 25;
+            case "26":
+                return 26;
+            case "27":
+                return 27;
+            case "28":
+                return 28;
+            case "29":
+                return 29;
+            case "30":
+                return 30;
+            default:
+                return -1;
+
+        }
+
+    }
+
+    private void setPawnPositionInCell(View v,RelativeLayout layout){
+        RelativeLayout.LayoutParams params =(RelativeLayout.LayoutParams) v.getLayoutParams();
+
+            params.addRule(RelativeLayout.RIGHT_OF,0);
+            params.addRule(RelativeLayout.LEFT_OF,0);
+            params.addRule(RelativeLayout.CENTER_HORIZONTAL,1);
+            params.addRule(RelativeLayout.CENTER_VERTICAL,1);
+            params.addRule(RelativeLayout.CENTER_IN_PARENT,1);
+            params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, 0);
+            params.addRule(RelativeLayout.ALIGN_PARENT_TOP,0);
+            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
+            params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
 
     }
     private void resetTargetViewBackground(View view)
