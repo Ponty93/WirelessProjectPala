@@ -33,7 +33,9 @@ public class BoardActivity extends AppCompatActivity {
     private Context context = null;
     private RelativeLayout refLayout=null;
     private final BoardActivity boardView = this;
-    private Timer internalTimer = null;
+    private Timer internalTimer;
+
+
 
 
 
@@ -52,8 +54,9 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     public Timer getTimerInstance(){
-        if(internalTimer == null)
+        if(internalTimer == null) {
             internalTimer = new Timer();
+        }
 
         return internalTimer;
     }
@@ -105,7 +108,7 @@ public class BoardActivity extends AppCompatActivity {
         @Override
         public void run() {
             counter ++;
-            Log.d("ConnectionTimeout","Connection timeout occurred"+counter);
+            Log.d("ConnectionTimeout","Connection timeout occurred "+counter);
             boolean connRes = false;
             phpConnect connTimeout = new phpConnect("https://psionofficial.com/Wireless/handler.php", currentBoard.getIdGame());
             connRes = getCurrentBoard().updateRound(connTimeout);
@@ -232,7 +235,10 @@ public class BoardActivity extends AppCompatActivity {
         //sets the order of player rounds
         int roundId = buildBoard.getIntExtra("roundPlayerId",0);
         //abilitate to move the pawns
-        roundOrganize(currentBoard.playerOrder(roundId));
+
+            roundOrganize(currentBoard.playerOrder(roundId));
+
+
 
         //Define the player1 pawns drag and drop
         ImageView red1 = findViewById(R.id.red1);

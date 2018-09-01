@@ -58,10 +58,10 @@ public class lobby extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    if(aux  == true)
-                       // timer.stop();
+                    if(aux  == true) {
+                        timer.stop();
                         toBoard();
-
+                    }
                 }
 
             }
