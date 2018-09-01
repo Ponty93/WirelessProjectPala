@@ -37,7 +37,7 @@ public class onDragCustomMethod implements View.OnDragListener {
                 int local = findPositionByView((View)dragEvent.getLocalState());
                 int action1 = currentBoard.getDiceRes(0);
                 int action2 = currentBoard.getDiceRes(1);
-                int action3 = action1+action1;
+                int action3 = action1+action2;
 
                     if(dragEvent.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)){
                         if(Integer.parseInt((String)view.getTag()) == action1 || Integer.parseInt((String)view.getTag()) == action2 ||
@@ -60,7 +60,7 @@ public class onDragCustomMethod implements View.OnDragListener {
                 return true;
             //not doing anything
             case DragEvent.ACTION_DRAG_EXITED:
-                view.setBackgroundColor(Color.BLUE);
+                view.setBackgroundColor(Color.WHITE);
                 view.invalidate();
                 return true;
             case DragEvent.ACTION_DROP:

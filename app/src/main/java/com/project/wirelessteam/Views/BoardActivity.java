@@ -155,14 +155,14 @@ public class BoardActivity extends AppCompatActivity {
     private void roundOrganize(boolean round) {
         //true : my round
         //false : foe round
-
-        findViewById(R.id.red1).setEnabled(round);
-        findViewById(R.id.red2).setEnabled(round);
-        findViewById(R.id.red3).setEnabled(round);
-        findViewById(R.id.red4).setEnabled(round);
-        findViewById(R.id.red5).setEnabled(round);
-        findViewById(R.id.red6).setEnabled(round);
-
+        if(round ==false) {
+            findViewById(R.id.red1).setEnabled(round);
+            findViewById(R.id.red2).setEnabled(round);
+            findViewById(R.id.red3).setEnabled(round);
+            findViewById(R.id.red4).setEnabled(round);
+            findViewById(R.id.red5).setEnabled(round);
+            findViewById(R.id.red6).setEnabled(round);
+        }
         findViewById(R.id.roll).setEnabled(round);
         //display a message "waiting for foe to finish his turn.."
 
@@ -414,6 +414,12 @@ public class BoardActivity extends AppCompatActivity {
         roll1.setImageDrawable(getImageViewByResult(currentBoard.getDiceRes(0)));
         roll2.setImageDrawable(getImageViewByResult(currentBoard.getDiceRes(1)));
         findViewById(R.id.roll).setEnabled(false);
+        findViewById(R.id.red1).setEnabled(true);
+        findViewById(R.id.red2).setEnabled(true);
+        findViewById(R.id.red3).setEnabled(true);
+        findViewById(R.id.red4).setEnabled(true);
+        findViewById(R.id.red5).setEnabled(true);
+        findViewById(R.id.red6).setEnabled(true);
         //Log.d("DICE RESULT","RES 1 "+getCurrentBoard().getDiceRes(0)+"RES 2 "+getCurrentBoard().getDiceRes(1));
 
 
