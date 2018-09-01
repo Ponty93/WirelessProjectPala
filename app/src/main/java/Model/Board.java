@@ -180,15 +180,16 @@ public class Board extends Game {
             board.put("userNamePlayer2",getPlayer2().getUserName());
             board.put("idPlayer2",getPlayer2().getUserId());
             board.put("scorePlayer2",getPlayer2().getScore());
+            board.put("roundNumber",getRoundsCounter());
 
             for (int i = 1; i < 7; i++) {
                 JSONObject player2Pawns = new JSONObject();
                 JSONObject player1Pawns = new JSONObject();
-                player1Pawns.put("idPawn"+i,i);
+                player1Pawns.put("idPawn"+i,getPlayer1().getPawnbyId(i).getIdDB());
                 player1Pawns.put("pawnPosition",getPlayer1().getPawnbyId(i).getPosition());
-                player2Pawns.put("idPawn"+i,i);
-                player1.put(new JSONObject().put("pawn"+i,player1Pawns));
+                player2Pawns.put("idPawn"+i,getPlayer2().getPawnbyId(i).getIdDB());
                 player2Pawns.put("pawnPosition",getPlayer2().getPawnbyId(i).getPosition());
+                player1.put(new JSONObject().put("pawn"+i,player1Pawns));
                 player2.put(new JSONObject().put("pawn"+i,player2Pawns));
             }
 

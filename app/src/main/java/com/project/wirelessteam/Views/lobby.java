@@ -82,10 +82,6 @@ public class lobby extends AppCompatActivity {
         }catch(InterruptedException e){e.printStackTrace();}
         catch(ExecutionException e){e.printStackTrace();}
 
-        if(aux == true) {
-            gameId = Integer.parseInt(myConn.getParamFromJson("gameId"));
-            roundPlayerId = Integer.parseInt(myConn.getParamFromJson("filetto"));
-        }
 
         Log.d("gameID","game id is "+gameId);
 
@@ -98,6 +94,7 @@ public class lobby extends AppCompatActivity {
         toBoard.putExtra("player2Name",player2UserName);
         toBoard.putExtra("gameId",gameId);
         toBoard.putExtra("roundPlayerId",roundPlayerId);
+        toBoard.putExtra("json",myConn.getResJson().toString());
         //put extraInt the id of the game object created
         startActivity(toBoard);
         finish();

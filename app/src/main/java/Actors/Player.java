@@ -1,4 +1,9 @@
 package Actors;
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.String;
 import java.util.HashMap;
 import java.util.UUID;
@@ -17,17 +22,20 @@ public class Player {
      * @constructor
      */
 
-    public Player(int idfromServer, String user) {
+    public Player(int idfromServer, String user, JSONObject pawnId) {
         id = idfromServer;
         userName = user;
         score = 0;
-        buildMap();
+        buildMap(pawnId);
 
     }
-    private void buildMap() {
-        for(int i=1;i<7;i++)
-            pawns.put(i,new Pawn(i));
-
+    private void buildMap(JSONObject json) {
+        Log.d("costruisco hashmap","qui");
+        try {
+            for (int i = 1; i < 7; i++) {
+                pawns.put(i, new Pawn(i, json.getInt("pawnId" + i)));
+            }
+        }catch(JSONException e){e.printStackTrace();}
     }
     public int getUserId() {
         return id;

@@ -15,6 +15,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -160,6 +163,7 @@ public class BoardActivity extends AppCompatActivity {
         findViewById(R.id.red5).setEnabled(round);
         findViewById(R.id.red6).setEnabled(round);
 
+        findViewById(R.id.roll).setEnabled(round);
         //display a message "waiting for foe to finish his turn.."
 
         //increments the players rounds
@@ -210,19 +214,42 @@ public class BoardActivity extends AppCompatActivity {
         userAvv.setText(buildBoard.getStringExtra("player2Name"));
         int id1 = buildBoard.getIntExtra("player1Id", 0);
         int id2 = buildBoard.getIntExtra("player2Id", 0);
-        int gameId = buildBoard.getIntExtra("gameId", 0);
+
         //Log.d("gameID","gameId is" +gameId);
         String user1 = buildBoard.getStringExtra("player1Name");
         String user2 = buildBoard.getStringExtra("player2Name");
 
 
+        //Log.d("Json ",buildBoard.getStringExtra("json"));
+
+        JSONObject jsonP1 = null,jsonP2=null,json=null;
+        int gameId=0,roundId=0;
+        try {
+            json= new JSONObject(buildBoard.getStringExtra("json"));
+            //Log.d("JSONP1","is"+json);
+            if(json.getJSONObject("pawnPlayer1").getInt("ID")==id1){
+                jsonP1 = json.getJSONObject("pawnPlayer1");
+                jsonP2 = json.getJSONObject("pawnPlayer2");
+            }
+            else{
+                jsonP1 =json.getJSONObject("pawnPlayer2");
+                jsonP2 = json.getJSONObject("pawnPlayer1");
+                gameId =json.getInt("gameId");
+                roundId = json.getInt("filetto");
 
 
+            }
+           //Log.d("JSONP1","is"+jsonP1);
+            //Log.d("JSONP2","is"+jsonP2);
+
+        }catch(JSONException e){e.printStackTrace();}
 
         if(currentBoard == null) {
-            currentBoard = new Board(30, new Player(id1, user1), new Player(id2, user2), gameId);
-            setPawnView(context, currentBoard.getPlayer1().getPawns(), "player1");
-            setPawnView(context, currentBoard.getPlayer2().getPawns(), "player2");
+            if(jsonP1!=null && jsonP2!=null) {
+                currentBoard = new Board(30, new Player(id1, user1,jsonP1), new Player(id2, user2,jsonP2), gameId);
+                setPawnView(context, currentBoard.getPlayer1().getPawns(), "player1");
+                setPawnView(context, currentBoard.getPlayer2().getPawns(), "player2");
+            }
         }
 
         if(refLayout == null){
@@ -233,10 +260,10 @@ public class BoardActivity extends AppCompatActivity {
 
 
         //sets the order of player rounds
-        int roundId = buildBoard.getIntExtra("roundPlayerId",0);
+
         //abilitate to move the pawns
 
-            roundOrganize(currentBoard.playerOrder(roundId));
+        roundOrganize(currentBoard.playerOrder(roundId));
 
 
 
@@ -386,6 +413,7 @@ public class BoardActivity extends AppCompatActivity {
         ImageView roll2 = (ImageView) findViewById(R.id.diceRes2);
         roll1.setImageDrawable(getImageViewByResult(currentBoard.getDiceRes(0)));
         roll2.setImageDrawable(getImageViewByResult(currentBoard.getDiceRes(1)));
+        findViewById(R.id.roll).setEnabled(false);
         //Log.d("DICE RESULT","RES 1 "+getCurrentBoard().getDiceRes(0)+"RES 2 "+getCurrentBoard().getDiceRes(1));
 
 
