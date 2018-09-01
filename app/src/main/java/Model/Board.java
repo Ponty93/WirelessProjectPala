@@ -36,9 +36,9 @@ public class Board extends Game {
      * The method models two dice roll
      */
     public void roll() {
-
-        diceBuffer[0] = (int) Math.random()*6+1;
-        diceBuffer[1] = (int) Math.random()*6+1;
+        diceBuffer[0] = (int) (Math.random()*6+1);
+        String aux = "tempo da far saltare";
+        diceBuffer[1] = (int) (Math.random()*6+1);
 
     }
 
@@ -154,8 +154,10 @@ public class Board extends Game {
 
         boolean serverResponse = false;
         try {
-            phpConnect myConn = new phpConnect("https://psionofficial.com/Wireless/handler.php", getIdGame());
-            myConn.execute("u", Integer.toString(getPlayer2().getUserId()), "endTurn", "-1", "-1").get();
+            phpConnect myConn = new phpConnect("https://psionofficial.com/Wireless/try.php", getIdGame());
+            myConn.execute("u", "-1", "boardUpdate", "-1", "-1",uploadBoard().toString()).get();
+            phpConnect myConn2 = new phpConnect("https://psionofficial.com/Wireless/handler.php", getIdGame());
+            myConn2.execute("u", Integer.toString(getPlayer2().getUserId()), "endTurn", "-1", "-1","-1").get();
         }catch(ExecutionException e){e.printStackTrace();}
         catch(InterruptedException e){e.printStackTrace();}
 
@@ -214,7 +216,7 @@ public class Board extends Game {
         boolean result = false;
         try{
             myConn = new phpConnect("https://psionofficial.com/Wireless/handler.php",getIdGame());
-            result = myConn.execute("u",Integer.toString(getPlayer2().getUserId()),"surrender","-1","-1").get();
+            result = myConn.execute("u",Integer.toString(getPlayer2().getUserId()),"surrender","-1","-1","-1").get();
 
         }catch(ExecutionException e){e.printStackTrace();}
         catch(InterruptedException e ){e.printStackTrace();}

@@ -75,7 +75,7 @@ public class BoardActivity extends AppCompatActivity {
             counter++;
 
             if(counter == 24){
-                //endGame(refBoard);
+                endGame(refBoard);
             }
 
             Log.d("COUNTER END ROUND","COUNTER IS:"+counter);
@@ -99,8 +99,8 @@ public class BoardActivity extends AppCompatActivity {
      */
     //class created only when its not my round
     protected class connectionTimeout extends TimerTask {
-        private int counter = 0;
         private BoardActivity refBoard;
+
         public connectionTimeout(BoardActivity board){
             refBoard = board;
         }
@@ -384,17 +384,32 @@ public class BoardActivity extends AppCompatActivity {
         getCurrentBoard().roll();
         ImageView roll1 = (ImageView) findViewById(R.id.diceRes1);
         ImageView roll2 = (ImageView) findViewById(R.id.diceRes2);
-        Log.d("DICE RESULT","RES 1"+getCurrentBoard().getDiceRes(0)+"RES 2"+getCurrentBoard().getDiceRes(1));
-        //Log.d("JSON UPDATE BOARD","JSON IS:"+currentBoard.uploadBoard());
+        roll1.setImageDrawable(getImageViewByResult(currentBoard.getDiceRes(0)));
+        roll2.setImageDrawable(getImageViewByResult(currentBoard.getDiceRes(1)));
+        //Log.d("DICE RESULT","RES 1 "+getCurrentBoard().getDiceRes(0)+"RES 2 "+getCurrentBoard().getDiceRes(1));
+
 
     }
 
-   /* private Drawable getImageViewByResult(int res){
+    private Drawable getImageViewByResult(int res){
+
         switch(res){
             case 1:
-                return getResources().getDrawable(R.)
+                return getResources().getDrawable(R.drawable.dadonum1);
+            case 2:
+                return getResources().getDrawable(R.drawable.dadonum2);
+            case 3:
+                return getResources().getDrawable(R.drawable.dadonum3);
+            case 4:
+                return getResources().getDrawable(R.drawable.dadonum4);
+            case 5:
+                return getResources().getDrawable(R.drawable.dadonum5);
+            case 6:
+                return getResources().getDrawable(R.drawable.dadonum6);
+            default:
+                return null;
         }
-    }*/
+    }
     //todo haiVinto e haiPerso method Views
     //todo update board
 

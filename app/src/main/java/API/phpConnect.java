@@ -36,7 +36,7 @@ public final class phpConnect extends AsyncTask<String, Void,Boolean>{
         else if(params[0] == "r")
             resOperation=read(params[0],params[1],Integer.parseInt(params[2]),params[3],Integer.parseInt(params[4]));
         else if(params[0] == "u")
-            resOperation=update(params[0],Integer.parseInt(params[1]),params[2],Integer.parseInt(params[3]),Integer.parseInt(params[4]));
+            resOperation=update(params[0],Integer.parseInt(params[1]),params[2],Integer.parseInt(params[3]),Integer.parseInt(params[4]),params[5]);
         else if(params[0] == "d")
             resOperation=delete(params[0],params[1],Integer.parseInt(params[2]));
         Log.d("VALORE RESOP" , String.valueOf(resOperation));
@@ -178,7 +178,7 @@ public final class phpConnect extends AsyncTask<String, Void,Boolean>{
      * exclusive method for the PAWN table
      * @return {boolean}
      */
-    private boolean update(String idOperation,int playerId,String attrToQuery,int valToQuery,int posToUpdate) {
+    private boolean update(String idOperation,int playerId,String attrToQuery,int valToQuery,int posToUpdate,String jsonObj) {
         try {
 
 
@@ -202,6 +202,16 @@ public final class phpConnect extends AsyncTask<String, Void,Boolean>{
                                     .param("playerId", playerId)
                                     .param("posToBeUpdated", valToQuery)
                                     .param("posToUpdate", posToUpdate)
+                                    .ensureSuccess()
+                                    .asJsonObject()
+                                    .getBody();
+                }
+            else if(attrToQuery.equals("boardUpdate")){
+                    resJson =
+                            webb.post(url)
+                                    .param("gameId", gameId)
+                                    .param("op", idOperation)
+                                    .param("boardUpdate",jsonObj)
                                     .ensureSuccess()
                                     .asJsonObject()
                                     .getBody();
