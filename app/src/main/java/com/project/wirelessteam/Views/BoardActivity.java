@@ -83,13 +83,13 @@ public class BoardActivity extends AppCompatActivity {
             boolean connRes = false;
             phpConnect connTimeout = new phpConnect("https://psionofficial.com/Wireless/handler.php", currentBoard.getIdGame());
             connRes = getCurrentBoard().updateRound(connTimeout);
-            Log.d("JSON", "Json res" + connTimeout.getResJson());
+            //Log.d("JSON", "Json res" + connTimeout.getResJson());
             if (connRes == true) {
                 if (connTimeout.getParamFromJson("winner").equals("none") == false) {
-                    /*if (Integer.parseInt(connTimeout.getParamFromJson("winner")) == currentBoard.getPlayer1().getUserId()) {
-                        //endGame(refBoard);
+                    if (Integer.parseInt(connTimeout.getParamFromJson("winner")) == currentBoard.getPlayer1().getUserId()) {
+                        endGame(refBoard);
                         //todo display hai vinto
-                    }*/
+                    }
                 }
             }
         }
@@ -107,12 +107,12 @@ public class BoardActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-            counter ++;
-            Log.d("ConnectionTimeout","Connection timeout occurred "+counter);
+
+            Log.d("ConnectionTimeout","Connection timeout occurred ");
             boolean connRes = false;
             phpConnect connTimeout = new phpConnect("https://psionofficial.com/Wireless/handler.php", currentBoard.getIdGame());
             connRes = getCurrentBoard().updateRound(connTimeout);
-            Log.d("JSON","Json res"+connTimeout.getResJson());
+            //Log.d("JSON","Json res"+connTimeout.getResJson());
             if(connRes == true){
                 Log.d("RECEIVER","CONNRES IS TRUE");
                 if(connTimeout.getParamFromJson("winner").equals("none") == false) {
@@ -126,10 +126,10 @@ public class BoardActivity extends AppCompatActivity {
                    }
                 }
                 else {
-                    Log.d("ROUND","ITS FINALLY MY ROUND");
-                    //Log.d("JSON","Json res"+connTimeout.getResJson());
+                    //Log.d("ROUND","ITS FINALLY MY ROUND");
+
                     refBoard.getTimerInstance().cancel();
-                    refBoard.internalTimer = null;
+                    refBoard.internalTimer = null; //todo
                     //it permits to call the UI thread to exec the Views operation
                     //timer runs on a different thread, so it does not have access to modify views
                     runOnUiThread(new Runnable() {
@@ -385,7 +385,7 @@ public class BoardActivity extends AppCompatActivity {
         ImageView roll1 = (ImageView) findViewById(R.id.diceRes1);
         ImageView roll2 = (ImageView) findViewById(R.id.diceRes2);
         Log.d("DICE RESULT","RES 1"+getCurrentBoard().getDiceRes(0)+"RES 2"+getCurrentBoard().getDiceRes(1));
-
+        //Log.d("JSON UPDATE BOARD","JSON IS:"+currentBoard.uploadBoard());
 
     }
 

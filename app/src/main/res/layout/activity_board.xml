@@ -172,11 +172,12 @@
         android:id="@+id/roll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Roll Dice"
-        android:layout_toLeftOf="@+id/endTurn"
         android:layout_alignTop="@+id/endTurn"
         android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"/>
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@+id/endTurn"
+        android:onClick="rollDiceButton"
+        android:text="Roll Dice" />
 
     <RelativeLayout
         android:id="@+id/boardWrap"
