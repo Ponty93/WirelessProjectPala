@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -78,6 +79,7 @@ public class BoardActivity extends AppCompatActivity {
             counter++;
 
             if(counter == 24){
+                currentBoard.surrender();
                 endGame(refBoard);
             }
 
@@ -113,7 +115,7 @@ public class BoardActivity extends AppCompatActivity {
 
             Log.d("ConnectionTimeout","Connection timeout occurred ");
             boolean connRes = false;
-            phpConnect connTimeout = new phpConnect("https://psionofficial.com/Wireless/handler.php", currentBoard.getIdGame());
+            final phpConnect connTimeout = new phpConnect("https://psionofficial.com/Wireless/handler.php", currentBoard.getIdGame());
             connRes = getCurrentBoard().updateRound(connTimeout);
             //Log.d("JSON","Json res"+connTimeout.getResJson());
             if(connRes == true){
@@ -138,6 +140,7 @@ public class BoardActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            updateBoard(connTimeout.getResJson());
                             roundOrganize(true);
                         }
                     });
@@ -155,7 +158,7 @@ public class BoardActivity extends AppCompatActivity {
     private void roundOrganize(boolean round) {
         //true : my round
         //false : foe round
-        if(round ==false) {
+        if(round == false) {
             findViewById(R.id.red1).setEnabled(round);
             findViewById(R.id.red2).setEnabled(round);
             findViewById(R.id.red3).setEnabled(round);
@@ -163,6 +166,7 @@ public class BoardActivity extends AppCompatActivity {
             findViewById(R.id.red5).setEnabled(round);
             findViewById(R.id.red6).setEnabled(round);
         }
+
         findViewById(R.id.roll).setEnabled(round);
         //display a message "waiting for foe to finish his turn.."
 
@@ -226,22 +230,15 @@ public class BoardActivity extends AppCompatActivity {
         int gameId=0,roundId=0;
         try {
             json= new JSONObject(buildBoard.getStringExtra("json"));
-            //Log.d("JSONP1","is"+json);
-            if(json.getJSONObject("pawnPlayer1").getInt("ID")==id1){
-                jsonP1 = json.getJSONObject("pawnPlayer1");
-                jsonP2 = json.getJSONObject("pawnPlayer2");
-            }
-            else{
-                jsonP1 =json.getJSONObject("pawnPlayer2");
-                jsonP2 = json.getJSONObject("pawnPlayer1");
-                gameId =json.getInt("gameId");
-                roundId = json.getInt("filetto");
+            Log.d("JSON INTERO","is"+json);
 
+            //update board
+            updateBoard(json);
 
-            }
            //Log.d("JSONP1","is"+jsonP1);
             //Log.d("JSONP2","is"+jsonP2);
-
+            gameId =json.getInt("gameId");
+            roundId = json.getInt("filetto");
         }catch(JSONException e){e.printStackTrace();}
 
         if(currentBoard == null) {
@@ -255,15 +252,6 @@ public class BoardActivity extends AppCompatActivity {
         if(refLayout == null){
             refLayout = (RelativeLayout) findViewById(R.id.rel1);
         }
-
-
-
-
-        //sets the order of player rounds
-
-        //abilitate to move the pawns
-
-        roundOrganize(currentBoard.playerOrder(roundId));
 
 
 
@@ -291,6 +279,11 @@ public class BoardActivity extends AppCompatActivity {
         ImageView red6 = findViewById(R.id.red6);
         red6.setOnTouchListener(new onTouchCustomMethod(context,refLayout,currentBoard));
         red6.setTag("red6");
+
+
+        //abilitate to move the pawns
+
+        roundOrganize(currentBoard.playerOrder(roundId));
 
         //sets the cell able to receive the pawns
         findViewById(R.id.cell1L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
@@ -413,13 +406,16 @@ public class BoardActivity extends AppCompatActivity {
         ImageView roll2 = (ImageView) findViewById(R.id.diceRes2);
         roll1.setImageDrawable(getImageViewByResult(currentBoard.getDiceRes(0)));
         roll2.setImageDrawable(getImageViewByResult(currentBoard.getDiceRes(1)));
+        //roll button
         findViewById(R.id.roll).setEnabled(false);
+        //red pawns
         findViewById(R.id.red1).setEnabled(true);
         findViewById(R.id.red2).setEnabled(true);
         findViewById(R.id.red3).setEnabled(true);
         findViewById(R.id.red4).setEnabled(true);
         findViewById(R.id.red5).setEnabled(true);
         findViewById(R.id.red6).setEnabled(true);
+
         //Log.d("DICE RESULT","RES 1 "+getCurrentBoard().getDiceRes(0)+"RES 2 "+getCurrentBoard().getDiceRes(1));
 
 
@@ -462,7 +458,7 @@ public class BoardActivity extends AppCompatActivity {
     public void onBackPressed() {//the button do nothing
     }
 
-    private void endGame(BoardActivity ref){
+    public void endGame(BoardActivity ref){
         ref.getTimerInstance().cancel();
         Intent intent = new Intent(ref,
                 setupPage.class);
@@ -471,5 +467,171 @@ public class BoardActivity extends AppCompatActivity {
 
         startActivity(intent);
         ref.finish();
+    }
+
+    public void updateBoard(JSONObject json){
+        //update model
+        if(getCurrentBoard().updateBoard(json) ==true){
+            //update views
+
+            //red pawns update
+
+            ViewGroup owner = (ViewGroup)findViewById(R.id.red1).getParent();
+            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer1().getPawnbyId(1).getPosition()){
+                owner.removeView(findViewById(R.id.red1));
+                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer1().getPawnbyId(1).getPosition());
+                newOwner.addView(findViewById(R.id.red1));
+            }
+            owner = (ViewGroup)findViewById(R.id.red2).getParent();
+            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer1().getPawnbyId(2).getPosition()){
+                owner.removeView(findViewById(R.id.red2));
+                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer1().getPawnbyId(2).getPosition());
+                newOwner.addView(findViewById(R.id.red2));
+            }
+            owner = (ViewGroup)findViewById(R.id.red3).getParent();
+            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer1().getPawnbyId(3).getPosition()){
+                owner.removeView(findViewById(R.id.red3));
+                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer1().getPawnbyId(3).getPosition());
+                newOwner.addView(findViewById(R.id.red3));
+            }
+            owner = (ViewGroup)findViewById(R.id.red4).getParent();
+            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer1().getPawnbyId(4).getPosition()){
+                owner.removeView(findViewById(R.id.red4));
+                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer1().getPawnbyId(4).getPosition());
+                newOwner.addView(findViewById(R.id.red4));
+            }
+            owner = (ViewGroup)findViewById(R.id.red5).getParent();
+            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer1().getPawnbyId(5).getPosition()){
+                owner.removeView(findViewById(R.id.red5));
+                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer1().getPawnbyId(5).getPosition());
+                newOwner.addView(findViewById(R.id.red5));
+            }
+            owner = (ViewGroup)findViewById(R.id.red6).getParent();
+            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer1().getPawnbyId(6).getPosition()){
+                owner.removeView(findViewById(R.id.red6));
+                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer1().getPawnbyId(6).getPosition());
+                newOwner.addView(findViewById(R.id.red6));
+            }
+
+            //black pawns update
+            owner = (ViewGroup)findViewById(R.id.black1).getParent();
+            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer2().getPawnbyId(1).getPosition()){
+                owner.removeView(findViewById(R.id.black1));
+                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer2().getPawnbyId(1).getPosition());
+                newOwner.addView(findViewById(R.id.black1));
+            }
+            owner = (ViewGroup)findViewById(R.id.black2).getParent();
+            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer2().getPawnbyId(2).getPosition()){
+                owner.removeView(findViewById(R.id.black2));
+                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer2().getPawnbyId(2).getPosition());
+                newOwner.addView(findViewById(R.id.black2));
+            }
+            owner = (ViewGroup)findViewById(R.id.black3).getParent();
+            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer2().getPawnbyId(3).getPosition()){
+                owner.removeView(findViewById(R.id.black3));
+                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer2().getPawnbyId(3).getPosition());
+                newOwner.addView(findViewById(R.id.black3));
+            }
+            owner = (ViewGroup)findViewById(R.id.black4).getParent();
+            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer2().getPawnbyId(4).getPosition()){
+                owner.removeView(findViewById(R.id.black4));
+                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer2().getPawnbyId(4).getPosition());
+                newOwner.addView(findViewById(R.id.black4));
+            }
+            owner = (ViewGroup)findViewById(R.id.black5).getParent();
+            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer2().getPawnbyId(5).getPosition()){
+                owner.removeView(findViewById(R.id.black5));
+                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer2().getPawnbyId(5).getPosition());
+                newOwner.addView(findViewById(R.id.black5));
+            }
+            owner = (ViewGroup)findViewById(R.id.black6).getParent();
+            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer2().getPawnbyId(6).getPosition()){
+                owner.removeView(findViewById(R.id.black6));
+                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer2().getPawnbyId(6).getPosition());
+                newOwner.addView(findViewById(R.id.black6));
+            }
+
+
+        }
+        else{
+            currentBoard.surrender();
+            endGame(boardView);
+        }
+
+
+
+    }
+
+    public RelativeLayout findCellByIndex(int v){
+
+
+        switch(v) {
+            case 0:
+                return (RelativeLayout)findViewById(R.id.cell1L);
+            case 1:
+                return (RelativeLayout)findViewById(R.id.cell2L);
+            case 2:
+                return (RelativeLayout)findViewById(R.id.cell3L);
+            case 3:
+                return (RelativeLayout)findViewById(R.id.cell4L);
+            case 4:
+                return (RelativeLayout)findViewById(R.id.cell5L);
+            case 5:
+                return (RelativeLayout)findViewById(R.id.cell6L);
+            case 6:
+                return (RelativeLayout)findViewById(R.id.cell7L);
+            case 7:
+                return (RelativeLayout)findViewById(R.id.cell8L);
+            case 8:
+                return (RelativeLayout)findViewById(R.id.cell9L);
+            case 9:
+                return (RelativeLayout)findViewById(R.id.cell10L);
+            case 10:
+                return (RelativeLayout)findViewById(R.id.cell11L);
+            case 11:
+                return (RelativeLayout)findViewById(R.id.cell12L);
+            case 12:
+                return (RelativeLayout)findViewById(R.id.cell13L);
+            case 13:
+                return (RelativeLayout)findViewById(R.id.cell14L);
+            case 14:
+                return (RelativeLayout)findViewById(R.id.cell15L);
+            case 15:
+                return (RelativeLayout)findViewById(R.id.cell16L);
+            case 16:
+                return (RelativeLayout)findViewById(R.id.cell17L);
+            case 17:
+                return (RelativeLayout)findViewById(R.id.cell18L);
+            case 18:
+                return (RelativeLayout)findViewById(R.id.cell19L);
+            case 19:
+                return (RelativeLayout)findViewById(R.id.cell20L);
+            case 20:
+                return (RelativeLayout)findViewById(R.id.cell21L);
+            case 21:
+                return (RelativeLayout)findViewById(R.id.cell22L);
+            case 22:
+                return (RelativeLayout)findViewById(R.id.cell23L);
+            case 23:
+                return (RelativeLayout)findViewById(R.id.cell24L);
+            case 24:
+                return (RelativeLayout)findViewById(R.id.cell25L);
+            case 25:
+                return (RelativeLayout)findViewById(R.id.cell26L);
+            case 26:
+                return (RelativeLayout)findViewById(R.id.cell27L);
+            case 27:
+                return (RelativeLayout)findViewById(R.id.cell28L);
+            case 28:
+                return (RelativeLayout)findViewById(R.id.cell29L);
+            case 29:
+                return (RelativeLayout)findViewById(R.id.cell30L);
+            case 30:
+                return (RelativeLayout)findViewById(R.id.cell31L);
+            default:
+                return null;
+
+        }
+
     }
 }

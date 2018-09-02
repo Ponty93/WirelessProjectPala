@@ -30,6 +30,7 @@ public class Board extends Game {
     public Board(int cells,Player player1, Player player2,int gameId) {
         super(player1,player2,gameId);
         numberOfCell = cells;
+        setDiceResToNull();
     }
     /**
      * Assign two random values in sequence to the diceBuffer array
@@ -48,7 +49,7 @@ public class Board extends Game {
      * @param id
      * @param player
      */
-    public void planToMove(int val, int id, Player player) {
+    /*public void planToMove(int val, int id, Player player) {
         getConnection().execute("r","PAWN",Integer.toString(player.getUserId()),Integer.toString(id));
         int posToStart = Integer.parseInt(getConnection().getParamFromJson("position"));
         int posToArrive = posToStart+ val;
@@ -64,10 +65,10 @@ public class Board extends Game {
                         movePawn(player.getUserId(),id,posToStart,posToArrive);
                 }
             }
-            /*else {
+            else {
             //shows a popup to inform the user the move is not valid
-        }*/
-    }
+        }
+    }*/
 
     /**
      * Check if a pawn is able to win
@@ -123,12 +124,12 @@ public class Board extends Game {
      * @param posToArrive
      * @return {void}
      */
-    public void movePawn(int playerId,int pawnId,int posToStart, int posToArrive) {
+    /*public void movePawn(int playerId,int pawnId,int posToStart, int posToArrive) {
         if(posToStart == -1)
             getConnection().execute("u",Integer.toString(playerId),"pawnId",Integer.toString(pawnId),Integer.toString(posToArrive));
         else
             getConnection().execute("u",Integer.toString(playerId),"position",Integer.toString(posToStart),Integer.toString(posToArrive));
-    }
+    }*/
 
 
     /**
@@ -200,6 +201,46 @@ public class Board extends Game {
         }catch(JSONException e){e.printStackTrace();}
 
         return null;
+    }
+
+    public boolean updateBoard(JSONObject json){
+        try{
+            if(getIdGame() == json.getInt("gameId")){
+                JSONObject player1 = json.getJSONObject("pawnPlayer1");
+                JSONObject player2 = json.getJSONObject("pawnPlayer2");
+                if(player1.getInt("ID")==getPlayer1().getUserId()){
+                    if(player2.getInt("ID")== getPlayer2().getUserId()) {
+                        for (int i = 1; i < 7; i++) {
+                            getPlayer1().getPawnbyId(i).setPosition(player1.getInt("pawnPos" + i));
+                            getPlayer1().getPawnbyId(i).setPawnIdFromDb(player1.getInt("pawnId" + i));
+                            getPlayer2().getPawnbyId(i).setPosition(player2.getInt("pawnPos" + i));
+                            getPlayer2().getPawnbyId(i).setPawnIdFromDb(player2.getInt("pawnId" + i));
+                        }
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+                else if(player2.getInt("ID")== getPlayer1().getUserId()){
+                    if(player1.getInt("ID")==getPlayer2().getUserId()) {
+                        for (int i = 1; i < 7; i++) {
+                            getPlayer2().getPawnbyId(i).setPosition(player1.getInt("pawnPos" + i));
+                            getPlayer2().getPawnbyId(i).setPawnIdFromDb(player1.getInt("pawnId" + i));
+                            getPlayer1().getPawnbyId(i).setPosition(player2.getInt("pawnPos" + i));
+                            getPlayer1().getPawnbyId(i).setPawnIdFromDb(player2.getInt("pawnId" + i));
+                        }
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+                else
+                    return false;
+            }
+            return false;
+
+        }catch(JSONException e){e.printStackTrace();}
+        return false;
     }
 
     public boolean updateRound(phpConnect connTimeout){

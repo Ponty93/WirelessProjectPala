@@ -10,7 +10,7 @@ public class Pawn {
     ImageView pawn = null;
     private final int pawnId;
     private int pawnIdFromDb;
-    private int position = 1; //position leggends:
+    private int position = 0; //position leggends:
                                 // 1 : Start
                                 // 31 : Finish
                                 // -1 : currently in a stack
@@ -29,6 +29,7 @@ public class Pawn {
         return pawn;
     }
     public int getIdDB(){return pawnIdFromDb;}
+    public void setPawnIdFromDb(int id){pawnIdFromDb=id;}
     public int getId() {
         return pawnId;
     }

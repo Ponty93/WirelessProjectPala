@@ -22,6 +22,11 @@ import Model.Board;
 public class onDragCustomMethod implements View.OnDragListener {
     private BoardActivity refActivity;
     private Board currentBoard;
+    //var to be used in onDrag method
+    private int local = 0;
+    private int action1=0,action2=0,action3=0;
+    private boolean ac1 =false,ac2=false;
+
     public onDragCustomMethod(BoardActivity boardAct, Board boardRef)
     {
         refActivity = boardAct;
@@ -32,27 +37,35 @@ public class onDragCustomMethod implements View.OnDragListener {
     public boolean onDrag(View view, DragEvent dragEvent){
         int action = dragEvent.getAction();
 
+
         switch(action){
             case DragEvent.ACTION_DRAG_STARTED:
-                int local = findPositionByView((View)dragEvent.getLocalState());
-                int action1 = currentBoard.getDiceRes(0);
-                int action2 = currentBoard.getDiceRes(1);
-                int action3 = action1+action2;
-
-                    if(dragEvent.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)){
-                        if(Integer.parseInt((String)view.getTag()) == action1 || Integer.parseInt((String)view.getTag()) == action2 ||
-                                Integer.parseInt((String)view.getTag()) == action3) {
-                            ((myClass) findCellByIndex(local + action1).getChildAt(0)).setCellColor(Color.RED);
-                            ((myClass) findCellByIndex(local + action2).getChildAt(0)).setCellColor(Color.RED);
-                            ((myClass) findCellByIndex(local + action3).getChildAt(0)).setCellColor(Color.RED);
+                local = findPositionByView((View)dragEvent.getLocalState());
+                action1 = currentBoard.getDiceRes(0);
+                action2 = currentBoard.getDiceRes(1);
+                action3 = action1+action2;
+                if(action1!= 0 && action2 != 0 && action3 != 0) {
+                    if (dragEvent.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                        if (Integer.parseInt((String) view.getTag()) == local + action1 && ac1 != true) {
+                            refActivity.findCellByIndex(local + action1).setBackgroundColor(Color.RED);
+                            return true;
+                        }
+                        if (Integer.parseInt((String) view.getTag()) == local + action2 && ac2 != true) {
+                            refActivity.findCellByIndex(local + action2).setBackgroundColor(Color.RED);
+                            return true;
+                        }
+                        if (Integer.parseInt((String) view.getTag()) == local + action3 && ac1 != true && ac2 != true) {
+                            refActivity.findCellByIndex(local + action3).setBackgroundColor(Color.RED);
                             return true;
                         }
                     }
+                }
+
 
                 return false;
 
             case DragEvent.ACTION_DRAG_ENTERED:
-                view.setBackgroundColor(Color.RED);
+                view.setBackgroundColor(Color.BLUE);
                 view.invalidate();
                 return true;
 
@@ -77,22 +90,42 @@ public class onDragCustomMethod implements View.OnDragListener {
                 // Get dragged view's parent view group.
                 ViewGroup owner = (ViewGroup) srcView.getParent();
                 // Remove source view from original parent view group.
-                owner.removeView(srcView);
 
-                RelativeLayout newParent = (RelativeLayout) view;
-                newParent.addView(srcView);
-                ((myClass)((RelativeLayout) view).getChildAt(0)).setCellColor(Color.BLACK);
-                int cellNumber = Integer.parseInt((String)newParent.getTag());
-                if(cellNumber >6 && cellNumber !=30)
-                    setPawnPositionInCell(srcView,newParent);
+                    owner.removeView(srcView);
 
-                currentBoard.getPlayer1().setPawnPosition(findViewByTag(srcView),Integer.parseInt((String)newParent.getTag()));
-                currentBoard.setNumberOfMove(currentBoard.getNumberOfMove()+1);
-                return true;
+                    RelativeLayout newParent = (RelativeLayout) view;
+                    newParent.addView(srcView);
+
+                    int cellNumber = Integer.parseInt((String) newParent.getTag());
+
+                    if (cellNumber > 6 && cellNumber != 30)
+                        setPawnPositionInCell(srcView, newParent);
+
+                    if (cellNumber == local + action1) {
+                        ac1 = true;
+                        currentBoard.setNumberOfMove(currentBoard.getNumberOfMove() + 1);
+                    }
+                    if (cellNumber == local + action2) {
+                        ac2 = true;
+                        currentBoard.setNumberOfMove(currentBoard.getNumberOfMove() + 1);
+                    }
+                    if (cellNumber == local + action3) {
+                        ac1 = true;
+                        ac2 = true;
+                        currentBoard.setNumberOfMove(currentBoard.getNumberOfMove() + 2);
+                    }
+
+
+                    currentBoard.getPlayer1().setPawnPosition(findViewByTag(srcView), Integer.parseInt((String) newParent.getTag()));
+                    return true;
+
+
+
 
 
             case DragEvent.ACTION_DRAG_ENDED:
-                ((myClass)((RelativeLayout) view).getChildAt(0)).setCellColor(Color.BLACK);
+                ((RelativeLayout) view).setBackgroundColor(Color.WHITE);
+                view.invalidate();
                 if(dragEvent.getResult())
                     Toast.makeText(refActivity,"The drop was handled",Toast.LENGTH_LONG);
                 else
@@ -131,78 +164,7 @@ public class onDragCustomMethod implements View.OnDragListener {
 
     }
 
-    private RelativeLayout findCellByIndex(int v){
 
-
-        switch(v) {
-            case 0:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell1L);
-            case 1:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell2L);
-            case 2:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell3L);
-            case 3:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell4L);
-            case 4:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell5L);
-            case 5:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell6L);
-            case 6:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell7L);
-            case 7:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell8L);
-            case 8:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell9L);
-            case 9:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell10L);
-            case 10:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell11L);
-            case 11:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell12L);
-            case 12:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell13L);
-            case 13:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell14L);
-            case 14:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell15L);
-            case 15:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell16L);
-            case 16:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell17L);
-            case 17:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell18L);
-            case 18:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell19L);
-            case 19:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell20L);
-            case 20:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell21L);
-            case 21:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell22L);
-            case 22:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell23L);
-            case 23:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell24L);
-            case 24:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell25L);
-            case 25:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell26L);
-            case 26:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell27L);
-            case 27:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell28L);
-            case 28:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell29L);
-            case 29:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell30L);
-            case 30:
-                return (RelativeLayout)refActivity.findViewById(R.id.cell31L);
-            default:
-                return null;
-
-        }
-
-    }
 
     private void setPawnPositionInCell(View v,RelativeLayout layout){
         RelativeLayout.LayoutParams params =(RelativeLayout.LayoutParams) v.getLayoutParams();
