@@ -9,16 +9,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.concurrent.ExecutionException;
 
 import API.phpConnect;
+import Controller.lobbyController;
+import Model.lobbyModel;
+
 public class lobby extends AppCompatActivity {
     private Intent lobbyIntent;
-    private phpConnect lobbyConn;
+    private JSONObject lobbyConn;
     private Chronometer timer;
     private AppCompatActivity currActivity =this;
     private Button startButton,stopButton;
-
+    private lobbyController controller = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +32,7 @@ public class lobby extends AppCompatActivity {
         setContentView(R.layout.activity_lobby);
         lobbyIntent = getIntent();
         timer = (Chronometer) findViewById(R.id.timer);
-        startButton = (Button)findViewById(R.id.start);
-        stopButton = (Button) findViewById(R.id.stop);
-        startButton.setEnabled(false);
-        stopButton.setEnabled(false);
+        controller = new lobbyController(new lobbyModel(),this);
 
         timer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
@@ -44,23 +47,17 @@ public class lobby extends AppCompatActivity {
                 if(minutes == 5L){
                     currActivity.finish();
                 }
-                boolean aux = false;
 
                 if(seconds % 5 == 0){
-                    try{
-                        lobbyConn = new phpConnect("https://psionofficial.com/Wireless/lobby.php", -1);
-                        aux = lobbyConn.execute("r","-1","-1",lobbyIntent.getStringExtra("userName"),lobbyIntent.getStringExtra("idPlayer")).get();
-                    }
-                    catch(InterruptedException e ){
-                        e.printStackTrace();
-                    }
-                    catch(Exception e){
-                        e.printStackTrace();
-                    }
 
-                    if(aux  == true) {
-                        timer.stop();
+                    lobbyConn = controller.lobbyCheck(lobbyIntent.getStringExtra("userName"),lobbyIntent.getStringExtra("idPlayer"));
+
+                    try{
+                    if(lobbyConn.getInt("Result") == 1) {
                         toBoard();
+                    }
+                    }catch(JSONException e){
+                        e.printStackTrace();
                     }
                 }
 
@@ -71,30 +68,19 @@ public class lobby extends AppCompatActivity {
     }
 
     private void toBoard(){
-        boolean aux = false;
-        int gameId = 0;
-        int roundPlayerId = -1;
-        phpConnect myConn = null;
 
-        try {
-             myConn = new phpConnect("https://psionofficial.com/Wireless/handler.php", -1);
-             aux = myConn.execute("r", "GAME","-1","gameId", lobbyIntent.getStringExtra("idPlayer")).get();
-        }catch(InterruptedException e){e.printStackTrace();}
-        catch(ExecutionException e){e.printStackTrace();}
+        JSONObject res =controller.toBoardConnect(lobbyIntent.getStringExtra("idPlayer"));
 
-
-        Log.d("gameID","game id is "+gameId);
-
-        String player2UserName = lobbyConn.getParamFromJson("player2Name");
-        int player2Id = Integer.parseInt(lobbyConn.getParamFromJson("player2Id"));
         Intent toBoard = new Intent(currActivity,BoardActivity.class);
-        toBoard.putExtra("player1Name",lobbyIntent.getStringExtra("userName"));
+
         toBoard.putExtra("player1Id",Integer.parseInt(lobbyIntent.getStringExtra("idPlayer")));
-        toBoard.putExtra("player2Id",player2Id);
-        toBoard.putExtra("player2Name",player2UserName);
-        toBoard.putExtra("gameId",gameId);
-        toBoard.putExtra("roundPlayerId",roundPlayerId);
-        toBoard.putExtra("json",myConn.getResJson().toString());
+        try {
+            toBoard.putExtra("player2Id", lobbyConn.getInt("player2Id"));
+            toBoard.putExtra("player2Name", lobbyConn.getString("player2Name"));
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+        toBoard.putExtra("json",res.toString());
         //put extraInt the id of the game object created
         startActivity(toBoard);
         finish();
@@ -107,35 +93,19 @@ public class lobby extends AppCompatActivity {
     }
 
 
-    //todo remove in production (usefull to debug)
-    public void startButton(View view){
-        timer.start();
-        startButton.setEnabled(false);
-        stopButton.setEnabled(true);
-    }
-
-    public void stopButton(View view){//todo
-        //currActivity.finish();
-        timer.stop();
-        timer.setBase(SystemClock.elapsedRealtime());
-        stopButton.setEnabled(false);
-        startButton.setEnabled(true);
-    }
-
     public void back(View v){
         timer.stop();
-        boolean reaux = false;
+
+        lobbyConn = controller.backAction(lobbyIntent.getStringExtra("userName"),lobbyIntent.getStringExtra("idPlayer"));
         try {
-            lobbyConn = new phpConnect("https://psionofficial.com/Wireless/lobby.php", -1);
-            reaux = lobbyConn.execute("r", "delete","-1",lobbyIntent.getStringExtra("userName"), lobbyIntent.getStringExtra("idPlayer")).get();
-        }catch(InterruptedException e){e.printStackTrace();}
-        catch(ExecutionException e){e.printStackTrace();}
-
-        if(reaux == true)
-            toBoard();
-        else
-            super.finish();
-
+            if (lobbyConn.getInt("Result") == 1)
+                toBoard();
+            else
+                super.finish();
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
     }
+
 
 }
