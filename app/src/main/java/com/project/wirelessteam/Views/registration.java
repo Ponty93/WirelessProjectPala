@@ -7,54 +7,45 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import Controller.registrationController;
+import Model.registrationModel;
 
-import java.util.concurrent.ExecutionException;
-
-import API.phpConnect;
 
 public class registration extends AppCompatActivity {
+
+    private registrationController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        controller = new registrationController(this,new registrationModel());
     }
 
     public boolean checkInput(EditText name, EditText pass) {
-        if(!name.getText().toString().equals("") && !pass.getText().toString().equals(""))
+        if(controller.checkInput(name,pass))
             return true;
         else {
-            name.setText("Questo campo non deve essere lasciato vuoto!"); //todo
+            name.setText("Questo campo non deve essere lasciato vuoto!");
             return false;
         }
     }
 
-    private void goToLogin() {
+    public void goToLogin() {
         startActivity(new Intent(this,login.class));
     }
+
     public void sendRegistrationData(View view) {
        EditText editName = (EditText) findViewById(R.id.editText2);
        EditText editPass = (EditText) findViewById(R.id.editText3);
 
         if(checkInput(editName,editPass)){
-            String pass= ((TextView)findViewById(R.id.editText3)).getText().toString();
-            pass = pass.replaceAll("\\s","");
-            String name= ((TextView)findViewById(R.id.editText2)).getText().toString();
-            name = name.replaceAll("\\s","");
-            phpConnect conn = new phpConnect("https://www.psionofficial.com/Wireless/register.php",-1);
-            boolean aux = false;
 
-            try {
-                aux = conn.execute("c","USERS",name,pass,"1").get();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if(aux == true){
+            if(controller.goToLogin(editName,editPass)){
                 ((TextView) findViewById(R.id.textView6)).setText("REGISTRAZIONE EFFETTUATA!");
                 goToLogin();
-            }else{
+            }
+            else{
                 ((TextView) findViewById(R.id.textView6)).setText("NOME NON DISPONIBILE!");
             }
 
