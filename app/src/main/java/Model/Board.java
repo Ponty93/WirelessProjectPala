@@ -1,4 +1,6 @@
 package Model;
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -205,6 +207,7 @@ public class Board extends Game {
 
     public boolean updateBoard(JSONObject json){
         try{
+            //Log.d("GAMEID","IS"+json.getInt("gameId")+"   "+"LOCAL GAME ID"+getIdGame());
             if(getIdGame() == json.getInt("gameId")){
                 JSONObject player1 = json.getJSONObject("pawnPlayer1");
                 JSONObject player2 = json.getJSONObject("pawnPlayer2");
@@ -237,7 +240,6 @@ public class Board extends Game {
                 else
                     return false;
             }
-            return false;
 
         }catch(JSONException e){e.printStackTrace();}
         return false;

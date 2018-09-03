@@ -54,13 +54,7 @@ public class BoardActivity extends AppCompatActivity {
 
     }
 
-    public Timer getTimerInstance(){
-        if(internalTimer == null) {
-            internalTimer = new Timer();
-        }
 
-        return internalTimer;
-    }
 
     protected class roundTimeout extends TimerTask {
         private int counter = 0;
@@ -130,14 +124,13 @@ public class BoardActivity extends AppCompatActivity {
                 else {
                     //Log.d("ROUND","ITS FINALLY MY ROUND");
 
-                    refBoard.getTimerInstance().cancel();
-                    refBoard.internalTimer = null; //todo
+                    refBoard.internalTimer.cancel();
                     //it permits to call the UI thread to exec the Views operation
                     //timer runs on a different thread, so it does not have access to modify views
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            updateBoard(connTimeout.getResJson());
+                            //updateBoard(connTimeout.getResJson());
                             roundOrganize(true);
                         }
                     });
@@ -182,11 +175,13 @@ public class BoardActivity extends AppCompatActivity {
         //timer to schedule action
         if(round == true) {//if its my turn, at 2m calls endTurn
             Log.d("internalTimer","starts my round timer");
-            getTimerInstance().schedule(new roundTimeout(boardView),0,5000);
+            internalTimer = new Timer();
+            internalTimer.schedule(new roundTimeout(boardView),0,5000);
         }
         else if(round == false){//its not my turn, every 10s i ask the server if its my turn now
             Log.d("internalTimer","starts NOT my round timer");
-            getTimerInstance().schedule(new connectionTimeout(boardView),0,5000);
+            internalTimer = new Timer();
+            internalTimer.schedule(new connectionTimeout(boardView),0,5000);
         }
 
 
@@ -383,8 +378,7 @@ public class BoardActivity extends AppCompatActivity {
 
     public void buttonEndTurn(View view){
         currentBoard.endTurn();
-        getTimerInstance().cancel();
-        internalTimer = null;
+        internalTimer.cancel();
         roundOrganize(false);
         //Log.d("JSON IS0","JSON:"+currentBoard.uploadBoard());
     }
@@ -437,7 +431,7 @@ public class BoardActivity extends AppCompatActivity {
         }
     }
     //todo haiVinto e haiPerso method Views
-    //todo update board
+
 
 
 
@@ -455,7 +449,7 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     public void endGame(BoardActivity ref){
-        ref.getTimerInstance().cancel();
+        ref.internalTimer.cancel();
         Intent intent = new Intent(ref,
                 setupPage.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
