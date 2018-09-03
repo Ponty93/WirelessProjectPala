@@ -42,7 +42,6 @@ public class setupPage extends AppCompatActivity {
      * @param view
      */
     public void goToNewGame(View view) {
-
         Intent intentToLobby = new Intent(this,lobby.class);
         intentToLobby.putExtra("idPlayer",myIntent.getIntExtra("idPlayer",0));
         intentToLobby.putExtra("userName",myIntent.getStringExtra("userName"));

@@ -83,7 +83,7 @@ public class lobby extends AppCompatActivity {
             e.printStackTrace();
         }
         if(res != null) {
-            Log.d("JSON","is"+res.toString());
+            //Log.d("JSON","is"+res.toString());
             toBoard.putExtra("json", res.toString());
             startActivity(toBoard);
             finish();

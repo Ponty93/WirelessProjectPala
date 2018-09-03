@@ -221,35 +221,26 @@ public class BoardActivity extends AppCompatActivity {
         String user2 = buildBoard.getStringExtra("player2Name");
 
 
-        //Log.d("Json ",buildBoard.getStringExtra("json"));
-
-        JSONObject jsonP1 = null,jsonP2=null,json=null;
+        JSONObject json=null;
         int gameId=0,roundId=0;
         try {
             json= new JSONObject(buildBoard.getStringExtra("json"));
             Log.d("JSON INTERO","is"+json);
-
             //update board
-            updateBoard(json);
-
-           //Log.d("JSONP1","is"+jsonP1);
-            //Log.d("JSONP2","is"+jsonP2);
             gameId =json.getInt("gameId");
             roundId = json.getInt("filetto");
-        }catch(JSONException e){e.printStackTrace();}
 
-        if(currentBoard == null) {
-            if(jsonP1!=null && jsonP2!=null) {
-                currentBoard = new Board(30, new Player(id1, user1,jsonP1), new Player(id2, user2,jsonP2), gameId);
-                setPawnView(context, currentBoard.getPlayer1().getPawns(), "player1");
-                setPawnView(context, currentBoard.getPlayer2().getPawns(), "player2");
+            if(currentBoard == null) {
+                if(json!=null) {
+                    currentBoard = new Board(30, new Player(id1, user1,json.getJSONObject("pawnPlayer1")), new Player(id2, user2,json.getJSONObject("pawnPlayer2")), gameId);
+                    setPawnView(context, currentBoard.getPlayer1().getPawns(), "player1");
+                    setPawnView(context, currentBoard.getPlayer2().getPawns(), "player2");
+                }
             }
-        }
 
-        if(refLayout == null){
-            refLayout = (RelativeLayout) findViewById(R.id.rel1);
+        }catch(JSONException e){
+            e.printStackTrace();
         }
-
 
 
         //Define the player1 pawns drag and drop
@@ -277,10 +268,6 @@ public class BoardActivity extends AppCompatActivity {
         red6.setOnTouchListener(new onTouchCustomMethod(context,refLayout,currentBoard));
         red6.setTag("red6");
 
-
-        //abilitate to move the pawns
-
-        roundOrganize(currentBoard.playerOrder(roundId));
 
         //sets the cell able to receive the pawns
         findViewById(R.id.cell1L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
@@ -344,7 +331,19 @@ public class BoardActivity extends AppCompatActivity {
         findViewById(R.id.cell30L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
         findViewById(R.id.cell30L).setTag("29");
         findViewById(R.id.cell31L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
-        findViewById(R.id.cell31L).setTag("30");
+        findViewById(R.id.cell31L).setTag("30");        //Log.d("Json ",buildBoard.getStringExtra("json"));
+
+
+        if(refLayout == null){
+            refLayout = (RelativeLayout) findViewById(R.id.rel1);
+        }
+
+        //abilitate to move the pawns
+
+        roundOrganize(currentBoard.playerOrder(roundId));
+
+        updateBoard(json);
+
     }
 
 
@@ -475,77 +474,89 @@ public class BoardActivity extends AppCompatActivity {
 
             ViewGroup owner = (ViewGroup)findViewById(R.id.red1).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer1().getPawnbyId(1).getPosition()){
+                ImageView red1 = (ImageView)findViewById(R.id.red1);
                 owner.removeView(findViewById(R.id.red1));
                 RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer1().getPawnbyId(1).getPosition());
-                newOwner.addView(findViewById(R.id.red1));
+                newOwner.addView(red1);
             }
             owner = (ViewGroup)findViewById(R.id.red2).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer1().getPawnbyId(2).getPosition()){
+                ImageView red2 = (ImageView)findViewById(R.id.red2);
                 owner.removeView(findViewById(R.id.red2));
                 RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer1().getPawnbyId(2).getPosition());
-                newOwner.addView(findViewById(R.id.red2));
+                newOwner.addView(red2);
             }
             owner = (ViewGroup)findViewById(R.id.red3).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer1().getPawnbyId(3).getPosition()){
+                ImageView red3 = (ImageView)findViewById(R.id.red3);
                 owner.removeView(findViewById(R.id.red3));
                 RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer1().getPawnbyId(3).getPosition());
-                newOwner.addView(findViewById(R.id.red3));
+                newOwner.addView(red3);
             }
             owner = (ViewGroup)findViewById(R.id.red4).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer1().getPawnbyId(4).getPosition()){
+                ImageView red4 = (ImageView)findViewById(R.id.red4);
                 owner.removeView(findViewById(R.id.red4));
                 RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer1().getPawnbyId(4).getPosition());
-                newOwner.addView(findViewById(R.id.red4));
+                newOwner.addView(red4);
             }
             owner = (ViewGroup)findViewById(R.id.red5).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer1().getPawnbyId(5).getPosition()){
+                ImageView red5  = (ImageView)findViewById(R.id.red5);
                 owner.removeView(findViewById(R.id.red5));
                 RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer1().getPawnbyId(5).getPosition());
-                newOwner.addView(findViewById(R.id.red5));
+                newOwner.addView(red5);
             }
             owner = (ViewGroup)findViewById(R.id.red6).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer1().getPawnbyId(6).getPosition()){
+                ImageView red6  =(ImageView)findViewById(R.id.red6);
                 owner.removeView(findViewById(R.id.red6));
                 RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer1().getPawnbyId(6).getPosition());
-                newOwner.addView(findViewById(R.id.red6));
+                newOwner.addView(red6);
             }
 
             //black pawns update
             owner = (ViewGroup)findViewById(R.id.black1).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer2().getPawnbyId(1).getPosition()){
+                ImageView black1= (ImageView)findViewById(R.id.black1);
                 owner.removeView(findViewById(R.id.black1));
                 RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer2().getPawnbyId(1).getPosition());
-                newOwner.addView(findViewById(R.id.black1));
+                newOwner.addView(black1);
             }
             owner = (ViewGroup)findViewById(R.id.black2).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer2().getPawnbyId(2).getPosition()){
+                ImageView black2 =(ImageView)findViewById(R.id.black2);
                 owner.removeView(findViewById(R.id.black2));
                 RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer2().getPawnbyId(2).getPosition());
-                newOwner.addView(findViewById(R.id.black2));
+                newOwner.addView(black2);
             }
             owner = (ViewGroup)findViewById(R.id.black3).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer2().getPawnbyId(3).getPosition()){
+                ImageView black3 = (ImageView)findViewById(R.id.black3);
                 owner.removeView(findViewById(R.id.black3));
                 RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer2().getPawnbyId(3).getPosition());
-                newOwner.addView(findViewById(R.id.black3));
+                newOwner.addView(black3);
             }
             owner = (ViewGroup)findViewById(R.id.black4).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer2().getPawnbyId(4).getPosition()){
+                ImageView black4 = (ImageView)findViewById(R.id.black4);
                 owner.removeView(findViewById(R.id.black4));
                 RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer2().getPawnbyId(4).getPosition());
-                newOwner.addView(findViewById(R.id.black4));
+                newOwner.addView(black4);
             }
             owner = (ViewGroup)findViewById(R.id.black5).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer2().getPawnbyId(5).getPosition()){
+                ImageView black5 = (ImageView)findViewById(R.id.black5);
                 owner.removeView(findViewById(R.id.black5));
                 RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer2().getPawnbyId(5).getPosition());
-                newOwner.addView(findViewById(R.id.black5));
+                newOwner.addView(black5);
             }
             owner = (ViewGroup)findViewById(R.id.black6).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer2().getPawnbyId(6).getPosition()){
+                ImageView black6 = (ImageView)findViewById(R.id.black6);
                 owner.removeView(findViewById(R.id.black6));
                 RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer2().getPawnbyId(6).getPosition());
-                newOwner.addView(findViewById(R.id.black6));
+                newOwner.addView(black6);
             }
 
 
