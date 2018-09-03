@@ -148,14 +148,14 @@ public class BoardActivity extends AppCompatActivity {
     private void roundOrganize(boolean round) {
         //true : my round
         //false : foe round
-        if(round == false) {
-            findViewById(R.id.red1).setEnabled(round);
-            findViewById(R.id.red2).setEnabled(round);
-            findViewById(R.id.red3).setEnabled(round);
-            findViewById(R.id.red4).setEnabled(round);
-            findViewById(R.id.red5).setEnabled(round);
-            findViewById(R.id.red6).setEnabled(round);
-        }
+
+            findViewById(R.id.red1).setEnabled(false);
+            findViewById(R.id.red2).setEnabled(false);
+            findViewById(R.id.red3).setEnabled(false);
+            findViewById(R.id.red4).setEnabled(false);
+            findViewById(R.id.red5).setEnabled(false);
+            findViewById(R.id.red6).setEnabled(false);
+
 
         findViewById(R.id.roll).setEnabled(round);
         //display a message "waiting for foe to finish his turn.."
@@ -211,9 +211,6 @@ public class BoardActivity extends AppCompatActivity {
         int id1 = buildBoard.getIntExtra("player1Id", 0);
         int id2 = buildBoard.getIntExtra("player2Id", 0);
 
-        //Log.d("gameID","gameId is" +gameId);
-        String user1 = buildBoard.getStringExtra("player1Name");
-        String user2 = buildBoard.getStringExtra("player2Name");
 
 
         JSONObject json=null;
@@ -227,7 +224,7 @@ public class BoardActivity extends AppCompatActivity {
 
             if(currentBoard == null) {
                 if(json!=null) {
-                    currentBoard = new Board(30, new Player(id1, user1,json.getJSONObject("pawnPlayer1")), new Player(id2, user2,json.getJSONObject("pawnPlayer2")), gameId);
+                    currentBoard = new Board(30, new Player(id1, buildBoard.getStringExtra("player1Name"),json.getJSONObject("pawnPlayer1")), new Player(id2, buildBoard.getStringExtra("player1Name"),json.getJSONObject("pawnPlayer2")), gameId);
                     setPawnView(context, currentBoard.getPlayer1().getPawns(), "player1");
                     setPawnView(context, currentBoard.getPlayer2().getPawns(), "player2");
                 }

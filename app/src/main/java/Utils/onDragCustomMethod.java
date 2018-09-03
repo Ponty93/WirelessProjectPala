@@ -101,6 +101,7 @@ public class onDragCustomMethod implements View.OnDragListener {
                     if (cellNumber > 6 && cellNumber != 30)
                         setPawnPositionInCell(srcView, newParent);
 
+                    //todo considerare il risultato identico
                     if (cellNumber == local + action1) {
                         ac1 = true;
                         currentBoard.setNumberOfMove(currentBoard.getNumberOfMove() + 1);

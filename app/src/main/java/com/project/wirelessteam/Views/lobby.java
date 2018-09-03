@@ -76,6 +76,8 @@ public class lobby extends AppCompatActivity {
         Intent toBoard = new Intent(currActivity,BoardActivity.class);
 
         toBoard.putExtra("player1Id",lobbyIntent.getIntExtra("idPlayer",0));
+        toBoard.putExtra("player1Name",lobbyIntent.getStringExtra("userName"));
+
         try {
             toBoard.putExtra("player2Id", lobbyConn.getInt("player2Id"));
             toBoard.putExtra("player2Name", lobbyConn.getString("player2Name"));
