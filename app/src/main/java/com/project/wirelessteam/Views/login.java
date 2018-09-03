@@ -36,13 +36,16 @@ public class login extends AppCompatActivity {
         conn = controller.sendLogin((EditText) findViewById(R.id.editText),(EditText) findViewById(R.id.editText4));
 
         try {
-            if (conn.getInt("Result") == 1) {
-                ((TextView) findViewById(R.id.textView2)).setText("LOGIN CORRETTO!");
-                goToSetup();
+            if(conn != null) {
+                if (conn.getInt("Result") == 1) {
+                    ((TextView) findViewById(R.id.textView2)).setText("LOGIN CORRETTO!");
+                    goToSetup();
+                }
             } else {
-                ((TextView) findViewById(R.id.textView2)).setText("LOGIN ERRATO!");
+                    ((TextView) findViewById(R.id.textView2)).setText("LOGIN ERRATO!");
 
-            }
+                }
+
         }catch(JSONException e){
             e.printStackTrace();
         }

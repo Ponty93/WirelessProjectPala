@@ -40,9 +40,6 @@ public class BoardActivity extends AppCompatActivity {
     private Timer internalTimer;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -471,7 +468,7 @@ public class BoardActivity extends AppCompatActivity {
 
     public void updateBoard(JSONObject json){
         //update model
-        if(getCurrentBoard().updateBoard(json) ==true){
+        if(getCurrentBoard().updateBoard(json) == true){
             //update views
 
             //red pawns update

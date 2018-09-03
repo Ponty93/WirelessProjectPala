@@ -15,15 +15,15 @@ public class lobbyController {
         lobbyView = view;
     }
 
-    public JSONObject toBoardConnect(String playerId){
+    public JSONObject toBoardConnect(int playerId){
         return refModel.toBoardConnect(playerId);
     }
 
-    public JSONObject lobbyCheck(String userName, String playerId){
+    public JSONObject lobbyCheck(String userName, int playerId){
         return refModel.lobbyCheck(userName,playerId);
     }
 
-    public JSONObject backAction(String userName, String playerId){
+    public JSONObject backAction(String userName, int playerId){
         return refModel.backAction(userName,playerId);
     }
 }

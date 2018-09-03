@@ -48,8 +48,6 @@ public class registration extends AppCompatActivity {
             else{
                 ((TextView) findViewById(R.id.textView6)).setText("NOME NON DISPONIBILE!");
             }
-
-
         }
     }
 }

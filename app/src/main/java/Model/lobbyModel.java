@@ -1,5 +1,7 @@
 package Model;
 
+import android.util.Log;
+
 import com.project.wirelessteam.Views.lobby;
 
 import org.json.JSONException;
@@ -11,26 +13,26 @@ import API.phpConnect;
 
 public class lobbyModel {
 
-    public JSONObject toBoardConnect(String playerId) {
-        phpConnect myConn =null;
-        boolean res = false;
+    public JSONObject toBoardConnect(int playerId) {
+        phpConnect myConn;
         try {
             myConn = new phpConnect("https://psionofficial.com/Wireless/handler.php", -1);
-            res = myConn.execute("r", "GAME","-1","gameId", playerId).get();
+            if(myConn.execute("r", "GAME","-1","gameId", Integer.toString(playerId)).get() == true) {
+               // Log.d("JSON","is"+myConn.getResJson());
+                return myConn.getResJson();
+            }
         }catch(InterruptedException e){e.printStackTrace();}
         catch(ExecutionException e){e.printStackTrace();}
-        if(res == true)
-            return myConn.getResJson();
 
         return null;
     }
 
-    public JSONObject lobbyCheck(String userName, String playerId){
+    public JSONObject lobbyCheck(String userName, int playerId){
         phpConnect lobbyConn = null;
         boolean res = false;
         try{
             lobbyConn = new phpConnect("https://psionofficial.com/Wireless/lobby.php", -1);
-            if(lobbyConn.execute("r","-1","-1",userName,playerId).get() == true)
+            if(lobbyConn.execute("r","-1","-1",userName,Integer.toString(playerId)).get() == true)
                 return lobbyConn.getResJson();
         }
         catch(InterruptedException e ){
@@ -43,11 +45,11 @@ public class lobbyModel {
         return null;
     }
 
-    public JSONObject backAction(String userName, String playerId){
+    public JSONObject backAction(String userName, int playerId){
         phpConnect lobbyConn =null;
         try {
             lobbyConn = new phpConnect("https://psionofficial.com/Wireless/lobby.php", -1);
-            if(lobbyConn.execute("r", "delete","-1",userName,playerId).get() == true)
+            if(lobbyConn.execute("r", "delete","-1",userName,Integer.toString(playerId)).get() == true)
                 return lobbyConn.getResJson();
         }catch(InterruptedException e){e.printStackTrace();}
         catch(ExecutionException e){e.printStackTrace();}

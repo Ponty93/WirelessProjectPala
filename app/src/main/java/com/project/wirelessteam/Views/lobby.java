@@ -48,16 +48,18 @@ public class lobby extends AppCompatActivity {
                     currActivity.finish();
                 }
 
-                if(seconds % 5 == 0){
+                if(seconds % 5 == 0) {
 
-                    lobbyConn = controller.lobbyCheck(lobbyIntent.getStringExtra("userName"),lobbyIntent.getStringExtra("idPlayer"));
+                    lobbyConn = controller.lobbyCheck(lobbyIntent.getStringExtra("userName"), lobbyIntent.getIntExtra("idPlayer",0));
+                    if (lobbyConn != null) {
+                        try {
+                            if (lobbyConn.getInt("Result") == 1)
+                                toBoard();
 
-                    try{
-                    if(lobbyConn.getInt("Result") == 1) {
-                        toBoard();
-                    }
-                    }catch(JSONException e){
-                        e.printStackTrace();
+
+                        }catch(JSONException e){
+                            e.printStackTrace();
+                        }
                     }
                 }
 
@@ -69,37 +71,43 @@ public class lobby extends AppCompatActivity {
 
     private void toBoard(){
 
-        JSONObject res =controller.toBoardConnect(lobbyIntent.getStringExtra("idPlayer"));
+        JSONObject res =controller.toBoardConnect(lobbyIntent.getIntExtra("idPlayer",0));
 
         Intent toBoard = new Intent(currActivity,BoardActivity.class);
 
-        toBoard.putExtra("player1Id",Integer.parseInt(lobbyIntent.getStringExtra("idPlayer")));
+        toBoard.putExtra("player1Id",lobbyIntent.getIntExtra("idPlayer",0));
         try {
             toBoard.putExtra("player2Id", lobbyConn.getInt("player2Id"));
             toBoard.putExtra("player2Name", lobbyConn.getString("player2Name"));
         }catch(JSONException e){
             e.printStackTrace();
         }
-        toBoard.putExtra("json",res.toString());
-        //put extraInt the id of the game object created
-        startActivity(toBoard);
-        finish();
+        if(res != null) {
+            Log.d("JSON","is"+res.toString());
+            toBoard.putExtra("json", res.toString());
+            startActivity(toBoard);
+            finish();
+        }
+        else
+            super.finish();
+
     }
 
     public void lobbyChecker() {
         timer.setBase(SystemClock.elapsedRealtime());
         timer.start();
-        stopButton.setEnabled(true);
     }
 
 
     public void back(View v){
         timer.stop();
 
-        lobbyConn = controller.backAction(lobbyIntent.getStringExtra("userName"),lobbyIntent.getStringExtra("idPlayer"));
+        lobbyConn = controller.backAction(lobbyIntent.getStringExtra("userName"),lobbyIntent.getIntExtra("idPlayer",0));
         try {
-            if (lobbyConn.getInt("Result") == 1)
-                toBoard();
+            if(lobbyConn != null) {
+                if (lobbyConn.getInt("Result") == 1)
+                    toBoard();
+            }
             else
                 super.finish();
         }catch(JSONException e){
