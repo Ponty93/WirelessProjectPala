@@ -103,17 +103,37 @@ public class onDragCustomMethod implements View.OnDragListener {
 
                     //todo risolvere problema
                     if (cellNumber == local + action1) {
-                        /*if(isBlack(newParent.getChildAt(1))){
-
-                        }*/
+                        if((cellNumber>6 && cellNumber!=30) && isBlack(newParent.getChildAt(1))){
+                            if(currentBoard.canEat(currentBoard.getPlayer1().getUserId(),currentBoard.getPlayer2().getUserId(),local,local+action1)){
+                                currentBoard.eatPawn(currentBoard.getPlayer2().getUserId(),local+action1);
+                            }
+                        }
+                        currentBoard.movePawn(currentBoard.getPlayer1().getUserId(),currentBoard.getPlayer1().getPawnbyId(findViewByTag(srcView)).getIdDB(),local,local+action1);
                         currentBoard.setDiceResToNullInPos(0);
                         currentBoard.setNumberOfMove(currentBoard.getNumberOfMove() + 1);
                     }
                     else if(cellNumber == local + action2) {
+                        if((cellNumber>6 && cellNumber!=30) && isBlack(newParent.getChildAt(1))){
+                            if(currentBoard.canEat(currentBoard.getPlayer1().getUserId(),currentBoard.getPlayer2().getUserId(),local,local+action2)){
+                                currentBoard.eatPawn(currentBoard.getPlayer2().getUserId(),local+action2);
+                                //todo
+                                /*int toRestart = currentBoard.howManyPawns(local+action1,currentBoard.getPlayer2().getUserId());
+                                while(toRestart>0){
+
+                                }*/
+                            }
+                        }
+                        currentBoard.movePawn(currentBoard.getPlayer1().getUserId(),currentBoard.getPlayer1().getPawnbyId(findViewByTag(srcView)).getIdDB(),local,local+action2);
                         currentBoard.setDiceResToNullInPos(1);
                         currentBoard.setNumberOfMove(currentBoard.getNumberOfMove() + 1);
                     }
                     else if (cellNumber == local + action3) {
+                        if((cellNumber>6 && cellNumber!=30) && isBlack(newParent.getChildAt(1))){
+                            if(currentBoard.canEat(currentBoard.getPlayer1().getUserId(),currentBoard.getPlayer2().getUserId(),local,local+action3)){
+                                currentBoard.eatPawn(currentBoard.getPlayer2().getUserId(),local+action3);
+                            }
+                        }
+                        currentBoard.movePawn(currentBoard.getPlayer1().getUserId(),currentBoard.getPlayer1().getPawnbyId(findViewByTag(srcView)).getIdDB(),local,local+action3);
                         currentBoard.setDiceResToNull();
                         currentBoard.setNumberOfMove(currentBoard.getNumberOfMove() + 2);
                     }

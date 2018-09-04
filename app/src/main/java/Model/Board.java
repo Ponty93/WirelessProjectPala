@@ -45,32 +45,6 @@ public class Board extends Game {
 
     }
 
-    /**
-     * The method search for the pawns the user wants to move
-     * @param val
-     * @param id
-     * @param player
-     */
-    /*public void planToMove(int val, int id, Player player) {
-        getConnection().execute("r","PAWN",Integer.toString(player.getUserId()),Integer.toString(id));
-        int posToStart = Integer.parseInt(getConnection().getParamFromJson("position"));
-        int posToArrive = posToStart+ val;
-        if(posToArrive < numberOfCell) {
-                if(checkIfPawnWin(player.getUserId(),posToArrive,posToStart))
-                    return;
-                else {
-                    if(canEat(player.getUserId(),findPlayerByRemoving(player.getUserId()).getUserId(),posToStart,posToArrive)) {
-                        eatPawn(player.getUserId(),posToArrive);
-                        movePawn(player.getUserId(),id,posToStart,posToArrive);
-                    }
-                    else
-                        movePawn(player.getUserId(),id,posToStart,posToArrive);
-                }
-            }
-            else {
-            //shows a popup to inform the user the move is not valid
-        }
-    }*/
 
     /**
      * Check if a pawn is able to win
