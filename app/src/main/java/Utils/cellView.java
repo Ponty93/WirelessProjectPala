@@ -11,7 +11,7 @@ import android.view.View;
 
 import com.project.wirelessteam.Views.R;
 
-public class myClass extends View {
+public class cellView extends View {
     private String cellText;
     private int cellColor;
     private int textWidth = 10;
@@ -20,24 +20,24 @@ public class myClass extends View {
     private Paint paintShapeBorder;
 
 
-    public myClass(Context context) {
+    public cellView(Context context) {
         super(context);
 
     }
 
-    public myClass(Context context, @Nullable AttributeSet attrs) {
+    public cellView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
         setupPaint();
     }
 
-    public myClass(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public cellView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
         setupPaint();
     }
 
-    public myClass(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public cellView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(attrs);
         setupPaint();
@@ -46,11 +46,11 @@ public class myClass extends View {
 
     private void init(AttributeSet attrs) {
         // Obtain a typed array of attributes
-        TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.myClass, 0, 0);
+        TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.cellView, 0, 0);
         // Extract custom attributes into member variables
         try {
-            cellText = a.getString(R.styleable.myClass_cellText);
-            cellColor = a.getColor(R.styleable.myClass_cellColor,Color.BLACK);
+            cellText = a.getString(R.styleable.cellView_cellText);
+            cellColor = a.getColor(R.styleable.cellView_cellColor,Color.BLACK);
         } finally {
             // TypedArray objects are shared and must be recycled.
             a.recycle();

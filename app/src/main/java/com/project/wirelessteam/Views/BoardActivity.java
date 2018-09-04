@@ -108,7 +108,7 @@ public class BoardActivity extends AppCompatActivity {
             boolean connRes = false;
             final phpConnect connTimeout = new phpConnect("https://psionofficial.com/Wireless/handler.php", currentBoard.getIdGame());
             connRes = getCurrentBoard().updateRound(connTimeout);
-            //Log.d("JSON","Json res"+connTimeout.getResJson());
+            Log.d("JSON","Json res"+connTimeout.getResJson());
             if(connRes == true){
                 Log.d("RECEIVER","CONNRES IS TRUE");
                 if(connTimeout.getParamFromJson("winner").equals("none") == false) {

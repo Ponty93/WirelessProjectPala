@@ -25,7 +25,7 @@ public class onDragCustomMethod implements View.OnDragListener {
     //var to be used in onDrag method
     private int local = 0;
     private int action1=0,action2=0,action3=0;
-    private boolean ac1 =false,ac2=false;
+
 
     public onDragCustomMethod(BoardActivity boardAct, Board boardRef)
     {
@@ -38,29 +38,29 @@ public class onDragCustomMethod implements View.OnDragListener {
         int action = dragEvent.getAction();
 
 
-        switch(action){
+        switch(action) {
             case DragEvent.ACTION_DRAG_STARTED:
-                local = findPositionByView((View)dragEvent.getLocalState());
+                local = findPositionByView((View) dragEvent.getLocalState());
                 action1 = currentBoard.getDiceRes(0);
                 action2 = currentBoard.getDiceRes(1);
-                action3 = action1+action2;
-                if(action1!= 0 && action2 != 0 && action3 != 0) {
+                action3 = action1 + action2;
+
+                if(local+action1 != local || local + action2 != local || local+action3 != local) {
                     if (dragEvent.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-                        if (Integer.parseInt((String) view.getTag()) == local + action1 && ac1 != true) {
+                        if (Integer.parseInt((String) view.getTag()) == local + action1 && local + action1 != 0) {
                             refActivity.findCellByIndex(local + action1).setBackgroundColor(Color.RED);
                             return true;
                         }
-                        if (Integer.parseInt((String) view.getTag()) == local + action2 && ac2 != true) {
+                        if (Integer.parseInt((String) view.getTag()) == local + action2 && local + action2 != 0) {
                             refActivity.findCellByIndex(local + action2).setBackgroundColor(Color.RED);
                             return true;
                         }
-                        if (Integer.parseInt((String) view.getTag()) == local + action3 && ac1 != true && ac2 != true) {
+                        if (Integer.parseInt((String) view.getTag()) == local + action3 && local + action3 != 0) {
                             refActivity.findCellByIndex(local + action3).setBackgroundColor(Color.RED);
                             return true;
                         }
                     }
                 }
-
 
                 return false;
 
@@ -94,28 +94,31 @@ public class onDragCustomMethod implements View.OnDragListener {
                     owner.removeView(srcView);
 
                     RelativeLayout newParent = (RelativeLayout) view;
-                    newParent.addView(srcView);
+
 
                     int cellNumber = Integer.parseInt((String) newParent.getTag());
 
                     if (cellNumber > 6 && cellNumber != 30)
                         setPawnPositionInCell(srcView, newParent);
 
-                    //todo considerare il risultato identico
+                    //todo risolvere problema
                     if (cellNumber == local + action1) {
-                        ac1 = true;
+                        /*if(isBlack(newParent.getChildAt(1))){
+
+                        }*/
+                        currentBoard.setDiceResToNullInPos(0);
                         currentBoard.setNumberOfMove(currentBoard.getNumberOfMove() + 1);
                     }
-                    if (cellNumber == local + action2) {
-                        ac2 = true;
+                    else if(cellNumber == local + action2) {
+                        currentBoard.setDiceResToNullInPos(1);
                         currentBoard.setNumberOfMove(currentBoard.getNumberOfMove() + 1);
                     }
-                    if (cellNumber == local + action3) {
-                        ac1 = true;
-                        ac2 = true;
+                    else if (cellNumber == local + action3) {
+                        currentBoard.setDiceResToNull();
                         currentBoard.setNumberOfMove(currentBoard.getNumberOfMove() + 2);
                     }
 
+                    newParent.addView(srcView);
 
                     currentBoard.getPlayer1().setPawnPosition(findViewByTag(srcView), Integer.parseInt((String) newParent.getTag()));
                     return true;
@@ -167,7 +170,7 @@ public class onDragCustomMethod implements View.OnDragListener {
 
 
 
-    private void setPawnPositionInCell(View v,RelativeLayout layout){
+   public void setPawnPositionInCell(View v,RelativeLayout layout){
         RelativeLayout.LayoutParams params =(RelativeLayout.LayoutParams) v.getLayoutParams();
 
             params.addRule(RelativeLayout.RIGHT_OF,0);
@@ -214,6 +217,27 @@ public class onDragCustomMethod implements View.OnDragListener {
                 return currentBoard.getPlayer1().getPawnbyId(6).getPosition();
             default:
                 return 0;
+        }
+    }
+
+    public boolean isBlack(View v){
+        String tag = (String)v.getTag();
+
+        switch(tag){
+            case "black1":
+                return true;
+            case "black2":
+                return true;
+            case "black3":
+                return true;
+            case "black4":
+                return true;
+            case "black5":
+                return true;
+            case "black6":
+                return true;
+            default:
+                return false;
         }
     }
 }

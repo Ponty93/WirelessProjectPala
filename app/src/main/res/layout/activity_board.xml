@@ -191,7 +191,7 @@
             android:layout_toEndOf="@+id/cell14L"
             android:background="#0000ff"
             >
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -199,7 +199,7 @@
                 >
 
 
-            </Utils.myClass>
+            </Utils.cellView>
 
             <ImageView
                 android:id="@+id/red1"
@@ -319,14 +319,14 @@
             android:layout_alignTop="@+id/cell1L"
             android:background="#00ff00"
             >
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="  1"
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -339,7 +339,7 @@
             android:layout_toEndOf="@+id/cell2L"
             android:background="#00ff00"
             >
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -347,7 +347,7 @@
 
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -360,7 +360,7 @@
             android:layout_alignTop="@id/cell3L"
             android:background="#00ff00"
             >
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -368,7 +368,7 @@
 
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -381,14 +381,14 @@
             android:layout_alignTop="@id/cell4L"
             android:background="#00ff00"
             >
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="  4"
 
                 >
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -402,7 +402,7 @@
             android:layout_alignTop="@id/cell5L"
             android:background="#00ff00"
             >
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -410,7 +410,7 @@
 
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -423,7 +423,7 @@
             android:layout_alignStart="@+id/cell6L"
             android:background="#00ff00"
             >
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell7"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -431,7 +431,7 @@
 
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -443,14 +443,14 @@
             android:layout_toStartOf="@+id/cell7L"
             android:layout_alignTop="@id/cell7L"
             >
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="  7"
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -463,14 +463,14 @@
             android:layout_alignTop="@id/cell7L"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell9"
                 android:layout_width="75dp"
                 android:layout_height="60dp"
                 app:cellText="  8"
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -483,14 +483,14 @@
             android:layout_alignTop="@id/cell7L"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell10"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="  9"
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -503,14 +503,14 @@
             android:layout_alignTop="@id/cell7L"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell11"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="10"
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -523,14 +523,14 @@
             android:layout_alignTop="@id/cell7L"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell12"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="11"
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -543,13 +543,13 @@
             android:layout_toLeftOf="@+id/cell1L"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell13"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="12">
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -562,13 +562,13 @@
             android:layout_alignTop="@+id/cell2L"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell14"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="13">
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -581,13 +581,13 @@
             android:layout_alignParentLeft="true"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell15"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="14">
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -600,14 +600,14 @@
             android:layout_alignTop="@id/cell15L"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell16"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="15"
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -620,14 +620,14 @@
             android:layout_alignTop="@id/cell15L"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell17"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="16"
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -640,14 +640,14 @@
             android:layout_alignTop="@id/cell15L"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell18"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="17"
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -660,7 +660,7 @@
             android:layout_alignTop="@id/cell15L"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell19"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -668,7 +668,7 @@
 
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -682,14 +682,14 @@
             >
 
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell20"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="19"
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -702,14 +702,14 @@
             android:layout_alignTop="@id/cell15L"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell21"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="20"
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -722,14 +722,14 @@
             android:layout_alignTop="@id/cell15L"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell22"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="21"
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -742,13 +742,13 @@
             android:layout_toRightOf="@+id/cell6L"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell23"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="22">
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -761,13 +761,13 @@
             android:layout_toRightOf="@+id/cell6L"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell24"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="23">
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -780,13 +780,13 @@
             android:layout_toRightOf="@+id/cell6L"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell25"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="24">
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -799,13 +799,13 @@
             android:layout_toRightOf="@+id/cell5L"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell26"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="25">
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -818,13 +818,13 @@
             android:layout_toRightOf="@+id/cell4L"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell27"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="26">
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -836,14 +836,14 @@
             android:layout_toStartOf="@+id/cell27L"
             android:layout_alignTop="@+id/cell25L">
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell28"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="27"
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -856,14 +856,14 @@
             android:layout_alignTop="@+id/cell25L"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell29"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="28"
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -876,13 +876,13 @@
             android:layout_toLeftOf="@+id/cell29L"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell30"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="29">
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 
@@ -896,14 +896,14 @@
             android:background="#0000ff"
             >
 
-            <Utils.myClass
+            <Utils.cellView
                 android:id="@+id/cell31"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cellText="END"
                 >
 
-            </Utils.myClass>
+            </Utils.cellView>
 
         </RelativeLayout>
 

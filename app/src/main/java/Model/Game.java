@@ -12,8 +12,6 @@ public class Game {
     private final Player player1;
     private final Player player2;
     private int roundsCounter = 0;
-    //todo remove
-    private phpConnect connectionHandler = new phpConnect("https://www.psionofficial.com/Wireless/handler.php",getIdGame());
 
 
     public Game(Player p1, Player p2,int gameId) {
@@ -68,9 +66,7 @@ public class Game {
             return player1;
     }
 
-    public phpConnect getConnection() {
-        return connectionHandler;
-    }
+
 
     public boolean playerOrder(int id){
         if(id == getPlayer1().getUserId())
