@@ -142,6 +142,10 @@ public class Board extends Game {
      * @param playerId :
      * @return {int}
      */
+
+    //todo redefine this method as a JSonObject that contains:
+    // - the number of pawns im that pos
+    // - the id of the pawns in that pos
     public int howManyPawns(int pos, int playerId)
     {   phpConnect conn = new phpConnect("https://www.psionofficial.com/Wireless/handler.php", getIdGame());
         try {

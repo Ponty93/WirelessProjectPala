@@ -120,8 +120,8 @@ public class onDragCustomMethod implements View.OnDragListener {
 
                             }
                         }
-                        */currentBoard.movePawn(currentBoard.getPlayer1().getUserId(),currentBoard.getPlayer1().getPawnbyId(findViewByTag(srcView)).getIdDB(),local,local+action2);
-                        currentBoard.setDiceResToNullInPos(1);
+                        currentBoard.movePawn(currentBoard.getPlayer1().getUserId(),currentBoard.getPlayer1().getPawnbyId(findViewByTag(srcView)).getIdDB(),local,local+action2);
+                        */currentBoard.setDiceResToNullInPos(1);
                         currentBoard.setNumberOfMove(currentBoard.getNumberOfMove() + 1);
                     }
                     else if (cellNumber == local + action3) {
@@ -130,8 +130,8 @@ public class onDragCustomMethod implements View.OnDragListener {
                                 currentBoard.eatPawn(currentBoard.getPlayer2().getUserId(),local+action3);
                             }
                         }
-                        */currentBoard.movePawn(currentBoard.getPlayer1().getUserId(),currentBoard.getPlayer1().getPawnbyId(findViewByTag(srcView)).getIdDB(),local,local+action3);
-                        currentBoard.setDiceResToNull();
+                        currentBoard.movePawn(currentBoard.getPlayer1().getUserId(),currentBoard.getPlayer1().getPawnbyId(findViewByTag(srcView)).getIdDB(),local,local+action3);
+                        */currentBoard.setDiceResToNull();
                         currentBoard.setNumberOfMove(currentBoard.getNumberOfMove() + 2);
                     }
 
