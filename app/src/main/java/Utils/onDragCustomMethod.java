@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.project.wirelessteam.Views.BoardActivity;
 import com.project.wirelessteam.Views.R;
 
+import java.util.ArrayList;
+
 import Controller.boardController;
 import Model.Board;
 
@@ -81,66 +83,99 @@ public class onDragCustomMethod implements View.OnDragListener {
                 ClipData data = dragEvent.getClipData();
                 ClipData.Item item = data.getItemAt(0);
                 String itemText = item.getText().toString();
-                Toast.makeText(refActivity,"Dragged data is"+ itemText,Toast.LENGTH_LONG).show();
+                Toast.makeText(refActivity,"Dragged data is"+ itemText+" in "+view.getTag(),Toast.LENGTH_LONG).show();
                 resetTargetViewBackground(view);
                 view.invalidate();
 
 
                 // Get dragged view object from drag event object.
                 View srcView = (View)dragEvent.getLocalState();
+
                 // Get dragged view's parent view group.
                 ViewGroup owner = (ViewGroup) srcView.getParent();
                 // Remove source view from original parent view group.
 
-                    owner.removeView(srcView);
+                int reds= controller.howManyPawns(local,controller.getPlayer1().getUserId());
+                ArrayList<View> stack = new ArrayList<>();
+                if(reds>1 && ((String)owner.getTag()).equals("0") == false)
+                    stack = loadArray(owner,reds);
 
-                    RelativeLayout newParent = (RelativeLayout) view;
+                owner.removeView(srcView);
+
+                RelativeLayout newParent = (RelativeLayout) view;
 
 
-                    int cellNumber = Integer.parseInt((String) newParent.getTag());
+                int cellNumber = Integer.parseInt((String) newParent.getTag());
 
-                    if (cellNumber > 6 && cellNumber != 30)
-                        setPawnPositionInCell(srcView, newParent);
+                if (cellNumber > 6 && cellNumber != 30)
+                    setPawnPositionInCell(srcView, newParent);
 
-                    //todo risolvere problema
-                    if (cellNumber == local + action1) {
-                       /* if((cellNumber>6 && cellNumber!=30) && isBlack(newParent.getChildAt(1))){
-                            if(currentBoard.canEat(currentBoard.getPlayer1().getUserId(),currentBoard.getPlayer2().getUserId(),local,local+action1)){
-                                currentBoard.eatPawn(currentBoard.getPlayer2().getUserId(),local+action1);
+
+                if (cellNumber == local + action1) {
+                    if((cellNumber>6 && cellNumber!=30) && isOccupied(newParent)){
+                        if(isBlack(newParent.getChildAt(1))){
+                            if(controller.canEat(controller.getPlayer1().getUserId(),controller.getPlayer2().getUserId(),local,local+action1)){
+                                int blackStack = controller.howManyPawns(local+action1,controller.getPlayer2().getUserId());
+                                int index=0;
+                                while(index<blackStack) {
+                                    controller.eatPawn(controller.getPlayer2().getPawnbyId(findViewByTag(newParent.getChildAt(1))).getId());
+                                    View black = (View) newParent.getChildAt(1);
+                                    newParent.removeView(black);
+                                    refToStart().addView(black);
+                                    index++;
+                                }
                             }
                         }
-                        */controller.setDiceResToNullInPos(0);
-                        controller.setNumberOfMove(controller.getNumberOfMove() + 1);
+                    }
+                        controller.setDiceResToNullInPos(0);
+                        //controller.setNumberOfMove(controller.getNumberOfMove() + 1);
                     }
                     else if(cellNumber == local + action2) {
-                        /*if((cellNumber>6 && cellNumber!=30) && isBlack(newParent.getChildAt(1))){
-                            if(currentBoard.canEat(currentBoard.getPlayer1().getUserId(),currentBoard.getPlayer2().getUserId(),local,local+action2)){
-                                currentBoard.eatPawn(currentBoard.getPlayer2().getUserId(),local+action2);
-                                //todo
-
+                        if((cellNumber>6 && cellNumber!=30) && isOccupied(newParent)){
+                            if(isBlack(newParent.getChildAt(1))){
+                            if(controller.canEat(controller.getPlayer1().getUserId(),controller.getPlayer2().getUserId(),local,local+action2)){
+                                int blackStack = controller.howManyPawns(local+action2,controller.getPlayer2().getUserId());
+                                int index=0;
+                                while(index<blackStack) {
+                                    controller.eatPawn(controller.getPlayer2().getPawnbyId(findViewByTag(newParent.getChildAt(1))).getId());
+                                    View black = (View) newParent.getChildAt(1);
+                                    newParent.removeView(black);
+                                    refToStart().addView(black);
+                                    index++;
+                                }
+                            }
                             }
                         }
-                        */controller.setDiceResToNullInPos(1);
-                        controller.setNumberOfMove(controller.getNumberOfMove() + 1);
+                        controller.setDiceResToNullInPos(1);
+                        //controller.setNumberOfMove(controller.getNumberOfMove() + 1);
                     }
                     else if (cellNumber == local + action3) {
-                        /*if((cellNumber>6 && cellNumber!=30) && isBlack(newParent.getChildAt(1))){
-                            if(currentBoard.canEat(currentBoard.getPlayer1().getUserId(),currentBoard.getPlayer2().getUserId(),local,local+action3)){
-                                currentBoard.eatPawn(currentBoard.getPlayer2().getUserId(),local+action3);
+                    if((cellNumber>6 && cellNumber!=30) && isOccupied(newParent)){
+                        if(isBlack(newParent.getChildAt(1))){
+                            if(controller.canEat(controller.getPlayer1().getUserId(),controller.getPlayer2().getUserId(),local,local+action3)){
+                                int blackStack = controller.howManyPawns(local+action3,controller.getPlayer2().getUserId());
+                                int index=0;
+                                while(index<blackStack) {
+                                    controller.eatPawn(controller.getPlayer2().getPawnbyId(findViewByTag(newParent.getChildAt(1))).getId());
+                                    View black = (View) newParent.getChildAt(1);
+                                    newParent.removeView(black);
+                                    refToStart().addView(black);
+                                    index++;
+                                }
                             }
                         }
-                        */controller.setDiceResToNull();
-                        controller.setNumberOfMove(controller.getNumberOfMove() + 2);
+                    }
+                        controller.setDiceResToNull();
+                        //controller.setNumberOfMove(controller.getNumberOfMove() + 2);
                     }
 
                     newParent.addView(srcView);
-                    //todo stack moves not supported
                     controller.movePawn(findViewByTag(srcView), Integer.parseInt((String) newParent.getTag()));
+
+                    if(((String) owner.getTag()).equals("0") == false)
+                        removeFromArray(stack,newParent);
+
                     return true;
-
-
-
-
 
             case DragEvent.ACTION_DRAG_ENDED:
                 ((RelativeLayout) view).setBackgroundColor(Color.WHITE);
@@ -177,6 +212,18 @@ public class onDragCustomMethod implements View.OnDragListener {
             case "red5":
                 return 5;
             case "red6":
+                return 6;
+            case "black1":
+                return 1;
+            case "black2":
+                return 2;
+            case "black3":
+                return 3;
+            case "black4":
+                return 4;
+            case "black5":
+                return 5;
+            case "black6":
                 return 6;
             default:
                 return 0;
@@ -256,5 +303,38 @@ public class onDragCustomMethod implements View.OnDragListener {
             default:
                 return false;
         }
+    }
+
+    public RelativeLayout refToStart(){
+        return refActivity.findViewById(R.id.cell1L);
+    }
+
+    public ArrayList<View> loadArray(ViewGroup owner,int howMuch){
+        ArrayList<View> stack = new ArrayList<>();
+
+        int index=0;
+        while(index<howMuch-1){
+            stack.add(owner.getChildAt(1));
+            owner.removeView(owner.getChildAt(1));
+            index++;
+        }
+        return stack;
+    }
+
+    public void removeFromArray(ArrayList<View> stack,ViewGroup newParent){
+        int howMuch = stack.size();
+        int index =0;
+        while(index < howMuch){
+            newParent.addView(stack.get(index));
+            controller.movePawn(findViewByTag(stack.get(index)), Integer.parseInt((String) newParent.getTag()));
+            index++;
+        }
+    }
+
+    public boolean isOccupied(ViewGroup v){
+        if(v.getChildAt(1) != null)
+            return true;
+        else
+            return false;
     }
 }

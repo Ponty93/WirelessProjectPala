@@ -79,5 +79,17 @@ public class boardController {
     public void setCounter(int val){
         model.setCounter(val);
     }
+
+    public void eatPawn(int id){
+        model.eatPawn(id);
+    }
+
+    public boolean canEat(int id1,int id2,int posToStart,int posToArrive){
+        return model.canEat(id1,id2,posToStart,posToArrive);
+    }
+
+    public int howManyPawns(int pos, int playerId){
+        return model.howManyPawns(pos,playerId);
+    }
 }
 

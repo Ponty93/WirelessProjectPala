@@ -14,7 +14,6 @@ public class Pawn {
                                 // 1 : Start
                                 // 31 : Finish
                                 // -1 : currently in a stack
-    private int cap = 1 ;
 
     public Pawn(int id,int pawnDb) {
         pawnIdFromDb = pawnDb;

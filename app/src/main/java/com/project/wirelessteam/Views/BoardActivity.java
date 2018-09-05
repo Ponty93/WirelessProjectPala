@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,14 +40,16 @@ public class BoardActivity extends AppCompatActivity {
     private final BoardActivity boardView = this;
     private Timer internalTimer;
     private boardController controller = null;
-
+    private MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
         Intent buildBoard = getIntent();
-
+        mp = MediaPlayer.create(this, R.raw.menu);
+        mp.start();
+        mp.setLooping(true);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         //initialize the boards view feature
@@ -255,6 +258,19 @@ public class BoardActivity extends AppCompatActivity {
         red6.setOnTouchListener(new onTouchCustomMethod(context,refLayout,controller));
         red6.setTag("red6");
 
+        ImageView black1 = findViewById(R.id.black1);
+        black1.setTag("black1");
+        ImageView black2 = findViewById(R.id.black2);
+        black2.setTag("black2");
+        ImageView black3 = findViewById(R.id.black3);
+        black3.setTag("black3");
+        ImageView black4 = findViewById(R.id.black4);
+        black4.setTag("black4");
+        ImageView black5 = findViewById(R.id.black5);
+        black5.setTag("black5");
+        ImageView black6 = findViewById(R.id.black6);
+        black6.setTag("black6");
+
 
         //sets the cell able to receive the pawns
         findViewById(R.id.cell1L).setOnDragListener(new onDragCustomMethod(boardView,controller));
@@ -329,7 +345,7 @@ public class BoardActivity extends AppCompatActivity {
 
         roundOrganize(controller.playerOrder(roundId));
 
-        updateBoard(json);
+        //updateBoard(json);
 
     }
 
@@ -354,6 +370,8 @@ public class BoardActivity extends AppCompatActivity {
             map.get(4).setPawnView((ImageView)findViewById(R.id.black4));
             map.get(5).setPawnView((ImageView)findViewById(R.id.black5));
             map.get(6).setPawnView((ImageView)findViewById(R.id.black6));
+            map.get(5).setPosition(7);
+            map.get(6).setPosition(7);
         }
     }
 
@@ -378,6 +396,7 @@ public class BoardActivity extends AppCompatActivity {
     public void surrenderButton(View view){
             controller.surrender();
             //invoco haiPerso
+            mp.stop();
             endGame(boardView);
 
 
@@ -389,7 +408,7 @@ public class BoardActivity extends AppCompatActivity {
         roll1.setImageDrawable(getImageViewByResult(controller.getDiceRes(0)));
         roll2.setImageDrawable(getImageViewByResult(controller.getDiceRes(1)));
         //roll button
-        findViewById(R.id.roll).setEnabled(false);
+        //findViewById(R.id.roll).setEnabled(false);
         //red pawns
         findViewById(R.id.red1).setEnabled(true);
         findViewById(R.id.red2).setEnabled(true);

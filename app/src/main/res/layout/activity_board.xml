@@ -291,23 +291,9 @@
                 android:layout_alignParentEnd="true"
                 app:srcCompat="@drawable/nero" />
 
-            <ImageView
-                android:id="@+id/black5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                app:srcCompat="@drawable/nero" />
 
-            <ImageView
-                android:id="@+id/black6"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/nero" />
+
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -325,8 +311,8 @@
                 android:layout_height="match_parent"
                 app:cellText="  1"
                 >
-
             </Utils.cellView>
+
 
         </RelativeLayout>
 
@@ -433,6 +419,7 @@
 
             </Utils.cellView>
 
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -451,6 +438,23 @@
                 >
 
             </Utils.cellView>
+            <ImageView
+                android:id="@+id/black5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                app:srcCompat="@drawable/nero" />
+
+            <ImageView
+                android:id="@+id/black6"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/nero" />
 
         </RelativeLayout>
 

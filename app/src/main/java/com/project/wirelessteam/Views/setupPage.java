@@ -19,10 +19,7 @@ public class setupPage extends AppCompatActivity {
         TextView userName = (TextView) findViewById(R.id.displayUserName);
         userName.setText(myIntent.getStringExtra("userName"));
         mp = MediaPlayer.create(this, R.raw.menu);
-        if(mp.isPlaying()){
-            mp.stop();
-
-        }else {
+        if(!mp.isPlaying()) {
             mp.start();
             mp.setLooping(true);
         }
@@ -45,6 +42,7 @@ public class setupPage extends AppCompatActivity {
         Intent intentToLobby = new Intent(this,lobby.class);
         intentToLobby.putExtra("idPlayer",myIntent.getIntExtra("idPlayer",0));
         intentToLobby.putExtra("userName",myIntent.getStringExtra("userName"));
+        mp.stop();
         startActivity(intentToLobby);
 
     }

@@ -79,15 +79,12 @@ public class Board extends Game {
 
     /**
      * Sets the position value of a enemy pawn that can be eaten to -1
-     * @param posToStart
-     * @param cap
+     * @param id
      * @return {void}
      */
-    public void eatPawn(int posToStart,int cap) {
-        int counter=0;
-        while(counter<cap){
-            getPlayer2().findPawnByPos(posToStart).setPosition(0);
-        }
+    public void eatPawn(int id) {
+        getPlayer2().getPawnbyId(id).setPosition(0);
+
     }
 
     /**
@@ -106,9 +103,6 @@ public class Board extends Game {
      * @return {int}
      */
 
-    //todo redefine this method as a JSonObject that contains:
-    // - the number of pawns im that pos
-    // - the id of the pawns in that pos
     public int howManyPawns(int pos, int playerId)
     {
         int counter = 0;
@@ -117,12 +111,14 @@ public class Board extends Game {
             while (index < 7) {
                 if (getPlayer1().getPawnbyId(index).getPosition() == pos)
                     counter++;
+                index++;
             }
         }
         else{
             while (index < 7) {
                 if (getPlayer2().getPawnbyId(index).getPosition() == pos)
                     counter++;
+                index++;
             }
         }
         return counter;
