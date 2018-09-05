@@ -69,6 +69,14 @@ public class BoardActivity extends AppCompatActivity {
 
         @Override
         public void run() {
+            if(getController().getNumberOfMove()==2){
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        findViewById(R.id.endTurn).setEnabled(true);
+                    }
+                });
+            }
 
             counter++;
 
@@ -174,12 +182,12 @@ public class BoardActivity extends AppCompatActivity {
         if(round == true) {//if its my turn, at 2m calls endTurn
             Log.d("internalTimer","starts my round timer");
             internalTimer = new Timer();
-            internalTimer.schedule(new roundTimeout(boardView),0,5000);
+            internalTimer.schedule(new roundTimeout(boardView),0,3000);
         }
         else if(round == false){//its not my turn, every 10s i ask the server if its my turn now
             Log.d("internalTimer","starts NOT my round timer");
             internalTimer = new Timer();
-            internalTimer.schedule(new connectionTimeout(boardView),0,5000);
+            internalTimer.schedule(new connectionTimeout(boardView),0,3000);
         }
 
         findViewById(R.id.endTurn).setEnabled(false);
@@ -353,8 +361,6 @@ public class BoardActivity extends AppCompatActivity {
             map.get(4).setPawnView((ImageView)findViewById(R.id.red4));
             map.get(5).setPawnView((ImageView)findViewById(R.id.red5));
             map.get(6).setPawnView((ImageView)findViewById(R.id.red6));
-
-
         }
         else {
             map.get(1).setPawnView((ImageView)findViewById(R.id.black1));
@@ -363,7 +369,6 @@ public class BoardActivity extends AppCompatActivity {
             map.get(4).setPawnView((ImageView)findViewById(R.id.black4));
             map.get(5).setPawnView((ImageView)findViewById(R.id.black5));
             map.get(6).setPawnView((ImageView)findViewById(R.id.black6));
-
         }
     }
 
@@ -401,7 +406,6 @@ public class BoardActivity extends AppCompatActivity {
         roll2.setImageDrawable(getImageViewByResult(controller.getDiceRes(1)));
         //roll button
         findViewById(R.id.roll).setEnabled(false);
-        findViewById(R.id.endTurn).setEnabled(true);
         //red pawns
         findViewById(R.id.red1).setEnabled(true);
         findViewById(R.id.red2).setEnabled(true);
