@@ -128,7 +128,7 @@ public class onDragCustomMethod implements View.OnDragListener {
                         }
                     }
                         controller.setDiceResToNullInPos(0);
-                        //controller.setNumberOfMove(controller.getNumberOfMove() + 1);
+                        controller.setNumberOfMove(controller.getNumberOfMove() + 1);
                     }
                     else if(cellNumber == local + action2) {
                         if((cellNumber>6 && cellNumber!=30) && isOccupied(newParent)){
@@ -147,7 +147,7 @@ public class onDragCustomMethod implements View.OnDragListener {
                             }
                         }
                         controller.setDiceResToNullInPos(1);
-                        //controller.setNumberOfMove(controller.getNumberOfMove() + 1);
+                        controller.setNumberOfMove(controller.getNumberOfMove() + 1);
                     }
                     else if (cellNumber == local + action3) {
                     if((cellNumber>6 && cellNumber!=30) && isOccupied(newParent)){
@@ -166,7 +166,7 @@ public class onDragCustomMethod implements View.OnDragListener {
                         }
                     }
                         controller.setDiceResToNull();
-                        //controller.setNumberOfMove(controller.getNumberOfMove() + 2);
+                        controller.setNumberOfMove(controller.getNumberOfMove() + 2);
                     }
 
                     newParent.addView(srcView);

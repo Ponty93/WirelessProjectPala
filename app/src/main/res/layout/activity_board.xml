@@ -290,6 +290,23 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 app:srcCompat="@drawable/nero" />
+            <ImageView
+                android:id="@+id/black5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                app:srcCompat="@drawable/nero" />
+
+            <ImageView
+                android:id="@+id/black6"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/nero" />
 
 
 
@@ -438,23 +455,7 @@
                 >
 
             </Utils.cellView>
-            <ImageView
-                android:id="@+id/black5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                app:srcCompat="@drawable/nero" />
 
-            <ImageView
-                android:id="@+id/black6"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/nero" />
 
         </RelativeLayout>
 

@@ -370,8 +370,7 @@ public class BoardActivity extends AppCompatActivity {
             map.get(4).setPawnView((ImageView)findViewById(R.id.black4));
             map.get(5).setPawnView((ImageView)findViewById(R.id.black5));
             map.get(6).setPawnView((ImageView)findViewById(R.id.black6));
-            map.get(5).setPosition(7);
-            map.get(6).setPosition(7);
+
         }
     }
 
@@ -408,7 +407,7 @@ public class BoardActivity extends AppCompatActivity {
         roll1.setImageDrawable(getImageViewByResult(controller.getDiceRes(0)));
         roll2.setImageDrawable(getImageViewByResult(controller.getDiceRes(1)));
         //roll button
-        //findViewById(R.id.roll).setEnabled(false);
+        findViewById(R.id.roll).setEnabled(false);
         //red pawns
         findViewById(R.id.red1).setEnabled(true);
         findViewById(R.id.red2).setEnabled(true);
