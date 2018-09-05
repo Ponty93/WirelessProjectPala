@@ -109,7 +109,7 @@ public class BoardActivity extends AppCompatActivity {
         public void run() {
 
             Log.d("ConnectionTimeout","Connection timeout occurred ");
-            JSONObject res = getController().updateRound();
+            final JSONObject res = getController().updateRound();
             Log.d("JSON","Json res"+res);
             if(res!=null) {
                 try {
@@ -126,7 +126,7 @@ public class BoardActivity extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    //updateBoard(connTimeout.getResJson());
+                                    updateBoard(res);
                                     roundOrganize(true);
                                 }
                             });
@@ -182,14 +182,7 @@ public class BoardActivity extends AppCompatActivity {
             internalTimer.schedule(new connectionTimeout(boardView),0,5000);
         }
 
-
-        //enables or disables the endTurn button
-        if(round == true){
-            findViewById(R.id.endTurn).setEnabled(true);
-        }
-        else {
-            findViewById(R.id.endTurn).setEnabled(false);
-        }
+        findViewById(R.id.endTurn).setEnabled(false);
     }
 
     private void init(Intent buildBoard) {
@@ -222,7 +215,7 @@ public class BoardActivity extends AppCompatActivity {
 
             if(controller == null) {
                 if(json!=null) {
-                    controller = new boardController(new Board(30, new Player(id1, buildBoard.getStringExtra("player1Name"),json.getJSONObject("pawnPlayer1")), new Player(id2, buildBoard.getStringExtra("player1Name"),json.getJSONObject("pawnPlayer2")), gameId),this);
+                    controller = new boardController(new Board(30, new Player(id1, buildBoard.getStringExtra("player1Name"),json.getJSONObject("pawnPlayer1")), new Player(id2, buildBoard.getStringExtra("player2Name"),json.getJSONObject("pawnPlayer2")), gameId),this);
                     setPawnView(context, controller.getPlayer1().getPawns(), "player1");
                     setPawnView(context, controller.getPlayer2().getPawns(), "player2");
                 }
@@ -345,7 +338,7 @@ public class BoardActivity extends AppCompatActivity {
 
         roundOrganize(controller.playerOrder(roundId));
 
-        //updateBoard(json);
+        updateBoard(json);
 
     }
 
@@ -389,7 +382,7 @@ public class BoardActivity extends AppCompatActivity {
         controller.endTurn();
         internalTimer.cancel();
         roundOrganize(false);
-        //Log.d("JSON IS0","JSON:"+currentBoard.uploadBoard());
+
     }
 
     public void surrenderButton(View view){
@@ -408,6 +401,7 @@ public class BoardActivity extends AppCompatActivity {
         roll2.setImageDrawable(getImageViewByResult(controller.getDiceRes(1)));
         //roll button
         findViewById(R.id.roll).setEnabled(false);
+        findViewById(R.id.endTurn).setEnabled(true);
         //red pawns
         findViewById(R.id.red1).setEnabled(true);
         findViewById(R.id.red2).setEnabled(true);

@@ -91,5 +91,7 @@ public class boardController {
     public int howManyPawns(int pos, int playerId){
         return model.howManyPawns(pos,playerId);
     }
+
+
 }
 

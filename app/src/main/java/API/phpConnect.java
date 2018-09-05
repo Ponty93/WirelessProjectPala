@@ -206,12 +206,12 @@ public final class phpConnect extends AsyncTask<String, Void,Boolean>{
                                     .asJsonObject()
                                     .getBody();
                 }
-            else if(attrToQuery.equals("boardUpdate")){
+            else if(attrToQuery.equals("boardUpload")){
                     resJson =
                             webb.post(url)
                                     .param("gameId", gameId)
                                     .param("op", idOperation)
-                                    .param("boardUpdate",jsonObj)
+                                    .param(attrToQuery,jsonObj)
                                     .ensureSuccess()
                                     .asJsonObject()
                                     .getBody();
