@@ -34,7 +34,6 @@ import Utils.onDragCustomMethod;
 
 
 public class BoardActivity extends AppCompatActivity {
-    private Board currentBoard = null;
     private Context context = null;
     private RelativeLayout refLayout=null;
     private final BoardActivity boardView = this;
