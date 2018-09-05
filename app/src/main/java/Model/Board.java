@@ -48,27 +48,14 @@ public class Board extends Game {
 
     /**
      * Check if a pawn is able to win
-     * @param playerId
-     * @param posToStart
      * @param posToArrive
      * @return {boolean}
      */
-    public boolean checkIfPawnWin(int playerId,int posToStart, int posToArrive) {
-        if(posToArrive == numberOfCell) {
-            phpConnect conn = new phpConnect("https://www.psionofficial.com/Wireless/handler.php", getIdGame());
-            try {
-                if(conn.execute("u",Integer.toString(playerId),"position",Integer.toString(posToStart),Integer.toString(posToArrive)).get())
-                    return true;
+    public boolean checkIfPawnWin(int posToArrive) {
+        if(posToArrive == numberOfCell)
+           return true;
 
-            }catch(ExecutionException e){
-                e.printStackTrace();
-            }catch (InterruptedException e){
-                e.printStackTrace();
-            }
-            return false;
-        }
-        else
-            return false;
+           return false;
     }
 
 
@@ -93,46 +80,22 @@ public class Board extends Game {
     /**
      * Sets the position value of a enemy pawn that can be eaten to -1
      * @param posToStart
-     * @param playerId
+     * @param cap
      * @return {void}
      */
-    public void eatPawn(int playerId,int posToStart) {
-        phpConnect conn = new phpConnect("https://www.psionofficial.com/Wireless/handler.php", getIdGame());
-        try {
-            conn.execute("u",Integer.toString(playerId),"position",Integer.toString(posToStart),"0").get();
-
-        }catch(ExecutionException e){
-            e.printStackTrace();
-        }catch (InterruptedException e){
-            e.printStackTrace();
+    public void eatPawn(int posToStart,int cap) {
+        int counter=0;
+        while(counter<cap){
+            getPlayer2().findPawnByPos(posToStart).setPosition(0);
         }
-
     }
 
     /**
      * Move a pawn according to the values passed as param
-     * The method also check if the pawn is at the end line or is over that
-     * @param playerId
-     * @param pawnId
-     * @param posToStart
-     * @param posToArrive
      * @return {void}
      */
-    public void movePawn(int playerId,int pawnId,int posToStart, int posToArrive) {
-
-        phpConnect conn = new phpConnect("https://www.psionofficial.com/Wireless/handler.php", getIdGame());
-        try {
-            if(posToStart == 0)
-                conn.execute("u",Integer.toString(playerId),"pawnId",Integer.toString(pawnId),Integer.toString(posToArrive)).get();
-            else
-                conn.execute("u",Integer.toString(playerId),"position",Integer.toString(posToStart),Integer.toString(posToArrive)).get();
-        }catch(ExecutionException e){
-            e.printStackTrace();
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
-
-
+    public void movePawn(int idPawn,int posNewParent) {
+        getPlayer1().setPawnPosition(idPawn,posNewParent);
     }
 
 
@@ -147,16 +110,22 @@ public class Board extends Game {
     // - the number of pawns im that pos
     // - the id of the pawns in that pos
     public int howManyPawns(int pos, int playerId)
-    {   phpConnect conn = new phpConnect("https://www.psionofficial.com/Wireless/handler.php", getIdGame());
-        try {
-            if (conn.execute("r", "PAWN", Integer.toString(playerId), "pos", Integer.toString(pos)).get())
-                return Integer.parseInt(conn.getParamFromJson("count"));
-        }catch(ExecutionException e){
-            e.printStackTrace();
-        }catch (InterruptedException e){
-            e.printStackTrace();
+    {
+        int counter = 0;
+        int index = 1;
+        if(playerId == getPlayer1().getUserId()) {
+            while (index < 7) {
+                if (getPlayer1().getPawnbyId(index).getPosition() == pos)
+                    counter++;
+            }
         }
-        return 0;
+        else{
+            while (index < 7) {
+                if (getPlayer2().getPawnbyId(index).getPosition() == pos)
+                    counter++;
+            }
+        }
+        return counter;
     }
 
     public int getNumberOfMove(){
@@ -259,13 +228,15 @@ public class Board extends Game {
         return false;
     }
 
-    public boolean updateRound(phpConnect connTimeout){
+    public JSONObject updateRound(){
+        phpConnect connTimeout = new phpConnect("https://psionofficial.com/Wireless/handler.php", getIdGame());
         try {
-            return connTimeout.execute("r", "GAME", Integer.toString(getPlayer1().getUserId()), "round", "-1").get();
+            if(connTimeout.execute("r", "GAME", Integer.toString(getPlayer1().getUserId()), "round", "-1").get())
+                return connTimeout.getResJson();
         }catch(InterruptedException e ){e.printStackTrace();}
         catch(ExecutionException e ){e.printStackTrace();}
 
-        return false;
+        return null;
     }
 
 

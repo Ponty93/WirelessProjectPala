@@ -60,9 +60,17 @@ public class Player {
     public HashMap<Integer, Pawn> getPawns() {
         return pawns;
     }
+
     public void setPawnPosition(int id,int pos){
         pawns.get(id).setPosition(pos);
 
+    }
+    public Pawn findPawnByPos(int pos){
+        for(int i=1;i<7;i++){
+            if(getPawnbyId(i).getPosition() == pos)
+                return getPawnbyId(i);
+        }
+        return null;
     }
 
 

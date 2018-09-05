@@ -26,6 +26,7 @@ import java.util.concurrent.ExecutionException;
 
 import Actors.Pawn;
 import Actors.Player;
+import Controller.boardController;
 import Model.Board;
 import API.phpConnect;
 import Utils.onTouchCustomMethod;
@@ -38,6 +39,7 @@ public class BoardActivity extends AppCompatActivity {
     private RelativeLayout refLayout=null;
     private final BoardActivity boardView = this;
     private Timer internalTimer;
+    private boardController controller = null;
 
 
     @Override
@@ -50,7 +52,6 @@ public class BoardActivity extends AppCompatActivity {
 
         //initialize the boards view feature
         init(buildBoard);
-        //todo send a req to reload the data if any
 
     }
 
@@ -70,23 +71,24 @@ public class BoardActivity extends AppCompatActivity {
             counter++;
 
             if(counter == 24){
-                currentBoard.surrender();
+                controller.surrender();
                 endGame(refBoard);
             }
 
             Log.d("COUNTER END ROUND","COUNTER IS:"+counter);
-            //Log.d("roundTimeout", "round timeout occurred");
-            boolean connRes = false;
-            phpConnect connTimeout = new phpConnect("https://psionofficial.com/Wireless/handler.php", currentBoard.getIdGame());
-            connRes = getCurrentBoard().updateRound(connTimeout);
-            //Log.d("JSON", "Json res" + connTimeout.getResJson());
-            if (connRes == true) {
-                if (connTimeout.getParamFromJson("winner").equals("none") == false) {
-                    if (Integer.parseInt(connTimeout.getParamFromJson("winner")) == currentBoard.getPlayer1().getUserId()) {
-                        endGame(refBoard);
-                        //todo display hai vinto
+            JSONObject res = getController().updateRound();
+            //Log.d("JSON", "Json res" + res));
+            if(res != null) {
+                try {
+                    if (res.getInt("Result") == 1) {
+                        if (res.getString("winner").equals("none") == false) {
+                            if (res.getInt("winner") == getController().getPlayer1().getUserId()) {
+                                endGame(refBoard);
+                                //todo display hai vinto
+                            }
+                        }
                     }
-                }
+                }catch(JSONException e){e.printStackTrace();}
             }
         }
     }
@@ -105,38 +107,32 @@ public class BoardActivity extends AppCompatActivity {
         public void run() {
 
             Log.d("ConnectionTimeout","Connection timeout occurred ");
-            boolean connRes = false;
-            final phpConnect connTimeout = new phpConnect("https://psionofficial.com/Wireless/handler.php", currentBoard.getIdGame());
-            connRes = getCurrentBoard().updateRound(connTimeout);
-            Log.d("JSON","Json res"+connTimeout.getResJson());
-            if(connRes == true){
-                Log.d("RECEIVER","CONNRES IS TRUE");
-                if(connTimeout.getParamFromJson("winner").equals("none") == false) {
-                    Log.d("RECEIVER","WINNER IS ID");
-                   if (Integer.parseInt(connTimeout.getParamFromJson("winner")) == refBoard.getCurrentBoard().getPlayer1().getUserId()){
-                       endGame(refBoard);
-                        //todo display hai vinto
-                    }
-                   else {
-                       //todo hai perso : avversario è arrivato con i 6 pawn al finish
-                   }
-                }
-                else {
-                    //Log.d("ROUND","ITS FINALLY MY ROUND");
+            JSONObject res = getController().updateRound();
+            Log.d("JSON","Json res"+res);
+            if(res!=null) {
+                try {
+                    if (res.getInt("Result") == 1) {
+                        if (res.getString("winner").equals("none") == false) {
+                            if (res.getInt("winner") == refBoard.getController().getPlayer1().getUserId()) {
+                                endGame(refBoard);
+                                //todo display hai vinto
+                            } else {
+                                //todo hai perso : avversario è arrivato con i 6 pawn al finish
+                            }
+                        } else {
+                            refBoard.internalTimer.cancel();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    //updateBoard(connTimeout.getResJson());
+                                    roundOrganize(true);
+                                }
+                            });
 
-                    refBoard.internalTimer.cancel();
-                    //it permits to call the UI thread to exec the Views operation
-                    //timer runs on a different thread, so it does not have access to modify views
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            //updateBoard(connTimeout.getResJson());
-                            roundOrganize(true);
                         }
-                    });
 
-                }
-
+                    }
+                }catch(JSONException e){e.printStackTrace();}
             }
         }
     }
@@ -164,11 +160,11 @@ public class BoardActivity extends AppCompatActivity {
         // sets to 0 the number of move in this round
         // sets the foe score
         if(round == true) {
-            currentBoard.setDiceResToNull();
-            currentBoard.setNumberOfMove(0);
-            getCurrentBoard().setCounter(getCurrentBoard().getRoundsCounter() + 1);
-            ((TextView)findViewById(R.id.roundNumber)).setText(Integer.toString(getCurrentBoard().getRoundsCounter()));
-            ((TextView)findViewById(R.id.scoreAvv)).setText(Integer.toString(getCurrentBoard().getPlayer2().getScore()));
+            controller.setDiceResToNull();
+            controller.setNumberOfMove(0);
+            getController().setCounter(getController().getRoundsCounter() + 1);
+            ((TextView)findViewById(R.id.roundNumber)).setText(Integer.toString(controller.getRoundsCounter()));
+            ((TextView)findViewById(R.id.scoreAvv)).setText(Integer.toString(controller.getPlayer2().getScore()));
         }
 
 
@@ -222,11 +218,11 @@ public class BoardActivity extends AppCompatActivity {
             gameId =json.getInt("gameId");
             roundId = json.getInt("filetto");
 
-            if(currentBoard == null) {
+            if(controller == null) {
                 if(json!=null) {
-                    currentBoard = new Board(30, new Player(id1, buildBoard.getStringExtra("player1Name"),json.getJSONObject("pawnPlayer1")), new Player(id2, buildBoard.getStringExtra("player1Name"),json.getJSONObject("pawnPlayer2")), gameId);
-                    setPawnView(context, currentBoard.getPlayer1().getPawns(), "player1");
-                    setPawnView(context, currentBoard.getPlayer2().getPawns(), "player2");
+                    controller = new boardController(new Board(30, new Player(id1, buildBoard.getStringExtra("player1Name"),json.getJSONObject("pawnPlayer1")), new Player(id2, buildBoard.getStringExtra("player1Name"),json.getJSONObject("pawnPlayer2")), gameId),this);
+                    setPawnView(context, controller.getPlayer1().getPawns(), "player1");
+                    setPawnView(context, controller.getPlayer2().getPawns(), "player2");
                 }
             }
 
@@ -237,92 +233,92 @@ public class BoardActivity extends AppCompatActivity {
 
         //Define the player1 pawns drag and drop
         ImageView red1 = findViewById(R.id.red1);
-        red1.setOnTouchListener(new onTouchCustomMethod(context,refLayout,currentBoard));
+        red1.setOnTouchListener(new onTouchCustomMethod(context,refLayout,controller));
         red1.setTag("red1");
 
         ImageView red2 = findViewById(R.id.red2);
-        red2.setOnTouchListener(new onTouchCustomMethod(context,refLayout,currentBoard));
+        red2.setOnTouchListener(new onTouchCustomMethod(context,refLayout,controller));
         red2.setTag("red2");
 
         ImageView red3 = findViewById(R.id.red3);
-        red3.setOnTouchListener(new onTouchCustomMethod(context,refLayout,currentBoard));
+        red3.setOnTouchListener(new onTouchCustomMethod(context,refLayout,controller));
         red3.setTag("red3");
 
         ImageView red4 = findViewById(R.id.red4);
-        red4.setOnTouchListener(new onTouchCustomMethod(context,refLayout,currentBoard));
+        red4.setOnTouchListener(new onTouchCustomMethod(context,refLayout,controller));
         red4.setTag("red4");
 
         ImageView red5 = findViewById(R.id.red5);
-        red5.setOnTouchListener(new onTouchCustomMethod(context,refLayout,currentBoard));
+        red5.setOnTouchListener(new onTouchCustomMethod(context,refLayout,controller));
         red5.setTag("red5");
 
         ImageView red6 = findViewById(R.id.red6);
-        red6.setOnTouchListener(new onTouchCustomMethod(context,refLayout,currentBoard));
+        red6.setOnTouchListener(new onTouchCustomMethod(context,refLayout,controller));
         red6.setTag("red6");
 
 
         //sets the cell able to receive the pawns
-        findViewById(R.id.cell1L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell1L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell1L).setTag("0");
-        findViewById(R.id.cell2L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell2L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell2L).setTag("1");
-        findViewById(R.id.cell3L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell3L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell3L).setTag("2");
-        findViewById(R.id.cell4L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell4L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell4L).setTag("3");
-        findViewById(R.id.cell5L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell5L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell5L).setTag("4");
-        findViewById(R.id.cell6L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell6L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell6L).setTag("5");
-        findViewById(R.id.cell7L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell7L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell7L).setTag("6");
-        findViewById(R.id.cell8L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell8L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell8L).setTag("7");
-        findViewById(R.id.cell9L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell9L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell9L).setTag("8");
-        findViewById(R.id.cell10L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell10L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell10L).setTag("9");
-        findViewById(R.id.cell11L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell11L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell11L).setTag("10");
-        findViewById(R.id.cell12L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell12L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell12L).setTag("11");
-        findViewById(R.id.cell13L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell13L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell13L).setTag("12");
-        findViewById(R.id.cell14L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell14L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell14L).setTag("13");
-        findViewById(R.id.cell15L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell15L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell15L).setTag("14");
-        findViewById(R.id.cell16L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell16L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell16L).setTag("15");
-        findViewById(R.id.cell17L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell17L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell17L).setTag("16");
-        findViewById(R.id.cell18L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell18L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell18L).setTag("17");
-        findViewById(R.id.cell19L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell19L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell19L).setTag("18");
-        findViewById(R.id.cell20L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell20L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell20L).setTag("19");
-        findViewById(R.id.cell21L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell21L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell21L).setTag("20");
-        findViewById(R.id.cell22L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell22L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell22L).setTag("21");
-        findViewById(R.id.cell23L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell23L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell23L).setTag("22");
-        findViewById(R.id.cell24L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell24L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell24L).setTag("23");
-        findViewById(R.id.cell25L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell25L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell25L).setTag("24");
-        findViewById(R.id.cell26L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell26L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell26L).setTag("25");
-        findViewById(R.id.cell27L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell27L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell27L).setTag("26");
-        findViewById(R.id.cell28L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell28L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell28L).setTag("27");
-        findViewById(R.id.cell29L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell29L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell29L).setTag("28");
-        findViewById(R.id.cell30L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell30L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell30L).setTag("29");
-        findViewById(R.id.cell31L).setOnDragListener(new onDragCustomMethod(boardView,currentBoard));
+        findViewById(R.id.cell31L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell31L).setTag("30");        //Log.d("Json ",buildBoard.getStringExtra("json"));
 
 
@@ -332,7 +328,7 @@ public class BoardActivity extends AppCompatActivity {
 
         //abilitate to move the pawns
 
-        roundOrganize(currentBoard.playerOrder(roundId));
+        roundOrganize(controller.playerOrder(roundId));
 
         updateBoard(json);
 
@@ -374,25 +370,25 @@ public class BoardActivity extends AppCompatActivity {
 
 
     public void buttonEndTurn(View view){
-        currentBoard.endTurn();
+        controller.endTurn();
         internalTimer.cancel();
         roundOrganize(false);
         //Log.d("JSON IS0","JSON:"+currentBoard.uploadBoard());
     }
 
     public void surrenderButton(View view){
-            currentBoard.surrender();
+            controller.surrender();
             //invoco haiPerso
             endGame(boardView);
 
 
     }
     public void rollDiceButton(View view){
-        getCurrentBoard().roll();
+        getController().roll();
         ImageView roll1 = (ImageView) findViewById(R.id.diceRes1);
         ImageView roll2 = (ImageView) findViewById(R.id.diceRes2);
-        roll1.setImageDrawable(getImageViewByResult(currentBoard.getDiceRes(0)));
-        roll2.setImageDrawable(getImageViewByResult(currentBoard.getDiceRes(1)));
+        roll1.setImageDrawable(getImageViewByResult(controller.getDiceRes(0)));
+        roll2.setImageDrawable(getImageViewByResult(controller.getDiceRes(1)));
         //roll button
         findViewById(R.id.roll).setEnabled(false);
         //red pawns
@@ -432,8 +428,8 @@ public class BoardActivity extends AppCompatActivity {
 
 
 
-    public Board getCurrentBoard() {
-        return currentBoard;
+    public boardController getController() {
+        return controller;
     }
 
     public RelativeLayout getRefLayout() {
@@ -458,102 +454,102 @@ public class BoardActivity extends AppCompatActivity {
 
     public void updateBoard(JSONObject json){
         //update model
-        if(getCurrentBoard().updateBoard(json) == true){
+        if(getController().updateBoard(json) == true){
             //update views
 
             //red pawns update
 
             ViewGroup owner = (ViewGroup)findViewById(R.id.red1).getParent();
-            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer1().getPawnbyId(1).getPosition()){
+            if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer1().getPawnbyId(1).getPosition()){
                 ImageView red1 = (ImageView)findViewById(R.id.red1);
                 owner.removeView(findViewById(R.id.red1));
-                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer1().getPawnbyId(1).getPosition());
+                RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(1).getPosition());
                 newOwner.addView(red1);
             }
             owner = (ViewGroup)findViewById(R.id.red2).getParent();
-            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer1().getPawnbyId(2).getPosition()){
+            if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer1().getPawnbyId(2).getPosition()){
                 ImageView red2 = (ImageView)findViewById(R.id.red2);
                 owner.removeView(findViewById(R.id.red2));
-                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer1().getPawnbyId(2).getPosition());
+                RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(2).getPosition());
                 newOwner.addView(red2);
             }
             owner = (ViewGroup)findViewById(R.id.red3).getParent();
-            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer1().getPawnbyId(3).getPosition()){
+            if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer1().getPawnbyId(3).getPosition()){
                 ImageView red3 = (ImageView)findViewById(R.id.red3);
                 owner.removeView(findViewById(R.id.red3));
-                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer1().getPawnbyId(3).getPosition());
+                RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(3).getPosition());
                 newOwner.addView(red3);
             }
             owner = (ViewGroup)findViewById(R.id.red4).getParent();
-            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer1().getPawnbyId(4).getPosition()){
+            if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer1().getPawnbyId(4).getPosition()){
                 ImageView red4 = (ImageView)findViewById(R.id.red4);
                 owner.removeView(findViewById(R.id.red4));
-                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer1().getPawnbyId(4).getPosition());
+                RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(4).getPosition());
                 newOwner.addView(red4);
             }
             owner = (ViewGroup)findViewById(R.id.red5).getParent();
-            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer1().getPawnbyId(5).getPosition()){
+            if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer1().getPawnbyId(5).getPosition()){
                 ImageView red5  = (ImageView)findViewById(R.id.red5);
                 owner.removeView(findViewById(R.id.red5));
-                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer1().getPawnbyId(5).getPosition());
+                RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(5).getPosition());
                 newOwner.addView(red5);
             }
             owner = (ViewGroup)findViewById(R.id.red6).getParent();
-            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer1().getPawnbyId(6).getPosition()){
+            if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer1().getPawnbyId(6).getPosition()){
                 ImageView red6  =(ImageView)findViewById(R.id.red6);
                 owner.removeView(findViewById(R.id.red6));
-                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer1().getPawnbyId(6).getPosition());
+                RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(6).getPosition());
                 newOwner.addView(red6);
             }
 
             //black pawns update
             owner = (ViewGroup)findViewById(R.id.black1).getParent();
-            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer2().getPawnbyId(1).getPosition()){
+            if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer2().getPawnbyId(1).getPosition()){
                 ImageView black1= (ImageView)findViewById(R.id.black1);
                 owner.removeView(findViewById(R.id.black1));
-                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer2().getPawnbyId(1).getPosition());
+                RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(1).getPosition());
                 newOwner.addView(black1);
             }
             owner = (ViewGroup)findViewById(R.id.black2).getParent();
-            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer2().getPawnbyId(2).getPosition()){
+            if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer2().getPawnbyId(2).getPosition()){
                 ImageView black2 =(ImageView)findViewById(R.id.black2);
                 owner.removeView(findViewById(R.id.black2));
-                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer2().getPawnbyId(2).getPosition());
+                RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(2).getPosition());
                 newOwner.addView(black2);
             }
             owner = (ViewGroup)findViewById(R.id.black3).getParent();
-            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer2().getPawnbyId(3).getPosition()){
+            if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer2().getPawnbyId(3).getPosition()){
                 ImageView black3 = (ImageView)findViewById(R.id.black3);
                 owner.removeView(findViewById(R.id.black3));
-                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer2().getPawnbyId(3).getPosition());
+                RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(3).getPosition());
                 newOwner.addView(black3);
             }
             owner = (ViewGroup)findViewById(R.id.black4).getParent();
-            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer2().getPawnbyId(4).getPosition()){
+            if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer2().getPawnbyId(4).getPosition()){
                 ImageView black4 = (ImageView)findViewById(R.id.black4);
                 owner.removeView(findViewById(R.id.black4));
-                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer2().getPawnbyId(4).getPosition());
+                RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(4).getPosition());
                 newOwner.addView(black4);
             }
             owner = (ViewGroup)findViewById(R.id.black5).getParent();
-            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer2().getPawnbyId(5).getPosition()){
+            if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer2().getPawnbyId(5).getPosition()){
                 ImageView black5 = (ImageView)findViewById(R.id.black5);
                 owner.removeView(findViewById(R.id.black5));
-                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer2().getPawnbyId(5).getPosition());
+                RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(5).getPosition());
                 newOwner.addView(black5);
             }
             owner = (ViewGroup)findViewById(R.id.black6).getParent();
-            if(Integer.parseInt((String)owner.getTag()) != getCurrentBoard().getPlayer2().getPawnbyId(6).getPosition()){
+            if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer2().getPawnbyId(6).getPosition()){
                 ImageView black6 = (ImageView)findViewById(R.id.black6);
                 owner.removeView(findViewById(R.id.black6));
-                RelativeLayout newOwner = findCellByIndex(getCurrentBoard().getPlayer2().getPawnbyId(6).getPosition());
+                RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(6).getPosition());
                 newOwner.addView(black6);
             }
 
 
         }
         else{
-            currentBoard.surrender();
+            controller.surrender();
             endGame(boardView);
         }
 

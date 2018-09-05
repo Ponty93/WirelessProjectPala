@@ -17,20 +17,21 @@ import android.widget.Toast;
 import com.project.wirelessteam.Views.BoardActivity;
 import com.project.wirelessteam.Views.R;
 
+import Controller.boardController;
 import Model.Board;
 
 public class onDragCustomMethod implements View.OnDragListener {
     private BoardActivity refActivity;
-    private Board currentBoard;
+    private boardController controller;
     //var to be used in onDrag method
     private int local = 0;
     private int action1=0,action2=0,action3=0;
 
 
-    public onDragCustomMethod(BoardActivity boardAct, Board boardRef)
+    public onDragCustomMethod(BoardActivity boardAct, boardController boardRef)
     {
         refActivity = boardAct;
-        currentBoard = boardRef;
+        controller = boardRef;
     }
 
     @Override
@@ -41,8 +42,8 @@ public class onDragCustomMethod implements View.OnDragListener {
         switch(action) {
             case DragEvent.ACTION_DRAG_STARTED:
                 local = findPositionByView((View) dragEvent.getLocalState());
-                action1 = currentBoard.getDiceRes(0);
-                action2 = currentBoard.getDiceRes(1);
+                action1 = controller.getDiceRes(0);
+                action2 = controller.getDiceRes(1);
                 action3 = action1 + action2;
 
                 if(local+action1 != local || local + action2 != local || local+action3 != local) {
@@ -108,9 +109,8 @@ public class onDragCustomMethod implements View.OnDragListener {
                                 currentBoard.eatPawn(currentBoard.getPlayer2().getUserId(),local+action1);
                             }
                         }
-                        currentBoard.movePawn(currentBoard.getPlayer1().getUserId(),currentBoard.getPlayer1().getPawnbyId(findViewByTag(srcView)).getIdDB(),local,local+action1);
-                        */currentBoard.setDiceResToNullInPos(0);
-                        currentBoard.setNumberOfMove(currentBoard.getNumberOfMove() + 1);
+                        */controller.setDiceResToNullInPos(0);
+                        controller.setNumberOfMove(controller.getNumberOfMove() + 1);
                     }
                     else if(cellNumber == local + action2) {
                         /*if((cellNumber>6 && cellNumber!=30) && isBlack(newParent.getChildAt(1))){
@@ -120,9 +120,8 @@ public class onDragCustomMethod implements View.OnDragListener {
 
                             }
                         }
-                        currentBoard.movePawn(currentBoard.getPlayer1().getUserId(),currentBoard.getPlayer1().getPawnbyId(findViewByTag(srcView)).getIdDB(),local,local+action2);
-                        */currentBoard.setDiceResToNullInPos(1);
-                        currentBoard.setNumberOfMove(currentBoard.getNumberOfMove() + 1);
+                        */controller.setDiceResToNullInPos(1);
+                        controller.setNumberOfMove(controller.getNumberOfMove() + 1);
                     }
                     else if (cellNumber == local + action3) {
                         /*if((cellNumber>6 && cellNumber!=30) && isBlack(newParent.getChildAt(1))){
@@ -130,14 +129,13 @@ public class onDragCustomMethod implements View.OnDragListener {
                                 currentBoard.eatPawn(currentBoard.getPlayer2().getUserId(),local+action3);
                             }
                         }
-                        currentBoard.movePawn(currentBoard.getPlayer1().getUserId(),currentBoard.getPlayer1().getPawnbyId(findViewByTag(srcView)).getIdDB(),local,local+action3);
-                        */currentBoard.setDiceResToNull();
-                        currentBoard.setNumberOfMove(currentBoard.getNumberOfMove() + 2);
+                        */controller.setDiceResToNull();
+                        controller.setNumberOfMove(controller.getNumberOfMove() + 2);
                     }
 
                     newParent.addView(srcView);
-
-                    currentBoard.getPlayer1().setPawnPosition(findViewByTag(srcView), Integer.parseInt((String) newParent.getTag()));
+                    //todo stack moves not supported
+                    controller.movePawn(findViewByTag(srcView), Integer.parseInt((String) newParent.getTag()));
                     return true;
 
 
@@ -147,6 +145,7 @@ public class onDragCustomMethod implements View.OnDragListener {
             case DragEvent.ACTION_DRAG_ENDED:
                 ((RelativeLayout) view).setBackgroundColor(Color.WHITE);
                 view.invalidate();
+
                 if(dragEvent.getResult())
                     Toast.makeText(refActivity,"The drop was handled",Toast.LENGTH_LONG);
                 else
@@ -222,17 +221,17 @@ public class onDragCustomMethod implements View.OnDragListener {
 
         switch(tag){
             case "red1":
-                return currentBoard.getPlayer1().getPawnbyId(1).getPosition();
+                return controller.getPlayer1().getPawnbyId(1).getPosition();
             case "red2":
-                return currentBoard.getPlayer1().getPawnbyId(2).getPosition();
+                return controller.getPlayer1().getPawnbyId(2).getPosition();
             case "red3":
-                return currentBoard.getPlayer1().getPawnbyId(3).getPosition();
+                return controller.getPlayer1().getPawnbyId(3).getPosition();
             case "red4":
-                return currentBoard.getPlayer1().getPawnbyId(4).getPosition();
+                return controller.getPlayer1().getPawnbyId(4).getPosition();
             case "red5":
-                return currentBoard.getPlayer1().getPawnbyId(5).getPosition();
+                return controller.getPlayer1().getPawnbyId(5).getPosition();
             case "red6":
-                return currentBoard.getPlayer1().getPawnbyId(6).getPosition();
+                return controller.getPlayer1().getPawnbyId(6).getPosition();
             default:
                 return 0;
         }
