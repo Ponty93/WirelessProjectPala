@@ -98,7 +98,11 @@ public class onDragCustomMethod implements View.OnDragListener {
                 ClipData data = dragEvent.getClipData();
                 ClipData.Item item = data.getItemAt(0);
                 String itemText = item.getText().toString();
-                Toast.makeText(refActivity,"Dragged data is"+ itemText+" in "+view.getTag(),Toast.LENGTH_LONG).show();
+
+                int reds= controller.howManyPawns(local,controller.getPlayer1().getUserId());
+                ArrayList<View> stack = new ArrayList<>();
+
+
                 resetTargetViewBackground(view);
                 view.invalidate();
 
@@ -110,8 +114,6 @@ public class onDragCustomMethod implements View.OnDragListener {
                 ViewGroup owner = (ViewGroup) srcView.getParent();
                 // Remove source view from original parent view group.
 
-                int reds= controller.howManyPawns(local,controller.getPlayer1().getUserId());
-                ArrayList<View> stack = new ArrayList<>();
 
                 if(reds>1 && ((String)owner.getTag()).equals("0") == false)
                     stack = loadArray(owner,reds);
@@ -151,8 +153,9 @@ public class onDragCustomMethod implements View.OnDragListener {
                                 }
                             }
                         }
+                    Toast.makeText(refActivity,"Dragged data is"+itemText+" with "+reds+" on "+cellNumber+" with "+ controller.howManyPawns(local+action1,controller.getPlayer1().getUserId())+" in "+view.getTag(),Toast.LENGTH_LONG).show();
 
-                        controller.setDiceResToNullInPos(0);
+                    controller.setDiceResToNullInPos(0);
                         controller.setNumberOfMove(controller.getNumberOfMove() + 1);
                     }
                     else if(cellNumber == local + action2) {
@@ -176,7 +179,9 @@ public class onDragCustomMethod implements View.OnDragListener {
                             }
                             }
                         }
-                        controller.setDiceResToNullInPos(1);
+                    Toast.makeText(refActivity,"Dragged data is "+itemText+" with "+reds+" with "+ controller.howManyPawns(local+action2,controller.getPlayer2().getUserId())+" in "+cellNumber,Toast.LENGTH_LONG).show();
+
+                    controller.setDiceResToNullInPos(1);
                         controller.setNumberOfMove(controller.getNumberOfMove() + 1);
                     }
                     else if (cellNumber == local + action3) {
@@ -200,7 +205,9 @@ public class onDragCustomMethod implements View.OnDragListener {
                             }
                         }
                     }
-                        controller.setDiceResToNull();
+                    Toast.makeText(refActivity,"Dragged data is"+itemText+" with "+reds+" on "+cellNumber+" with "+ controller.howManyPawns(local+action3,controller.getPlayer1().getUserId())+" in "+view.getTag(),Toast.LENGTH_LONG).show();
+
+                    controller.setDiceResToNull();
                         controller.setNumberOfMove(controller.getNumberOfMove() + 2);
                     }
 

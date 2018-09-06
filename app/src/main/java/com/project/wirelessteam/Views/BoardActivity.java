@@ -222,7 +222,7 @@ public class BoardActivity extends AppCompatActivity {
         int gameId=0,roundId=0;
         try {
             json= new JSONObject(buildBoard.getStringExtra("json"));
-            Log.d("JSON INTERO","is"+json);
+            //Log.d("JSON INTERO","is"+json);
             //update board
             gameId =json.getInt("gameId");
             roundId = json.getInt("filetto");
@@ -390,9 +390,10 @@ public class BoardActivity extends AppCompatActivity {
 
 
     public void buttonEndTurn(View view){
+        roundOrganize(false);
         controller.endTurn();
         internalTimer.cancel();
-        roundOrganize(false);
+
 
     }
 
