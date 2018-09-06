@@ -80,10 +80,12 @@ public class BoardActivity extends AppCompatActivity {
 
             counter++;
 
-            if(counter == 24){
+            if(counter == 40){
                 controller.surrender();
+                refBoard.internalTimer.cancel();
                 endGame(refBoard);
             }
+
 
             Log.d("COUNTER END ROUND","COUNTER IS:"+counter);
             JSONObject res = getController().updateRound();
@@ -93,6 +95,7 @@ public class BoardActivity extends AppCompatActivity {
                     if (res.getInt("Result") == 1) {
                         if (res.getString("winner").equals("none") == false) {
                             if (res.getInt("winner") == getController().getPlayer1().getUserId()) {
+                                refBoard.internalTimer.cancel();
                                 endGame(refBoard);
                                 //todo display hai vinto
                             }
@@ -124,6 +127,7 @@ public class BoardActivity extends AppCompatActivity {
                     if (res.getInt("Result") == 1) {
                         if (res.getString("winner").equals("none") == false) {
                             if (res.getInt("winner") == refBoard.getController().getPlayer1().getUserId()) {
+                                refBoard.internalTimer.cancel();
                                 endGame(refBoard);
                                 //todo display hai vinto
                             } else {
@@ -163,16 +167,18 @@ public class BoardActivity extends AppCompatActivity {
             findViewById(R.id.red6).setEnabled(false);
 
 
+        //increments the players rounds
+        getController().setCounter(getController().getRoundsCounter() + 1);
+
         findViewById(R.id.roll).setEnabled(round);
         //display a message "waiting for foe to finish his turn.."
 
-        //increments the players rounds
+
         // sets to 0 the number of move in this round
         // sets the foe score
         if(round == true) {
             controller.setDiceResToNull();
             controller.setNumberOfMove(0);
-            getController().setCounter(getController().getRoundsCounter() + 1);
             ((TextView)findViewById(R.id.roundNumber)).setText(Integer.toString(controller.getRoundsCounter()));
             ((TextView)findViewById(R.id.scoreAvv)).setText(Integer.toString(controller.getPlayer2().getScore()));
         }
@@ -394,6 +400,7 @@ public class BoardActivity extends AppCompatActivity {
             controller.surrender();
             //invoco haiPerso
             mp.stop();
+            boardView.internalTimer.cancel();
             endGame(boardView);
 
 
@@ -405,7 +412,7 @@ public class BoardActivity extends AppCompatActivity {
         roll1.setImageDrawable(getImageViewByResult(controller.getDiceRes(0)));
         roll2.setImageDrawable(getImageViewByResult(controller.getDiceRes(1)));
         //roll button
-        findViewById(R.id.roll).setEnabled(false);
+        //findViewById(R.id.roll).setEnabled(false);
         //red pawns
         findViewById(R.id.red1).setEnabled(true);
         findViewById(R.id.red2).setEnabled(true);
@@ -457,7 +464,6 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     public void endGame(BoardActivity ref){
-        ref.internalTimer.cancel();
         Intent intent = new Intent(ref,
                 setupPage.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP

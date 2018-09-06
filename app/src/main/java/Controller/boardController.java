@@ -92,6 +92,8 @@ public class boardController {
         return model.howManyPawns(pos,playerId);
     }
 
-
+    public boolean checkIfPawnWin(int val){
+        return model.checkIfPawnWin(val);
+    }
 }
 
