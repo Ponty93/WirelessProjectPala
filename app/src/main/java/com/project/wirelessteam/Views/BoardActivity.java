@@ -470,6 +470,28 @@ public class BoardActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
+        //find if player is winner or loser and set the drawable to loser or winner image
+        //if(winner){
+        //      ImageView imageView = (ImageView) findViewById(R.id.winnerimg);
+        //      imageView.setImageResource(R.drawable.winner);
+        //}
+        //if(loser){
+        //      ImageView imageView = (ImageView) findViewById(R.id.imageView1);
+        //      imageView.setImageResource(R.drawable.defeat);
+        //}
+        //create alert dialog with commented code
+        /*AlertDialog.Builder alertadd = new AlertDialog.Builder(BoardActivity.this);
+        LayoutInflater inflater = LayoutInflater.from(BoardActivity.this);
+        final View view = inflater.inflate(R.layout.endgamealert, null);
+        alertadd.setView(view);
+        alertadd.setNeutralButton("Click Here to continue!", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dlg, int sumthin) {
+
+                }
+            });
+
+        alertadd.show();*/
+
         startActivity(intent);
         ref.finish();
     }
