@@ -41,6 +41,7 @@ public class Board extends Game {
     public void roll() {
         diceBuffer[0] = (int) (Math.random()*6+1);
         String aux = "tempo da far saltare";
+        String ref = "altro tempo";
         diceBuffer[1] = (int) (Math.random()*6+1);
 
     }

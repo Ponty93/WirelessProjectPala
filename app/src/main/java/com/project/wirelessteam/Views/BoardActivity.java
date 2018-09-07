@@ -69,7 +69,7 @@ public class BoardActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-            if(getController().getNumberOfMove()==2){
+            if(getController().getNumberOfMove()>=2){
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -166,10 +166,7 @@ public class BoardActivity extends AppCompatActivity {
             findViewById(R.id.red5).setEnabled(false);
             findViewById(R.id.red6).setEnabled(false);
 
-
-
-
-        findViewById(R.id.endTurn).setEnabled(false);
+            findViewById(R.id.endTurn).setEnabled(false);
 
         findViewById(R.id.roll).setEnabled(round);
         //display a message "waiting for foe to finish his turn.."

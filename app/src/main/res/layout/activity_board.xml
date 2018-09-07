@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:id="@+id/rel1"
     tools:context=".BoardActivity"
-    android:background="@drawable/background"
+    android:background="@color/dark"
     >
 
     <ImageView
@@ -327,7 +327,7 @@
                 android:id="@+id/cell2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cellText="  1"
+                app:cellText=" 1"
                 >
             </Utils.cellView>
 
@@ -347,7 +347,7 @@
                 android:id="@+id/cell3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cellText="  2"
+                app:cellText=" 2"
 
                 >
 
@@ -368,7 +368,7 @@
                 android:id="@+id/cell4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cellText="  3"
+                app:cellText=" 3"
 
                 >
 
@@ -389,7 +389,7 @@
                 android:id="@+id/cell5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cellText="  4"
+                app:cellText=" 4"
 
                 >
             </Utils.cellView>
@@ -410,7 +410,7 @@
                 android:id="@+id/cell6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cellText="  5"
+                app:cellText=" 5"
 
                 >
 
@@ -431,7 +431,7 @@
                 android:id="@+id/cell7"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cellText="  6"
+                app:cellText=" 6"
 
                 >
 
@@ -453,7 +453,7 @@
                 android:id="@+id/cell8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cellText="  7"
+                app:cellText=" 7"
                 >
 
             </Utils.cellView>
@@ -475,7 +475,7 @@
                 android:id="@+id/cell9"
                 android:layout_width="75dp"
                 android:layout_height="60dp"
-                app:cellText="  8"
+                app:cellText=" 8"
                 >
 
             </Utils.cellView>
@@ -496,7 +496,7 @@
                 android:id="@+id/cell10"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cellText="  9"
+                app:cellText=" 9"
                 >
 
             </Utils.cellView>
