@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     android:id="@+id/rel1"
     tools:context=".BoardActivity"
+    android:background="@drawable/background"
     >
 
     <ImageView
@@ -189,7 +190,7 @@
             android:layout_above="@+id/cell16L"
             android:layout_toRightOf="@+id/cell14L"
             android:layout_toEndOf="@+id/cell14L"
-            android:background="#0000ff"
+            android:background="@drawable/mar3"
             >
             <Utils.cellView
                 android:id="@+id/cell1"
@@ -320,7 +321,7 @@
             android:layout_toRightOf="@+id/cell1L"
             android:layout_toEndOf="@+id/cell1L"
             android:layout_alignTop="@+id/cell1L"
-            android:background="#00ff00"
+            android:background="@drawable/mar3"
             >
             <Utils.cellView
                 android:id="@+id/cell2"
@@ -340,7 +341,7 @@
             android:layout_alignTop="@+id/cell2L"
             android:layout_toRightOf="@+id/cell2L"
             android:layout_toEndOf="@+id/cell2L"
-            android:background="#00ff00"
+            android:background="@drawable/mar3"
             >
             <Utils.cellView
                 android:id="@+id/cell3"
@@ -361,7 +362,7 @@
             android:layout_toEndOf="@+id/cell3L"
             android:layout_toRightOf="@+id/cell3L"
             android:layout_alignTop="@id/cell3L"
-            android:background="#00ff00"
+            android:background="@drawable/mar3"
             >
             <Utils.cellView
                 android:id="@+id/cell4"
@@ -382,7 +383,7 @@
             android:layout_toEndOf="@+id/cell4L"
             android:layout_toRightOf="@+id/cell4L"
             android:layout_alignTop="@id/cell4L"
-            android:background="#00ff00"
+            android:background="@drawable/mar3"
             >
             <Utils.cellView
                 android:id="@+id/cell5"
@@ -403,7 +404,7 @@
             android:layout_toEndOf="@+id/cell5L"
             android:layout_toRightOf="@+id/cell5L"
             android:layout_alignTop="@id/cell5L"
-            android:background="#00ff00"
+            android:background="@drawable/mar3"
             >
             <Utils.cellView
                 android:id="@+id/cell6"
@@ -424,7 +425,7 @@
             android:layout_above="@+id/cell6L"
             android:layout_alignLeft="@+id/cell6L"
             android:layout_alignStart="@+id/cell6L"
-            android:background="#00ff00"
+            android:background="@drawable/mar3"
             >
             <Utils.cellView
                 android:id="@+id/cell7"
@@ -446,6 +447,7 @@
             android:layout_toLeftOf="@+id/cell7L"
             android:layout_toStartOf="@+id/cell7L"
             android:layout_alignTop="@id/cell7L"
+            android:background="@drawable/mar3"
             >
             <Utils.cellView
                 android:id="@+id/cell8"
@@ -466,6 +468,7 @@
             android:layout_toStartOf="@+id/cell8L"
             android:layout_toLeftOf="@+id/cell8L"
             android:layout_alignTop="@id/cell7L"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
@@ -486,6 +489,7 @@
             android:layout_toStartOf="@+id/cell9L"
             android:layout_toLeftOf="@+id/cell9L"
             android:layout_alignTop="@id/cell7L"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
@@ -506,6 +510,7 @@
             android:layout_toStartOf="@+id/cell10L"
             android:layout_toLeftOf="@+id/cell10L"
             android:layout_alignTop="@id/cell7L"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
@@ -526,6 +531,7 @@
             android:layout_toStartOf="@+id/cell11L"
             android:layout_toLeftOf="@+id/cell11L"
             android:layout_alignTop="@id/cell7L"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
@@ -546,6 +552,7 @@
             android:layout_above="@+id/cell1L"
             android:layout_toStartOf="@+id/cell1L"
             android:layout_toLeftOf="@+id/cell1L"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
@@ -565,6 +572,7 @@
             android:layout_alignLeft="@+id/cell15L"
             android:layout_alignStart="@+id/cell15L"
             android:layout_alignTop="@+id/cell2L"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
@@ -584,6 +592,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
@@ -603,6 +612,7 @@
             android:layout_toEndOf="@+id/cell15L"
             android:layout_toRightOf="@+id/cell15L"
             android:layout_alignTop="@id/cell15L"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
@@ -623,6 +633,7 @@
             android:layout_toEndOf="@+id/cell16L"
             android:layout_toRightOf="@+id/cell16L"
             android:layout_alignTop="@id/cell15L"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
@@ -643,6 +654,7 @@
             android:layout_toEndOf="@+id/cell17L"
             android:layout_toRightOf="@+id/cell17L"
             android:layout_alignTop="@id/cell15L"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
@@ -663,6 +675,7 @@
             android:layout_toEndOf="@+id/cell18L"
             android:layout_toRightOf="@+id/cell18L"
             android:layout_alignTop="@id/cell15L"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
@@ -684,6 +697,7 @@
             android:layout_toEndOf="@+id/cell19L"
             android:layout_toRightOf="@+id/cell19L"
             android:layout_alignTop="@id/cell15L"
+            android:background="@drawable/mar3"
             >
 
 
@@ -705,6 +719,7 @@
             android:layout_toRightOf="@+id/cell20L"
             android:layout_toEndOf="@+id/cell20L"
             android:layout_alignTop="@id/cell15L"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
@@ -725,6 +740,8 @@
             android:layout_toRightOf="@+id/cell21L"
             android:layout_toEndOf="@+id/cell21L"
             android:layout_alignTop="@id/cell15L"
+            android:background="@drawable/mar3"
+
             >
 
             <Utils.cellView
@@ -745,6 +762,7 @@
             android:layout_alignTop="@+id/cell1L"
             android:layout_toEndOf="@+id/cell6L"
             android:layout_toRightOf="@+id/cell6L"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
@@ -764,6 +782,7 @@
             android:layout_above="@+id/cell1L"
             android:layout_toEndOf="@+id/cell6L"
             android:layout_toRightOf="@+id/cell6L"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
@@ -783,6 +802,7 @@
             android:layout_above="@+id/cell7L"
             android:layout_toEndOf="@+id/cell6L"
             android:layout_toRightOf="@+id/cell6L"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
@@ -802,6 +822,7 @@
             android:layout_above="@+id/cell7L"
             android:layout_toEndOf="@+id/cell5L"
             android:layout_toRightOf="@+id/cell5L"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
@@ -821,6 +842,7 @@
             android:layout_above="@+id/cell7L"
             android:layout_toEndOf="@+id/cell4L"
             android:layout_toRightOf="@+id/cell4L"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
@@ -839,7 +861,9 @@
             android:layout_height="60dp"
             android:layout_toLeftOf="@+id/cell27L"
             android:layout_toStartOf="@+id/cell27L"
-            android:layout_alignTop="@+id/cell25L">
+            android:layout_alignTop="@+id/cell25L"
+            android:background="@drawable/mar3">
+
 
             <Utils.cellView
                 android:id="@+id/cell28"
@@ -859,6 +883,7 @@
             android:layout_toLeftOf="@+id/cell28L"
             android:layout_toStartOf="@+id/cell28L"
             android:layout_alignTop="@+id/cell25L"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
@@ -879,6 +904,7 @@
             android:layout_above="@+id/cell7L"
             android:layout_toStartOf="@+id/cell29L"
             android:layout_toLeftOf="@+id/cell29L"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
@@ -898,14 +924,14 @@
             android:layout_toLeftOf="@+id/cell30L"
             android:layout_toStartOf="@+id/cell30L"
             android:layout_alignTop="@+id/cell25L"
-            android:background="#0000ff"
+            android:background="@drawable/mar3"
             >
 
             <Utils.cellView
                 android:id="@+id/cell31"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cellText="END"
+                app:cellText=" FINISH"
                 >
 
             </Utils.cellView>

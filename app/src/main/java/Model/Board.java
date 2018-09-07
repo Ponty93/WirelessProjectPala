@@ -195,6 +195,7 @@ public class Board extends Game {
                 JSONObject player2 = json.getJSONObject("pawnPlayer2");
                 if(player1.getInt("ID")==getPlayer1().getUserId()){
                     if(player2.getInt("ID")== getPlayer2().getUserId()) {
+                        //todo set counter
                         for (int i = 1; i < 7; i++) {
                             getPlayer1().getPawnbyId(i).setPosition(player1.getInt("pawnPos" + i));
                             getPlayer1().getPawnbyId(i).setPawnIdFromDb(player1.getInt("pawnId" + i));

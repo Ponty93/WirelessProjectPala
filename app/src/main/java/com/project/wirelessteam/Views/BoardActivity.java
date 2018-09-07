@@ -168,15 +168,16 @@ public class BoardActivity extends AppCompatActivity {
 
 
         //increments the players rounds
-        getController().setCounter(getController().getRoundsCounter() + 1);
+
 
         findViewById(R.id.roll).setEnabled(round);
         //display a message "waiting for foe to finish his turn.."
 
-
+        //increments the players rounds
         // sets to 0 the number of move in this round
         // sets the foe score
         if(round == true) {
+            getController().setCounter(getController().getRoundsCounter() + 1);
             controller.setDiceResToNull();
             controller.setNumberOfMove(0);
             ((TextView)findViewById(R.id.roundNumber)).setText(Integer.toString(controller.getRoundsCounter()));
@@ -380,19 +381,20 @@ public class BoardActivity extends AppCompatActivity {
 
 
 
-    //todo move in a controller class
+    /*
     public boolean CheckCollision(View v1,View v2) {
         Rect R1=new Rect(v1.getLeft(), v1.getTop(), v1.getRight(), v1.getBottom());
         Rect R2=new Rect(v2.getLeft(), v2.getTop(), v2.getRight(), v2.getBottom());
         return R1.intersect(R2);
-    }
+    }*/
 
 
 
     public void buttonEndTurn(View view){
         roundOrganize(false);
-        controller.endTurn();
         internalTimer.cancel();
+
+        controller.endTurn();
 
 
     }
@@ -402,6 +404,10 @@ public class BoardActivity extends AppCompatActivity {
             //invoco haiPerso
             mp.stop();
             boardView.internalTimer.cancel();
+            ImageView roll1 = (ImageView) findViewById(R.id.diceRes1);
+            ImageView roll2 = (ImageView) findViewById(R.id.diceRes2);
+            roll1.setImageDrawable(getResources().getDrawable(R.drawable.customborder));
+            roll2.setImageDrawable(getResources().getDrawable(R.drawable.customborder));
             endGame(boardView);
 
 

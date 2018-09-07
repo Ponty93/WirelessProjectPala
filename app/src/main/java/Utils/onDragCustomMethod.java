@@ -29,7 +29,7 @@ public class onDragCustomMethod implements View.OnDragListener {
     //var to be used in onDrag method
     private int local = 0;
     private int action1=0,action2=0,action3=0;
-    boolean canEat1 = false,canEat2 = false, canEat3 = false;
+
 
 
     public onDragCustomMethod(BoardActivity boardAct, boardController boardRef)
@@ -54,13 +54,14 @@ public class onDragCustomMethod implements View.OnDragListener {
 
 
 
-                if(local+action1 != local || local + action2 != local || local+action3 != local && Integer.parseInt((String) view.getTag()) != local) {
+                if((local+action1 != local || local + action2 != local || local+action3 != local) && Integer.parseInt((String) view.getTag()) != local) {
                     if(dragEvent.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
                         if(Integer.parseInt((String) view.getTag()) == local + action1 && local + action1 != 0) {
                             refActivity.findCellByIndex(local + action1).setBackgroundColor(Color.RED);
                             if (cellNumber > 6 && isOccupied(newParent))
                                 if (isBlack(newParent.getChildAt(1)))
                                     return controller.canEat(controller.getPlayer1().getUserId(), controller.getPlayer2().getUserId(), local, local + action1);
+
                             return true;
                         }
                         if (Integer.parseInt((String) view.getTag()) == local + action2 && local + action2 != 0) {
@@ -68,6 +69,7 @@ public class onDragCustomMethod implements View.OnDragListener {
                             if (cellNumber > 6 && isOccupied(newParent))
                                 if (isBlack(newParent.getChildAt(1)))
                                     return controller.canEat(controller.getPlayer1().getUserId(), controller.getPlayer2().getUserId(), local, local + action2);
+
                             return true;
                         }
                         if (Integer.parseInt((String) view.getTag()) == local + action3 && local + action3 != 0) {
@@ -75,6 +77,7 @@ public class onDragCustomMethod implements View.OnDragListener {
                             if (cellNumber > 6 && isOccupied(newParent))
                                 if (isBlack(newParent.getChildAt(1)))
                                     return controller.canEat(controller.getPlayer1().getUserId(), controller.getPlayer2().getUserId(), local, local + action3);
+
                             return true;
                         }
                     }
