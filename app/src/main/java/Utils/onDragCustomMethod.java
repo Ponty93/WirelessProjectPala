@@ -93,7 +93,6 @@ public class onDragCustomMethod implements View.OnDragListener {
                 return true;
             //not doing anything
             case DragEvent.ACTION_DRAG_EXITED:
-                resetTargetViewBackground(view);
                 return true;
             case DragEvent.ACTION_DROP:
                 ClipData data = dragEvent.getClipData();
@@ -226,8 +225,7 @@ public class onDragCustomMethod implements View.OnDragListener {
                     return true;
 
             case DragEvent.ACTION_DRAG_ENDED:
-                ((RelativeLayout) view).setBackgroundColor(Color.WHITE);
-                view.invalidate();
+                resetTargetViewBackground(view);
 
                 if(dragEvent.getResult())
                     Toast.makeText(refActivity,"The drop was handled",Toast.LENGTH_LONG);
