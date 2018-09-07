@@ -391,14 +391,16 @@ public class BoardActivity extends AppCompatActivity {
 
 
     public void buttonEndTurn(View view){
-        internalTimer.cancel();
-        roundOrganize(false);
-
-        ImageView roll1 = (ImageView) findViewById(R.id.diceRes1);
-        ImageView roll2 = (ImageView) findViewById(R.id.diceRes2);
-        roll1.setImageDrawable(getResources().getDrawable(R.drawable.customborder));
-        roll2.setImageDrawable(getResources().getDrawable(R.drawable.customborder));
         controller.endTurn();
+        internalTimer.cancel();
+        if(controller.endTurn() == true) {
+            roundOrganize(false);
+
+            ImageView roll1 = (ImageView) findViewById(R.id.diceRes1);
+            ImageView roll2 = (ImageView) findViewById(R.id.diceRes2);
+            roll1.setImageDrawable(getResources().getDrawable(R.drawable.customborder));
+            roll2.setImageDrawable(getResources().getDrawable(R.drawable.customborder));
+        }
 
     }
 

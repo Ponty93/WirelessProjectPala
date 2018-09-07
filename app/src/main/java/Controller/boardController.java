@@ -48,8 +48,8 @@ public class boardController {
         return model.playerOrder(id);
     }
 
-    public void endTurn(){
-        model.endTurn();
+    public boolean endTurn(){
+        return model.endTurn();
     }
 
     public void roll(){

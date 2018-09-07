@@ -132,16 +132,17 @@ public class Board extends Game {
         numberOfMove = val;
     }
 
-    public void endTurn(){
+    public boolean endTurn(){
 
 
         try {
             if(uploadBoard() == true){
                 phpConnect myConn2 = new phpConnect("https://psionofficial.com/Wireless/handler.php", getIdGame());
-                myConn2.execute("u", Integer.toString(getPlayer2().getUserId()), "endTurn", "-1", "-1", "-1").get();
+                return myConn2.execute("u", Integer.toString(getPlayer2().getUserId()), "endTurn", "-1", "-1", "-1").get();
             }
         }catch(ExecutionException e){e.printStackTrace();}
         catch(InterruptedException e){e.printStackTrace();}
+        return false;
     }
 
 
