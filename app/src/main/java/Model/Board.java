@@ -133,8 +133,6 @@ public class Board extends Game {
     }
 
     public boolean endTurn(){
-
-
         try {
             if(uploadBoard() == true){
                 phpConnect myConn2 = new phpConnect("https://psionofficial.com/Wireless/handler.php", getIdGame());

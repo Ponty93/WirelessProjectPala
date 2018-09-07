@@ -167,8 +167,9 @@ public class BoardActivity extends AppCompatActivity {
             findViewById(R.id.red6).setEnabled(false);
 
 
-        //increments the players rounds
 
+
+        findViewById(R.id.endTurn).setEnabled(false);
 
         findViewById(R.id.roll).setEnabled(round);
         //display a message "waiting for foe to finish his turn.."
@@ -197,7 +198,7 @@ public class BoardActivity extends AppCompatActivity {
             internalTimer.schedule(new connectionTimeout(boardView),0,3000);
         }
 
-        findViewById(R.id.endTurn).setEnabled(false);
+
     }
 
     private void init(Intent buildBoard) {
@@ -391,7 +392,6 @@ public class BoardActivity extends AppCompatActivity {
 
 
     public void buttonEndTurn(View view){
-        controller.endTurn();
         internalTimer.cancel();
         if(controller.endTurn() == true) {
             roundOrganize(false);
