@@ -86,16 +86,14 @@ public class onDragCustomMethod implements View.OnDragListener {
                 return false;
 
             case DragEvent.ACTION_DRAG_ENTERED:
-                view.setBackgroundColor(Color.BLUE);
-                view.invalidate();
+
                 return true;
 
             case DragEvent.ACTION_DRAG_LOCATION:
                 return true;
             //not doing anything
             case DragEvent.ACTION_DRAG_EXITED:
-                view.setBackgroundColor(Color.WHITE);
-                view.invalidate();
+                resetTargetViewBackground(view);
                 return true;
             case DragEvent.ACTION_DROP:
                 ClipData data = dragEvent.getClipData();
@@ -300,16 +298,8 @@ public class onDragCustomMethod implements View.OnDragListener {
     }
     private void resetTargetViewBackground(View view)
     {
-        // Clear color filter.
-        /*if(view.getTag().equals("cell1L") || view.getTag().equals("cell31L"))
-            view.setBackgroundColor(Color.BLUE);
-        else if(view.getTag().equals("cell2L") || view.getTag().equals("cell3L") || view.getTag().equals("cell4L") || view.getTag().equals("cell5L")
-            || view.getTag().equals("cell6L") || view.getTag().equals("cell7L")) {
-            view.setBackgroundColor(Color.GREEN);
-        }
-        else*/
-            view.getBackground().clearColorFilter();
-            view.setBackground(refActivity.getResources().getDrawable(R.drawable.mar3));
+
+        view.setBackground(refActivity.getResources().getDrawable(R.drawable.mar3));
         // Redraw the target view use original color.
         view.invalidate();
     }

@@ -391,11 +391,9 @@ public class BoardActivity extends AppCompatActivity {
 
 
     public void buttonEndTurn(View view){
-        roundOrganize(false);
         internalTimer.cancel();
-
+        roundOrganize(false);
         controller.endTurn();
-
 
     }
 

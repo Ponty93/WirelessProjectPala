@@ -37,7 +37,11 @@ public class cellView extends View {
         setupPaint();
     }
 
-
+    public cellView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        init(attrs);
+        setupPaint();
+    }
 
 
     private void init(AttributeSet attrs) {
@@ -76,7 +80,7 @@ public class cellView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        paintShapeText.setTextSize(80);
+        paintShapeText.setTextSize(25);
         canvas.drawText(cellText,textWidth,textHeight,paintShapeText);
         canvas.drawRect(0,0,getWidth(),getHeight(),paintShapeBorder);
 
@@ -89,7 +93,7 @@ public class cellView extends View {
         paintShapeText = new Paint();
         paintShapeText.setStyle(Paint.Style.FILL);
         paintShapeText.setColor(cellColor);
-        //paintShapeText.setTextSize(80);
+        paintShapeText.setTextSize(60);
         paintShapeText.setFakeBoldText(true);
 
         paintShapeBorder = new Paint();
