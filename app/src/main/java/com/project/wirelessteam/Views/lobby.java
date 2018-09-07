@@ -23,7 +23,7 @@ public class lobby extends AppCompatActivity {
     private JSONObject lobbyConn;
     private Chronometer timer;
     private AppCompatActivity currActivity =this;
-    private Button startButton,stopButton;
+
     private lobbyController controller = null;
 
     @Override
@@ -32,6 +32,7 @@ public class lobby extends AppCompatActivity {
         setContentView(R.layout.activity_lobby);
         lobbyIntent = getIntent();
         timer = (Chronometer) findViewById(R.id.timer);
+        timer.setFormat("%s");
         controller = new lobbyController(new lobbyModel(),this);
 
         timer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
@@ -40,7 +41,7 @@ public class lobby extends AppCompatActivity {
                 long minutes = ((SystemClock.elapsedRealtime() - timer.getBase())/1000) / 60;
                 long seconds = ((SystemClock.elapsedRealtime() - timer.getBase())/1000) % 60;
 
-                timer.setFormat(Long.toString(minutes)+":"+Long.toString(seconds));
+
                 Log.d("MyTimer", "onChronometerTick: " + minutes + " : " + seconds);
                 Log.d("MyCounter",""+seconds%10);
 
@@ -66,9 +67,26 @@ public class lobby extends AppCompatActivity {
             }
         });
 
-        lobbyChecker();
+        timer.setBase(SystemClock.elapsedRealtime());
+        timer.start();
     }
 
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        timer.setBase(SystemClock.elapsedRealtime());
+        timer.start();
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        timer.stop();
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        //cancella coda
+    }
     private void toBoard(){
 
         JSONObject res =controller.toBoardConnect(lobbyIntent.getIntExtra("idPlayer",0));
@@ -93,11 +111,6 @@ public class lobby extends AppCompatActivity {
         else
             super.finish();
 
-    }
-
-    public void lobbyChecker() {
-        timer.setBase(SystemClock.elapsedRealtime());
-        timer.start();
     }
 
 

@@ -61,6 +61,7 @@ public class login extends AppCompatActivity {
                 intent.putExtra("idPlayer", conn.getInt("playerId"));
                 intent.putExtra("userName", conn.getString("userName"));
                 startActivity(intent);
+                finish();
             }
         }catch(JSONException e){
                 e.printStackTrace();

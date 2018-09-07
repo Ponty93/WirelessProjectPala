@@ -33,6 +33,7 @@ public class registration extends AppCompatActivity {
 
     public void goToLogin() {
         startActivity(new Intent(this,login.class));
+        finish();
     }
 
     public void sendRegistrationData(View view) {

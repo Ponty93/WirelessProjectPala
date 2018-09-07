@@ -51,13 +51,37 @@ public class BoardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_board);
         Intent buildBoard = getIntent();
         mp = MediaPlayer.create(this, R.raw.menu);
-        mp.start();
-        mp.setLooping(true);
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         //initialize the boards view feature
         init(buildBoard);
 
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+            mp.start();
+            mp.setLooping(true);
+
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        mp.pause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //chiama destroy del game per notificare avv
     }
 
 
@@ -415,7 +439,6 @@ public class BoardActivity extends AppCompatActivity {
     public void surrenderButton(View view){
             controller.surrender();
             //invoco haiPerso
-            mp.stop();
             boardView.internalTimer.cancel();
             endGame(boardView);
 
@@ -512,6 +535,7 @@ public class BoardActivity extends AppCompatActivity {
             });
 
         alertadd.show();*/
+        mp.release();
 
         startActivity(intent);
         ref.finish();

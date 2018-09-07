@@ -19,10 +19,38 @@ public class setupPage extends AppCompatActivity {
         TextView userName = (TextView) findViewById(R.id.displayUserName);
         userName.setText(myIntent.getStringExtra("userName"));
         mp = MediaPlayer.create(this, R.raw.menu);
+
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
         if(!mp.isPlaying()) {
             mp.start();
             mp.setLooping(true);
         }
+    }
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        mp.start();
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        if(mp.isPlaying())
+            mp.pause();
+    }
+
+    @Override
+    protected  void onStop(){
+        super.onStop();
+        if(mp.isPlaying())
+            mp.pause();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mp.start();
     }
 
     /**
@@ -42,7 +70,6 @@ public class setupPage extends AppCompatActivity {
         Intent intentToLobby = new Intent(this,lobby.class);
         intentToLobby.putExtra("idPlayer",myIntent.getIntExtra("idPlayer",0));
         intentToLobby.putExtra("userName",myIntent.getStringExtra("userName"));
-        mp.stop();
         startActivity(intentToLobby);
 
     }
