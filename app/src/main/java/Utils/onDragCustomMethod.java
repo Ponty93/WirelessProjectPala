@@ -309,6 +309,7 @@ public class onDragCustomMethod implements View.OnDragListener {
         }
         else*/
             view.getBackground().clearColorFilter();
+            view.setBackground(refActivity.getResources().getDrawable(R.drawable.mar3));
         // Redraw the target view use original color.
         view.invalidate();
     }
