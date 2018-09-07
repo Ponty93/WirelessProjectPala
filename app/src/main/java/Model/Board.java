@@ -136,22 +136,19 @@ public class Board extends Game {
 
         boolean serverResponse = false;
         try {
-            uploadBoard(buildBoardJSON());
-            phpConnect myConn2 = new phpConnect("https://psionofficial.com/Wireless/handler.php", getIdGame());
-            serverResponse = myConn2.execute("u", Integer.toString(getPlayer2().getUserId()), "endTurn", "-1", "-1","-1").get();
-        }catch(ExecutionException e){e.printStackTrace();}
-        catch(InterruptedException e){e.printStackTrace();}
-    }
-
-
-    public void uploadBoard(JSONObject json){
-        try{
+            JSONObject json = buildBoardJSON();
             Log.d("JSON UPLOAD","IS"+json);
             phpConnect conn = new phpConnect("https://psionofficial.com/Wireless/update.php",getIdGame());
-            conn.execute("u","-1","boardUpload","-1","-1",json.toString()).get();
+            if(conn.execute("u","-1","boardUpload","-1","-1",json.toString()).get() == true) {
+                phpConnect myConn2 = new phpConnect("https://psionofficial.com/Wireless/handler.php", getIdGame());
+                serverResponse = myConn2.execute("u", Integer.toString(getPlayer2().getUserId()), "endTurn", "-1", "-1", "-1").get();
+            }
         }catch(ExecutionException e){e.printStackTrace();}
         catch(InterruptedException e){e.printStackTrace();}
     }
+
+
+
     public JSONObject buildBoardJSON(){
         JSONObject board = new JSONObject();
         JSONArray player1 = new JSONArray();
