@@ -5,10 +5,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import API.phpConnect;
 import Actors.Player;
+import Utils.dice;
 
 public class Board extends Game {
     /**
@@ -21,6 +23,7 @@ public class Board extends Game {
     private int numberOfCell = 30;
     private int[] diceBuffer = new int[2];
     private int numberOfMove = 0;
+    private dice diceRes;
 
     /**
      * create a BoardActivity instance to begin the game
@@ -29,22 +32,13 @@ public class Board extends Game {
      * @param player2
      * @param gameId
      */
-    public Board(int cells,Player player1, Player player2,int gameId) {
+    public Board(int cells,Player player1, Player player2,int gameId,dice d) {
         super(player1,player2,gameId);
         numberOfCell = cells;
-        setDiceResToNull();
+        diceRes = d;
+        diceRes.setDiceResToNull();
     }
-    /**
-     * Assign two random values in sequence to the diceBuffer array
-     * The method models two dice roll
-     */
-    public void roll() {
-        diceBuffer[0] = (int) (Math.random()*6+1);
-        String aux = "tempo da far saltare";
-        String ref = "altro tempo";
-        diceBuffer[1] = (int) (Math.random()*6+1);
 
-    }
 
 
     /**
@@ -199,7 +193,6 @@ public class Board extends Game {
                 JSONObject player2 = json.getJSONObject("pawnPlayer2");
                 if(player1.getInt("ID")==getPlayer1().getUserId()){
                     if(player2.getInt("ID")== getPlayer2().getUserId()) {
-                        //todo set counter
                         for (int i = 1; i < 7; i++) {
                             getPlayer1().getPawnbyId(i).setPosition(player1.getInt("pawnPos" + i));
                             getPlayer1().getPawnbyId(i).setPawnIdFromDb(player1.getInt("pawnId" + i));
@@ -258,17 +251,10 @@ public class Board extends Game {
 
     }
 
-    public int getDiceRes(int index){
-        return diceBuffer[index];
+    public dice getDice(){
+        return diceRes;
     }
 
-    public void setDiceResToNull(){
-        diceBuffer[0]=0;
-        diceBuffer[1]=0;
-    }
-    public void setDiceResToNullInPos(int index){
-        diceBuffer[index]=0;
-    }
 
 
 }

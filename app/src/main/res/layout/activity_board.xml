@@ -53,6 +53,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginEnd="5dp"
         android:textStyle="bold"
+        android:textColor="#fff"
         android:text="ID"/>
 
     <TextView
@@ -64,6 +65,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:text="OPPONENT USERNAME"
+        android:textColor="#fff"
         />
 
     <TextView
@@ -75,6 +77,7 @@
         android:layout_marginRight="50dp"
         android:layout_marginEnd="50dp"
         android:textStyle="bold"
+        android:textColor="#fff"
         android:text="ID"/>
 
     <TextView
@@ -88,6 +91,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginEnd="5dp"
         android:text="USERNAME"
+        android:textColor="#fff"
         />
 
     <TextView
@@ -98,6 +102,7 @@
         android:layout_below="@+id/idAvv"
         android:layout_alignLeft="@+id/idAvv"
         android:layout_alignStart="@+id/idAvv"
+        android:textColor="#fff"
         />
 
     <TextView
@@ -105,6 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Score:"
+        android:textColor="#fff"
         android:layout_below="@+id/userPL"/>
 
     <TextView
@@ -116,6 +122,7 @@
         android:layout_alignTop="@+id/scoreAvvText"
         android:text="0"
         android:textAlignment="center"
+        android:textColor="#fff"
         tools:text="0"
         />
 
@@ -129,6 +136,7 @@
         android:layout_toRightOf="@+id/scorePLText"
         android:layout_toEndOf="@+id/scorePLText"
         android:layout_alignTop="@id/scorePLText"
+        android:textColor="#fff"
         />
 
     <TextView
@@ -136,6 +144,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Round:"
+        android:textColor="#fff"
         android:layout_centerHorizontal="true"/>
 
     <TextView
@@ -144,6 +153,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/roundtext"
         android:layout_centerHorizontal="true"
+        android:textColor="#fff"
         android:text="0" />
 
     <Button
@@ -209,6 +219,8 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_marginLeft="3dp"
+
                 app:srcCompat="@drawable/rosso" />
 
             <ImageView
@@ -218,6 +230,8 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_marginLeft="3dp"
+
                 app:srcCompat="@drawable/rosso" />
 
             <ImageView
@@ -227,6 +241,8 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_marginLeft="3dp"
+
                 app:srcCompat="@drawable/rosso" />
 
             <ImageView
@@ -236,6 +252,8 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_marginLeft="3dp"
+
                 app:srcCompat="@drawable/rosso" />
 
             <ImageView
@@ -245,15 +263,17 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_marginLeft="3dp"
+
                 app:srcCompat="@drawable/rosso" />
 
             <ImageView
                 android:id="@+id/red6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_marginLeft="3dp"
+                android:layout_centerVertical="true"
                 app:srcCompat="@drawable/rosso" />
 
             <ImageView
@@ -263,6 +283,8 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginRight="3dp"
+
                 app:srcCompat="@drawable/nero" />
 
             <ImageView
@@ -272,6 +294,8 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginRight="3dp"
+
                 app:srcCompat="@drawable/nero" />
 
             <ImageView
@@ -281,6 +305,8 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginRight="3dp"
+
                 app:srcCompat="@drawable/nero" />
 
             <ImageView
@@ -290,6 +316,8 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginRight="3dp"
+
                 app:srcCompat="@drawable/nero" />
             <ImageView
                 android:id="@+id/black5"
@@ -298,6 +326,8 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginRight="3dp"
+
                 app:srcCompat="@drawable/nero" />
 
             <ImageView
@@ -307,6 +337,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="3dp"
+
                 app:srcCompat="@drawable/nero" />
 
 
@@ -322,12 +354,13 @@
             android:layout_toEndOf="@+id/cell1L"
             android:layout_alignTop="@+id/cell1L"
             android:background="@drawable/mar3"
+
             >
             <Utils.cellView
                 android:id="@+id/cell2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cellText=" 1"
+                app:cellText=" I"
                 >
             </Utils.cellView>
 
@@ -347,7 +380,7 @@
                 android:id="@+id/cell3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cellText=" 2"
+                app:cellText=" II"
 
                 >
 
@@ -368,7 +401,7 @@
                 android:id="@+id/cell4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cellText=" 3"
+                app:cellText=" III"
 
                 >
 
@@ -389,7 +422,7 @@
                 android:id="@+id/cell5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cellText=" 4"
+                app:cellText=" IV"
 
                 >
             </Utils.cellView>
@@ -410,7 +443,7 @@
                 android:id="@+id/cell6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cellText=" 5"
+                app:cellText=" V"
 
                 >
 
@@ -431,7 +464,7 @@
                 android:id="@+id/cell7"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cellText=" 6"
+                app:cellText=" VI"
 
                 >
 
@@ -457,6 +490,13 @@
                 >
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell8l"
+                android:gravity="center">
+
+            </LinearLayout>
 
 
         </RelativeLayout>
@@ -479,6 +519,13 @@
                 >
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell9l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -500,6 +547,13 @@
                 >
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell10l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -521,6 +575,13 @@
                 >
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell11l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -542,6 +603,13 @@
                 >
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell12l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -562,6 +630,13 @@
                 app:cellText="12">
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell13l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -582,6 +657,13 @@
                 app:cellText="13">
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell14l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -602,6 +684,13 @@
                 app:cellText="14">
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell15l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -623,6 +712,13 @@
                 >
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell16l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -644,6 +740,13 @@
                 >
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell17l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -665,6 +768,13 @@
                 >
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell18l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -687,6 +797,13 @@
                 >
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell19l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -709,6 +826,13 @@
                 >
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell20l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -730,6 +854,13 @@
                 >
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell21l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -752,6 +883,13 @@
                 >
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell22l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -772,6 +910,13 @@
                 app:cellText="22">
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell23l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -792,6 +937,13 @@
                 app:cellText="23">
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell24l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -812,6 +964,13 @@
                 app:cellText="24">
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell25l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -832,6 +991,13 @@
                 app:cellText="25">
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell26l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -852,6 +1018,13 @@
                 app:cellText="26">
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell27l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -873,7 +1046,13 @@
                 >
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell28l"
+                android:gravity="center">
 
+            </LinearLayout>
         </RelativeLayout>
 
         <RelativeLayout
@@ -894,6 +1073,13 @@
                 >
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell29l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -914,6 +1100,13 @@
                 app:cellText="29">
 
             </Utils.cellView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cell30l"
+                android:gravity="center">
+
+            </LinearLayout>
 
         </RelativeLayout>
 

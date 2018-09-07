@@ -80,7 +80,7 @@ public class cellView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        paintShapeText.setTextSize(25);
+        paintShapeText.setTextSize(30);
         canvas.drawText(cellText,textWidth,textHeight,paintShapeText);
         canvas.drawRect(0,0,getWidth(),getHeight(),paintShapeBorder);
 
@@ -98,7 +98,7 @@ public class cellView extends View {
 
         paintShapeBorder = new Paint();
         paintShapeBorder.setStyle(Paint.Style.STROKE);
-        paintShapeBorder.setStrokeWidth(12);
+        paintShapeBorder.setStrokeWidth(10);
         paintShapeBorder.setColor(cellColor);
 
     }

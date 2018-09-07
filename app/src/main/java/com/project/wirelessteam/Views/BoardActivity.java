@@ -20,6 +20,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,6 +31,7 @@ import Actors.Player;
 import Controller.boardController;
 import Model.Board;
 import API.phpConnect;
+import Utils.dice;
 import Utils.onTouchCustomMethod;
 import Utils.onDragCustomMethod;
 
@@ -41,6 +43,7 @@ public class BoardActivity extends AppCompatActivity {
     private Timer internalTimer;
     private boardController controller = null;
     private MediaPlayer mp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,17 +73,20 @@ public class BoardActivity extends AppCompatActivity {
         @Override
         public void run() {
             if(getController().getNumberOfMove()>=2){
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        findViewById(R.id.endTurn).setEnabled(true);
-                    }
-                });
+
+                /*else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            findViewById(R.id.endTurn).setEnabled(true);
+                        }
+                    });
+                }*/
             }
 
             counter++;
 
-            if(counter == 40){
+            if(counter == 60){
                 controller.surrender();
                 refBoard.internalTimer.cancel();
                 endGame(refBoard);
@@ -166,7 +172,7 @@ public class BoardActivity extends AppCompatActivity {
             findViewById(R.id.red5).setEnabled(false);
             findViewById(R.id.red6).setEnabled(false);
 
-            findViewById(R.id.endTurn).setEnabled(false);
+            findViewById(R.id.endTurn).setEnabled(round);
 
         findViewById(R.id.roll).setEnabled(round);
         //display a message "waiting for foe to finish his turn.."
@@ -228,7 +234,7 @@ public class BoardActivity extends AppCompatActivity {
 
             if(controller == null) {
                 if(json!=null) {
-                    controller = new boardController(new Board(30, new Player(id1, buildBoard.getStringExtra("player1Name"),json.getJSONObject("pawnPlayer1")), new Player(id2, buildBoard.getStringExtra("player2Name"),json.getJSONObject("pawnPlayer2")), gameId),this);
+                    controller = new boardController(new Board(30, new Player(id1, buildBoard.getStringExtra("player1Name"),json.getJSONObject("pawnPlayer1")), new Player(id2, buildBoard.getStringExtra("player2Name"),json.getJSONObject("pawnPlayer2")), gameId,new dice()),this);
                     setPawnView(context, controller.getPlayer1().getPawns(), "player1");
                     setPawnView(context, controller.getPlayer2().getPawns(), "player2");
                 }
@@ -244,6 +250,7 @@ public class BoardActivity extends AppCompatActivity {
         red1.setOnTouchListener(new onTouchCustomMethod(context,refLayout,controller));
         red1.setTag("red1");
 
+
         ImageView red2 = findViewById(R.id.red2);
         red2.setOnTouchListener(new onTouchCustomMethod(context,refLayout,controller));
         red2.setTag("red2");
@@ -252,17 +259,21 @@ public class BoardActivity extends AppCompatActivity {
         red3.setOnTouchListener(new onTouchCustomMethod(context,refLayout,controller));
         red3.setTag("red3");
 
+
         ImageView red4 = findViewById(R.id.red4);
         red4.setOnTouchListener(new onTouchCustomMethod(context,refLayout,controller));
         red4.setTag("red4");
+
 
         ImageView red5 = findViewById(R.id.red5);
         red5.setOnTouchListener(new onTouchCustomMethod(context,refLayout,controller));
         red5.setTag("red5");
 
+
         ImageView red6 = findViewById(R.id.red6);
         red6.setOnTouchListener(new onTouchCustomMethod(context,refLayout,controller));
         red6.setTag("red6");
+
 
         ImageView black1 = findViewById(R.id.black1);
         black1.setTag("black1");
@@ -293,52 +304,52 @@ public class BoardActivity extends AppCompatActivity {
         findViewById(R.id.cell6L).setTag("5");
         findViewById(R.id.cell7L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell7L).setTag("6");
-        findViewById(R.id.cell8L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell8L).setTag("7");
-        findViewById(R.id.cell9L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell9L).setTag("8");
-        findViewById(R.id.cell10L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell10L).setTag("9");
-        findViewById(R.id.cell11L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell11L).setTag("10");
-        findViewById(R.id.cell12L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell12L).setTag("11");
-        findViewById(R.id.cell13L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell13L).setTag("12");
-        findViewById(R.id.cell14L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell14L).setTag("13");
-        findViewById(R.id.cell15L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell15L).setTag("14");
-        findViewById(R.id.cell16L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell16L).setTag("15");
-        findViewById(R.id.cell17L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell17L).setTag("16");
-        findViewById(R.id.cell18L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell18L).setTag("17");
-        findViewById(R.id.cell19L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell19L).setTag("18");
-        findViewById(R.id.cell20L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell20L).setTag("19");
-        findViewById(R.id.cell21L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell21L).setTag("20");
-        findViewById(R.id.cell22L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell22L).setTag("21");
-        findViewById(R.id.cell23L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell23L).setTag("22");
-        findViewById(R.id.cell24L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell24L).setTag("23");
-        findViewById(R.id.cell25L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell25L).setTag("24");
-        findViewById(R.id.cell26L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell26L).setTag("25");
-        findViewById(R.id.cell27L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell27L).setTag("26");
-        findViewById(R.id.cell28L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell28L).setTag("27");
-        findViewById(R.id.cell29L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell29L).setTag("28");
-        findViewById(R.id.cell30L).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell30L).setTag("29");
+        findViewById(R.id.cell8l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell8l).setTag("7");
+        findViewById(R.id.cell9l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell9l).setTag("8");
+        findViewById(R.id.cell10l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell10l).setTag("9");
+        findViewById(R.id.cell11l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell11l).setTag("10");
+        findViewById(R.id.cell12l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell12l).setTag("11");
+        findViewById(R.id.cell13l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell13l).setTag("12");
+        findViewById(R.id.cell14l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell14l).setTag("13");
+        findViewById(R.id.cell15l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell15l).setTag("14");
+        findViewById(R.id.cell16l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell16l).setTag("15");
+        findViewById(R.id.cell17l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell17l).setTag("16");
+        findViewById(R.id.cell18l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell18l).setTag("17");
+        findViewById(R.id.cell19l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell19l).setTag("18");
+        findViewById(R.id.cell20l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell20l).setTag("19");
+        findViewById(R.id.cell21l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell21l).setTag("20");
+        findViewById(R.id.cell22l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell22l).setTag("21");
+        findViewById(R.id.cell23l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell23l).setTag("22");
+        findViewById(R.id.cell24l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell24l).setTag("23");
+        findViewById(R.id.cell25l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell25l).setTag("24");
+        findViewById(R.id.cell26l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell26l).setTag("25");
+        findViewById(R.id.cell27l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell27l).setTag("26");
+        findViewById(R.id.cell28l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell28l).setTag("27");
+        findViewById(R.id.cell29l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell29l).setTag("28");
+        findViewById(R.id.cell30l).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell30l).setTag("29");
         findViewById(R.id.cell31L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell31L).setTag("30");        //Log.d("Json ",buildBoard.getStringExtra("json"));
 
@@ -411,13 +422,19 @@ public class BoardActivity extends AppCompatActivity {
 
     }
     public void rollDiceButton(View view){
-        getController().roll();
+        controller.roll();
         ImageView roll1 = (ImageView) findViewById(R.id.diceRes1);
         ImageView roll2 = (ImageView) findViewById(R.id.diceRes2);
         roll1.setImageDrawable(getImageViewByResult(controller.getDiceRes(0)));
         roll2.setImageDrawable(getImageViewByResult(controller.getDiceRes(1)));
         //roll button
-        //findViewById(R.id.roll).setEnabled(false);
+        if(getController().doubleDiceRes()){
+            controller.setDoubleDown();
+            controller.setNumberOfMove(0);
+        }
+        else
+            findViewById(R.id.roll).setEnabled(false);
+
         //red pawns
         findViewById(R.id.red1).setEnabled(true);
         findViewById(R.id.red2).setEnabled(true);
@@ -604,7 +621,24 @@ public class BoardActivity extends AppCompatActivity {
 
 
     }
-
+    public ImageView findPawnViewById(int id){
+        switch(id){
+            case 1:
+                return (ImageView)findViewById(R.id.red1);
+            case 2:
+                return (ImageView)findViewById(R.id.red2);
+            case 3:
+                return (ImageView)findViewById(R.id.red3);
+            case 4:
+                return (ImageView)findViewById(R.id.red4);
+            case 5:
+                return (ImageView)findViewById(R.id.red5);
+            case 6:
+                return (ImageView)findViewById(R.id.red6);
+            default:
+                return null;
+        }
+    }
     public RelativeLayout findCellByIndex(int v){
 
 
@@ -677,4 +711,7 @@ public class BoardActivity extends AppCompatActivity {
         }
 
     }
+
+
+
 }

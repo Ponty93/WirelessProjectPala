@@ -33,7 +33,7 @@ public class boardController {
     }
 
     public void setDiceResToNull(){
-        model.setDiceResToNull();
+        model.getDice().setDiceResToNull();
     }
 
     public void setNumberOfMove(int val){
@@ -53,7 +53,7 @@ public class boardController {
     }
 
     public void roll(){
-        model.roll();
+        model.getDice().roll();
     }
 
     public boolean updateBoard(JSONObject json){
@@ -69,11 +69,11 @@ public class boardController {
     }
 
     public int getDiceRes(int index){
-        return model.getDiceRes(index);
+        return model.getDice().getDiceRes(index);
     }
 
     public void setDiceResToNullInPos(int index){
-        model.setDiceResToNullInPos(index);
+        model.getDice().setDiceResToNullInPos(index);
     }
 
     public void setCounter(int val){
@@ -95,5 +95,14 @@ public class boardController {
     public boolean checkIfPawnWin(int val){
         return model.checkIfPawnWin(val);
     }
+
+    public boolean doubleDiceRes(){
+        return model.getDice().getDouble();
+    }
+
+    public void setDoubleDown(){
+        model.getDice().setDoubleRoll(false);
+    }
+
 }
 

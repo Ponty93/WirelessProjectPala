@@ -65,12 +65,15 @@ public class Player {
         pawns.get(id).setPosition(pos);
 
     }
-    public Pawn findPawnByPos(int pos){
+    public ArrayList<Integer> findPawnsByPos(int position){
+        ArrayList<Integer> stack = new ArrayList<>();
         for(int i=1;i<7;i++){
-            if(getPawnbyId(i).getPosition() == pos)
-                return getPawnbyId(i);
+            if(pawns.get(i).getPosition() == position )
+                stack.add(pawns.get(i).getId());
         }
-        return null;
+
+
+        return stack;
     }
 
 

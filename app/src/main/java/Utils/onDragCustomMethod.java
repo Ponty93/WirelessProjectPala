@@ -42,203 +42,218 @@ public class onDragCustomMethod implements View.OnDragListener {
     public boolean onDrag(View view, DragEvent dragEvent){
         int action = dragEvent.getAction();
 
-        RelativeLayout newParent = (RelativeLayout) view;
+        ViewGroup newParent = (ViewGroup) view;
         int cellNumber = Integer.parseInt((String) newParent.getTag());
-
-        switch(action) {
-            case DragEvent.ACTION_DRAG_STARTED:
-                local = findPositionByView((View) dragEvent.getLocalState());
-                action1 = controller.getDiceRes(0);
-                action2 = controller.getDiceRes(1);
-                action3 = action1 + action2;
-
-
-
-                if((local+action1 != local || local + action2 != local || local+action3 != local) && Integer.parseInt((String) view.getTag()) != local) {
-                    if(dragEvent.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-                        if(Integer.parseInt((String) view.getTag()) == local + action1 && local + action1 != 0) {
-                            if (cellNumber > 6 && isOccupied(newParent))
-                                if (isBlack(newParent.getChildAt(1)))
-                                    return controller.canEat(controller.getPlayer1().getUserId(), controller.getPlayer2().getUserId(), local, local + action1);
-                            refActivity.findCellByIndex(local + action1).setBackgroundColor(Color.RED);
-                            return true;
-                        }
-                        if (Integer.parseInt((String) view.getTag()) == local + action2 && local + action2 != 0) {
-                            if (cellNumber > 6 && isOccupied(newParent))
-                                if (isBlack(newParent.getChildAt(1)))
-                                    return controller.canEat(controller.getPlayer1().getUserId(), controller.getPlayer2().getUserId(), local, local + action2);
-                            refActivity.findCellByIndex(local + action2).setBackgroundColor(Color.RED);
-                            return true;
-                        }
-                        if (Integer.parseInt((String) view.getTag()) == local + action3 && local + action3 != 0) {
-                            if (cellNumber > 6 && isOccupied(newParent))
-                                if (isBlack(newParent.getChildAt(1)))
-                                    return controller.canEat(controller.getPlayer1().getUserId(), controller.getPlayer2().getUserId(), local, local + action3);
-                            refActivity.findCellByIndex(local + action3).setBackgroundColor(Color.RED);
-                            return true;
-                        }
-                    }
-                }
-
-                return false;
-
-            case DragEvent.ACTION_DRAG_ENTERED:
-
-                return true;
-
-            case DragEvent.ACTION_DRAG_LOCATION:
-                return true;
-            //not doing anything
-            case DragEvent.ACTION_DRAG_EXITED:
-                return true;
-            case DragEvent.ACTION_DROP:
-                ClipData data = dragEvent.getClipData();
-                ClipData.Item item = data.getItemAt(0);
-                String itemText = item.getText().toString();
-
-                int reds= controller.howManyPawns(local,controller.getPlayer1().getUserId());
-                ArrayList<View> stack = new ArrayList<>();
+        if(dragEvent != null) {
+            switch (action) {
+                case DragEvent.ACTION_DRAG_STARTED:
+                    local = findPositionByView((View) dragEvent.getLocalState());
+                    action1 = controller.getDiceRes(0);
+                    action2 = controller.getDiceRes(1);
+                    action3 = action1 + action2;
 
 
-                resetTargetViewBackground(view);
-                view.invalidate();
+                    if ((local + action1 != local || local + action2 != local || local + action3 != local) && Integer.parseInt((String) view.getTag()) != local) {
+                        if (dragEvent.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                            if (Integer.parseInt((String) view.getTag()) == local + action1 && local + action1 != 0) {
+                                if (cellNumber > 0 && cellNumber < 7 && isOccupied(newParent)) {
+                                    if (controller.howManyPawns(local + action1, controller.getPlayer1().getUserId()) > 0 && local == 0)
+                                        return false;
 
-
-                // Get dragged view object from drag event object.
-                View srcView = (View)dragEvent.getLocalState();
-
-                // Get dragged view's parent view group.
-                ViewGroup owner = (ViewGroup) srcView.getParent();
-                // Remove source view from original parent view group.
-
-
-                if(reds>1 && ((String)owner.getTag()).equals("0") == false)
-                    stack = loadArray(owner,reds);
-
-                owner.removeView(srcView);
-
-
-
-
-                //todo not functioning properly
-                if (cellNumber > 6 && cellNumber != 30)
-                    setPawnPositionInCell(srcView, newParent);
-
-                boolean pawnWin = false;
-
-                if (cellNumber == local + action1) {
-                    if(controller.checkIfPawnWin(local + action1)) {
-                        controller.getPlayer1().setScore(controller.getPlayer1().getScore()+controller.howManyPawns(local,controller.getPlayer1().getUserId()));
-                        ((TextView)refActivity.findViewById(R.id.scorePL)).setText(Integer.toString(controller.getPlayer1().getScore()));
-
-                        if(controller.getPlayer1().getScore() == 6)
-                            //todo hai vinto se ==6
-                        pawnWin = true;
-                    }
-                    else if(cellNumber>6 && isOccupied(newParent)){
-                            if(isBlack(newParent.getChildAt(1))){
-                                if(controller.canEat(controller.getPlayer1().getUserId(),controller.getPlayer2().getUserId(),local,local+action1)){
-                                    int blackStack = controller.howManyPawns(local+action1,controller.getPlayer2().getUserId());
-                                    int index=0;
-                                    while(index<blackStack) {
-                                        controller.eatPawn(controller.getPlayer2().getPawnbyId(findViewByTag(newParent.getChildAt(1))).getId());
-                                        View black = (View) newParent.getChildAt(1);
-                                        newParent.removeView(black);
-                                        refToStart().addView(black);
-                                        index++;
-                                    }
                                 }
+                                if (cellNumber > 6) {
+                                    if (controller.howManyPawns(0, controller.getPlayer1().getUserId()) > 0) {
+                                        return false;
+                                    } else if (isOccupied(newParent))
+                                        if (isBlack(newParent.getChildAt(1)))
+                                            if (!controller.canEat(controller.getPlayer1().getUserId(), controller.getPlayer2().getUserId(), local, local + action1)) {
+                                                return false;
+                                            }
+                                }
+                                refActivity.findCellByIndex(local + action1).setBackgroundColor(Color.RED);
+                                return true;
+                            }
+                            if (Integer.parseInt((String) view.getTag()) == local + action2 && local + action2 != 0) {
+                                if (cellNumber > 0 && cellNumber < 7 && isOccupied(newParent)) {
+                                    if (controller.howManyPawns(local + action2, controller.getPlayer1().getUserId()) > 0 && local == 0)
+                                        return false;
+                                }
+                                if (cellNumber > 6) {
+                                    if (controller.howManyPawns(0, controller.getPlayer1().getUserId()) > 0) {
+                                        return false;
+                                    } else if (isOccupied(newParent))
+                                        if (isBlack(newParent.getChildAt(1)))
+                                            if (!controller.canEat(controller.getPlayer1().getUserId(), controller.getPlayer2().getUserId(), local, local + action1)) {
+                                                return false;
+                                            }
+                                }
+
+                                refActivity.findCellByIndex(local + action2).setBackgroundColor(Color.RED);
+                                return true;
+                            }
+                            if (Integer.parseInt((String) view.getTag()) == local + action3 && local + action3 != 0) {
+                                if (cellNumber > 0 && cellNumber < 7 && isOccupied(newParent)) {
+                                    if (controller.howManyPawns(local + action3, controller.getPlayer1().getUserId()) > 0 && local == 0)
+                                        return false;
+                                }
+                                if (cellNumber > 6) {
+                                    if (controller.howManyPawns(0, controller.getPlayer1().getUserId()) > 0) {
+                                        return false;
+                                    } else if (isOccupied(newParent))
+                                        if (isBlack(newParent.getChildAt(1)))
+                                            if (!controller.canEat(controller.getPlayer1().getUserId(), controller.getPlayer2().getUserId(), local, local + action1)) {
+                                                return false;
+                                            }
+                                }
+
+                                refActivity.findCellByIndex(local + action3).setBackgroundColor(Color.RED);
+
+                                return true;
                             }
                         }
-                    Toast.makeText(refActivity,"Dragged data is"+itemText+" with "+reds+" on "+cellNumber+" with "+ controller.howManyPawns(local+action1,controller.getPlayer1().getUserId())+" in "+view.getTag(),Toast.LENGTH_LONG).show();
+                    }
 
-                    controller.setDiceResToNullInPos(0);
+                    return false;
+
+                case DragEvent.ACTION_DRAG_ENTERED:
+
+                    return true;
+
+                case DragEvent.ACTION_DRAG_LOCATION:
+                    return true;
+                //not doing anything
+                case DragEvent.ACTION_DRAG_EXITED:
+                    return true;
+                case DragEvent.ACTION_DROP:
+                    ClipData data = dragEvent.getClipData();
+                    ClipData.Item item = data.getItemAt(0);
+                    String itemText = item.getText().toString();
+
+                    int reds = controller.howManyPawns(local, controller.getPlayer1().getUserId());
+                    ArrayList<View> stack = new ArrayList<>();
+
+
+                    resetTargetViewBackground(view);
+                    view.invalidate();
+
+
+                    // Get dragged view object from drag event object.
+                    View srcView = (View) dragEvent.getLocalState();
+
+                    // Get dragged view's parent view group.
+                    ViewGroup owner = (ViewGroup) srcView.getParent();
+                    // Remove source view from original parent view group.
+
+
+                    if (reds > 1 && ((String) owner.getTag()).equals("0") == false)
+                        stack = loadArray(owner, reds);
+                    else
+                        owner.removeView(srcView);
+
+
+
+
+                    boolean pawnWin = false;
+
+                    if (cellNumber == local + action1) {
+                        pawnWin = checkWinner(action1);
+
+                        if (pawnWin == false && cellNumber > 6 && isOccupied(newParent))
+                            eatView(newParent, action1);
+
+                        Toast.makeText(refActivity, "Dragged data is" + itemText + " with " + reds + " on " + cellNumber + " with " + controller.howManyPawns(local + action1, controller.getPlayer1().getUserId()) + " in " + view.getTag(), Toast.LENGTH_LONG).show();
+
+                        controller.setDiceResToNullInPos(0);
                         controller.setNumberOfMove(controller.getNumberOfMove() + 1);
-                    }
-                    else if(cellNumber == local + action2) {
-                    if(controller.checkIfPawnWin(local + action2)) {
-                        controller.getPlayer1().setScore(controller.getPlayer1().getScore()+controller.howManyPawns(local,controller.getPlayer1().getUserId()));
-                        ((TextView)refActivity.findViewById(R.id.scorePL)).setText(Integer.toString(controller.getPlayer1().getScore()));
-                        pawnWin = true;
-                    }
-                    else if(cellNumber>6 && isOccupied(newParent)){
-                            if(isBlack(newParent.getChildAt(1))){
-                            if(controller.canEat(controller.getPlayer1().getUserId(),controller.getPlayer2().getUserId(),local,local+action2)){
-                                int blackStack = controller.howManyPawns(local+action2,controller.getPlayer2().getUserId());
-                                int index=0;
-                                while(index<blackStack) {
-                                    controller.eatPawn(controller.getPlayer2().getPawnbyId(findViewByTag(newParent.getChildAt(1))).getId());
-                                    View black = (View) newParent.getChildAt(1);
-                                    newParent.removeView(black);
-                                    refToStart().addView(black);
-                                    index++;
-                                }
-                            }
-                            }
-                        }
-                    Toast.makeText(refActivity,"Dragged data is "+itemText+" with "+reds+" with "+ controller.howManyPawns(local+action2,controller.getPlayer2().getUserId())+" in "+cellNumber,Toast.LENGTH_LONG).show();
+                    } else if (cellNumber == local + action2) {
+                        pawnWin = checkWinner(action2);
+                        if (pawnWin == true && cellNumber > 6 && isOccupied(newParent))
+                            eatView(newParent, action2);
 
-                    controller.setDiceResToNullInPos(1);
+
+                        Toast.makeText(refActivity, "Dragged data is " + itemText + " with " + reds + " with " + controller.howManyPawns(local + action2, controller.getPlayer2().getUserId()) + " in " + cellNumber, Toast.LENGTH_LONG).show();
+
+                        controller.setDiceResToNullInPos(1);
                         controller.setNumberOfMove(controller.getNumberOfMove() + 1);
-                    }
-                    else if (cellNumber == local + action3) {
-                    if(controller.checkIfPawnWin(local + action3)) {
-                        controller.getPlayer1().setScore(controller.getPlayer1().getScore()+controller.howManyPawns(local,controller.getPlayer1().getUserId()));
-                        ((TextView)refActivity.findViewById(R.id.scorePL)).setText(Integer.toString(controller.getPlayer1().getScore()));
-                        pawnWin = true;
-                    }
-                    else if(cellNumber>6  && isOccupied(newParent)){
-                        if(isBlack(newParent.getChildAt(1))){
-                            if(controller.canEat(controller.getPlayer1().getUserId(),controller.getPlayer2().getUserId(),local,local+action3)){
-                                int blackStack = controller.howManyPawns(local+action3,controller.getPlayer2().getUserId());
-                                int index=0;
-                                while(index<blackStack) {
-                                    controller.eatPawn(controller.getPlayer2().getPawnbyId(findViewByTag(newParent.getChildAt(1))).getId());
-                                    View black = (View) newParent.getChildAt(1);
-                                    newParent.removeView(black);
-                                    refToStart().addView(black);
-                                    index++;
-                                }
-                            }
-                        }
-                    }
-                    Toast.makeText(refActivity,"Dragged data is"+itemText+" with "+reds+" on "+cellNumber+" with "+ controller.howManyPawns(local+action3,controller.getPlayer1().getUserId())+" in "+view.getTag(),Toast.LENGTH_LONG).show();
+                    } else if (cellNumber == local + action3) {
+                        pawnWin = checkWinner(action3);
+                        if (pawnWin == true && cellNumber > 6 && isOccupied(newParent))
+                            eatView(newParent, action3);
 
-                    controller.setDiceResToNull();
+
+                        Toast.makeText(refActivity, "Dragged data is" + itemText + " with " + reds + " on " + cellNumber + " with " + controller.howManyPawns(local + action3, controller.getPlayer1().getUserId()) + " in " + view.getTag(), Toast.LENGTH_LONG).show();
+
+                        controller.setDiceResToNull();
                         controller.setNumberOfMove(controller.getNumberOfMove() + 2);
                     }
 
-                    newParent.addView(srcView);
-                    controller.movePawn(findViewByTag(srcView), Integer.parseInt((String) newParent.getTag()));
 
-                    if(((String) owner.getTag()).equals("0") == false)
-                        removeFromArray(stack,newParent);
+                    //moves just one pawn if reds == 1 else the whole stack
+                    if (((String) owner.getTag()).equals("0") == false && reds > 1)
+                        removeFromArray(stack, newParent);
+                    else {
+                        newParent.addView(srcView);
+                        controller.movePawn(findViewByTag(srcView), Integer.parseInt((String) newParent.getTag()));
+                    }
 
-                    if(pawnWin == true){
-                            srcView.setEnabled(false);
-                            disableWinnerPawns(stack);
+                    if (pawnWin == true) {
+                        //srcView.setEnabled(false);
+                        disableWinnerPawns(stack);
                     }
 
                     return true;
 
-            case DragEvent.ACTION_DRAG_ENDED:
-                resetTargetViewBackground(view);
+                case DragEvent.ACTION_DRAG_ENDED:
+                    resetTargetViewBackground(view);
 
-                if(dragEvent.getResult())
-                    Toast.makeText(refActivity,"The drop was handled",Toast.LENGTH_LONG);
-                else
-                    Toast.makeText(refActivity,"The drop was not handled",Toast.LENGTH_LONG);
+                    if (dragEvent.getResult())
+                        Toast.makeText(refActivity, "The drop was handled", Toast.LENGTH_LONG);
+                    else
+                        Toast.makeText(refActivity, "The drop was not handled", Toast.LENGTH_LONG);
 
-                return true;
+                    return true;
 
-            default:
-                Log.e("DragDrop Example","Unknown action type received by OnDragListener.");
-                break;
+                default:
+                    Log.e("DragDrop Example", "Unknown action type received by OnDragListener.");
+                    break;
+
+            }
 
         }
         return false;
 
     }
+
+    public void eatView(ViewGroup newParent,int action) {
+        if(isBlack(newParent.getChildAt(1))){
+            if(controller.canEat(controller.getPlayer1().getUserId(),controller.getPlayer2().getUserId(),local,local+action)){
+                int blackStack = controller.howManyPawns(local+action,controller.getPlayer2().getUserId());
+                int index=0;
+                while(index<blackStack) {
+                    controller.eatPawn(controller.getPlayer2().getPawnbyId(findViewByTag(newParent.getChildAt(1))).getId());
+                    View black = (View) newParent.getChildAt(1);
+                    newParent.removeView(black);
+                    refToStart().addView(black);
+                    index++;
+                }
+            }
+        }
+    }
+
+    public boolean checkWinner(int action) {
+        if (controller.checkIfPawnWin(local + action)) {
+            controller.getPlayer1().setScore(controller.getPlayer1().getScore() + controller.howManyPawns(local, controller.getPlayer1().getUserId()));
+            ((TextView) refActivity.findViewById(R.id.scorePL)).setText(Integer.toString(controller.getPlayer1().getScore()));
+
+            if (controller.getPlayer1().getScore() == 6)
+                //todo hai vinto se ==6
+
+                return true;
+        }
+
+            return false;
+    }
+
 
     private int findViewByTag(View v){
         String pawn = (String)v.getTag();
@@ -277,19 +292,13 @@ public class onDragCustomMethod implements View.OnDragListener {
 
 
 
-   public void setPawnPositionInCell(View v,RelativeLayout layout){
-        RelativeLayout.LayoutParams params =(RelativeLayout.LayoutParams) v.getLayoutParams();
 
-            params.addRule(RelativeLayout.RIGHT_OF,0);
-            params.addRule(RelativeLayout.LEFT_OF,0);
-            params.addRule(RelativeLayout.CENTER_HORIZONTAL,1);
-            params.addRule(RelativeLayout.CENTER_VERTICAL,1);
-            params.addRule(RelativeLayout.CENTER_IN_PARENT,1);
-            params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, 0);
-            params.addRule(RelativeLayout.ALIGN_PARENT_TOP,0);
-            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
-            params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
 
+    public boolean isInMainPath(String tag){
+        if(tag == "I" || tag == "II" || tag == "III" || tag == "IV" || tag == "V" || tag == "VI")
+            return true;
+        else
+            return false;
     }
     private void resetTargetViewBackground(View view)
     {
@@ -300,7 +309,7 @@ public class onDragCustomMethod implements View.OnDragListener {
     }
 
     private int findPositionByView(View view){
-        String tag = (String) view.getTag();
+        String tag = (String) view.getTag(); //bugged
 
         switch(tag){
             case "red1":
@@ -347,11 +356,12 @@ public class onDragCustomMethod implements View.OnDragListener {
 
     public ArrayList<View> loadArray(ViewGroup owner,int howMuch){
         ArrayList<View> stack = new ArrayList<>();
-
+        ArrayList<Integer> stackId = controller.getPlayer1().findPawnsByPos(Integer.parseInt((String)owner.getTag()));
         int index=0;
-        while(index<howMuch-1){
-            stack.add(owner.getChildAt(1));
-            owner.removeView(owner.getChildAt(1));
+        while(index<howMuch){
+            ImageView view = refActivity.findPawnViewById(stackId.get(index));
+            stack.add(view);
+            owner.removeView(view);
             index++;
         }
         return stack;
@@ -382,4 +392,7 @@ public class onDragCustomMethod implements View.OnDragListener {
             index++;
         }
     }
+
+
+
 }
