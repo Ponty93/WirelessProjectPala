@@ -575,6 +575,8 @@ public class BoardActivity extends AppCompatActivity {
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(1).getPosition());
                 if(Integer.parseInt((String)owner.getTag())>6)
                     centerInCell(red1);
+                else
+                    borderInCell(red1);
                 newOwner.addView(red1);
             }
             owner = (ViewGroup)findViewById(R.id.red2).getParent();
@@ -584,6 +586,8 @@ public class BoardActivity extends AppCompatActivity {
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(2).getPosition());
                 if(Integer.parseInt((String)owner.getTag())>6)
                     centerInCell(red2);
+                else
+                    borderInCell(red2);
                 newOwner.addView(red2);
             }
             owner = (ViewGroup)findViewById(R.id.red3).getParent();
@@ -593,6 +597,8 @@ public class BoardActivity extends AppCompatActivity {
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(3).getPosition());
                 if(Integer.parseInt((String)owner.getTag())>6)
                     centerInCell(red3);
+                else
+                    borderInCell(red3);
                 newOwner.addView(red3);
             }
             owner = (ViewGroup)findViewById(R.id.red4).getParent();
@@ -602,6 +608,8 @@ public class BoardActivity extends AppCompatActivity {
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(4).getPosition());
                 if(Integer.parseInt((String)owner.getTag())>6)
                     centerInCell(red4);
+                else
+                    borderInCell(red4);
                 newOwner.addView(red4);
             }
             owner = (ViewGroup)findViewById(R.id.red5).getParent();
@@ -611,6 +619,8 @@ public class BoardActivity extends AppCompatActivity {
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(5).getPosition());
                 if(Integer.parseInt((String)owner.getTag())>6)
                     centerInCell(red5);
+                else
+                    borderInCell(red5);
                 newOwner.addView(red5);
             }
             owner = (ViewGroup)findViewById(R.id.red6).getParent();
@@ -620,6 +630,8 @@ public class BoardActivity extends AppCompatActivity {
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(6).getPosition());
                 if(Integer.parseInt((String)owner.getTag())>6)
                     centerInCell(red6);
+                else
+                    borderInCell(red6);
                 newOwner.addView(red6);
             }
 
@@ -631,6 +643,8 @@ public class BoardActivity extends AppCompatActivity {
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(1).getPosition());
                 if(Integer.parseInt((String)owner.getTag())>6)
                     centerInCell(black1);
+                else
+                    borderInCell(black1);
                 newOwner.addView(black1);
             }
             owner = (ViewGroup)findViewById(R.id.black2).getParent();
@@ -640,6 +654,8 @@ public class BoardActivity extends AppCompatActivity {
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(2).getPosition());
                 if(Integer.parseInt((String)owner.getTag())>6)
                     centerInCell(black2);
+                else
+                    borderInCell(black2);
                 newOwner.addView(black2);
             }
             owner = (ViewGroup)findViewById(R.id.black3).getParent();
@@ -649,6 +665,8 @@ public class BoardActivity extends AppCompatActivity {
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(3).getPosition());
                 if(Integer.parseInt((String)owner.getTag())>6)
                     centerInCell(black3);
+                else
+                    borderInCell(black3);
                 newOwner.addView(black3);
             }
             owner = (ViewGroup)findViewById(R.id.black4).getParent();
@@ -658,6 +676,8 @@ public class BoardActivity extends AppCompatActivity {
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(4).getPosition());
                 if(Integer.parseInt((String)owner.getTag())>6)
                     centerInCell(black4);
+                else
+                    borderInCell(black4);
                 newOwner.addView(black4);
             }
             owner = (ViewGroup)findViewById(R.id.black5).getParent();
@@ -667,6 +687,8 @@ public class BoardActivity extends AppCompatActivity {
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(5).getPosition());
                 if(Integer.parseInt((String)owner.getTag())>6)
                     centerInCell(black5);
+                else
+                    borderInCell(black5);
                 newOwner.addView(black5);
             }
             owner = (ViewGroup)findViewById(R.id.black6).getParent();
@@ -676,6 +698,8 @@ public class BoardActivity extends AppCompatActivity {
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(6).getPosition());
                 if(Integer.parseInt((String)owner.getTag())>6)
                     centerInCell(black6);
+                else
+                    borderInCell(black6);
                 newOwner.addView(black6);
             }
 
@@ -798,6 +822,22 @@ public class BoardActivity extends AppCompatActivity {
 
         v.setLayoutParams(params);
 
+    }
+
+    public void borderInCell(View v){
+
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params.removeRule(RelativeLayout.CENTER_IN_PARENT);
+        params.removeRule(RelativeLayout.CENTER_HORIZONTAL);
+        if(isBlack(v)) {
+            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            params.addRule(RelativeLayout.ALIGN_PARENT_END);
+        }
+        else {
+            params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            params.addRule(RelativeLayout.ALIGN_PARENT_START);
+        }
+        v.setLayoutParams(params);
     }
 
     public boolean isBlack(View v){
