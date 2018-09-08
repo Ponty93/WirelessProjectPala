@@ -573,7 +573,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView red1 = (ImageView)findViewById(R.id.red1);
                 owner.removeView(findViewById(R.id.red1));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(1).getPosition());
-                if(Integer.parseInt((String)owner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(red1);
                 else
                     borderInCell(red1);
@@ -584,7 +584,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView red2 = (ImageView)findViewById(R.id.red2);
                 owner.removeView(findViewById(R.id.red2));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(2).getPosition());
-                if(Integer.parseInt((String)owner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(red2);
                 else
                     borderInCell(red2);
@@ -595,7 +595,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView red3 = (ImageView)findViewById(R.id.red3);
                 owner.removeView(findViewById(R.id.red3));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(3).getPosition());
-                if(Integer.parseInt((String)owner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(red3);
                 else
                     borderInCell(red3);
@@ -606,7 +606,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView red4 = (ImageView)findViewById(R.id.red4);
                 owner.removeView(findViewById(R.id.red4));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(4).getPosition());
-                if(Integer.parseInt((String)owner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(red4);
                 else
                     borderInCell(red4);
@@ -617,7 +617,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView red5  = (ImageView)findViewById(R.id.red5);
                 owner.removeView(findViewById(R.id.red5));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(5).getPosition());
-                if(Integer.parseInt((String)owner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(red5);
                 else
                     borderInCell(red5);
@@ -628,7 +628,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView red6  =(ImageView)findViewById(R.id.red6);
                 owner.removeView(findViewById(R.id.red6));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(6).getPosition());
-                if(Integer.parseInt((String)owner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(red6);
                 else
                     borderInCell(red6);
@@ -641,7 +641,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView black1= (ImageView)findViewById(R.id.black1);
                 owner.removeView(findViewById(R.id.black1));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(1).getPosition());
-                if(Integer.parseInt((String)owner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(black1);
                 else
                     borderInCell(black1);
@@ -652,7 +652,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView black2 =(ImageView)findViewById(R.id.black2);
                 owner.removeView(findViewById(R.id.black2));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(2).getPosition());
-                if(Integer.parseInt((String)owner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(black2);
                 else
                     borderInCell(black2);
@@ -663,7 +663,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView black3 = (ImageView)findViewById(R.id.black3);
                 owner.removeView(findViewById(R.id.black3));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(3).getPosition());
-                if(Integer.parseInt((String)owner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(black3);
                 else
                     borderInCell(black3);
@@ -674,7 +674,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView black4 = (ImageView)findViewById(R.id.black4);
                 owner.removeView(findViewById(R.id.black4));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(4).getPosition());
-                if(Integer.parseInt((String)owner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(black4);
                 else
                     borderInCell(black4);
@@ -685,7 +685,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView black5 = (ImageView)findViewById(R.id.black5);
                 owner.removeView(findViewById(R.id.black5));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(5).getPosition());
-                if(Integer.parseInt((String)owner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(black5);
                 else
                     borderInCell(black5);
@@ -696,7 +696,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView black6 = (ImageView)findViewById(R.id.black6);
                 owner.removeView(findViewById(R.id.black6));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(6).getPosition());
-                if(Integer.parseInt((String)owner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(black6);
                 else
                     borderInCell(black6);
