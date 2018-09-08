@@ -545,20 +545,16 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     public void defeat(){
-        ImageView imageView = (ImageView) findViewById(R.id.winnerimg);
-        imageView.setImageResource(R.drawable.defeat);
-        //create alert dialog with commented code
-        AlertDialog.Builder alertadd = new AlertDialog.Builder(BoardActivity.this);
-        LayoutInflater inflater = LayoutInflater.from(BoardActivity.this);
-        final View view = inflater.inflate(R.layout.endgamealert, null);
-        alertadd.setView(view);
-        alertadd.setNeutralButton("Click Here to continue!", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dlg, int sumthin) {
-                endGame(boardView);
-            }
-        });
-
-        alertadd.show();
+        AlertDialog alertDialog = new AlertDialog.Builder(BoardActivity.this).create();
+        alertDialog.setTitle("looser");
+        alertDialog.setMessage("ESKERE???");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "k skarso",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 
     public void updateBoard(JSONObject json){
