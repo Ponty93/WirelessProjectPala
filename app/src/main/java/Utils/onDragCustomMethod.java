@@ -198,6 +198,8 @@ public class onDragCustomMethod implements View.OnDragListener {
                     else {
                         if(Integer.parseInt((String)newParent.getTag())>6)
                             refActivity.centerInCell(srcView);
+                        else
+                            refActivity.borderInCell(srcView);
                         newParent.addView(srcView);
                         controller.movePawn(findViewByTag(srcView), Integer.parseInt((String) newParent.getTag()));
                     }
@@ -359,6 +361,8 @@ public class onDragCustomMethod implements View.OnDragListener {
             View v = stack.get(index);
             if(Integer.parseInt((String)newParent.getTag())>6)
                 refActivity.centerInCell(v);
+            else
+                refActivity.borderInCell(v);
             newParent.addView(v);
             controller.movePawn(findViewByTag(v), Integer.parseInt((String) newParent.getTag()));
             index++;
