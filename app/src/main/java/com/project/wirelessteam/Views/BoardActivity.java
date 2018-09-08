@@ -805,7 +805,7 @@ public class BoardActivity extends AppCompatActivity {
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.CENTER_IN_PARENT);
-
+        params.addRule(RelativeLayout.CENTER_VERTICAL);
         params.addRule(RelativeLayout.CENTER_HORIZONTAL);
         if(isBlack(v)) {
             params.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
@@ -828,11 +828,16 @@ public class BoardActivity extends AppCompatActivity {
         if(isBlack(v)) {
             params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             params.addRule(RelativeLayout.ALIGN_PARENT_END);
+            params.setMargins(0,0,8,0);
         }
         else {
             params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params.addRule(RelativeLayout.ALIGN_PARENT_START);
+            params.setMargins(8,0,0,0);
+
         }
+        params.addRule(RelativeLayout.CENTER_VERTICAL);
+
         v.setLayoutParams(params);
     }
 
