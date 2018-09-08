@@ -196,7 +196,8 @@ public class onDragCustomMethod implements View.OnDragListener {
                     if (((String) owner.getTag()).equals("0") == false && reds > 1)
                         removeFromArray(stack, newParent);
                     else {
-                        refActivity.centerInCell(srcView);
+                        if(Integer.parseInt((String)newParent.getTag())>6)
+                            refActivity.centerInCell(srcView);
                         newParent.addView(srcView);
                         controller.movePawn(findViewByTag(srcView), Integer.parseInt((String) newParent.getTag()));
                     }
@@ -356,7 +357,8 @@ public class onDragCustomMethod implements View.OnDragListener {
         int index =0;
         while(index < howMuch){
             View v = stack.get(index);
-            refActivity.centerInCell(v);
+            if(Integer.parseInt((String)newParent.getTag())>6)
+                refActivity.centerInCell(v);
             newParent.addView(v);
             controller.movePawn(findViewByTag(v), Integer.parseInt((String) newParent.getTag()));
             index++;

@@ -135,9 +135,10 @@ public class BoardActivity extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         winner();
-                                        refBoard.internalTimer.cancel();
                                     }
-                                });                            }
+                                });
+                                refBoard.internalTimer.cancel();
+                            }
                         }
                     }
                 }catch(JSONException e){e.printStackTrace();}
@@ -166,10 +167,11 @@ public class BoardActivity extends AppCompatActivity {
                     if (res.getInt("Result") == 1) {
                         if (res.getString("winner").equals("none") == false) {
                             if (res.getInt("winner") == refBoard.getController().getPlayer1().getUserId()) {
-                                refBoard.internalTimer.cancel();
                                 winner();
+                                refBoard.internalTimer.cancel();
                             } else {
                                 defeat();
+                                refBoard.internalTimer.cancel();
                             }
                         } else {
                             refBoard.internalTimer.cancel();
