@@ -130,15 +130,14 @@ public class BoardActivity extends AppCompatActivity {
                     if (res.getInt("Result") == 1) {
                         if (res.getString("winner").equals("none") == false) {
                             if (res.getInt("winner") == getController().getPlayer1().getUserId()) {
-                                refBoard.internalTimer.cancel();
+
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         winner();
+                                        refBoard.internalTimer.cancel();
                                     }
-                                });
-
-                            }
+                                });                            }
                         }
                     }
                 }catch(JSONException e){e.printStackTrace();}
@@ -448,8 +447,8 @@ public class BoardActivity extends AppCompatActivity {
     public void surrenderButton(View view){
             controller.surrender();
             //invoco haiPerso
-            boardView.internalTimer.cancel();
             defeat();
+            boardView.internalTimer.cancel();
 
 
     }
@@ -531,20 +530,16 @@ public class BoardActivity extends AppCompatActivity {
 
 
     public void winner(){
-        ImageView imageView = (ImageView) findViewById(R.id.winnerimg);
-        imageView.setImageResource(R.drawable.victory);
-        //create alert dialog with commented code
-        AlertDialog.Builder alertadd = new AlertDialog.Builder(BoardActivity.this);
-        LayoutInflater inflater = LayoutInflater.from(BoardActivity.this);
-        final View view = inflater.inflate(R.layout.endgamealert, null);
-        alertadd.setView(view);
-        alertadd.setNeutralButton("Click Here to continue!", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dlg, int sumthin) {
-                            endGame(boardView);
-                }
-            });
-
-        alertadd.show();
+        AlertDialog alertDialog = new AlertDialog.Builder(BoardActivity.this).create();
+        alertDialog.setTitle("WINNER");
+        alertDialog.setMessage("ESKERE!!!!");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "DAB",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 
     public void defeat(){
