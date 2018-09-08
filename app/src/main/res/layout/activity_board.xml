@@ -231,7 +231,6 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="3dp"
-
                 app:srcCompat="@drawable/rosso" />
 
             <ImageView
@@ -490,14 +489,6 @@
                 >
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell8l"
-                android:gravity="center">
-
-            </LinearLayout>
 
 
         </RelativeLayout>
@@ -520,14 +511,7 @@
                 >
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell9l"
-                android:gravity="center">
 
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -549,14 +533,6 @@
                 >
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell10l"
-                android:gravity="center">
-
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -578,14 +554,7 @@
                 >
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell11l"
-                android:gravity="center">
 
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -607,14 +576,7 @@
                 >
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell12l"
-                android:gravity="center">
 
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -635,14 +597,7 @@
                 app:cellText="12">
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell13l"
-                android:gravity="center">
 
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -663,14 +618,6 @@
                 app:cellText="13">
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell14l"
-                android:gravity="center">
-
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -691,14 +638,7 @@
                 app:cellText="14">
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell15l"
-                android:gravity="center">
 
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -720,14 +660,6 @@
                 >
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell16l"
-                android:gravity="center">
-
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -749,14 +681,7 @@
                 >
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell17l"
-                android:gravity="center">
 
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -778,14 +703,7 @@
                 >
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell18l"
-                android:gravity="center">
 
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -808,14 +726,7 @@
                 >
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell19l"
-                android:gravity="center">
 
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -838,14 +749,7 @@
                 >
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell20l"
-                android:gravity="center">
 
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -867,14 +771,7 @@
                 >
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell21l"
-                android:gravity="center">
 
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -897,14 +794,7 @@
                 >
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell22l"
-                android:gravity="center">
 
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -925,14 +815,7 @@
                 app:cellText="22">
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell23l"
-                android:gravity="center">
 
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -953,14 +836,7 @@
                 app:cellText="23">
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell24l"
-                android:gravity="center">
 
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -981,14 +857,7 @@
                 app:cellText="24">
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell25l"
-                android:gravity="center">
 
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -1009,14 +878,7 @@
                 app:cellText="25">
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell26l"
-                android:gravity="center">
 
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -1037,14 +899,7 @@
                 app:cellText="26">
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell27l"
-                android:gravity="center">
 
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -1066,14 +921,7 @@
                 >
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell28l"
-                android:gravity="center">
 
-            </LinearLayout>
         </RelativeLayout>
 
         <RelativeLayout
@@ -1094,14 +942,7 @@
                 >
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell29l"
-                android:gravity="center">
 
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -1122,14 +963,7 @@
                 app:cellText="29">
 
             </Utils.cellView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cell30l"
-                android:gravity="center">
 
-            </LinearLayout>
 
         </RelativeLayout>
 

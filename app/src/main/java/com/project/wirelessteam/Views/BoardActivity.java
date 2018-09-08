@@ -131,7 +131,13 @@ public class BoardActivity extends AppCompatActivity {
                         if (res.getString("winner").equals("none") == false) {
                             if (res.getInt("winner") == getController().getPlayer1().getUserId()) {
                                 refBoard.internalTimer.cancel();
-                                winner();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        winner();
+                                    }
+                                });
+
                             }
                         }
                     }
@@ -331,52 +337,52 @@ public class BoardActivity extends AppCompatActivity {
         findViewById(R.id.cell6L).setTag("5");
         findViewById(R.id.cell7L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell7L).setTag("6");
-        findViewById(R.id.cell8l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell8l).setTag("7");
-        findViewById(R.id.cell9l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell9l).setTag("8");
-        findViewById(R.id.cell10l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell10l).setTag("9");
-        findViewById(R.id.cell11l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell11l).setTag("10");
-        findViewById(R.id.cell12l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell12l).setTag("11");
-        findViewById(R.id.cell13l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell13l).setTag("12");
-        findViewById(R.id.cell14l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell14l).setTag("13");
-        findViewById(R.id.cell15l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell15l).setTag("14");
-        findViewById(R.id.cell16l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell16l).setTag("15");
-        findViewById(R.id.cell17l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell17l).setTag("16");
-        findViewById(R.id.cell18l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell18l).setTag("17");
-        findViewById(R.id.cell19l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell19l).setTag("18");
-        findViewById(R.id.cell20l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell20l).setTag("19");
-        findViewById(R.id.cell21l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell21l).setTag("20");
-        findViewById(R.id.cell22l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell22l).setTag("21");
-        findViewById(R.id.cell23l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell23l).setTag("22");
-        findViewById(R.id.cell24l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell24l).setTag("23");
-        findViewById(R.id.cell25l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell25l).setTag("24");
-        findViewById(R.id.cell26l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell26l).setTag("25");
-        findViewById(R.id.cell27l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell27l).setTag("26");
-        findViewById(R.id.cell28l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell28l).setTag("27");
-        findViewById(R.id.cell29l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell29l).setTag("28");
-        findViewById(R.id.cell30l).setOnDragListener(new onDragCustomMethod(boardView,controller));
-        findViewById(R.id.cell30l).setTag("29");
+        findViewById(R.id.cell8L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell8L).setTag("7");
+        findViewById(R.id.cell9L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell9L).setTag("8");
+        findViewById(R.id.cell10L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell10L).setTag("9");
+        findViewById(R.id.cell11L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell11L).setTag("10");
+        findViewById(R.id.cell12L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell12L).setTag("11");
+        findViewById(R.id.cell13L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell13L).setTag("12");
+        findViewById(R.id.cell14L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell14L).setTag("13");
+        findViewById(R.id.cell15L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell15L).setTag("14");
+        findViewById(R.id.cell16L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell16L).setTag("15");
+        findViewById(R.id.cell17L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell17L).setTag("16");
+        findViewById(R.id.cell18L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell18L).setTag("17");
+        findViewById(R.id.cell19L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell19L).setTag("18");
+        findViewById(R.id.cell20L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell20L).setTag("19");
+        findViewById(R.id.cell21L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell21L).setTag("20");
+        findViewById(R.id.cell22L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell22L).setTag("21");
+        findViewById(R.id.cell23L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell23L).setTag("22");
+        findViewById(R.id.cell24L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell24L).setTag("23");
+        findViewById(R.id.cell25L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell25L).setTag("24");
+        findViewById(R.id.cell26L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell26L).setTag("25");
+        findViewById(R.id.cell27L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell27L).setTag("26");
+        findViewById(R.id.cell28L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell28L).setTag("27");
+        findViewById(R.id.cell29L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell29L).setTag("28");
+        findViewById(R.id.cell30L).setOnDragListener(new onDragCustomMethod(boardView,controller));
+        findViewById(R.id.cell30L).setTag("29");
         findViewById(R.id.cell31L).setOnDragListener(new onDragCustomMethod(boardView,controller));
         findViewById(R.id.cell31L).setTag("30");        //Log.d("Json ",buildBoard.getStringExtra("json"));
 
@@ -459,7 +465,7 @@ public class BoardActivity extends AppCompatActivity {
             controller.setNumberOfMove(0);
         }
         else
-            findViewById(R.id.roll).setEnabled(false);
+            //findViewById(R.id.roll).setEnabled(false);
 
         //red pawns
         findViewById(R.id.red1).setEnabled(true);
@@ -570,6 +576,8 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView red1 = (ImageView)findViewById(R.id.red1);
                 owner.removeView(findViewById(R.id.red1));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(1).getPosition());
+                if(Integer.parseInt((String)owner.getTag())>6)
+                    centerInCell(red1);
                 newOwner.addView(red1);
             }
             owner = (ViewGroup)findViewById(R.id.red2).getParent();
@@ -577,6 +585,8 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView red2 = (ImageView)findViewById(R.id.red2);
                 owner.removeView(findViewById(R.id.red2));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(2).getPosition());
+                if(Integer.parseInt((String)owner.getTag())>6)
+                    centerInCell(red2);
                 newOwner.addView(red2);
             }
             owner = (ViewGroup)findViewById(R.id.red3).getParent();
@@ -584,6 +594,8 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView red3 = (ImageView)findViewById(R.id.red3);
                 owner.removeView(findViewById(R.id.red3));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(3).getPosition());
+                if(Integer.parseInt((String)owner.getTag())>6)
+                    centerInCell(red3);
                 newOwner.addView(red3);
             }
             owner = (ViewGroup)findViewById(R.id.red4).getParent();
@@ -591,6 +603,8 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView red4 = (ImageView)findViewById(R.id.red4);
                 owner.removeView(findViewById(R.id.red4));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(4).getPosition());
+                if(Integer.parseInt((String)owner.getTag())>6)
+                    centerInCell(red4);
                 newOwner.addView(red4);
             }
             owner = (ViewGroup)findViewById(R.id.red5).getParent();
@@ -598,6 +612,8 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView red5  = (ImageView)findViewById(R.id.red5);
                 owner.removeView(findViewById(R.id.red5));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(5).getPosition());
+                if(Integer.parseInt((String)owner.getTag())>6)
+                    centerInCell(red5);
                 newOwner.addView(red5);
             }
             owner = (ViewGroup)findViewById(R.id.red6).getParent();
@@ -605,6 +621,8 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView red6  =(ImageView)findViewById(R.id.red6);
                 owner.removeView(findViewById(R.id.red6));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(6).getPosition());
+                if(Integer.parseInt((String)owner.getTag())>6)
+                    centerInCell(red6);
                 newOwner.addView(red6);
             }
 
@@ -614,6 +632,8 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView black1= (ImageView)findViewById(R.id.black1);
                 owner.removeView(findViewById(R.id.black1));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(1).getPosition());
+                if(Integer.parseInt((String)owner.getTag())>6)
+                    centerInCell(black1);
                 newOwner.addView(black1);
             }
             owner = (ViewGroup)findViewById(R.id.black2).getParent();
@@ -621,6 +641,8 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView black2 =(ImageView)findViewById(R.id.black2);
                 owner.removeView(findViewById(R.id.black2));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(2).getPosition());
+                if(Integer.parseInt((String)owner.getTag())>6)
+                    centerInCell(black2);
                 newOwner.addView(black2);
             }
             owner = (ViewGroup)findViewById(R.id.black3).getParent();
@@ -628,6 +650,8 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView black3 = (ImageView)findViewById(R.id.black3);
                 owner.removeView(findViewById(R.id.black3));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(3).getPosition());
+                if(Integer.parseInt((String)owner.getTag())>6)
+                    centerInCell(black3);
                 newOwner.addView(black3);
             }
             owner = (ViewGroup)findViewById(R.id.black4).getParent();
@@ -635,6 +659,8 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView black4 = (ImageView)findViewById(R.id.black4);
                 owner.removeView(findViewById(R.id.black4));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(4).getPosition());
+                if(Integer.parseInt((String)owner.getTag())>6)
+                    centerInCell(black4);
                 newOwner.addView(black4);
             }
             owner = (ViewGroup)findViewById(R.id.black5).getParent();
@@ -642,6 +668,8 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView black5 = (ImageView)findViewById(R.id.black5);
                 owner.removeView(findViewById(R.id.black5));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(5).getPosition());
+                if(Integer.parseInt((String)owner.getTag())>6)
+                    centerInCell(black5);
                 newOwner.addView(black5);
             }
             owner = (ViewGroup)findViewById(R.id.black6).getParent();
@@ -649,6 +677,8 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView black6 = (ImageView)findViewById(R.id.black6);
                 owner.removeView(findViewById(R.id.black6));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(6).getPosition());
+                if(Integer.parseInt((String)owner.getTag())>6)
+                    centerInCell(black6);
                 newOwner.addView(black6);
             }
 
@@ -751,6 +781,47 @@ public class BoardActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    public void centerInCell(View v){
+
+
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT);
+
+        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        if(isBlack(v)) {
+            params.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            params.removeRule(RelativeLayout.ALIGN_PARENT_END);
+        }
+        else {
+            params.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            params.removeRule(RelativeLayout.ALIGN_PARENT_START);
+        }
+
+        v.setLayoutParams(params);
+
+    }
+
+    public boolean isBlack(View v){
+        String tag = (String)v.getTag();
+
+        switch(tag){
+            case "black1":
+                return true;
+            case "black2":
+                return true;
+            case "black3":
+                return true;
+            case "black4":
+                return true;
+            case "black5":
+                return true;
+            case "black6":
+                return true;
+            default:
+                return false;
+        }
     }
 
 
