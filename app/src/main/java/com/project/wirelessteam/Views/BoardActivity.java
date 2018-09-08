@@ -50,7 +50,7 @@ public class BoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
         Intent buildBoard = getIntent();
-        mp = MediaPlayer.create(this, R.raw.menu);
+        mp = MediaPlayer.create(this, R.raw.game);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
