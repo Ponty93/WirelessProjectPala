@@ -256,38 +256,40 @@ public class onDragCustomMethod implements View.OnDragListener {
 
 
     private int findViewByTag(View v){
-        String pawn = (String)v.getTag();
+        if(v != null) {
+            String pawn = (String) v.getTag();
 
-        switch(pawn) {
-            case "red1":
-                return 1;
-            case "red2":
-                return 2;
-            case "red3":
-                return 3;
-            case "red4":
-                return 4;
-            case "red5":
-                return 5;
-            case "red6":
-                return 6;
-            case "black1":
-                return 1;
-            case "black2":
-                return 2;
-            case "black3":
-                return 3;
-            case "black4":
-                return 4;
-            case "black5":
-                return 5;
-            case "black6":
-                return 6;
-            default:
-                return 0;
+            switch (pawn) {
+                case "red1":
+                    return 1;
+                case "red2":
+                    return 2;
+                case "red3":
+                    return 3;
+                case "red4":
+                    return 4;
+                case "red5":
+                    return 5;
+                case "red6":
+                    return 6;
+                case "black1":
+                    return 1;
+                case "black2":
+                    return 2;
+                case "black3":
+                    return 3;
+                case "black4":
+                    return 4;
+                case "black5":
+                    return 5;
+                case "black6":
+                    return 6;
+                default:
+                    return 0;
 
+            }
         }
-
+        return 0;
     }
 
 
@@ -300,6 +302,7 @@ public class onDragCustomMethod implements View.OnDragListener {
         else
             return false;
     }
+
     private void resetTargetViewBackground(View view)
     {
 
