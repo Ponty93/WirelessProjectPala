@@ -197,13 +197,14 @@ public class onDragCustomMethod implements View.OnDragListener {
 
                     if (pawnWin == true) {
                         //srcView.setEnabled(false);
-                        disableWinnerPawns(stack);
+                        refActivity.setPawnNumber(newParent,"",controller.getPlayer1().getUserId());
+                        disableWinnerPawns();
                     }
 
-                    if(cellNumber != 0 && cellNumber != 30) {
+                    if(cellNumber != 0 && cellNumber < 30) {
                         int pawnNumber = controller.howManyPawns(cellNumber,controller.getPlayer1().getUserId());
                         if(pawnNumber>1)
-                            refActivity.setPawnNumber(newParent,pawnNumber,controller.getPlayer1().getUserId());
+                            refActivity.setPawnNumber(newParent,Integer.toString(pawnNumber),controller.getPlayer1().getUserId());
                     }
                     return true;
 
@@ -240,6 +241,7 @@ public class onDragCustomMethod implements View.OnDragListener {
                     View black = (View) newParent.getChildAt(1);
                     newParent.removeView(black);
                     refToStart().addView(black);
+                    refActivity.setPawnNumber(refToStart(),"",controller.getPlayer2().getUserId());
                     index++;
                 }
             }
@@ -375,11 +377,12 @@ public class onDragCustomMethod implements View.OnDragListener {
             return false;
     }
 
-    public void disableWinnerPawns(ArrayList<View> wins){
-        int howMuch = wins.size();
+    public void disableWinnerPawns(){
+        ArrayList<Integer> stack = controller.getPlayer1().findPawnsByPos(30);
         int index = 0;
-        while(index<howMuch){
-            wins.get(index).setEnabled(false);
+        while(index<stack.size()){
+            ImageView v = refActivity.findPawnViewById(stack.get(index));
+            v.setEnabled(false);
             index++;
         }
     }

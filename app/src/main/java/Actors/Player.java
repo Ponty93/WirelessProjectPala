@@ -71,9 +71,10 @@ public class Player {
             if(pawns.get(i).getPosition() == position )
                 stack.add(pawns.get(i).getId());
         }
-
-
-        return stack;
+        if(stack.size()>0)
+            return stack;
+        else
+            return null;
     }
 
 

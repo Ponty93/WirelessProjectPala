@@ -47,19 +47,23 @@ public class BoardActivity extends AppCompatActivity {
     private Timer internalTimer;
     private boardController controller = null;
     private MediaPlayer mp;
+    private Intent buildBoard;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
-        Intent buildBoard = getIntent();
+        buildBoard = getIntent();
         mp = MediaPlayer.create(this, R.raw.game);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         //initialize the boards view feature
-        init(buildBoard);
+        if(buildBoard !=null)
+            init(buildBoard);
+        else
+            endGame(boardView);
 
     }
     @Override
@@ -112,14 +116,7 @@ public class BoardActivity extends AppCompatActivity {
                     });
                     refBoard.internalTimer.cancel();
                 }
-                /*else {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            findViewById(R.id.endTurn).setEnabled(true);
-                        }
-                    });
-                }*/
+
 
 
             counter++;
@@ -288,8 +285,8 @@ public class BoardActivity extends AppCompatActivity {
             if(controller == null) {
                 if(json!=null) {
                     controller = new boardController(new Board(30, new Player(id1, buildBoard.getStringExtra("player1Name"),json.getJSONObject("pawnPlayer1")), new Player(id2, buildBoard.getStringExtra("player2Name"),json.getJSONObject("pawnPlayer2")), gameId,new dice()),this);
-                    setPawnView(context, controller.getPlayer1().getPawns(), "player1");
-                    setPawnView(context, controller.getPlayer2().getPawns(), "player2");
+                    setPawnView(controller.getPlayer1().getPawns(), "player1");
+                    setPawnView(controller.getPlayer2().getPawns(), "player2");
                 }
             }
 
@@ -422,7 +419,7 @@ public class BoardActivity extends AppCompatActivity {
 
 
     //links the pawns object to the pawns views
-    private void setPawnView(Context context,HashMap<Integer, Pawn> map, String player){
+    private void setPawnView(HashMap<Integer, Pawn> map, String player){
         if(player.equals("player1")) {
             map.get(1).setPawnView((ImageView)findViewById(R.id.red1));
             map.get(2).setPawnView((ImageView)findViewById(R.id.red2));
@@ -484,16 +481,23 @@ public class BoardActivity extends AppCompatActivity {
             controller.setDoubleDown();
             controller.setNumberOfMove(0);
         }
-        else
+        else {
             //findViewById(R.id.roll).setEnabled(false);
-
+        }
         //red pawns
-        findViewById(R.id.red1).setEnabled(true);
-        findViewById(R.id.red2).setEnabled(true);
-        findViewById(R.id.red3).setEnabled(true);
-        findViewById(R.id.red4).setEnabled(true);
-        findViewById(R.id.red5).setEnabled(true);
-        findViewById(R.id.red6).setEnabled(true);
+
+        if(controller.getPlayer1().getPawnbyId(1).getPosition() != 30)
+            findViewById(R.id.red1).setEnabled(true);
+        if(controller.getPlayer1().getPawnbyId(2).getPosition() != 30)
+            findViewById(R.id.red2).setEnabled(true);
+        if(controller.getPlayer1().getPawnbyId(3).getPosition() != 30)
+            findViewById(R.id.red3).setEnabled(true);
+        if(controller.getPlayer1().getPawnbyId(4).getPosition() != 30)
+            findViewById(R.id.red4).setEnabled(true);
+        if(controller.getPlayer1().getPawnbyId(5).getPosition() != 30)
+            findViewById(R.id.red5).setEnabled(true);
+        if(controller.getPlayer1().getPawnbyId(6).getPosition() != 30)
+            findViewById(R.id.red6).setEnabled(true);
 
         //Log.d("DICE RESULT","RES 1 "+getCurrentBoard().getDiceRes(0)+"RES 2 "+getCurrentBoard().getDiceRes(1));
 
@@ -596,9 +600,14 @@ public class BoardActivity extends AppCompatActivity {
                     borderInCell(red1);
                 newOwner.addView(red1);
 
-                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
-                if(pawnNumber>1)
-                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
+                if(Integer.parseInt((String)owner.getTag()) == 0){
+                    setPawnNumber(owner,"",controller.getPlayer2().getUserId());
+                }
+                else {
+                    int pawnNumber = controller.howManyPawns(Integer.parseInt((String) owner.getTag()), controller.getPlayer2().getUserId());
+                    if (pawnNumber > 1)
+                        setPawnNumber(owner, Integer.toString(pawnNumber), controller.getPlayer2().getUserId());
+                }
             }
             owner = (ViewGroup)findViewById(R.id.red2).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer1().getPawnbyId(2).getPosition()){
@@ -613,9 +622,14 @@ public class BoardActivity extends AppCompatActivity {
                     borderInCell(red2);
                 newOwner.addView(red2);
 
-                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
-                if(pawnNumber>1)
-                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
+                if(Integer.parseInt((String)owner.getTag()) == 0){
+                    setPawnNumber(owner,"",controller.getPlayer2().getUserId());
+                }
+                else {
+                    int pawnNumber = controller.howManyPawns(Integer.parseInt((String) owner.getTag()), controller.getPlayer2().getUserId());
+                    if (pawnNumber > 1)
+                        setPawnNumber(owner, Integer.toString(pawnNumber), controller.getPlayer2().getUserId());
+                }
             }
             owner = (ViewGroup)findViewById(R.id.red3).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer1().getPawnbyId(3).getPosition()){
@@ -630,9 +644,14 @@ public class BoardActivity extends AppCompatActivity {
                     borderInCell(red3);
                 newOwner.addView(red3);
 
-                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
-                if(pawnNumber>1)
-                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
+                if(Integer.parseInt((String)owner.getTag()) == 0){
+                    setPawnNumber(owner,"",controller.getPlayer2().getUserId());
+                }
+                else {
+                    int pawnNumber = controller.howManyPawns(Integer.parseInt((String) owner.getTag()), controller.getPlayer2().getUserId());
+                    if (pawnNumber > 1)
+                        setPawnNumber(owner, Integer.toString(pawnNumber), controller.getPlayer2().getUserId());
+                }
             }
             owner = (ViewGroup)findViewById(R.id.red4).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer1().getPawnbyId(4).getPosition()){
@@ -647,9 +666,14 @@ public class BoardActivity extends AppCompatActivity {
                     borderInCell(red4);
                 newOwner.addView(red4);
 
-                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
-                if(pawnNumber>1)
-                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
+                if(Integer.parseInt((String)owner.getTag()) == 0){
+                    setPawnNumber(owner,"",controller.getPlayer2().getUserId());
+                }
+                else {
+                    int pawnNumber = controller.howManyPawns(Integer.parseInt((String) owner.getTag()), controller.getPlayer2().getUserId());
+                    if (pawnNumber > 1)
+                        setPawnNumber(owner, Integer.toString(pawnNumber), controller.getPlayer2().getUserId());
+                }
 
             }
             owner = (ViewGroup)findViewById(R.id.red5).getParent();
@@ -665,9 +689,14 @@ public class BoardActivity extends AppCompatActivity {
                     borderInCell(red5);
                 newOwner.addView(red5);
 
-                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
-                if(pawnNumber>1)
-                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
+                if(Integer.parseInt((String)owner.getTag()) == 0){
+                    setPawnNumber(owner,"",controller.getPlayer2().getUserId());
+                }
+                else {
+                    int pawnNumber = controller.howManyPawns(Integer.parseInt((String) owner.getTag()), controller.getPlayer2().getUserId());
+                    if (pawnNumber > 1)
+                        setPawnNumber(owner, Integer.toString(pawnNumber), controller.getPlayer2().getUserId());
+                }
             }
             owner = (ViewGroup)findViewById(R.id.red6).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer1().getPawnbyId(6).getPosition()){
@@ -682,9 +711,14 @@ public class BoardActivity extends AppCompatActivity {
                     borderInCell(red6);
                 newOwner.addView(red6);
 
-                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
-                if(pawnNumber>1)
-                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
+                if(Integer.parseInt((String)owner.getTag()) == 0){
+                    setPawnNumber(owner,"",controller.getPlayer2().getUserId());
+                }
+                else {
+                    int pawnNumber = controller.howManyPawns(Integer.parseInt((String) owner.getTag()), controller.getPlayer2().getUserId());
+                    if (pawnNumber > 1)
+                        setPawnNumber(owner, Integer.toString(pawnNumber), controller.getPlayer2().getUserId());
+                }
             }
 
             //black pawns update
@@ -701,9 +735,14 @@ public class BoardActivity extends AppCompatActivity {
                     borderInCell(black1);
                 newOwner.addView(black1);
 
-                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
-                if(pawnNumber>1)
-                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
+                if(Integer.parseInt((String)owner.getTag()) == 0){
+                    setPawnNumber(owner,"",controller.getPlayer2().getUserId());
+                }
+                else {
+                    int pawnNumber = controller.howManyPawns(Integer.parseInt((String) owner.getTag()), controller.getPlayer2().getUserId());
+                    if (pawnNumber > 1)
+                        setPawnNumber(owner, Integer.toString(pawnNumber), controller.getPlayer2().getUserId());
+                }
             }
             owner = (ViewGroup)findViewById(R.id.black2).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer2().getPawnbyId(2).getPosition()){
@@ -718,9 +757,14 @@ public class BoardActivity extends AppCompatActivity {
                     borderInCell(black2);
                 newOwner.addView(black2);
 
-                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
-                if(pawnNumber>1)
-                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
+                if(Integer.parseInt((String)owner.getTag()) == 0){
+                    setPawnNumber(owner,"",controller.getPlayer2().getUserId());
+                }
+                else {
+                    int pawnNumber = controller.howManyPawns(Integer.parseInt((String) owner.getTag()), controller.getPlayer2().getUserId());
+                    if (pawnNumber > 1)
+                        setPawnNumber(owner, Integer.toString(pawnNumber), controller.getPlayer2().getUserId());
+                }
             }
             owner = (ViewGroup)findViewById(R.id.black3).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer2().getPawnbyId(3).getPosition()){
@@ -735,9 +779,14 @@ public class BoardActivity extends AppCompatActivity {
                     borderInCell(black3);
                 newOwner.addView(black3);
 
-                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
-                if(pawnNumber>1)
-                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
+                if(Integer.parseInt((String)owner.getTag()) == 0){
+                    setPawnNumber(owner,"",controller.getPlayer2().getUserId());
+                }
+                else {
+                    int pawnNumber = controller.howManyPawns(Integer.parseInt((String) owner.getTag()), controller.getPlayer2().getUserId());
+                    if (pawnNumber > 1)
+                        setPawnNumber(owner, Integer.toString(pawnNumber), controller.getPlayer2().getUserId());
+                }
             }
             owner = (ViewGroup)findViewById(R.id.black4).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer2().getPawnbyId(4).getPosition()){
@@ -752,9 +801,14 @@ public class BoardActivity extends AppCompatActivity {
                     borderInCell(black4);
                 newOwner.addView(black4);
 
-                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
-                if(pawnNumber>1)
-                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
+                if(Integer.parseInt((String)owner.getTag()) == 0){
+                    setPawnNumber(owner,"",controller.getPlayer2().getUserId());
+                }
+                else {
+                    int pawnNumber = controller.howManyPawns(Integer.parseInt((String) owner.getTag()), controller.getPlayer2().getUserId());
+                    if (pawnNumber > 1)
+                        setPawnNumber(owner, Integer.toString(pawnNumber), controller.getPlayer2().getUserId());
+                }
 
             }
             owner = (ViewGroup)findViewById(R.id.black5).getParent();
@@ -770,9 +824,14 @@ public class BoardActivity extends AppCompatActivity {
                     borderInCell(black5);
                 newOwner.addView(black5);
 
-                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
-                if(pawnNumber>1)
-                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
+                if(Integer.parseInt((String)owner.getTag()) == 0){
+                    setPawnNumber(owner,"",controller.getPlayer2().getUserId());
+                }
+                else {
+                    int pawnNumber = controller.howManyPawns(Integer.parseInt((String) owner.getTag()), controller.getPlayer2().getUserId());
+                    if (pawnNumber > 1)
+                        setPawnNumber(owner, Integer.toString(pawnNumber), controller.getPlayer2().getUserId());
+                }
             }
             owner = (ViewGroup)findViewById(R.id.black6).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer2().getPawnbyId(6).getPosition()){
@@ -789,7 +848,7 @@ public class BoardActivity extends AppCompatActivity {
 
                 int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
                 if(pawnNumber>1)
-                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
+                    setPawnNumber(owner,Integer.toString(pawnNumber),controller.getPlayer2().getUserId());
             }
 
 
@@ -976,13 +1035,13 @@ public class BoardActivity extends AppCompatActivity {
         }
     }
 
-    public void setPawnNumber(ViewGroup owner,int number, int idPlayer) {
+    public void setPawnNumber(ViewGroup owner,String number, int idPlayer) {
         if(idPlayer == controller.getPlayer1().getUserId()) {
             ArrayList<Integer> stack = controller.getPlayer1().findPawnsByPos(Integer.parseInt((String) owner.getTag()));
             int index = 0;
             while (index < stack.size()) {
                 pawnView v = (pawnView)findPawnViewById(stack.get(index));
-                v.setPawnText(Integer.toString(number));
+                v.setPawnText(number);
                 index++;
             }
         }
@@ -991,7 +1050,7 @@ public class BoardActivity extends AppCompatActivity {
             int index = 0;
             while (index < stack.size()) {
                 pawnView v = (pawnView)findPawnViewById(stack.get(index));
-                v.setPawnText(Integer.toString(number));
+                v.setPawnText(number);
                 index++;
             }
         }
