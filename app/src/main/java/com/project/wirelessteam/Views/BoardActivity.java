@@ -541,7 +541,6 @@ public class BoardActivity extends AppCompatActivity {
                 setupPage.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        mp.release();
 
         startActivity(intent);
         ref.finish();
