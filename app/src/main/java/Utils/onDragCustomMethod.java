@@ -160,46 +160,37 @@ public class onDragCustomMethod implements View.OnDragListener {
                     boolean pawnWin = false;
 
                     if (cellNumber == local + action1) {
-                        pawnWin = checkWinner(action1);
-
-                        if (pawnWin == false && cellNumber > 6 && isOccupied(newParent))
-                            eatView(newParent, action1);
-
-                        Toast.makeText(refActivity, "Dragged data is" + itemText + " with " + reds + " on " + cellNumber + " with " + controller.howManyPawns(local + action1, controller.getPlayer1().getUserId()) + " in " + view.getTag(), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(refActivity, "Dragged data is" + itemText + " with " + reds + " on " + cellNumber + " with " + controller.howManyPawns(local + action1, controller.getPlayer1().getUserId()) + " in " + view.getTag(), Toast.LENGTH_LONG).show();
 
                         controller.setDiceResToNullInPos(0);
                         //controller.setNumberOfMove(controller.getNumberOfMove() + 1);
                     } else if (cellNumber == local + action2) {
-                        pawnWin = checkWinner(action2);
-                        if (pawnWin == true && cellNumber > 6 && isOccupied(newParent))
-                            eatView(newParent, action2);
-
-
-                        Toast.makeText(refActivity, "Dragged data is " + itemText + " with " + reds + " with " + controller.howManyPawns(local + action2, controller.getPlayer2().getUserId()) + " in " + cellNumber, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(refActivity, "Dragged data is " + itemText + " with " + reds + " with " + controller.howManyPawns(local + action2, controller.getPlayer2().getUserId()) + " in " + cellNumber, Toast.LENGTH_LONG).show();
 
                         controller.setDiceResToNullInPos(1);
                         //controller.setNumberOfMove(controller.getNumberOfMove() + 1);
                     } else if (cellNumber == local + action3) {
-                        pawnWin = checkWinner(action3);
-                        if (pawnWin == true && cellNumber > 6 && isOccupied(newParent))
-                            eatView(newParent, action3);
-
-
-                        Toast.makeText(refActivity, "Dragged data is" + itemText + " with " + reds + " on " + cellNumber + " with " + controller.howManyPawns(local + action3, controller.getPlayer1().getUserId()) + " in " + view.getTag(), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(refActivity, "Dragged data is" + itemText + " with " + reds + " on " + cellNumber + " with " + controller.howManyPawns(local + action3, controller.getPlayer1().getUserId()) + " in " + view.getTag(), Toast.LENGTH_LONG).show();
 
                         controller.setDiceResToNull();
                         //controller.setNumberOfMove(controller.getNumberOfMove() + 2);
                     }
 
+                    pawnWin = checkWinner(cellNumber);
+                    if (pawnWin == false && cellNumber > 6 && isOccupied(newParent))
+                        eatView(newParent, cellNumber);
 
                     //moves just one pawn if reds == 1 else the whole stack
                     if (((String) owner.getTag()).equals("0") == false && reds > 1)
                         removeFromArray(stack, newParent);
                     else {
-                        if(Integer.parseInt((String)newParent.getTag())>6)
+                        if(Integer.parseInt((String)newParent.getTag()) == 30)
+                            refActivity.finishInCell(srcView);
+                        else if(Integer.parseInt((String)newParent.getTag())>6)
                             refActivity.centerInCell(srcView);
                         else
                             refActivity.borderInCell(srcView);
+
                         newParent.addView(srcView);
                         controller.movePawn(findViewByTag(srcView), Integer.parseInt((String) newParent.getTag()));
                     }
@@ -209,6 +200,11 @@ public class onDragCustomMethod implements View.OnDragListener {
                         disableWinnerPawns(stack);
                     }
 
+                    if(cellNumber != 0 && cellNumber != 30) {
+                        int pawnNumber = controller.howManyPawns(cellNumber,controller.getPlayer1().getUserId());
+                        if(pawnNumber>1)
+                            refActivity.setPawnNumber(newParent,pawnNumber,controller.getPlayer1().getUserId());
+                    }
                     return true;
 
                 case DragEvent.ACTION_DRAG_ENDED:
@@ -234,10 +230,10 @@ public class onDragCustomMethod implements View.OnDragListener {
 
     }
 
-    public void eatView(ViewGroup newParent,int action) {
+    public void eatView(ViewGroup newParent,int cellNumber) {
         if(refActivity.isBlack(newParent.getChildAt(1))){
-            if(controller.canEat(controller.getPlayer1().getUserId(),controller.getPlayer2().getUserId(),local,local+action)){
-                int blackStack = controller.howManyPawns(local+action,controller.getPlayer2().getUserId());
+            if(controller.canEat(controller.getPlayer1().getUserId(),controller.getPlayer2().getUserId(),local,cellNumber)){
+                int blackStack = controller.howManyPawns(cellNumber,controller.getPlayer2().getUserId());
                 int index=0;
                 while(index<blackStack) {
                     controller.eatPawn(controller.getPlayer2().getPawnbyId(findViewByTag(newParent.getChildAt(1))).getId());
@@ -250,8 +246,8 @@ public class onDragCustomMethod implements View.OnDragListener {
         }
     }
 
-    public boolean checkWinner(int action) {
-        if (controller.checkIfPawnWin(local + action)) {
+    public boolean checkWinner(int cellNumber) {
+        if (controller.checkIfPawnWin(cellNumber)) {
             controller.getPlayer1().setScore(controller.getPlayer1().getScore() + controller.howManyPawns(local, controller.getPlayer1().getUserId()));
             ((TextView) refActivity.findViewById(R.id.scorePL)).setText(Integer.toString(controller.getPlayer1().getScore()));
 
@@ -359,7 +355,9 @@ public class onDragCustomMethod implements View.OnDragListener {
         int index =0;
         while(index < howMuch){
             View v = stack.get(index);
-            if(Integer.parseInt((String)newParent.getTag())>6)
+            if(Integer.parseInt((String)newParent.getTag()) == 30)
+                refActivity.finishInCell(v);
+            else if(Integer.parseInt((String)newParent.getTag())>6)
                 refActivity.centerInCell(v);
             else
                 refActivity.borderInCell(v);
@@ -368,6 +366,7 @@ public class onDragCustomMethod implements View.OnDragListener {
             index++;
         }
     }
+
 
     public boolean isOccupied(ViewGroup v){
         if(v.getChildAt(1) != null)

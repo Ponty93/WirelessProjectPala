@@ -106,7 +106,6 @@ public class cellView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec,int heightMeasureSpec){
 
-        int contentWidth = textWidth;
         int width = resolveSizeAndState(50,widthMeasureSpec,0);
         int height = resolveSizeAndState(80,heightMeasureSpec,0);
         setMeasuredDimension(width,height);

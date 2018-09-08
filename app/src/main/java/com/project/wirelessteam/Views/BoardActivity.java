@@ -37,6 +37,7 @@ import API.phpConnect;
 import Utils.dice;
 import Utils.onTouchCustomMethod;
 import Utils.onDragCustomMethod;
+import Utils.pawnView;
 
 
 public class BoardActivity extends AppCompatActivity {
@@ -541,7 +542,6 @@ public class BoardActivity extends AppCompatActivity {
                 setupPage.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
         startActivity(intent);
         ref.finish();
     }
@@ -588,66 +588,103 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView red1 = (ImageView)findViewById(R.id.red1);
                 owner.removeView(findViewById(R.id.red1));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(1).getPosition());
-                if(Integer.parseInt((String)newOwner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag()) == 30)
+                    finishInCell(red1);
+                else if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(red1);
                 else
                     borderInCell(red1);
                 newOwner.addView(red1);
+
+                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
+                if(pawnNumber>1)
+                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
             }
             owner = (ViewGroup)findViewById(R.id.red2).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer1().getPawnbyId(2).getPosition()){
                 ImageView red2 = (ImageView)findViewById(R.id.red2);
                 owner.removeView(findViewById(R.id.red2));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(2).getPosition());
-                if(Integer.parseInt((String)newOwner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag()) == 30)
+                    finishInCell(red2);
+                else if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(red2);
                 else
                     borderInCell(red2);
                 newOwner.addView(red2);
+
+                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
+                if(pawnNumber>1)
+                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
             }
             owner = (ViewGroup)findViewById(R.id.red3).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer1().getPawnbyId(3).getPosition()){
                 ImageView red3 = (ImageView)findViewById(R.id.red3);
                 owner.removeView(findViewById(R.id.red3));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(3).getPosition());
-                if(Integer.parseInt((String)newOwner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag()) == 30)
+                    finishInCell(red3);
+                else if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(red3);
                 else
                     borderInCell(red3);
                 newOwner.addView(red3);
+
+                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
+                if(pawnNumber>1)
+                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
             }
             owner = (ViewGroup)findViewById(R.id.red4).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer1().getPawnbyId(4).getPosition()){
                 ImageView red4 = (ImageView)findViewById(R.id.red4);
                 owner.removeView(findViewById(R.id.red4));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(4).getPosition());
-                if(Integer.parseInt((String)newOwner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag()) == 30)
+                    finishInCell(red4);
+                else if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(red4);
                 else
                     borderInCell(red4);
                 newOwner.addView(red4);
+
+                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
+                if(pawnNumber>1)
+                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
+
             }
             owner = (ViewGroup)findViewById(R.id.red5).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer1().getPawnbyId(5).getPosition()){
                 ImageView red5  = (ImageView)findViewById(R.id.red5);
                 owner.removeView(findViewById(R.id.red5));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(5).getPosition());
-                if(Integer.parseInt((String)newOwner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag()) == 30)
+                    finishInCell(red5);
+                else if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(red5);
                 else
                     borderInCell(red5);
                 newOwner.addView(red5);
+
+                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
+                if(pawnNumber>1)
+                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
             }
             owner = (ViewGroup)findViewById(R.id.red6).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer1().getPawnbyId(6).getPosition()){
                 ImageView red6  =(ImageView)findViewById(R.id.red6);
                 owner.removeView(findViewById(R.id.red6));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(6).getPosition());
-                if(Integer.parseInt((String)newOwner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag()) == 30)
+                    finishInCell(red6);
+                else if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(red6);
                 else
                     borderInCell(red6);
                 newOwner.addView(red6);
+
+                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
+                if(pawnNumber>1)
+                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
             }
 
             //black pawns update
@@ -656,66 +693,103 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView black1= (ImageView)findViewById(R.id.black1);
                 owner.removeView(findViewById(R.id.black1));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(1).getPosition());
-                if(Integer.parseInt((String)newOwner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag()) == 30)
+                    finishInCell(black1);
+                else if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(black1);
                 else
                     borderInCell(black1);
                 newOwner.addView(black1);
+
+                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
+                if(pawnNumber>1)
+                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
             }
             owner = (ViewGroup)findViewById(R.id.black2).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer2().getPawnbyId(2).getPosition()){
                 ImageView black2 =(ImageView)findViewById(R.id.black2);
                 owner.removeView(findViewById(R.id.black2));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(2).getPosition());
-                if(Integer.parseInt((String)newOwner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag()) == 30)
+                    finishInCell(black2);
+                else if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(black2);
                 else
                     borderInCell(black2);
                 newOwner.addView(black2);
+
+                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
+                if(pawnNumber>1)
+                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
             }
             owner = (ViewGroup)findViewById(R.id.black3).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer2().getPawnbyId(3).getPosition()){
                 ImageView black3 = (ImageView)findViewById(R.id.black3);
                 owner.removeView(findViewById(R.id.black3));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(3).getPosition());
-                if(Integer.parseInt((String)newOwner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag()) == 30)
+                    finishInCell(black3);
+                else if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(black3);
                 else
                     borderInCell(black3);
                 newOwner.addView(black3);
+
+                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
+                if(pawnNumber>1)
+                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
             }
             owner = (ViewGroup)findViewById(R.id.black4).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer2().getPawnbyId(4).getPosition()){
                 ImageView black4 = (ImageView)findViewById(R.id.black4);
                 owner.removeView(findViewById(R.id.black4));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(4).getPosition());
-                if(Integer.parseInt((String)newOwner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag()) == 30)
+                    finishInCell(black4);
+                else if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(black4);
                 else
                     borderInCell(black4);
                 newOwner.addView(black4);
+
+                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
+                if(pawnNumber>1)
+                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
+
             }
             owner = (ViewGroup)findViewById(R.id.black5).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer2().getPawnbyId(5).getPosition()){
                 ImageView black5 = (ImageView)findViewById(R.id.black5);
                 owner.removeView(findViewById(R.id.black5));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(5).getPosition());
-                if(Integer.parseInt((String)newOwner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag()) == 30)
+                    finishInCell(black5);
+                else if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(black5);
                 else
                     borderInCell(black5);
                 newOwner.addView(black5);
+
+                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
+                if(pawnNumber>1)
+                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
             }
             owner = (ViewGroup)findViewById(R.id.black6).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer2().getPawnbyId(6).getPosition()){
                 ImageView black6 = (ImageView)findViewById(R.id.black6);
                 owner.removeView(findViewById(R.id.black6));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(6).getPosition());
-                if(Integer.parseInt((String)newOwner.getTag())>6)
+                if(Integer.parseInt((String)newOwner.getTag()) == 30)
+                    finishInCell(black6);
+                else if(Integer.parseInt((String)newOwner.getTag())>6)
                     centerInCell(black6);
                 else
                     borderInCell(black6);
                 newOwner.addView(black6);
+
+                int pawnNumber = controller.howManyPawns(Integer.parseInt((String)owner.getTag()),controller.getPlayer2().getUserId());
+                if(pawnNumber>1)
+                    setPawnNumber(owner,pawnNumber,controller.getPlayer2().getUserId());
             }
 
 
@@ -860,6 +934,27 @@ public class BoardActivity extends AppCompatActivity {
         v.setLayoutParams(params);
     }
 
+    public void finishInCell(View v){
+
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params.removeRule(RelativeLayout.CENTER_IN_PARENT);
+        params.removeRule(RelativeLayout.CENTER_HORIZONTAL);
+        if(isBlack(v)) {
+            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            params.addRule(RelativeLayout.ALIGN_PARENT_END);
+            params.setMargins(0,0,125,0);
+        }
+        else {
+            params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            params.addRule(RelativeLayout.ALIGN_PARENT_START);
+            params.setMargins(125,0,0,0);
+
+        }
+        params.addRule(RelativeLayout.CENTER_VERTICAL);
+
+        v.setLayoutParams(params);
+    }
+
     public boolean isBlack(View v){
         String tag = (String)v.getTag();
 
@@ -878,6 +973,27 @@ public class BoardActivity extends AppCompatActivity {
                 return true;
             default:
                 return false;
+        }
+    }
+
+    public void setPawnNumber(ViewGroup owner,int number, int idPlayer) {
+        if(idPlayer == controller.getPlayer1().getUserId()) {
+            ArrayList<Integer> stack = controller.getPlayer1().findPawnsByPos(Integer.parseInt((String) owner.getTag()));
+            int index = 0;
+            while (index < stack.size()) {
+                pawnView v = (pawnView)findPawnViewById(stack.get(index));
+                v.setPawnText(Integer.toString(number));
+                index++;
+            }
+        }
+        else {
+            ArrayList<Integer> stack = controller.getPlayer2().findPawnsByPos(Integer.parseInt((String) owner.getTag()));
+            int index = 0;
+            while (index < stack.size()) {
+                pawnView v = (pawnView)findPawnViewById(stack.get(index));
+                v.setPawnText(Integer.toString(number));
+                index++;
+            }
         }
     }
 

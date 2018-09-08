@@ -212,7 +212,7 @@
 
             </Utils.cellView>
 
-            <ImageView
+            <Utils.pawnView
                 android:id="@+id/red1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -220,10 +220,11 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="3dp"
+                app:pawnNumber=""
 
                 app:srcCompat="@drawable/rosso" />
 
-            <ImageView
+            <Utils.pawnView
                 android:id="@+id/red2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -231,9 +232,10 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="3dp"
+                app:pawnNumber=""
                 app:srcCompat="@drawable/rosso" />
 
-            <ImageView
+            <Utils.pawnView
                 android:id="@+id/red3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -241,10 +243,10 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="3dp"
-
+                app:pawnNumber=""
                 app:srcCompat="@drawable/rosso" />
 
-            <ImageView
+            <Utils.pawnView
                 android:id="@+id/red4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -252,10 +254,10 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="3dp"
-
+                app:pawnNumber=""
                 app:srcCompat="@drawable/rosso" />
 
-            <ImageView
+            <Utils.pawnView
                 android:id="@+id/red5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -263,16 +265,18 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="3dp"
-
+                app:pawnNumber=""
                 app:srcCompat="@drawable/rosso" />
 
-            <ImageView
+            <Utils.pawnView
                 android:id="@+id/red6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="3dp"
                 android:layout_centerVertical="true"
+                app:pawnNumber=""
                 app:srcCompat="@drawable/rosso" />
 
             <ImageView
@@ -283,7 +287,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="3dp"
-
                 app:srcCompat="@drawable/nero" />
 
             <ImageView
