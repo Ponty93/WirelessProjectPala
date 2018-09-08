@@ -557,6 +557,7 @@ public class BoardActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+                        endGame(boardView);
                     }
                 });
         alertDialog.show();
@@ -570,6 +571,7 @@ public class BoardActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+                        endGame(boardView);
                     }
                 });
         alertDialog.show();
