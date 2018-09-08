@@ -43,6 +43,7 @@ public class onDragCustomMethod implements View.OnDragListener {
         int action = dragEvent.getAction();
 
         ViewGroup newParent = (ViewGroup) view;
+
         int cellNumber = Integer.parseInt((String) newParent.getTag());
         if(dragEvent != null) {
             switch (action) {
@@ -245,8 +246,7 @@ public class onDragCustomMethod implements View.OnDragListener {
             controller.getPlayer1().setScore(controller.getPlayer1().getScore() + controller.howManyPawns(local, controller.getPlayer1().getUserId()));
             ((TextView) refActivity.findViewById(R.id.scorePL)).setText(Integer.toString(controller.getPlayer1().getScore()));
 
-            if (controller.getPlayer1().getScore() == 6)
-                //todo hai vinto se ==6
+
 
                 return true;
         }
