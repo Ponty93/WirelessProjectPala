@@ -17,8 +17,8 @@ public class boardController {
         view = v;
     }
 
-    public boolean surrender() {
-        return model.surrender();
+    public boolean defeat() {
+        return model.defeat();
     }
 
     public JSONObject updateRound(){

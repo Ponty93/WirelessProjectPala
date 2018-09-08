@@ -237,7 +237,7 @@ public class Board extends Game {
     }
 
 
-    public boolean surrender(){
+    public boolean defeat(){
         phpConnect myConn = null;
         boolean result = false;
         try{

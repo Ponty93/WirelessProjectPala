@@ -99,10 +99,18 @@ public class BoardActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-            if(getController().getNumberOfMove()>=2){
-            //todo method to check if pawn in winner >=6
-                if(controller.howManyPawns(30,controller.getPlayer1().getUserId()) == 6)
-                    winner();
+
+
+                if(controller.howManyPawns(30,controller.getPlayer1().getUserId()) == 6) {
+                    //todo update winner attr in db
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            winner();
+                        }
+                    });
+                    refBoard.internalTimer.cancel();
+                }
                 /*else {
                     runOnUiThread(new Runnable() {
                         @Override
@@ -111,14 +119,14 @@ public class BoardActivity extends AppCompatActivity {
                         }
                     });
                 }*/
-            }
+
 
             counter++;
 
             if(counter == 60){
-                controller.surrender();
-                refBoard.internalTimer.cancel();
+                controller.defeat();
                 defeat();
+                refBoard.internalTimer.cancel();
             }
 
 
@@ -167,10 +175,20 @@ public class BoardActivity extends AppCompatActivity {
                     if (res.getInt("Result") == 1) {
                         if (res.getString("winner").equals("none") == false) {
                             if (res.getInt("winner") == refBoard.getController().getPlayer1().getUserId()) {
-                                winner();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        winner();
+                                    }
+                                });
                                 refBoard.internalTimer.cancel();
-                            } else {
-                                defeat();
+                            } else { // opponent's win
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                       defeat();
+                                    }
+                                });
                                 refBoard.internalTimer.cancel();
                             }
                         } else {
@@ -447,7 +465,7 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     public void surrenderButton(View view){
-            controller.surrender();
+            controller.defeat();
             //invoco haiPerso
             defeat();
             boardView.internalTimer.cancel();
@@ -702,7 +720,7 @@ public class BoardActivity extends AppCompatActivity {
 
         }
         else{
-            controller.surrender();
+            controller.defeat();
             defeat();
         }
 
