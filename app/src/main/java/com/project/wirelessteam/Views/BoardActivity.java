@@ -1,15 +1,18 @@
 package com.project.wirelessteam.Views;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.media.MediaPlayer;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -97,7 +100,9 @@ public class BoardActivity extends AppCompatActivity {
         @Override
         public void run() {
             if(getController().getNumberOfMove()>=2){
-
+            //todo method to check if pawn in winner >=6
+                if(controller.howManyPawns(30,controller.getPlayer1().getUserId()) == 6)
+                    winner();
                 /*else {
                     runOnUiThread(new Runnable() {
                         @Override
@@ -113,7 +118,7 @@ public class BoardActivity extends AppCompatActivity {
             if(counter == 60){
                 controller.surrender();
                 refBoard.internalTimer.cancel();
-                endGame(refBoard);
+                defeat();
             }
 
 
@@ -126,8 +131,7 @@ public class BoardActivity extends AppCompatActivity {
                         if (res.getString("winner").equals("none") == false) {
                             if (res.getInt("winner") == getController().getPlayer1().getUserId()) {
                                 refBoard.internalTimer.cancel();
-                                endGame(refBoard);
-                                //todo display hai vinto
+                                winner();
                             }
                         }
                     }
@@ -158,10 +162,9 @@ public class BoardActivity extends AppCompatActivity {
                         if (res.getString("winner").equals("none") == false) {
                             if (res.getInt("winner") == refBoard.getController().getPlayer1().getUserId()) {
                                 refBoard.internalTimer.cancel();
-                                endGame(refBoard);
-                                //todo display hai vinto
+                                winner();
                             } else {
-                                //todo hai perso : avversario è arrivato con i 6 pawn al finish
+                                defeat();
                             }
                         } else {
                             refBoard.internalTimer.cancel();
@@ -440,7 +443,7 @@ public class BoardActivity extends AppCompatActivity {
             controller.surrender();
             //invoco haiPerso
             boardView.internalTimer.cancel();
-            endGame(boardView);
+            defeat();
 
 
     }
@@ -490,7 +493,7 @@ public class BoardActivity extends AppCompatActivity {
                 return null;
         }
     }
-    //todo haiVinto e haiPerso method Views
+
 
 
 
@@ -513,32 +516,46 @@ public class BoardActivity extends AppCompatActivity {
                 setupPage.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        mp.release();
 
-        //find if player is winner or loser and set the drawable to loser or winner image
-        //if(winner){
-        //      ImageView imageView = (ImageView) findViewById(R.id.winnerimg);
-        //      imageView.setImageResource(R.drawable.winner);
-        //}
-        //if(loser){
-        //      ImageView imageView = (ImageView) findViewById(R.id.imageView1);
-        //      imageView.setImageResource(R.drawable.defeat);
-        //}
+        startActivity(intent);
+        ref.finish();
+    }
+
+
+
+    public void winner(){
+        ImageView imageView = (ImageView) findViewById(R.id.winnerimg);
+        imageView.setImageResource(R.drawable.victory);
         //create alert dialog with commented code
-        /*AlertDialog.Builder alertadd = new AlertDialog.Builder(BoardActivity.this);
+        AlertDialog.Builder alertadd = new AlertDialog.Builder(BoardActivity.this);
         LayoutInflater inflater = LayoutInflater.from(BoardActivity.this);
         final View view = inflater.inflate(R.layout.endgamealert, null);
         alertadd.setView(view);
         alertadd.setNeutralButton("Click Here to continue!", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dlg, int sumthin) {
-
+                            endGame(boardView);
                 }
             });
 
-        alertadd.show();*/
-        mp.release();
+        alertadd.show();
+    }
 
-        startActivity(intent);
-        ref.finish();
+    public void defeat(){
+        ImageView imageView = (ImageView) findViewById(R.id.winnerimg);
+        imageView.setImageResource(R.drawable.defeat);
+        //create alert dialog with commented code
+        AlertDialog.Builder alertadd = new AlertDialog.Builder(BoardActivity.this);
+        LayoutInflater inflater = LayoutInflater.from(BoardActivity.this);
+        final View view = inflater.inflate(R.layout.endgamealert, null);
+        alertadd.setView(view);
+        alertadd.setNeutralButton("Click Here to continue!", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dlg, int sumthin) {
+                endGame(boardView);
+            }
+        });
+
+        alertadd.show();
     }
 
     public void updateBoard(JSONObject json){
@@ -639,7 +656,7 @@ public class BoardActivity extends AppCompatActivity {
         }
         else{
             controller.surrender();
-            endGame(boardView);
+            defeat();
         }
 
 
