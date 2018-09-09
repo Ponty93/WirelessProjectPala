@@ -344,7 +344,7 @@ public class onDragCustomMethod implements View.OnDragListener {
         ArrayList<Integer> stackId = controller.getPlayer1().findPawnsByPos(Integer.parseInt((String)owner.getTag()));
         int index=0;
         while(index<howMuch){
-            ImageView view = refActivity.findPawnViewById(stackId.get(index));
+            ImageView view = refActivity.findPawnViewById(stackId.get(index),controller.getPlayer1().getUserId());
             stack.add(view);
             owner.removeView(view);
             index++;
@@ -381,7 +381,7 @@ public class onDragCustomMethod implements View.OnDragListener {
         ArrayList<Integer> stack = controller.getPlayer1().findPawnsByPos(30);
         int index = 0;
         while(index<stack.size()){
-            ImageView v = refActivity.findPawnViewById(stack.get(index));
+            ImageView v = refActivity.findPawnViewById(stack.get(index),controller.getPlayer1().getUserId());
             v.setEnabled(false);
             index++;
         }
