@@ -478,7 +478,7 @@ public class BoardActivity extends AppCompatActivity {
     public void rollDiceButton(View view) {
         controller.roll();
         //roll button
-        if (getController().doubleDiceRes()) { //todo non va bene
+        if (getController().doubleDiceRes()) {
             controller.setDoubleDown();
             controller.setNumberOfMove(0);
         } else {

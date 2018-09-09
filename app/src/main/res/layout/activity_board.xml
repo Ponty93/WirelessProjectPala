@@ -279,7 +279,7 @@
                 app:pawnNumber=""
                 app:srcCompat="@drawable/rosso" />
 
-            <ImageView
+            <Utils.pawnView
                 android:id="@+id/black1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
