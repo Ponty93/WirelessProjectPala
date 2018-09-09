@@ -1,5 +1,6 @@
 package com.project.wirelessteam.Views;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -556,31 +559,37 @@ public class BoardActivity extends AppCompatActivity {
 
 
     public void winner(){
-        AlertDialog alertDialog = new AlertDialog.Builder(BoardActivity.this).create();
-        alertDialog.setTitle("WINNER");
-        alertDialog.setMessage("ESKERE!!!!");
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "DAB",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        endGame(boardView);
-                    }
-                });
-        alertDialog.show();
+
+            Dialog MyDialog = new Dialog(BoardActivity.this);
+            MyDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            MyDialog.setContentView(R.layout.endgamealertvic);
+
+            MyDialog.setTitle("END GAME");
+            Button closeGame = (Button)MyDialog.findViewById(R.id.button11);
+        closeGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                endGame(boardView);
+            }
+        });
+            MyDialog.show();
+
     }
 
     public void defeat(){
-        AlertDialog alertDialog = new AlertDialog.Builder(BoardActivity.this).create();
-        alertDialog.setTitle("looser");
-        alertDialog.setMessage("ESKERE???");
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "k skarso",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        endGame(boardView);
-                    }
-                });
-        alertDialog.show();
+        Dialog MyDialog = new Dialog(BoardActivity.this);
+        MyDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        MyDialog.setContentView(R.layout.endgamealert);
+
+        MyDialog.setTitle("END GAME");
+        Button closeGame = (Button)MyDialog.findViewById(R.id.button11);
+        closeGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                endGame(boardView);
+            }
+        });
+        MyDialog.show();
     }
 
     public void updateBoard(JSONObject json){
