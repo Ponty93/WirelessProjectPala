@@ -474,10 +474,6 @@ public class BoardActivity extends AppCompatActivity {
     }
     public void rollDiceButton(View view){
         controller.roll();
-        ImageView roll1 = (ImageView) findViewById(R.id.diceRes1);
-        ImageView roll2 = (ImageView) findViewById(R.id.diceRes2);
-        roll1.setImageDrawable(getImageViewByResult(controller.getDiceRes(0)));
-        roll2.setImageDrawable(getImageViewByResult(controller.getDiceRes(1)));
         //roll button
         if(getController().doubleDiceRes()){
             controller.setDoubleDown();
@@ -486,6 +482,11 @@ public class BoardActivity extends AppCompatActivity {
         else {
             //findViewById(R.id.roll).setEnabled(false);
         }
+
+        ImageView roll1 = (ImageView) findViewById(R.id.diceRes1);
+        ImageView roll2 = (ImageView) findViewById(R.id.diceRes2);
+        roll1.setImageDrawable(getImageViewByResult(controller.getDiceRes(0)));
+        roll2.setImageDrawable(getImageViewByResult(controller.getDiceRes(1)));
         //red pawns
 
         if(controller.getPlayer1().getPawnbyId(1).getPosition() != 30)
