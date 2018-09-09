@@ -1051,20 +1051,25 @@ public class BoardActivity extends AppCompatActivity {
         if(idPlayer == controller.getPlayer1().getUserId()) {
             ArrayList<Integer> stack = controller.getPlayer1().findPawnsByPos(Integer.parseInt((String) owner.getTag()));
             int index = 0;
-            while (index < stack.size()) {
-                pawnView v = (pawnView)findPawnViewById(stack.get(index));
-                v.setPawnText(number);
-                index++;
+            if(stack != null) {
+                while (index < stack.size()) {
+                    pawnView v = (pawnView) findPawnViewById(stack.get(index));
+                    v.setPawnText(number);
+                    index++;
+                }
             }
         }
         else {
             ArrayList<Integer> stack = controller.getPlayer2().findPawnsByPos(Integer.parseInt((String) owner.getTag()));
             int index = 0;
-            while (index < stack.size()) {
-                pawnView v = (pawnView)findPawnViewById(stack.get(index));
-                v.setPawnText(number);
-                index++;
+            if(stack != null){
+                while (index < stack.size()) {
+                    pawnView v = (pawnView)findPawnViewById(stack.get(index));
+                    v.setPawnText(number);
+                    index++;
+                }
             }
+
         }
     }
 
