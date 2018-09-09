@@ -135,7 +135,7 @@ public class onDragCustomMethod implements View.OnDragListener {
                     ArrayList<View> stack = new ArrayList<>();
 
 
-                    view.setBackground(refActivity.getResources().getDrawable(R.drawable.mar3));
+                    view.setBackgroundColor(refActivity.getResources().getColor(R.color.cell));
                     // Redraw the target view use original color.
                     view.invalidate();
 
@@ -209,7 +209,7 @@ public class onDragCustomMethod implements View.OnDragListener {
                     return true;
 
                 case DragEvent.ACTION_DRAG_ENDED:
-                    view.setBackground(refActivity.getResources().getDrawable(R.drawable.mar3));
+                    view.setBackgroundColor(refActivity.getResources().getColor(R.color.cell));
                     // Redraw the target view use original color.
                     view.invalidate();
 

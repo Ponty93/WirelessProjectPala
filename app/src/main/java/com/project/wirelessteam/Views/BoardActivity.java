@@ -89,7 +89,7 @@ public class BoardActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //chiama destroy del game per notificare avv
+        controller.finishGame(controller.getPlayer2().getUserId());
     }
 
 
@@ -280,7 +280,7 @@ public class BoardActivity extends AppCompatActivity {
         try {
             json= new JSONObject(buildBoard.getStringExtra("json"));
             //Log.d("JSON INTERO","is"+json);
-            //update board
+            //update board//chiama destroy del game per notificare avv
             gameId =json.getInt("gameId");
             roundId = json.getInt("filetto");
 

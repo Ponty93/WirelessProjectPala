@@ -3,5 +3,5 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303f9f</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="dark">#778899</color>
+    <color name="cell" id="cell">#f2f2f2</color>
 </resources>

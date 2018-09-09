@@ -85,7 +85,9 @@ public class lobby extends AppCompatActivity {
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        //cancella coda
+        timer.stop();
+        lobbyConn = controller.backAction(lobbyIntent.getStringExtra("userName"),lobbyIntent.getIntExtra("idPlayer",0));
+
     }
     private void toBoard(){
 
