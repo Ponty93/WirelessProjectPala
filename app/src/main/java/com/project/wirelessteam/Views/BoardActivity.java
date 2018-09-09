@@ -480,7 +480,7 @@ public class BoardActivity extends AppCompatActivity {
             controller.setNumberOfMove(0);
         }
         else {
-            //findViewById(R.id.roll).setEnabled(false);
+            findViewById(R.id.roll).setEnabled(false);
         }
 
         ImageView roll1 = (ImageView) findViewById(R.id.diceRes1);
