@@ -289,7 +289,7 @@
                 android:layout_marginRight="3dp"
                 app:srcCompat="@drawable/nero" />
 
-            <ImageView
+            <Utils.pawnView
                 android:id="@+id/black2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -300,7 +300,7 @@
 
                 app:srcCompat="@drawable/nero" />
 
-            <ImageView
+            <Utils.pawnView
                 android:id="@+id/black3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -308,10 +308,10 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="3dp"
-
+                app:pawnNumber=""
                 app:srcCompat="@drawable/nero" />
 
-            <ImageView
+            <Utils.pawnView
                 android:id="@+id/black4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -319,9 +319,9 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="3dp"
-
+                app:pawnNumber=""
                 app:srcCompat="@drawable/nero" />
-            <ImageView
+            <Utils.pawnView
                 android:id="@+id/black5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -329,10 +329,10 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="3dp"
-
+                app:pawnNumber=""
                 app:srcCompat="@drawable/nero" />
 
-            <ImageView
+            <Utils.pawnView
                 android:id="@+id/black6"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
@@ -340,7 +340,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="3dp"
-
+                app:pawnNumber=""
                 app:srcCompat="@drawable/nero" />
 
 

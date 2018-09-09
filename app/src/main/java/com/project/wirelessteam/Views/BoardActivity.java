@@ -600,7 +600,7 @@ public class BoardActivity extends AppCompatActivity {
             //update views
 
             //red pawns update
-
+            Log.d("JSON UPDATE ", "IS"+controller.buildBoardJSON());
             ViewGroup owner = (ViewGroup)findViewById(R.id.red1).getParent();
             if(Integer.parseInt((String)owner.getTag()) != getController().getPlayer1().getPawnbyId(1).getPosition()){
                 ImageView red1 = (ImageView)findViewById(R.id.red1);

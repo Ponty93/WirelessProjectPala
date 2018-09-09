@@ -104,5 +104,9 @@ public class boardController {
         model.getDice().setDoubleRoll(false);
     }
 
+    public JSONObject buildBoardJSON(){
+        return model.buildBoardJSON();
+    }
+
 }
 
