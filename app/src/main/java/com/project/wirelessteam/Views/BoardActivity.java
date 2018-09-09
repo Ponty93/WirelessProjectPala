@@ -560,7 +560,7 @@ public class BoardActivity extends AppCompatActivity {
 
     public void winner(){
 
-            Dialog MyDialog = new Dialog(BoardActivity.this);
+            final Dialog MyDialog = new Dialog(BoardActivity.this);
             MyDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             MyDialog.setContentView(R.layout.endgamealertvic);
 
@@ -569,6 +569,7 @@ public class BoardActivity extends AppCompatActivity {
         closeGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MyDialog.cancel();
                 endGame(boardView);
             }
         });
@@ -577,7 +578,7 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     public void defeat(){
-        Dialog MyDialog = new Dialog(BoardActivity.this);
+        final Dialog MyDialog = new Dialog(BoardActivity.this);
         MyDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         MyDialog.setContentView(R.layout.endgamealert);
 
@@ -586,6 +587,7 @@ public class BoardActivity extends AppCompatActivity {
         closeGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MyDialog.cancel();
                 endGame(boardView);
             }
         });
