@@ -16,8 +16,6 @@ public class setupPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setup_page);
         myIntent = getIntent();
-        TextView userName = (TextView) findViewById(R.id.displayUserName);
-        userName.setText(myIntent.getStringExtra("userName"));
         mp = MediaPlayer.create(this, R.raw.menu);
 
     }
