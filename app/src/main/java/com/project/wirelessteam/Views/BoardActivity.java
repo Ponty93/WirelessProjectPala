@@ -106,48 +106,50 @@ public class BoardActivity extends AppCompatActivity {
         public void run() {
 
 
-                if(controller.howManyPawns(30,controller.getPlayer1().getUserId()) == 6) {
-                    //todo update winner attr in db
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            winner();
-                        }
-                    });
+            if (controller.howManyPawns(30, controller.getPlayer1().getUserId()) == 6) {
+                controller.finishGame(getController().getPlayer1().getUserId());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        winner();
+                    }
+                });
+                refBoard.internalTimer.cancel();
+            } else {
+
+
+                counter++;
+
+                if (counter == 60) {
+                    controller.finishGame(getController().getPlayer2().getUserId());
+                    defeat();
                     refBoard.internalTimer.cancel();
                 }
 
 
+                Log.d("COUNTER END ROUND", "COUNTER IS:" + counter);
+                JSONObject res = getController().updateRound();
+                //Log.d("JSON", "Json res" + res));
+                if (res != null) {
+                    try {
+                        if (res.getInt("Result") == 1) {
+                            if (res.getString("winner").equals("none") == false) {
+                                if (res.getInt("winner") == getController().getPlayer1().getUserId()) {
 
-            counter++;
-
-            if(counter == 60){
-                controller.defeat();
-                defeat();
-                refBoard.internalTimer.cancel();
-            }
-
-
-            Log.d("COUNTER END ROUND","COUNTER IS:"+counter);
-            JSONObject res = getController().updateRound();
-            //Log.d("JSON", "Json res" + res));
-            if(res != null) {
-                try {
-                    if (res.getInt("Result") == 1) {
-                        if (res.getString("winner").equals("none") == false) {
-                            if (res.getInt("winner") == getController().getPlayer1().getUserId()) {
-
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        winner();
-                                    }
-                                });
-                                refBoard.internalTimer.cancel();
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            winner();
+                                        }
+                                    });
+                                    refBoard.internalTimer.cancel();
+                                }
                             }
                         }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                }catch(JSONException e){e.printStackTrace();}
+                }
             }
         }
     }
@@ -463,7 +465,7 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     public void surrenderButton(View view){
-            controller.defeat();
+            controller.finishGame(controller.getPlayer2().getUserId());
             //invoco haiPerso
             defeat();
             boardView.internalTimer.cancel();
@@ -854,7 +856,7 @@ public class BoardActivity extends AppCompatActivity {
 
         }
         else{
-            controller.defeat();
+            controller.finishGame(controller.getPlayer2().getUserId());
             defeat();
         }
 

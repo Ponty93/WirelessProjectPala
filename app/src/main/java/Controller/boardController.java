@@ -17,8 +17,8 @@ public class boardController {
         view = v;
     }
 
-    public boolean defeat() {
-        return model.defeat();
+    public boolean finishGame(int playerId) {
+        return model.finishGame(playerId);
     }
 
     public JSONObject updateRound(){

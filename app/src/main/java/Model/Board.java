@@ -237,12 +237,12 @@ public class Board extends Game {
     }
 
 
-    public boolean defeat(){
+    public boolean finishGame(int playerId){
         phpConnect myConn = null;
         boolean result = false;
         try{
             myConn = new phpConnect("https://psionofficial.com/Wireless/handler.php",getIdGame());
-            result = myConn.execute("u",Integer.toString(getPlayer2().getUserId()),"surrender","-1","-1","-1").get();
+            result = myConn.execute("u",Integer.toString(playerId),"endGame","-1","-1","-1").get();
 
         }catch(ExecutionException e){e.printStackTrace();}
         catch(InterruptedException e ){e.printStackTrace();}

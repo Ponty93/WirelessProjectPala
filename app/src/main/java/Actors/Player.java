@@ -16,7 +16,6 @@ public class Player {
 
     private int score;
     private HashMap<Integer,Pawn> pawns = new HashMap<>();
-    //todo memorize the pawns
     /**
      * Builds a Player instance
      * @constructor
@@ -30,7 +29,6 @@ public class Player {
 
     }
     private void buildMap(JSONObject json) {
-        Log.d("costruisco hashmap","qui");
         try {
             for (int i = 1; i < 7; i++) {
                 pawns.put(i, new Pawn(i, json.getInt("pawnId" + i)));
