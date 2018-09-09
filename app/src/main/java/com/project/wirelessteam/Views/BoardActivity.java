@@ -604,6 +604,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView red1 = (ImageView)findViewById(R.id.red1);
                 owner.removeView(findViewById(R.id.red1));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(1).getPosition());
+
                 if(Integer.parseInt((String)newOwner.getTag()) == 30)
                     finishInCell(red1);
                 else if(Integer.parseInt((String)newOwner.getTag())>6)
@@ -626,6 +627,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView red2 = (ImageView)findViewById(R.id.red2);
                 owner.removeView(findViewById(R.id.red2));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(2).getPosition());
+
                 if(Integer.parseInt((String)newOwner.getTag()) == 30)
                     finishInCell(red2);
                 else if(Integer.parseInt((String)newOwner.getTag())>6)
@@ -648,6 +650,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView red3 = (ImageView)findViewById(R.id.red3);
                 owner.removeView(findViewById(R.id.red3));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(3).getPosition());
+
                 if(Integer.parseInt((String)newOwner.getTag()) == 30)
                     finishInCell(red3);
                 else if(Integer.parseInt((String)newOwner.getTag())>6)
@@ -670,6 +673,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView red4 = (ImageView)findViewById(R.id.red4);
                 owner.removeView(findViewById(R.id.red4));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(4).getPosition());
+
                 if(Integer.parseInt((String)newOwner.getTag()) == 30)
                     finishInCell(red4);
                 else if(Integer.parseInt((String)newOwner.getTag())>6)
@@ -693,6 +697,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView red5  = (ImageView)findViewById(R.id.red5);
                 owner.removeView(findViewById(R.id.red5));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(5).getPosition());
+
                 if(Integer.parseInt((String)newOwner.getTag()) == 30)
                     finishInCell(red5);
                 else if(Integer.parseInt((String)newOwner.getTag())>6)
@@ -715,6 +720,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView red6  =(ImageView)findViewById(R.id.red6);
                 owner.removeView(findViewById(R.id.red6));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer1().getPawnbyId(6).getPosition());
+
                 if(Integer.parseInt((String)newOwner.getTag()) == 30)
                     finishInCell(red6);
                 else if(Integer.parseInt((String)newOwner.getTag())>6)
@@ -739,6 +745,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView black1= (ImageView)findViewById(R.id.black1);
                 owner.removeView(findViewById(R.id.black1));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(1).getPosition());
+
                 if(Integer.parseInt((String)newOwner.getTag()) == 30)
                     finishInCell(black1);
                 else if(Integer.parseInt((String)newOwner.getTag())>6)
@@ -761,6 +768,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView black2 =(ImageView)findViewById(R.id.black2);
                 owner.removeView(findViewById(R.id.black2));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(2).getPosition());
+
                 if(Integer.parseInt((String)newOwner.getTag()) == 30)
                     finishInCell(black2);
                 else if(Integer.parseInt((String)newOwner.getTag())>6)
@@ -783,6 +791,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView black3 = (ImageView)findViewById(R.id.black3);
                 owner.removeView(findViewById(R.id.black3));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(3).getPosition());
+
                 if(Integer.parseInt((String)newOwner.getTag()) == 30)
                     finishInCell(black3);
                 else if(Integer.parseInt((String)newOwner.getTag())>6)
@@ -805,6 +814,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView black4 = (ImageView)findViewById(R.id.black4);
                 owner.removeView(findViewById(R.id.black4));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(4).getPosition());
+
                 if(Integer.parseInt((String)newOwner.getTag()) == 30)
                     finishInCell(black4);
                 else if(Integer.parseInt((String)newOwner.getTag())>6)
@@ -828,6 +838,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView black5 = (ImageView)findViewById(R.id.black5);
                 owner.removeView(findViewById(R.id.black5));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(5).getPosition());
+
                 if(Integer.parseInt((String)newOwner.getTag()) == 30)
                     finishInCell(black5);
                 else if(Integer.parseInt((String)newOwner.getTag())>6)
@@ -850,6 +861,7 @@ public class BoardActivity extends AppCompatActivity {
                 ImageView black6 = (ImageView)findViewById(R.id.black6);
                 owner.removeView(findViewById(R.id.black6));
                 RelativeLayout newOwner = findCellByIndex(getController().getPlayer2().getPawnbyId(6).getPosition());
+
                 if(Integer.parseInt((String)newOwner.getTag()) == 30)
                     finishInCell(black6);
                 else if(Integer.parseInt((String)newOwner.getTag())>6)
