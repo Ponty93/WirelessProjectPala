@@ -9,6 +9,7 @@
     android:id="@+id/rel1"
     tools:context=".BoardActivity"
     android:background="@drawable/background"
+
     >
 
     <ImageView
