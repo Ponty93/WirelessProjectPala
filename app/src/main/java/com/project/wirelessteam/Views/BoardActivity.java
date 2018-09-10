@@ -42,7 +42,7 @@ import Utils.onTouchCustomMethod;
 import Utils.onDragCustomMethod;
 import Utils.pawnView;
 
-
+//todo remove log
 public class BoardActivity extends AppCompatActivity {
     private Context context = null;
     private RelativeLayout refLayout = null;
@@ -60,7 +60,7 @@ public class BoardActivity extends AppCompatActivity {
         buildBoard = getIntent();
         mp = MediaPlayer.create(this, R.raw.game);
 
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
 
         //initialize the boards view feature
         if (buildBoard != null)
@@ -75,6 +75,7 @@ public class BoardActivity extends AppCompatActivity {
         super.onStart();
         mp.start();
         mp.setLooping(true);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
     }
 

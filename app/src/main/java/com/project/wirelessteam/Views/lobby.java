@@ -49,7 +49,7 @@ public class lobby extends AppCompatActivity {
                     currActivity.finish();
                 }
 
-                if(seconds % 5 == 0) {
+                if(seconds % 3 == 0) {
 
                     lobbyConn = controller.lobbyCheck(lobbyIntent.getStringExtra("userName"), lobbyIntent.getIntExtra("idPlayer",0));
                     if (lobbyConn != null) {
