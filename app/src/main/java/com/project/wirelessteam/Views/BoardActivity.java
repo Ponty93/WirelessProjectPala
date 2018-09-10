@@ -268,13 +268,9 @@ public class BoardActivity extends AppCompatActivity {
             context = getApplicationContext();
 
         //init the board and the retrieve the data for player 2
-        TextView idPl = (TextView) findViewById(R.id.idPL);
-        idPl.setText(Integer.toString(buildBoard.getIntExtra("player1Id", 0)));
         TextView userPl = (TextView) findViewById(R.id.userPL);
         userPl.setText(buildBoard.getStringExtra("player1Name"));
-        TextView idAvv = (TextView) findViewById(R.id.idAvv);
         TextView userAvv = (TextView) findViewById(R.id.userAvv);
-        idAvv.setText(Integer.toString(buildBoard.getIntExtra("player2Id", 0)));
         userAvv.setText(buildBoard.getStringExtra("player2Name"));
         int id1 = buildBoard.getIntExtra("player1Id", 0);
         int id2 = buildBoard.getIntExtra("player2Id", 0);
