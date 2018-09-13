@@ -39,7 +39,7 @@ public final class phpConnect extends AsyncTask<String, Void,Boolean>{
             resOperation=update(params[0],Integer.parseInt(params[1]),params[2],Integer.parseInt(params[3]),Integer.parseInt(params[4]),params[5]);
         else if(params[0] == "d")
             resOperation=delete(params[0],params[1],Integer.parseInt(params[2]));
-        Log.d("VALORE RESOP" , String.valueOf(resOperation));
+        //Log.d("VALORE RESOP" , String.valueOf(resOperation));
         return resOperation;
     }
 

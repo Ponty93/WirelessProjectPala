@@ -7,11 +7,12 @@
     <application
         android:allowBackup="true"
         android:largeHeap="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ludus_foreground"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ludus_foreground"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:debuggable="false">
         <activity
             android:name="com.project.wirelessteam.Views.setupPage"
             android:parentActivityName="com.project.wirelessteam.Views.login">

@@ -42,7 +42,7 @@ import Utils.onTouchCustomMethod;
 import Utils.onDragCustomMethod;
 import Utils.pawnView;
 
-//todo remove log
+//todo add rules
 public class BoardActivity extends AppCompatActivity {
     private Context context = null;
     private RelativeLayout refLayout = null;
@@ -109,7 +109,6 @@ public class BoardActivity extends AppCompatActivity {
         @Override
         public void run() {
 
-
             if (controller.howManyPawns(30, controller.getPlayer1().getUserId()) == 6) {
                 controller.finishGame(getController().getPlayer1().getUserId());
                 runOnUiThread(new Runnable() {
@@ -131,7 +130,7 @@ public class BoardActivity extends AppCompatActivity {
                 }
 
 
-                Log.d("COUNTER END ROUND", "COUNTER IS:" + counter);
+                //Log.d("COUNTER END ROUND", "COUNTER IS:" + counter);
                 JSONObject res = getController().updateRound();
                 //Log.d("JSON", "Json res" + res));
                 if (res != null) {
@@ -164,6 +163,7 @@ public class BoardActivity extends AppCompatActivity {
     //class created only when its not my round
     protected class connectionTimeout extends TimerTask {
         private BoardActivity refBoard;
+        private int counter = 0;
 
         public connectionTimeout(BoardActivity board) {
             refBoard = board;
@@ -171,10 +171,22 @@ public class BoardActivity extends AppCompatActivity {
 
         @Override
         public void run() {
+            if(counter == 66){
+                controller.finishGame(getController().getPlayer1().getUserId());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        winner();
+                    }
+                });
+                refBoard.internalTimer.cancel();
+            }
 
-            Log.d("ConnectionTimeout", "Connection timeout occurred ");
+            counter++;
+
+            //Log.d("ConnectionTimeout", "Connection timeout occurred ");
             final JSONObject res = getController().updateRound();
-            Log.d("JSON", "Json res" + res);
+            //Log.d("JSON", "Json res" + res);
             if (res != null) {
                 try {
                     if (res.getInt("Result") == 1) {
@@ -473,15 +485,15 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     public void rollDiceButton(View view) {
-        controller.roll();
+
         //roll button
-        if (getController().doubleDiceRes()) {
+        if (getController().doubleDiceRes() && getController().getDiceRes(0) != 0 && getController().getDiceRes(1)!= 0) {
             controller.setDoubleDown();
             controller.setNumberOfMove(0);
-        } else {
+        } else if(controller.doubleDiceRes() ==false) {
             findViewById(R.id.roll).setEnabled(false);
         }
-
+        controller.roll();
         ImageView roll1 = (ImageView) findViewById(R.id.diceRes1);
         ImageView roll2 = (ImageView) findViewById(R.id.diceRes2);
         roll1.setImageDrawable(getImageViewByResult(controller.getDiceRes(0)));

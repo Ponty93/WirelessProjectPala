@@ -42,8 +42,8 @@ public class lobby extends AppCompatActivity {
                 long seconds = ((SystemClock.elapsedRealtime() - timer.getBase())/1000) % 60;
 
 
-                Log.d("MyTimer", "onChronometerTick: " + minutes + " : " + seconds);
-                Log.d("MyCounter",""+seconds%10);
+                //Log.d("MyTimer", "onChronometerTick: " + minutes + " : " + seconds);
+                //Log.d("MyCounter",""+seconds%10);
 
                 if(minutes == 5L){
                     currActivity.finish();

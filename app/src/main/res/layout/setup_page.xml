@@ -30,7 +30,7 @@
         android:layout_marginBottom="48dp"
         android:background="@drawable/mar3"
         android:onClick="goToHighlights"
-        android:text="Highlights"
+        android:text="RULES"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

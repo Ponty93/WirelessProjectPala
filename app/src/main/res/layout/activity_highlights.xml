@@ -6,22 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".Highlights">
 
-    <ListView
-        android:layout_width="fill_parent"
-        android:layout_height="456dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        tools:layout_editor_absoluteX="-15dp"
-        tools:layout_editor_absoluteY="70dp" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:text="Highlight Scores"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:text="Essential Rules:"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -37,4 +30,14 @@
         android:layout_marginEnd="34dp"
         android:onClick="back"
         android:text="Back" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="525dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="7dp"
+        app:srcCompat="@drawable/ludusrules" />
+
 </RelativeLayout>

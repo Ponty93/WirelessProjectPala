@@ -241,6 +241,7 @@ public class onDragCustomMethod implements View.OnDragListener {
                     View black = (View) newParent.getChildAt(1);
                     newParent.removeView(black);
                     refToStart().addView(black);
+                    refActivity.borderInCell(black);
                     refActivity.setPawnNumber(refToStart(),"",controller.getPlayer2().getUserId());
                     index++;
                 }
