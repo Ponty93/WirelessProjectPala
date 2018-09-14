@@ -82,15 +82,6 @@ public class BoardActivity extends AppCompatActivity {
         mp.start();
         mp.setLooping(true);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        if(isOnline(context) == false){
-            controller.finishGame(getController().getPlayer1().getUserId());
-            AlertDialog.Builder builder = new AlertDialog.Builder(BoardActivity.this);
-            builder.setMessage("It seems you're having connection issues. You're going back to the home page");
-            final Dialog MyDialog = builder.create();
-            MyDialog.setTitle("Connection issue");
-            MyDialog.show();
-            endGame(boardView);
-        }
 
 
     }
@@ -123,21 +114,40 @@ public class BoardActivity extends AppCompatActivity {
         private int counter = 0;
         private BoardActivity refBoard;
 
+
+
         roundTimeout(BoardActivity board) {
             refBoard = board;
         }
 
         @Override
         public void run() {
+
+
+
             if(isOnline(context) == false){
-                controller.finishGame(getController().getPlayer1().getUserId());
-                AlertDialog.Builder builder = new AlertDialog.Builder(BoardActivity.this);
-                builder.setMessage("It seems you're having connection issues. You're going back to the home page");
-                final Dialog MyDialog = builder.create();
-                MyDialog.setTitle("Connection issue");
-                MyDialog.show();
-                endGame(boardView);
-                refBoard.internalTimer.cancel();
+                //Log.d("connessione mancante","mio turno");
+                /*runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        final Dialog MyDialog = null;
+                        AlertDialog.Builder builder = new AlertDialog.Builder(BoardActivity.this);
+                        builder.setMessage("It seems you're having connection issues. You're going back to the home page").setPositiveButton("Homepage", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                MyDialog.cancel();
+                                endGame(boardView);
+                            }
+                        });
+
+                        MyDialog = builder.create();
+                        MyDialog.setTitle("Connection issue");
+
+                        MyDialog.show();
+                    }
+                });
+                    */
+
+
             }
 
             if (controller.howManyPawns(30, controller.getPlayer1().getUserId()) == 6) {
@@ -196,12 +206,37 @@ public class BoardActivity extends AppCompatActivity {
         private BoardActivity refBoard;
         private int counter = 0;
 
+
         public connectionTimeout(BoardActivity board) {
             refBoard = board;
         }
 
         @Override
         public void run() {
+
+
+            if(isOnline(context) == false){
+
+                /*runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(BoardActivity.this);
+                        builder.setMessage("It seems you're having connection issues. You're going back to the home page").setPositiveButton("Homepage", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                endGame(boardView);
+                            }
+                        });
+
+                        final Dialog MyDialog = builder.create();
+                        MyDialog.setTitle("Connection issue");
+
+                        MyDialog.show();
+                    }
+                });*/
+
+
+            }
             if(counter == 66){
                 controller.finishGame(getController().getPlayer1().getUserId());
                 runOnUiThread(new Runnable() {
