@@ -552,9 +552,9 @@ public class BoardActivity extends AppCompatActivity {
             findViewById(R.id.roll).setEnabled(false);
 
         if(getController().doubleDiceRes() == true) {
-            findViewById(R.id.roll).setEnabled(true);
             controller.setDoubleDown();
             controller.setNumberOfMove(0);
+            findViewById(R.id.roll).setEnabled(false);
         }
 
 
