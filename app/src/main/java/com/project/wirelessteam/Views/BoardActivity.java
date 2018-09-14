@@ -53,6 +53,7 @@ public class BoardActivity extends AppCompatActivity {
     private boardController controller = null;
     private MediaPlayer mp;
     private Intent buildBoard;
+    private boolean doubleDice = false;
 
 
 
@@ -297,6 +298,8 @@ public class BoardActivity extends AppCompatActivity {
     private void roundOrganize(boolean round) {
         //true : my round
         //false : foe round
+
+        doubleDice = false;
 
         findViewById(R.id.red1).setEnabled(false);
         findViewById(R.id.red2).setEnabled(false);
@@ -546,16 +549,22 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     public void rollDiceButton(View view) {
-        controller.roll();
-        //roll button
-        if(getController().doubleDiceRes() == false)
-            findViewById(R.id.roll).setEnabled(false);
 
-        if(getController().doubleDiceRes() == true) {
+        //roll button
+        if(doubleDice == false)
+            doubleDice = true;
+        else
+            doubleDice = false;
+
+        controller.roll();
+
+        if(getController().doubleDiceRes() == true && doubleDice == true) {
             controller.setDoubleDown();
             controller.setNumberOfMove(0);
             findViewById(R.id.roll).setEnabled(false);
         }
+        else
+            findViewById(R.id.roll).setEnabled(false);
 
 
 
