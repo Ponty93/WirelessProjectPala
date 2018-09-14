@@ -127,25 +127,25 @@ public class BoardActivity extends AppCompatActivity {
 
             if(isOnline(context) == false){
                 //Log.d("connessione mancante","mio turno");
-                /*runOnUiThread(new Runnable() {
+                runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        final Dialog MyDialog = null;
+
                         AlertDialog.Builder builder = new AlertDialog.Builder(BoardActivity.this);
                         builder.setMessage("It seems you're having connection issues. You're going back to the home page").setPositiveButton("Homepage", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                MyDialog.cancel();
+                                dialog.dismiss();
                                 endGame(boardView);
                             }
                         });
 
-                        MyDialog = builder.create();
+                        final Dialog MyDialog = builder.create();
                         MyDialog.setTitle("Connection issue");
 
                         MyDialog.show();
                     }
                 });
-                    */
+
 
 
             }
@@ -217,13 +217,13 @@ public class BoardActivity extends AppCompatActivity {
 
             if(isOnline(context) == false){
 
-                /*runOnUiThread(new Runnable() {
+                    runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         AlertDialog.Builder builder = new AlertDialog.Builder(BoardActivity.this);
                         builder.setMessage("It seems you're having connection issues. You're going back to the home page").setPositiveButton("Homepage", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
+                                dialog.dismiss();
                                 endGame(boardView);
                             }
                         });
@@ -233,8 +233,7 @@ public class BoardActivity extends AppCompatActivity {
 
                         MyDialog.show();
                     }
-                });*/
-
+                });
 
             }
             if(counter == 66){

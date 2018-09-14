@@ -315,24 +315,27 @@ public class onDragCustomMethod implements View.OnDragListener {
 
 
     private int findPositionByView(View view){
-        String tag = (String) view.getTag(); //bugged
+        if(view !=null) {
+            String tag = (String) view.getTag(); //bugged
 
-        switch(tag){
-            case "red1":
-                return controller.getPlayer1().getPawnbyId(1).getPosition();
-            case "red2":
-                return controller.getPlayer1().getPawnbyId(2).getPosition();
-            case "red3":
-                return controller.getPlayer1().getPawnbyId(3).getPosition();
-            case "red4":
-                return controller.getPlayer1().getPawnbyId(4).getPosition();
-            case "red5":
-                return controller.getPlayer1().getPawnbyId(5).getPosition();
-            case "red6":
-                return controller.getPlayer1().getPawnbyId(6).getPosition();
-            default:
-                return 0;
+            switch (tag) {
+                case "red1":
+                    return controller.getPlayer1().getPawnbyId(1).getPosition();
+                case "red2":
+                    return controller.getPlayer1().getPawnbyId(2).getPosition();
+                case "red3":
+                    return controller.getPlayer1().getPawnbyId(3).getPosition();
+                case "red4":
+                    return controller.getPlayer1().getPawnbyId(4).getPosition();
+                case "red5":
+                    return controller.getPlayer1().getPawnbyId(5).getPosition();
+                case "red6":
+                    return controller.getPlayer1().getPawnbyId(6).getPosition();
+                default:
+                    return 0;
+            }
         }
+        return 0;
     }
 
 

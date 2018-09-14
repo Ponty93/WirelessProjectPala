@@ -16,10 +16,10 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.project.wirelessteam.wirelessproject"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0.1"
+        versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
