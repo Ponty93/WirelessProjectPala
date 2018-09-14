@@ -9,6 +9,8 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -53,6 +55,10 @@ public class BoardActivity extends AppCompatActivity {
     private Intent buildBoard;
 
 
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +82,16 @@ public class BoardActivity extends AppCompatActivity {
         mp.start();
         mp.setLooping(true);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        if(isOnline(context) == false){
+            controller.finishGame(getController().getPlayer1().getUserId());
+            AlertDialog.Builder builder = new AlertDialog.Builder(BoardActivity.this);
+            builder.setMessage("It seems you're having connection issues. You're going back to the home page");
+            final Dialog MyDialog = builder.create();
+            MyDialog.setTitle("Connection issue");
+            MyDialog.show();
+            endGame(boardView);
+        }
+
 
     }
 
@@ -97,6 +113,11 @@ public class BoardActivity extends AppCompatActivity {
         controller.finishGame(controller.getPlayer2().getUserId());
     }
 
+    public static boolean isOnline(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected();
+    }
 
     protected class roundTimeout extends TimerTask {
         private int counter = 0;
@@ -108,6 +129,16 @@ public class BoardActivity extends AppCompatActivity {
 
         @Override
         public void run() {
+            if(isOnline(context) == false){
+                controller.finishGame(getController().getPlayer1().getUserId());
+                AlertDialog.Builder builder = new AlertDialog.Builder(BoardActivity.this);
+                builder.setMessage("It seems you're having connection issues. You're going back to the home page");
+                final Dialog MyDialog = builder.create();
+                MyDialog.setTitle("Connection issue");
+                MyDialog.show();
+                endGame(boardView);
+                refBoard.internalTimer.cancel();
+            }
 
             if (controller.howManyPawns(30, controller.getPlayer1().getUserId()) == 6) {
                 controller.finishGame(getController().getPlayer1().getUserId());
@@ -487,10 +518,12 @@ public class BoardActivity extends AppCompatActivity {
     public void rollDiceButton(View view) {
 
         //roll button
-        if (getController().doubleDiceRes() && getController().getDiceRes(0) != 0 && getController().getDiceRes(1)!= 0) {
+        if(getController().doubleDiceRes() == true && getController().getDiceRes(0) != 0 && getController().getDiceRes(1)!= 0) {
+            findViewById(R.id.roll).setEnabled(true);
             controller.setDoubleDown();
             controller.setNumberOfMove(0);
-        } else if(controller.doubleDiceRes() ==false) {
+        }
+        if(controller.doubleDiceRes() == false) {
             findViewById(R.id.roll).setEnabled(false);
         }
         controller.roll();

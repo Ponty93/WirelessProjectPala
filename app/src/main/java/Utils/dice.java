@@ -18,12 +18,7 @@ public class dice {
 
     }
 
-    public boolean doubleDiceRes(){
-        if(diceBuffer[0] == diceBuffer[1])
-            return true;
-        else
-            return false;
-    }
+
     public int getDiceRes(int index){
         return diceBuffer[index];
     }

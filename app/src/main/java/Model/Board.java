@@ -199,6 +199,8 @@ public class Board extends Game {
                             getPlayer2().getPawnbyId(i).setPosition(player2.getInt("pawnPos" + i));
                             getPlayer2().getPawnbyId(i).setPawnIdFromDb(player2.getInt("pawnId" + i));
                         }
+                        getPlayer1().setScore(howManyPawns(30,getPlayer1().getUserId()));
+                        getPlayer2().setScore(howManyPawns(30,getPlayer2().getUserId()));
                         return true;
                     }
                     else
@@ -212,6 +214,8 @@ public class Board extends Game {
                             getPlayer1().getPawnbyId(i).setPosition(player2.getInt("pawnPos" + i));
                             getPlayer1().getPawnbyId(i).setPawnIdFromDb(player2.getInt("pawnId" + i));
                         }
+                        getPlayer1().setScore(howManyPawns(30,getPlayer1().getUserId()));
+                        getPlayer2().setScore(howManyPawns(30,getPlayer2().getUserId()));
                         return true;
                     }
                     else

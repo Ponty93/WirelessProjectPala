@@ -83,9 +83,10 @@ public class onDragCustomMethod implements View.OnDragListener {
                                 if (cellNumber > 6) {
                                     if (controller.howManyPawns(0, controller.getPlayer1().getUserId()) > 0) {
                                         return false;
-                                    } else if (isOccupied(newParent))
+                                    }
+                                    else if (isOccupied(newParent))
                                         if (refActivity.isBlack(newParent.getChildAt(1)))
-                                            if (!controller.canEat(controller.getPlayer1().getUserId(), controller.getPlayer2().getUserId(), local, local + action1)) {
+                                            if (!controller.canEat(controller.getPlayer1().getUserId(), controller.getPlayer2().getUserId(), local, local + action2)) {
                                                 return false;
                                             }
                                 }
@@ -103,7 +104,7 @@ public class onDragCustomMethod implements View.OnDragListener {
                                         return false;
                                     } else if (isOccupied(newParent))
                                         if (refActivity.isBlack(newParent.getChildAt(1)))
-                                            if (!controller.canEat(controller.getPlayer1().getUserId(), controller.getPlayer2().getUserId(), local, local + action1)) {
+                                            if (!controller.canEat(controller.getPlayer1().getUserId(), controller.getPlayer2().getUserId(), local, local + action3)) {
                                                 return false;
                                             }
                                 }

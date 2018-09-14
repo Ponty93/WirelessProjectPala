@@ -1,4 +1,6 @@
 package Model;
+import android.net.ConnectivityManager;
+
 import API.phpConnect;
 import Actors.Player;
 
