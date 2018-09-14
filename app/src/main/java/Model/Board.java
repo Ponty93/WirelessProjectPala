@@ -142,7 +142,7 @@ public class Board extends Game {
     public boolean uploadBoard(){
         try{
             JSONObject json = buildBoardJSON();
-            Log.d("JSON UPLOAD","IS"+json);
+            //Log.d("JSON UPLOAD","IS"+json);
             phpConnect conn = new phpConnect("https://psionofficial.com/Wireless/update.php",getIdGame());
 
             return conn.execute("u","-1","boardUpload","-1","-1",json.toString()).get();

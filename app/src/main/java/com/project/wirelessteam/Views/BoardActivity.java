@@ -132,10 +132,9 @@ public class BoardActivity extends AppCompatActivity {
                     public void run() {
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(BoardActivity.this);
-                        builder.setMessage("It seems you're having connection issues. You're going back to the home page").setPositiveButton("Homepage", new DialogInterface.OnClickListener() {
+                        builder.setMessage("It seems you're having connection issues.").setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.dismiss();
-                                endGame(boardView);
                             }
                         });
 
@@ -221,10 +220,9 @@ public class BoardActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         AlertDialog.Builder builder = new AlertDialog.Builder(BoardActivity.this);
-                        builder.setMessage("It seems you're having connection issues. You're going back to the home page").setPositiveButton("Homepage", new DialogInterface.OnClickListener() {
+                        builder.setMessage("It seems you're having connection issues.").setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.dismiss();
-                                endGame(boardView);
                             }
                         });
 
@@ -328,11 +326,11 @@ public class BoardActivity extends AppCompatActivity {
 
         //timer to schedule action
         if (round == true) {//if its my turn, at 2m calls endTurn
-            Log.d("internalTimer", "starts my round timer");
+            //Log.d("internalTimer", "starts my round timer");
             internalTimer = new Timer();
             internalTimer.schedule(new roundTimeout(boardView), 0, 3000);
         } else if (round == false) {//its not my turn, every 10s i ask the server if its my turn now
-            Log.d("internalTimer", "starts NOT my round timer");
+           // Log.d("internalTimer", "starts NOT my round timer");
             internalTimer = new Timer();
             internalTimer.schedule(new connectionTimeout(boardView), 0, 3000);
         }
@@ -552,15 +550,17 @@ public class BoardActivity extends AppCompatActivity {
     public void rollDiceButton(View view) {
 
         //roll button
-        if(getController().doubleDiceRes() == true && getController().getDiceRes(0) != 0 && getController().getDiceRes(1)!= 0) {
+        if(getController().doubleDiceRes() == true) {
             findViewById(R.id.roll).setEnabled(true);
             controller.setDoubleDown();
             controller.setNumberOfMove(0);
         }
-        if(controller.doubleDiceRes() == false) {
-            findViewById(R.id.roll).setEnabled(false);
-        }
+
+        findViewById(R.id.roll).setEnabled(false);
+
+
         controller.roll();
+
         ImageView roll1 = (ImageView) findViewById(R.id.diceRes1);
         ImageView roll2 = (ImageView) findViewById(R.id.diceRes2);
         roll1.setImageDrawable(getImageViewByResult(controller.getDiceRes(0)));
