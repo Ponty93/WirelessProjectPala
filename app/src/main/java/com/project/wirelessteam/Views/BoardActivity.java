@@ -145,8 +145,6 @@ public class BoardActivity extends AppCompatActivity {
                     }
                 });
 
-
-
             }
 
             if (controller.howManyPawns(30, controller.getPlayer1().getUserId()) == 6) {
@@ -548,18 +546,18 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     public void rollDiceButton(View view) {
-
+        controller.roll();
         //roll button
+        if(getController().doubleDiceRes() == false)
+            findViewById(R.id.roll).setEnabled(false);
+
         if(getController().doubleDiceRes() == true) {
             findViewById(R.id.roll).setEnabled(true);
             controller.setDoubleDown();
             controller.setNumberOfMove(0);
         }
 
-        findViewById(R.id.roll).setEnabled(false);
 
-
-        controller.roll();
 
         ImageView roll1 = (ImageView) findViewById(R.id.diceRes1);
         ImageView roll2 = (ImageView) findViewById(R.id.diceRes2);
