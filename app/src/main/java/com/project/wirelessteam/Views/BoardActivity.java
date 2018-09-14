@@ -550,20 +550,15 @@ public class BoardActivity extends AppCompatActivity {
 
     public void rollDiceButton(View view) {
 
-        //roll button
-        if(doubleDice == false)
-            doubleDice = true;
-        else
-            doubleDice = false;
-
-        controller.roll();
-
-        if(getController().doubleDiceRes() == true && doubleDice == true) {
+        if(doubleDice == true ) {
             controller.setDoubleDown();
             controller.setNumberOfMove(0);
-            findViewById(R.id.roll).setEnabled(false);
+            doubleDice = false;
         }
-        else
+        controller.roll();
+        if(getController().doubleDiceRes() == true)
+            doubleDice = true;
+        if(getController().doubleDiceRes() == false && doubleDice == false)
             findViewById(R.id.roll).setEnabled(false);
 
 
