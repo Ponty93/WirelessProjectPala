@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ludus_foreground"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:debuggable="false">
+        android:debuggable="true">
         <activity
             android:name="com.project.wirelessteam.Views.setupPage"
             android:parentActivityName="com.project.wirelessteam.Views.login">
