@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ludus_foreground"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:debuggable="true">
+        android:debuggable="false">
         <activity
             android:name="com.project.wirelessteam.Views.setupPage"
             android:parentActivityName="com.project.wirelessteam.Views.login">
@@ -23,7 +23,8 @@
         </activity>
         <activity
             android:name="com.project.wirelessteam.Views.Rules"
-            android:parentActivityName="com.project.wirelessteam.Views.setupPage">
+            android:parentActivityName="com.project.wirelessteam.Views.setupPage"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.project.wirelessteam.Views.setupPage" />
