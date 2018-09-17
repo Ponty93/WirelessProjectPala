@@ -298,8 +298,10 @@ public class BoardActivity extends AppCompatActivity {
     private void roundOrganize(boolean round) {
         //true : my round
         //false : foe round
-
-        doubleDice = false;
+        if(round == true) {
+            doubleDice = false;
+            controller.setDoubleDown();
+        }
 
         findViewById(R.id.red1).setEnabled(false);
         findViewById(R.id.red2).setEnabled(false);
@@ -518,15 +520,7 @@ public class BoardActivity extends AppCompatActivity {
 
 
 
-    /*
-    public boolean CheckCollision(View v1,View v2) {
-        Rect R1=new Rect(v1.getLeft(), v1.getTop(), v1.getRight(), v1.getBottom());
-        Rect R2=new Rect(v2.getLeft(), v2.getTop(), v2.getRight(), v2.getBottom());
-        return R1.intersect(R2);
-    }*/
-
-
-    public void buttonEndTurn(View view) {
+       public void buttonEndTurn(View view) {
         internalTimer.cancel();
         if (controller.endTurn() == true) {
             roundOrganize(false);
@@ -556,8 +550,10 @@ public class BoardActivity extends AppCompatActivity {
             doubleDice = false;
         }
         controller.roll();
+
         if(getController().doubleDiceRes() == true)
             doubleDice = true;
+
         if(getController().doubleDiceRes() == false && doubleDice == false)
             findViewById(R.id.roll).setEnabled(false);
 

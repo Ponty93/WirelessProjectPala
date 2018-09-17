@@ -14,8 +14,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="164dp"
+        android:layout_marginTop="150dp"
         android:countDown="false"
+        android:layout_below="@+id/textView8"
+
         android:format="MM:SS"
         android:background="@drawable/rectangle_border"
         android:textAlignment="center"
@@ -29,7 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="118dp"
+
+        android:layout_marginTop="98dp"
         android:text="Searching for a game:"
         android:textColor="@android:color/background_light"
         android:textSize="24sp"
@@ -38,10 +41,10 @@
     <Button
         android:id="@+id/button6"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="187dp"
+        android:layout_marginBottom="63dp"
         android:onClick="back"
         android:text="Back" />
 
