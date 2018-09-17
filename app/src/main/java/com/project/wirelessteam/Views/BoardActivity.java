@@ -44,7 +44,7 @@ import Utils.onTouchCustomMethod;
 import Utils.onDragCustomMethod;
 import Utils.pawnView;
 
-//todo add rules
+
 public class BoardActivity extends AppCompatActivity {
     private Context context = null;
     private RelativeLayout refLayout = null;

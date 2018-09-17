@@ -22,7 +22,7 @@
                 android:value="com.project.wirelessteam.Views.login" />
         </activity>
         <activity
-            android:name="com.project.wirelessteam.Views.Highlights"
+            android:name="com.project.wirelessteam.Views.Rules"
             android:parentActivityName="com.project.wirelessteam.Views.setupPage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

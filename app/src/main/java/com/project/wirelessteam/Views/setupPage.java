@@ -5,7 +5,6 @@ import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 public class setupPage extends AppCompatActivity {
     MediaPlayer mp;
@@ -56,7 +55,7 @@ public class setupPage extends AppCompatActivity {
      * @param view
      */
     public void goToHighlights(View view) {
-        Intent intent = new Intent(this, Highlights.class);
+        Intent intent = new Intent(this, Rules.class);
         startActivity(intent);
     }
 

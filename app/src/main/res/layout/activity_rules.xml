@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Rules">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:text="Essential Rules:"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="34dp"
+        android:onClick="back"
+        android:text="Back" />
+
+    <TextView
+        android:id="@+id/rulesset"
+        android:layout_width="wrap_content"
+        android:layout_height="511dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="122dp"
+        android:text="- Ciascun giocatore possiede 6 pedine;
+- Per muovere una o più pedine il giocatore deve cliccare sul button roll dice. I punteggi dei dadi possono essere usati nei seguenti modi:
+            - risultato dado 1 per una pedina;
+            - risultato dado 2 per una seconda pedina;
+            - risultati dei dadi 1 e 2 per un'unica pedina.
+- Se il tiro dei dadi 1 e 2 è uguale il giocatore ha diritto a un tiro dei dadi bonus;
+- Se il giocatore possiede pedine sulla cella START le pedine non possono accedere al percorso di gioco principale ma soltanto essere disposte
+nelle celle dalla I alla VI. Una volta che il giocatore avrà disposto tutte le sue pedine sul terreno di gioco potrà accedere alle celle dalla 1
+alla 23 e avrà la possibilità di poter mangiare le pedine o le pile avversarie per ostacolare la sua avanzata;
+- Una pedina o pila del giocatore può mangiare una pedina o pila avversaria solo se questa è composta da un numero pari o inferiore al numero
+delle pedine possedute dall'avversario in una certa cella del terreno di gioco;
+- Quando una perdina o pila viene mangiata questa/e ricominciano dalla cella START;
+- Una pedina che viene trascinata dalla cella START non può fare una pila con un'altra pedina. Per poter fare uno stack è necessario che la
+pedina sia trascinata già dall'interno del terreno di gioco;
+- Un giocatore vince la partita quando tutte le sue pedine raggiungono la cella FINISH. " />
+
+
+</RelativeLayout>
