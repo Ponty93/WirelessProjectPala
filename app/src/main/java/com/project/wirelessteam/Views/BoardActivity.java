@@ -483,7 +483,7 @@ public class BoardActivity extends AppCompatActivity {
         findViewById(R.id.cell30L).setOnDragListener(new onDragCustomMethod(boardView, controller));
         findViewById(R.id.cell30L).setTag("29");
         findViewById(R.id.cell31L).setOnDragListener(new onDragCustomMethod(boardView, controller));
-        findViewById(R.id.cell31L).setTag("30");        //Log.d("Json ",buildBoard.getStringExtra("json"));
+        findViewById(R.id.cell31L).setTag("30");
 
 
         if (refLayout == null) {
@@ -578,7 +578,7 @@ public class BoardActivity extends AppCompatActivity {
         if (controller.getPlayer1().getPawnbyId(6).getPosition() != 30)
             findViewById(R.id.red6).setEnabled(true);
 
-        //Log.d("DICE RESULT","RES 1 "+getCurrentBoard().getDiceRes(0)+"RES 2 "+getCurrentBoard().getDiceRes(1));
+
 
 
     }

@@ -222,7 +222,7 @@ public class onDragCustomMethod implements View.OnDragListener {
                     return true;
 
                 default:
-                    Log.e("DragDrop Example", "Unknown action type received by OnDragListener.");
+
                     break;
 
             }
