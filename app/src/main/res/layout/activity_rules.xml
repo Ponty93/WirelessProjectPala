@@ -45,30 +45,44 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/rulesset"
         android:layout_centerHorizontal="true"
-        android:text="- Per muovere una o più pedine il giocatore deve cliccare sul button roll dice. I punteggi dei dadi possono essere usati nei seguenti modi:
-        - risultato dado 1 per una pedina;
-        - risultato dado 2 per una seconda pedina;
-        - risultati dei dadi 1 e 2 per un'unica pedina."
+        android:text="- Per muovere una o più pedine il giocatore deve cliccare sul button roll dice. I punteggi dei dadi possono essere usati nei seguenti modi:"
         android:textSize="12sp" />
 
     <TextView
         android:id="@+id/rulesset9"
         android:layout_width="352dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rulesset"
+        android:layout_below="@+id/rulesset2"
         android:layout_centerHorizontal="true"
-        android:text="- Per muovere una o più pedine il giocatore deve cliccare sul button roll dice. I punteggi dei dadi possono essere usati nei seguenti modi:
-        - risultato dado 1 per una pedina;
-        - risultato dado 2 per una seconda pedina;
-        - risultati dei dadi 1 e 2 per un'unica pedina."
+        android:text="      - risultato dado 1 per una pedina;"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/rulesset10"
+        android:layout_width="352dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rulesset9"
+        android:layout_centerHorizontal="true"
+        android:text="      - risultato dado 2 per una seconda pedina;"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/rulesset11"
+        android:layout_width="352dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rulesset3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-166dp"
+        android:text="      - risultati dei dadi 1 e 2 per un'unica pedina."
         android:textSize="12sp" />
 
     <TextView
         android:id="@+id/rulesset3"
         android:layout_width="352dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rulesset2"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="166dp"
         android:text="- Se il tiro dei dadi 1 e 2 è uguale il giocatore ha diritto a un tiro dei dadi bonus; "
         android:textSize="12sp" />
 
@@ -114,9 +128,8 @@
         android:id="@+id/rulesset8"
         android:layout_width="352dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/rulesset5"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="26dp"
         android:text="- Un giocatore vince la partita quando tutte le sue pedine raggiungono la cella FINISH. "
         android:textSize="12sp" />
 
